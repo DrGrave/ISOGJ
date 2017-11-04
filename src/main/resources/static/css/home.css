@@ -1,0 +1,75 @@
+.admin-message-text {
+	font-style: normal;
+	font-size: 22px;
+	color: #004080;
+}
+
+.form-signin {
+	float: right;
+	margin-right: 10px;
+	display: inline-flex!important;
+	flex-direction: row;
+	max-width: 500px;
+}
+
+.form-signin-heading {
+	text-align:center;
+	margin-bottom: 0;
+}
+
+.form-control {
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+}
+
+button[type="Submit"]{
+	background-color: #4CAF50;
+	color: white;
+	margin-top: 5px;
+	max-height: 35px;
+	max-width: 100px;
+}
+
+input[type="text"] {
+	margin-top: 5px;
+	margin-right: 5px;
+	max-width: 200px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+	margin-top: 5px;
+	margin-right: 5px;
+	max-width: 200px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.topnav{
+	background-color: #333;
+	overflow: hidden;
+}
+
+.topnav a{
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+
+.topnav a:hover{
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active{
+	background-color: #4CAF50;
+	color: white;
+}

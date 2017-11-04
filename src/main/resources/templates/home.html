@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="topnav">
+	<a href="ISOGJ">ISOGJ</a>
+	<a href="home">Home</a>
+
+
+
+	<form th:action="@{/logout}" method="POST" class="form-signin">
+
+		<!--<span data-tooltip="Custom tooltip text." data-tooltip-position="bottom">Custom bottom tooltip.</span>-->
+
+		<button class="btn btn-outline my-2 my-sm-0" name="Submit" value="Logout" type="Submit" th:text="Logout"></button>
+	</form>
+
+</div>
+<p>Name</p>
+<span th:text="${user.userName}"></span>
+<P>Surname</P>
+<span th:text="${user.userSurname}"></span>
+<p>Patronymic</p>
+<span th:text="${user.userPatronymic}"></span>
+<p>Gender</p>
+<span th:text="${userGender.nameOfGender}"></span>
+
+</body>
+</html>
