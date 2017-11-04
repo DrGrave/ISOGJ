@@ -69,25 +69,44 @@ public class User {
     @Column(name = "UserPassword")
     @Length(min = 6, message = "*Your password must have at least 6 characters")
     @NotEmpty(message = "*Please provide your password")
-    //@Transient
     private String userPassword;
 
     /**
      * gender of user
      */
-
     @ManyToOne
     @JoinColumn(name = "Gender")
     private Gender gender;
 
+    @ManyToOne
+    @JoinColumn(name = "TypeOfUser")
+    private TypeOfUser typeOfUser;
+
     /**
      * user role many to many
      */
-
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+
+    /**
+     *
+     * @return
+     * type of user object
+     */
+    public TypeOfUser getTypeOfUser() {
+        return typeOfUser;
+    }
+
+    /**
+     *
+     * @param typeOfUser
+     * set type of user object
+     */
+    public void setTypeOfUser(TypeOfUser typeOfUser) {
+        this.typeOfUser = typeOfUser;
+    }
 
     /**
      *
