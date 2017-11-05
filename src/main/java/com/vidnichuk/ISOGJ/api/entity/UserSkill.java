@@ -15,7 +15,7 @@ public class UserSkill {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idGender;
+    private int idUserSkill;
 
     /**
      * id user to many to many object
