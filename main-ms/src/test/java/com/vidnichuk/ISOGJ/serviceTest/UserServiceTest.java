@@ -25,15 +25,5 @@ public class UserServiceTest {
 
     @Test
     public void saveUser(){
-        User user = new User();
-        user.setUserPassword("ffffff");
-        user.setActive(1);
-        Gender gender = genderRepository.findByIdGender(1);
-        user.setGender(gender);
-        user.setUserEmail("vv@gmail.com");
-        user.setUserName("Petya");
-        user.setUserPatronymic("Petya1");
-        user.setUserSurname("Patu1");
-        userService.saveUser(user);
     }
 }

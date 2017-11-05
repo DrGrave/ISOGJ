@@ -35,7 +35,7 @@ public class TypeOfSkillRepositoryTest {
      */
     @Test
     public void getByNameTypeOfSkill(){
-        TypeOfSkill typeOfSkill = typeOfSkillRepository.findByNameOfTypeSkill("IT");
+        TypeOfSkill typeOfSkill = typeOfSkillRepository.findAll().get(0);
         typeOfSkill.getNameOfTypeSkill();
     }
 
@@ -44,7 +44,7 @@ public class TypeOfSkillRepositoryTest {
      */
     @Test
     public void getTypeOfSkillById(){
-        TypeOfSkill firstTypeOfSkill = typeOfSkillRepository.findByNameOfTypeSkill("IT");
+        TypeOfSkill firstTypeOfSkill = typeOfSkillRepository.findAll().get(0);
         TypeOfSkill typeOfSkill = typeOfSkillRepository.findByIdTypeOfSkill(firstTypeOfSkill.getIdTypeOfSkill());
         typeOfSkill.getNameOfTypeSkill();
     }

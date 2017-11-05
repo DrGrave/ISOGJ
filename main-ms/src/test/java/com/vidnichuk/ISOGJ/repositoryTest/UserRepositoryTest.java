@@ -40,7 +40,7 @@ public class UserRepositoryTest {
 
     @Test
     public void getUserByEmail(){
-        User user = userRepository.findByUserEmail("vv@gmail.com");
+        User user = userRepository.findAll().get(0);
         System.out.println(user);
     }
 }

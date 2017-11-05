@@ -17,6 +17,8 @@ public class TypeOfUserRepositoryTest {
     @Autowired
     private TypeOfUserRepository typeOfUserRepository;
 
+
+
     @Test
     public void saveTypeOfUser(){
         TypeOfUser typeOfUser = new TypeOfUser();
@@ -25,7 +27,9 @@ public class TypeOfUserRepositoryTest {
     }
 
     @Test
-    public void getTypeOfUser(){
-        typeOfUserRepository.findAll().get(0).getNameOfTypeUser();
+    public void findTypeOfUser(){
+        TypeOfUser typeOfUser = typeOfUserRepository.findAll().get(0);
+        typeOfUser.getNameOfTypeUser();
     }
+
 }

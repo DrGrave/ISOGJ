@@ -37,7 +37,7 @@ public class RoleRepositoryTest {
      */
     @Test
     public void getRoleByRole(){
-        Role role = roleRepository.findByRole("ADMIN");
+        Role role = roleRepository.findAll().get(0);
         System.out.println(role);
     }
 }
