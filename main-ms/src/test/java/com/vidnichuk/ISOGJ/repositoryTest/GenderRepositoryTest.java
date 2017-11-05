@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by vadim on 16.10.17.
  * test to gender repository
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class GenderRepositoryTest {
     @Autowired
     GenderRepository genderRepository;
