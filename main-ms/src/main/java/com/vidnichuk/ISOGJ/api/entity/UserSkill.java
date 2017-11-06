@@ -25,18 +25,57 @@ public class UserSkill {
     private User idUser;
 
     /**
+     * object of person who set the mark
+     */
+    @ManyToOne
+        @JoinColumn(name = "idMarker")
+    private User idMarker;
+
+    /**
      * id skill to many to many object
      */
     @ManyToOne
         @JoinColumn(name = "idSkill")
     private Skill idSkill;
 
+    /**
+     * mark of theoretical skill
+     */
     @Column(name = "skillMark")
     private String skillMark;
 
+    /**
+     * mark of practical skill
+     */
     @Column(name = "skillPracticalMark")
     private String skillPracticalMark;
 
+
+    public int getIdUserSkill() {
+        return idUserSkill;
+    }
+
+    public void setIdUserSkill(int idUserSkill) {
+        this.idUserSkill = idUserSkill;
+    }
+
+    /**
+     *
+     * @return
+     * user who set the mark
+     */
+    public User getIdMarker() {
+        return idMarker;
+    }
+
+    /**
+     *
+     * @param idMarker
+     * set user who set the mark
+     */
+    public void setIdMarker(User idMarker) {
+        this.idMarker = idMarker;
+    }
 
     /**
      *

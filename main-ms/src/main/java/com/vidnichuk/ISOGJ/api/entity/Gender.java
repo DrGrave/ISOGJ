@@ -7,7 +7,7 @@ import javax.persistence.*;
  * gender of user
  */
 @Entity
-@Table(name="gender")
+@Table(name="Gender")
 public class Gender {
 
     /**
