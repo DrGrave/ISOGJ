@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to user city to work entity
  */
 public interface UserCityToWorkRepository extends JpaRepository<UserCityToWork, Long>{
+    /**
+     *
+     * @param idCityToWork
+     * id of city to work
+     * @return
+     * city to work with this id
+     */
     UserCityToWork findByIdUserCityToWork(int idCityToWork);
 }

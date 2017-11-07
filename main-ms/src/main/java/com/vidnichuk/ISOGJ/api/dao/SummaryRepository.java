@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to summary entity
  */
 public interface SummaryRepository extends JpaRepository<Summary, Long>{
+    /**
+     *
+     * @param idOfSummary
+     * id of summary
+     * @return
+     * summary with this id
+     */
     Summary findByIdOfSummary(int idOfSummary);
 }

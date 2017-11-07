@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to vacancy skill entity
  */
 public interface VacancySkillRepository extends JpaRepository<VacancySkill, Long>{
+    /**
+     *
+     * @param idVacancySkill
+     * id vacancy skill
+     * @return
+     * vacancy skill with this id
+     */
     VacancySkill findByIdVacancySkill(int idVacancySkill);
 }

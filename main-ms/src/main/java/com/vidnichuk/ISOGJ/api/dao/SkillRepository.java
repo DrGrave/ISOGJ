@@ -10,5 +10,12 @@ import java.util.List;
  * skill repository
  */
 public interface SkillRepository extends JpaRepository<Skill, Long>{
+    /**
+     *
+     * @param idSkill
+     * id of skill
+     * @return
+     * skill with this id
+     */
     Skill getByIdSkill(int idSkill);
 }

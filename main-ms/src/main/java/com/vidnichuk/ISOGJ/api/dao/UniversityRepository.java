@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to uni
  */
 public interface UniversityRepository extends JpaRepository<University, Long>{
+    /**
+     *
+     * @param idUniversity
+     * id of university
+     * @return
+     * university with this id
+     */
     University findByIdUniversity(int idUniversity);
 }

@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to vacancy entity
  */
 public interface VacancyRepository extends JpaRepository<Vacancy, Long>{
+    /**
+     *
+     * @param idVacancy
+     * id of vacancy
+     * @return
+     * vacancy with this id
+     */
     Vacancy findByIdVacancy(int idVacancy);
 }

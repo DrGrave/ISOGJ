@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to user company entity
  */
 public interface UserCompanyRepository extends JpaRepository<UserCompany, Long>{
+    /**
+     *
+     * @param idUserCompany
+     * id of user company
+     * @return
+     * user company with this id
+     */
     UserCompany findByIdUserCompany(int idUserCompany);
 }

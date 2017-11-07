@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to task entity
  */
 public interface TaskRepository extends JpaRepository<Task, Long>{
+    /**
+     *
+     * @param idOfTask
+     * id of task
+     * @return
+     * task with this id
+     */
     Task findByIdOfTask(int idOfTask);
 }

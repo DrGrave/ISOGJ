@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to type of vacancy
  */
 public interface TypeOfVacancyRepository extends JpaRepository<TypeOfVacancy, Long>{
+    /**
+     *
+     * @param idTypeOfVacancy
+     * id of type of vacancy
+     * @return
+     * type of vacancy with this id
+     */
     TypeOfVacancy findByIdTypeOfVacancy(int idTypeOfVacancy);
 }

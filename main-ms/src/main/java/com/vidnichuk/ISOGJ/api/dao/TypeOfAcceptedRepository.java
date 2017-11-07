@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to accepted entity
  */
 public interface TypeOfAcceptedRepository extends JpaRepository<TypeOfAccepted, Long>{
+    /**
+     *
+     * @param idTypeOfAccepted
+     * id of type of accepted
+     * @return
+     * type of accepted with this id
+     */
     TypeOfAccepted findByIdTypeOfAccepted(int idTypeOfAccepted);
 }

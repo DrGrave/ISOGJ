@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to experience entity
  */
 public interface ExperienceRepository extends JpaRepository<Experience, Long> {
+    /**
+     *
+     * @param idOfExperience
+     * id of experience
+     * @return
+     * experience with this id
+     */
     Experience findByIdExperience(int idOfExperience);
 }

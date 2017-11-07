@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to type of task entity
  */
 public interface TypeOfTaskRepository extends JpaRepository<TypeOfTask, Long>{
+    /**
+     *
+     * @param idTypeOfTask
+     * id of type of task
+     * @return
+     * type of task with this id
+     */
     TypeOfTask findByIdTypeOfTask(int idTypeOfTask);
 }

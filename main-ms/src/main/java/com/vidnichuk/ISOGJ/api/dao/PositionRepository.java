@@ -8,5 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * repository to position
  */
 public interface PositionRepository extends JpaRepository<Position, Long>{
+    /**
+     *
+     * @param idPosition
+     * id of position
+     * @return
+     * position with this id
+     */
     Position findByIdOfPosition(int idPosition);
 }
