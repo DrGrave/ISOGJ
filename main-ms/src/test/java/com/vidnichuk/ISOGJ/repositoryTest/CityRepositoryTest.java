@@ -32,6 +32,9 @@ public class CityRepositoryTest {
         cityRepository.save(city);
     }
 
+    /**
+     * try to find city
+     */
     @Test
     public void findCity(){
         City city = new City();
