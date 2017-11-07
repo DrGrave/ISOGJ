@@ -20,10 +20,20 @@ public class TypeOfTask {
     @Column
     private String nameTypeOfTask;
 
+    /**
+     *
+     * @return
+     * id of type of task
+     */
     public int getIdTypeOfTask() {
         return idTypeOfTask;
     }
 
+    /**
+     *
+     * @param idTypeOfTask
+     * set id of type task
+     */
     public void setIdTypeOfTask(int idTypeOfTask) {
         this.idTypeOfTask = idTypeOfTask;
     }

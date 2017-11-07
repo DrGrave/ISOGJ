@@ -48,10 +48,11 @@ public class User {
     /**
      * patronymic of user
      */
-
     @Column(name = "UserPatronymic", nullable = false)
     @NotEmpty(message = "*Please provide your Patronymic")
     private String userPatronymic;
+
+
 
     /**
      * email of user
@@ -64,8 +65,6 @@ public class User {
     /**
      * password of user
      */
-
-
     @Column(name = "UserPassword")
     @Length(min = 6, message = "*Your password must have at least 6 characters")
     @NotEmpty(message = "*Please provide your password")
@@ -78,9 +77,19 @@ public class User {
     @JoinColumn(name = "Gender")
     private Gender gender;
 
+    /**
+     * type of user
+     */
     @ManyToOne
     @JoinColumn(name = "TypeOfUser")
     private TypeOfUser typeOfUser;
+
+    /**
+     * city of living
+     */
+    @ManyToOne
+        @JoinColumn(name = "CityOfLiving")
+    private City city;
 
     /**
      * user role many to many
@@ -89,6 +98,23 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    /**
+     *
+     * @return
+     * city of living
+     */
+    public City getCity() {
+        return city;
+    }
+
+    /**
+     *
+     * @param city
+     * set city of livng
+     */
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     /**
      *
@@ -117,6 +143,11 @@ public class User {
         return userPassword;
     }
 
+    /**
+     *
+     * @param userPassword
+     * set user password
+     */
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
@@ -148,6 +179,11 @@ public class User {
         return userName;
     }
 
+    /**
+     *
+     * @param userName
+     * set user name
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -161,6 +197,11 @@ public class User {
         return userSurname;
     }
 
+    /**
+     *
+     * @param userSurname
+     * set user surname
+     */
     public void setUserSurname(String userSurname) {
         this.userSurname = userSurname;
     }
@@ -174,6 +215,11 @@ public class User {
         return userPatronymic;
     }
 
+    /**
+     *
+     * @param userPatronymic
+     * set user patronymic
+     */
     public void setUserPatronymic(String userPatronymic) {
         this.userPatronymic = userPatronymic;
     }
@@ -187,10 +233,20 @@ public class User {
         return userEmail;
     }
 
+    /**
+     *
+     * @param userEmail
+     * set user email
+     */
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
 
+    /**
+     *
+     * @return
+     * user gender
+     */
     public Gender getGender() {
         return gender;
     }
@@ -213,6 +269,11 @@ public class User {
         return active;
     }
 
+    /**
+     *
+     * @param active
+     * set active
+     */
     public void setActive(int active) {
         this.active = active;
     }
