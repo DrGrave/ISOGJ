@@ -19,5 +19,10 @@ public interface GenderRepository extends JpaRepository<Gender, Long>{
      */
     Gender findByIdGender(int idGender);
 
+    /**
+     *
+     * @return
+     * all genders
+     */
     List<Gender> findAll();
 }

@@ -19,7 +19,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class GenderRepositoryTest {
     @Autowired
-    GenderRepository genderRepository;
+    private GenderRepository genderRepository;
 
     /**
      * try to save gender
