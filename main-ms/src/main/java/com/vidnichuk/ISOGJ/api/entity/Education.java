@@ -1,6 +1,7 @@
 package com.vidnichuk.ISOGJ.api.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Vadim on 06.11.2017.
@@ -33,6 +34,80 @@ public class Education {
     @ManyToOne
         @JoinColumn(name = "School")
     private School school;
+
+    /**
+     * user entity
+     */
+    @ManyToOne
+    @JoinColumn(name = "User")
+    private User user;
+
+    /**
+     * date of start of education
+     */
+    @Column(name = "StartOfEducation")
+    private Date dateOfStart;
+
+    /**
+     * date of end education
+     */
+    @Column(name = "EndOfEducation")
+    private Date dateOfEnd;
+
+
+    /**
+     *
+     * @return
+     * user object
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     *
+     * @param user
+     * set object user
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     *
+     * @return
+     * date of start education
+     */
+    public Date getDateOfStart() {
+        return dateOfStart;
+    }
+
+    /**
+     *
+     * @param dateOfStart
+     * set date of start work
+     */
+    public void setDateOfStart(Date dateOfStart) {
+        this.dateOfStart = dateOfStart;
+    }
+
+    /**
+     *
+     * @return
+     * date of end education
+     */
+    public Date getDateOfEnd() {
+        return dateOfEnd;
+    }
+
+    /**
+     *
+     * @param dateOfEnd
+     * set date of end education
+     */
+    public void setDateOfEnd(Date dateOfEnd) {
+        this.dateOfEnd = dateOfEnd;
+    }
 
     /**
      *

@@ -1,14 +1,13 @@
 package com.vidnichuk.ISOGJ.api.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Vadim on 06.11.2017.
  * summary of user
  */
+@Entity
+@Table(name = "Summary")
 public class Summary {
 
     @Id
@@ -20,6 +19,31 @@ public class Summary {
      */
     @Column(name = "TextOfSummary")
     private String textOfSummary;
+
+    /**
+     * user object
+     */
+    @ManyToOne
+        @JoinColumn(name = "User")
+    private User user;
+
+    /**
+     *
+     * @return
+     * user object
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     *
+     * @param user
+     * set user object
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     /**
      *
