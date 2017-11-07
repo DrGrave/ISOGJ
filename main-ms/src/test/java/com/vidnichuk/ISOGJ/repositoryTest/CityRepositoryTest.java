@@ -34,6 +34,9 @@ public class CityRepositoryTest {
 
     @Test
     public void findCity(){
+        City city = new City();
+        city.setNameOfCity("Minsk");
+        cityRepository.save(city);
         cityRepository.findByIdCity(cityRepository.findAll().get(0).getIdCity()).getNameOfCity();
     }
 }

@@ -29,6 +29,9 @@ public class CompanyRepositoryTest {
     @Autowired
     private CityRepository cityRepository;
 
+    /**
+     * try to save company
+     */
     @Test
     public void saveCompany(){
         City city = new City();
@@ -42,6 +45,9 @@ public class CompanyRepositoryTest {
         companyRepository.save(company);
     }
 
+    /**
+     * try to find company
+     */
     @Test
     public void findCompanyById(){
         City city = new City();
@@ -57,6 +63,9 @@ public class CompanyRepositoryTest {
         companyRepository.findByIdCompany(companyRepository.findAll().get(0).getIdOfCompany()).getInfoOfCompany();
     }
 
+    /**
+     * find all company's
+     */
     @Test
     public void findCompanys(){
         City city = new City();
