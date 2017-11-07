@@ -17,5 +17,5 @@ public interface SkillRepository extends JpaRepository<Skill, Long>{
      * @return
      * skill with this id
      */
-    Skill getByIdSkill(int idSkill);
+    Skill findByIdSkill(int idSkill);
 }
