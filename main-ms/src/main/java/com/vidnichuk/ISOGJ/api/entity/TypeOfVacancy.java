@@ -1,14 +1,13 @@
 package com.vidnichuk.ISOGJ.api.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Vadim on 06.11.2017.
  * type of vacancy entity
  */
+@Entity
+@Table(name = "TypeOfVacancy")
 public class TypeOfVacancy {
 
     @Id

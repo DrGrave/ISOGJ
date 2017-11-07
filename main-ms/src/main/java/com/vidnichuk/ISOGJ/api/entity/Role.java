@@ -1,15 +1,17 @@
 package com.vidnichuk.ISOGJ.api.entity;
 
-/**
- * Created by vadim on 16.10.17.
- * role of user
- */
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+/**
+ * Created by vadim on 16.10.17.
+ * role of user in system
+ */
 
 @Entity
 @Table(name = "role")

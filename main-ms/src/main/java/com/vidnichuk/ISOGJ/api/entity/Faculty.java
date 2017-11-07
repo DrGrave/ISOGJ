@@ -14,6 +14,22 @@ public class Faculty {
     private int idFaculty;
 
     @ManyToOne
-        @JoinColumn(name = "Univercity")
-    private String univercity;
+        @JoinColumn(name = "University")
+    private University university;
+
+    public int getIdFaculty() {
+        return idFaculty;
+    }
+
+    public void setIdFaculty(int idFaculty) {
+        this.idFaculty = idFaculty;
+    }
+
+    public University getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
+    }
 }
