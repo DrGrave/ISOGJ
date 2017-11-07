@@ -1,5 +1,6 @@
 package com.vidnichuk.ISOGJ.serviceTest;
 
+import com.vidnichuk.ISOGJ.api.entity.Gender;
 import com.vidnichuk.ISOGJ.api.service.GenderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,10 @@ public class GenderServiceTest {
      */
     @Test
     public void getAllGenders(){
+        Gender gender = new Gender();
+        gender.setNameOfGender("Male");
+        genderService.saveGender(gender);
+
         genderService.getListOfGenders().get(0).getNameOfGender();
     }
 
@@ -31,6 +36,10 @@ public class GenderServiceTest {
      */
     @Test
     public void getGenderById(){
+        Gender gender = new Gender();
+        gender.setNameOfGender("Male");
+        genderService.saveGender(gender);
+
         genderService.getGenderById(genderService.getListOfGenders().get(0).getIdGender()).getNameOfGender();
     }
 }

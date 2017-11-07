@@ -36,6 +36,9 @@ public class GenderRepositoryTest {
      */
     @Test
     public void getGenderById(){
+        Gender gender1 = new Gender();
+        gender1.setNameOfGender("Male");
+        genderRepository.save(gender1);
         Gender gender = genderRepository.findByIdGender(1);
         System.out.println(gender);
     }

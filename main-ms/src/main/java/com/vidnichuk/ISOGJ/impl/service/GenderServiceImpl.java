@@ -38,4 +38,14 @@ public class GenderServiceImpl implements GenderService{
     public Gender getGenderById(int idGender) {
         return genderRepository.findByIdGender(idGender);
     }
+
+    /**
+     *
+     * @param gender
+     * save gender object to DB
+     */
+    @Override
+    public void saveGender(Gender gender) {
+        genderRepository.save(gender);
+    }
 }

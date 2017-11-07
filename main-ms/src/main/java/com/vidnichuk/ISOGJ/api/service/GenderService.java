@@ -24,4 +24,11 @@ public interface GenderService {
      * gender by id
      */
     Gender getGenderById(int idGender);
+
+    /**
+     *
+     * @param gender
+     * save gender
+     */
+    void saveGender(Gender gender);
 }
