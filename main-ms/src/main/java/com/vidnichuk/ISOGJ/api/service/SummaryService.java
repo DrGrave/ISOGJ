@@ -9,6 +9,7 @@ import java.util.List;
  * service to summary repository
  */
 public interface SummaryService {
+    // TODO: 07.11.2017 add java dock 
     List<Summary> getAllSummary();
     Summary getByIdSummary(int idSummary);
     void save(Summary summary);
