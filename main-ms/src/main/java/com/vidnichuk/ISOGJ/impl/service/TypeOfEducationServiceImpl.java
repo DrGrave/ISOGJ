@@ -17,16 +17,33 @@ public class TypeOfEducationServiceImpl implements TypeOfEducationService{
     @Autowired
     private TypeOfEducationRepository typeOfEducationRepository;
 
+    /**
+     *
+     * @return
+     * all types of education
+     */
     @Override
     public List<TypeOfEducation> getAllTypeOfEducation() {
         return typeOfEducationRepository.findAll();
     }
 
+    /**
+     *
+     * @param idTypeOfEducation
+     * id type of education
+     * @return
+     * type of education with this id
+     */
     @Override
     public TypeOfEducation getTypeOfEducationById(int idTypeOfEducation) {
         return typeOfEducationRepository.findByIdTypeOfEducation(idTypeOfEducation);
     }
 
+    /**
+     *
+     * @param typeOfEducation
+     * save education
+     */
     @Override
     public void saveTypeOfEducation(TypeOfEducation typeOfEducation) {
         typeOfEducationRepository.save(typeOfEducation);

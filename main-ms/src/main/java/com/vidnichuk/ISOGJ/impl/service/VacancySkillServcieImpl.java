@@ -18,16 +18,33 @@ public class VacancySkillServcieImpl implements VacancySkillService{
     @Autowired
     private VacancySkillRepository vacancySkillRepository;
 
+    /**
+     *
+     * @return
+     * all vacancy skill
+     */
     @Override
     public List<VacancySkill> getAllVacancySkill() {
         return vacancySkillRepository.findAll();
     }
 
+    /**
+     *
+     * @param idVacancySkill
+     * id of vacancy skill
+     * @return
+     * vacancy skill with this id
+     */
     @Override
     public VacancySkill getVacancySkillById(int idVacancySkill) {
         return vacancySkillRepository.findByIdVacancySkill(idVacancySkill);
     }
 
+    /**
+     *
+     * @param vacancySkill
+     * save vacancy skill
+     */
     @Override
     public void saveVacancySkill(VacancySkill vacancySkill) {
         vacancySkillRepository.save(vacancySkill);

@@ -9,7 +9,27 @@ import java.util.List;
  * service to user company repository
  */
 public interface UserCompanyService {
+
+    /**
+     *
+     * @return
+     * all user company
+     */
     List<UserCompany> getAllUserCompany();
+
+    /**
+     *
+     * @param idUserCompany
+     * id user company
+     * @return
+     * user company with this id
+     */
     UserCompany getUserCompanyById(int idUserCompany);
+
+    /**
+     *
+     * @param userCompany
+     * save user company
+     */
     void saveUserCompany(UserCompany userCompany);
 }

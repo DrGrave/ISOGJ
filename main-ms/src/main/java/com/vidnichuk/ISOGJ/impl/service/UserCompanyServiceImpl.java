@@ -18,16 +18,33 @@ public class UserCompanyServiceImpl implements UserCompanyService{
     @Autowired
     private UserCompanyRepository userCompanyRepository;
 
+    /**
+     *
+     * @return
+     * all user company
+     */
     @Override
     public List<UserCompany> getAllUserCompany() {
         return userCompanyRepository.findAll();
     }
 
+    /**
+     *
+     * @param idUserCompany
+     * id user company
+     * @return
+     * user company with this id
+     */
     @Override
     public UserCompany getUserCompanyById(int idUserCompany) {
         return userCompanyRepository.findByIdUserCompany(idUserCompany);
     }
 
+    /**
+     *
+     * @param userCompany
+     * save user company
+     */
     @Override
     public void saveUserCompany(UserCompany userCompany) {
         userCompanyRepository.save(userCompany);

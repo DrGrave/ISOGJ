@@ -18,16 +18,33 @@ public class UniversityServiceImpl implements UniversityService{
     @Autowired
     private UniversityRepository universityRepository;
 
+    /**
+     *
+     * @return
+     * all university
+     */
     @Override
     public List<University> getAllUniversity() {
         return universityRepository.findAll();
     }
 
+    /**
+     *
+     * @param idUniversity
+     * id university
+     * @return
+     * university with this id
+     */
     @Override
     public University getUniversityById(int idUniversity) {
         return universityRepository.findByIdUniversity(idUniversity);
     }
 
+    /**
+     *
+     * @param university
+     * save university
+     */
     @Override
     public void saveUniversity(University university) {
         universityRepository.save(university);

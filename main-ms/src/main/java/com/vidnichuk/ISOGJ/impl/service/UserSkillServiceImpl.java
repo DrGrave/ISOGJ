@@ -17,16 +17,33 @@ public class UserSkillServiceImpl implements UserSkillService{
     @Autowired
     private UserSkillRepository userSkillRepository;
 
+    /**
+     *
+     * @return
+     * all user skills
+     */
     @Override
     public List<UserSkill> getAllUserSkill() {
         return userSkillRepository.findAll();
     }
 
+    /**
+     *
+     * @param idUserSkill
+     * id user skill
+     * @return
+     * user skill with this id
+     */
     @Override
     public UserSkill getUserSkillById(int idUserSkill) {
         return null;
     }
 
+    /**
+     *
+     * @param userSkill
+     * save user skill
+     */
     @Override
     public void saveUserSkill(UserSkill userSkill) {
         userSkillRepository.save(userSkill);

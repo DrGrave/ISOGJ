@@ -9,7 +9,27 @@ import java.util.List;
  * service to university repository
  */
 public interface UniversityService {
+
+    /**
+     *
+     * @return
+     * all university
+     */
     List<University> getAllUniversity();
+
+    /**
+     *
+     * @param idUniversity
+     * id university
+     * @return
+     * university with this id
+     */
     University getUniversityById(int idUniversity);
+
+    /**
+     *
+     * @param university
+     * save university
+     */
     void saveUniversity(University university);
 }

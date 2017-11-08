@@ -17,16 +17,33 @@ public class TypeOfTaskServiceImpl implements TypeOfTaskService{
     @Autowired
     private TypeOfTaskRepository typeOfTaskRepository;
 
+    /**
+     *
+     * @return
+     * all types of task
+     */
     @Override
     public List<TypeOfTask> getAllTypeOfTask() {
         return typeOfTaskRepository.findAll();
     }
 
+    /**
+     *
+     * @param idTypeOfTask
+     * id type of task
+     * @return
+     * type of task with this id
+     */
     @Override
     public TypeOfTask getTypeOfTaskById(int idTypeOfTask) {
         return typeOfTaskRepository.findByIdTypeOfTask(idTypeOfTask);
     }
 
+    /**
+     *
+     * @param typeOfTask
+     * save type of task
+     */
     @Override
     public void saveTypeOfTask(TypeOfTask typeOfTask) {
         typeOfTaskRepository.save(typeOfTask);

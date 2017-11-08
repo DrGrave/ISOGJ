@@ -18,16 +18,33 @@ public class TypeOfVacancyServiceImpl implements TypeOfVacancyService{
     @Autowired
     private TypeOfVacancyRepository typeOfVacancyRepository;
 
+    /**
+     *
+     * @return
+     * all types of vacancy
+     */
     @Override
     public List<TypeOfVacancy> getAllTypeOfVacancy() {
         return typeOfVacancyRepository.findAll();
     }
 
+    /**
+     *
+     * @param idTypeOfVacancy
+     * id type of vacancy
+     * @return
+     * type of vacancy with this id
+     */
     @Override
     public TypeOfVacancy getTypeOfVacancyById(int idTypeOfVacancy) {
         return typeOfVacancyRepository.findByIdTypeOfVacancy(idTypeOfVacancy);
     }
 
+    /**
+     *
+     * @param typeOfVacancy
+     * save type of vacancy
+     */
     @Override
     public void saveTypeOfVacancy(TypeOfVacancy typeOfVacancy) {
         typeOfVacancyRepository.save(typeOfVacancy);

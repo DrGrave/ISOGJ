@@ -9,7 +9,27 @@ import java.util.List;
  * user city to work service
  */
 public interface UserCityToWorkService {
+
+    /**
+     *
+     * @return
+     * all city to work
+     */
     List<UserCityToWork> getAllUserCityToWork();
+
+    /**
+     *
+     * @param idUserCityToWork
+     * id city to work
+     * @return
+     * city to work with this id
+     */
     UserCityToWork getUserCityToWorkById(int idUserCityToWork);
+
+    /**
+     *
+     * @param userCityToWork
+     * save city to work
+     */
     void saveUserCityToWork(UserCityToWork userCityToWork);
 }

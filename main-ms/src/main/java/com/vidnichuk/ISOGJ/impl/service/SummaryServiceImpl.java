@@ -17,18 +17,35 @@ public class SummaryServiceImpl implements SummaryService{
     @Autowired
     private SummaryRepository summaryRepository;
 
+    /**
+     *
+     * @return
+     * all summary
+     */
     @Override
     public List<Summary> getAllSummary() {
         return summaryRepository.findAll();
     }
 
+    /**
+     *
+     * @param idSummary
+     * id of summary
+     * @return
+     * summary with this id
+     */
     @Override
     public Summary getByIdSummary(int idSummary) {
         return summaryRepository.findByIdOfSummary(idSummary);
     }
 
+    /**
+     *
+     * @param summary
+     * save summary
+     */
     @Override
-    public void save(Summary summary) {
+    public void saveSummary(Summary summary) {
         summaryRepository.save(summary);
     }
 }

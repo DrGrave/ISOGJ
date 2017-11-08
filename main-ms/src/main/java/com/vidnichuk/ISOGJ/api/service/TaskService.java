@@ -9,7 +9,26 @@ import java.util.List;
  * service to task repository
  */
 public interface TaskService {
+    /**
+     *
+     * @return
+     * all tasks
+     */
     List<Task> getAllTask();
+
+    /**
+     *
+     * @param idTask
+     * id of task
+     * @return
+     * task with this id
+     */
     Task getByIdTask(int idTask);
+
+    /**
+     *
+     * @param task
+     * save task
+     */
     void saveTask(Task task);
 }

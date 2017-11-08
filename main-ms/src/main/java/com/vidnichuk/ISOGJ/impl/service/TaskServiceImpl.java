@@ -17,16 +17,33 @@ public class TaskServiceImpl implements TaskService{
     @Autowired
     private TaskRepository taskRepository;
 
+    /**
+     *
+     * @return
+     * all tasks
+     */
     @Override
     public List<Task> getAllTask() {
         return taskRepository.findAll();
     }
 
+    /**
+     *
+     * @param idTask
+     * id of task
+     * @return
+     * task with this id
+     */
     @Override
     public Task getByIdTask(int idTask) {
         return taskRepository.findByIdOfTask(idTask);
     }
 
+    /**
+     *
+     * @param task
+     * save task
+     */
     @Override
     public void saveTask(Task task) {
         taskRepository.save(task);

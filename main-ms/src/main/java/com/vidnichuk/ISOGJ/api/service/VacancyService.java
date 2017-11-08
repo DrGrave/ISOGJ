@@ -9,7 +9,27 @@ import java.util.List;
  * service to vacancy repository
  */
 public interface VacancyService {
+
+    /**
+     *
+     * @return
+     * all vacancy
+     */
     List<Vacancy> getAllVacancy();
+
+    /**
+     *
+     * @param idVacancy
+     * id of vacancy
+     * @return
+     * vacancy with this id
+     */
     Vacancy getById(int idVacancy);
+
+    /**
+     *
+     * @param vacancy
+     * save vacancy
+     */
     void saveVacancy(Vacancy vacancy);
 }

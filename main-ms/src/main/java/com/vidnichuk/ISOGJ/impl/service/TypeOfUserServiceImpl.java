@@ -18,16 +18,33 @@ public class TypeOfUserServiceImpl implements TypeOfUserService{
     @Autowired
     private TypeOfUserRepository typeOfUserRepository;
 
+    /**
+     *
+     * @return
+     * all types of user
+     */
     @Override
     public List<TypeOfUser> getAllTypeOfUser() {
         return typeOfUserRepository.findAll();
     }
 
+    /**
+     *
+     * @param idTypeOfUser
+     * id type of user
+     * @return
+     * type of user with this id
+     */
     @Override
     public TypeOfUser getTypeOfUserById(int idTypeOfUser) {
         return typeOfUserRepository.findByIdTypeOfUser(idTypeOfUser);
     }
 
+    /**
+     *
+     * @param typeOfUser
+     * save type of user
+     */
     @Override
     public void saveTypeOfUser(TypeOfUser typeOfUser) {
         typeOfUserRepository.save(typeOfUser);

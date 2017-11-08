@@ -9,7 +9,27 @@ import java.util.List;
  * service to type of user repository
  */
 public interface TypeOfUserService {
+
+    /**
+     *
+     * @return
+     * all types of user
+     */
     List<TypeOfUser> getAllTypeOfUser();
+
+    /**
+     *
+     * @param idTypeOfUser
+     * id type of user
+     * @return
+     * type of user with this id
+     */
     TypeOfUser getTypeOfUserById(int idTypeOfUser);
+
+    /**
+     *
+     * @param typeOfUser
+     * save type of user
+     */
     void saveTypeOfUser(TypeOfUser typeOfUser);
 }

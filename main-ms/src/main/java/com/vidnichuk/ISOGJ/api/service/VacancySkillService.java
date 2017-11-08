@@ -9,7 +9,27 @@ import java.util.List;
  * service to vacancy skill repository
  */
 public interface VacancySkillService {
+
+    /**
+     *
+     * @return
+     * all vacancy skills
+     */
     List<VacancySkill> getAllVacancySkill();
+
+    /**
+     *
+     * @param idVacancySkill
+     * id of vacancy skill
+     * @return
+     * vacancy skill with this id
+     */
     VacancySkill getVacancySkillById(int idVacancySkill);
+
+    /**
+     *
+     * @param vacancySkill
+     * save vacancy skill
+     */
     void saveVacancySkill(VacancySkill vacancySkill);
 }
