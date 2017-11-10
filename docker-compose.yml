@@ -1,0 +1,26 @@
+version: '2.1'
+services:
+  config-ms:
+
+    environment:
+      LALA: $CONFIG_SERVICE_PASSWORD
+    build: config
+    image: isogj/config-ms
+    restart: always
+    logging:
+          options:
+            max-size: "10m"
+            max-file: "10"
+    ports:
+      - 8888:8888
+
+  main-ms:
+    build: main-ms
+    image: isogj/main-ms
+    restart: always
+    logging:
+          options:
+            max-size: "10m"
+            max-file: "10"
+    ports:
+      - 8080:8080

@@ -17,6 +17,13 @@ apply plugin: 'org.springframework.boot'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+
+jar {
+    baseName = 'config-ms'
+    version = '0.0.1-SNAPSHOT'
+}
+
+
 repositories {
     mavenCentral()
 }

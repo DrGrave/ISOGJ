@@ -1,2 +1,2 @@
 ololo:
-  lo: asdf
+  lo: ${JAVA_HOME}
