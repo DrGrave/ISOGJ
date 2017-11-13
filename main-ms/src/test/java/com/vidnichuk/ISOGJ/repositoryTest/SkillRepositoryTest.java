@@ -44,7 +44,7 @@ public class SkillRepositoryTest {
      */
     @Test
     public void getSkillById(){
-        Skill skill = skillRepository.getByIdSkill(1);
+        Skill skill = skillRepository.findByIdSkill(skillRepository.findAll().get(0).getIdSkill());
         skill.getNameOfSkill();
     }
 }
