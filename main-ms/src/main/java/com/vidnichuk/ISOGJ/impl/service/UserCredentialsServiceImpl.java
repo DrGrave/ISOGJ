@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserCredentialsServiceImpl implements UserCredentialsService {
+
     @Autowired
     private UserCredentialsDAO userCredentialsDAO;
+
+
 
     @Override
     public void saveUserCredentials(MyUserCredentials userCredentials) {

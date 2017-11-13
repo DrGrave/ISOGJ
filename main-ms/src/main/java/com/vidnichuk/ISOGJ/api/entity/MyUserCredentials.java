@@ -1,12 +1,17 @@
 package com.vidnichuk.ISOGJ.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "MyUserCredentials")
 public class MyUserCredentials {
+
     @Id
+    @JsonIgnoreProperties
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUserCredential;
 
@@ -16,6 +21,7 @@ public class MyUserCredentials {
     @Column(name = "UserPassword")
     private String userPassword;
 
+    @JsonIgnoreProperties
     @OneToOne
     @JoinColumn(name = "User")
     private User user;
