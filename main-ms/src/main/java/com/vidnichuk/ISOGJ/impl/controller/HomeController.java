@@ -33,8 +33,6 @@ public class HomeController {
         User user = userService.findByEmail(auth.getName());
         modelAndView.addObject("user", user);
         modelAndView.addObject("userGender", user.getGender());
-        modelAndView.addObject("role", user.getRoles().toArray()[0]);
-
         modelAndView.setViewName("home");
         return modelAndView;
 
