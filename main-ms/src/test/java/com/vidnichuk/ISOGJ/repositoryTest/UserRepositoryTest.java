@@ -27,7 +27,6 @@ public class UserRepositoryTest {
     @Test
     public void saveUser(){
         User user = new User();
-        user.setUserPassword("ffffff");
         user.setActive(1);
         Gender gender = genderRepository.findByIdGender(1);
         user.setGender(gender);
