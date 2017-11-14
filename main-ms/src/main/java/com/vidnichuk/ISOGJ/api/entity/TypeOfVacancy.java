@@ -18,7 +18,7 @@ public class TypeOfVacancy {
      * name of type of vacancy
      */
     @Column(name = "NameTypeOfVacancy")
-    private int nameTypeOfVacancy;
+    private String nameTypeOfVacancy;
 
     /**
      *
@@ -43,7 +43,7 @@ public class TypeOfVacancy {
      * @return
      * name type of vacancy
      */
-    public int getNameTypeOfVacancy() {
+    public String getNameTypeOfVacancy() {
         return nameTypeOfVacancy;
     }
 
@@ -52,7 +52,7 @@ public class TypeOfVacancy {
      * @param nameTypeOfVacancy
      * set name type of vacancy
      */
-    public void setNameTypeOfVacancy(int nameTypeOfVacancy) {
+    public void setNameTypeOfVacancy(String nameTypeOfVacancy) {
         this.nameTypeOfVacancy = nameTypeOfVacancy;
     }
 

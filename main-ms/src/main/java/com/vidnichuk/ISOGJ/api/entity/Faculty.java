@@ -13,12 +13,23 @@ public class Faculty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idFaculty;
 
+    @Column(name = "NameOfFaculty")
+    private String nameOfFaculty;
+
     /**
      * object of university
      */
     @ManyToOne
         @JoinColumn(name = "University")
     private University university;
+
+    public String getNameOfFaculty() {
+        return nameOfFaculty;
+    }
+
+    public void setNameOfFaculty(String nameOfFaculty) {
+        this.nameOfFaculty = nameOfFaculty;
+    }
 
     /**
      *

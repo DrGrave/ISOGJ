@@ -62,13 +62,7 @@ public class User {
     @NotEmpty(message = "*Please provide a email")
     private String userEmail;
 
-    /**
-     * password of user
-     */
-    @Column(name = "UserPassword")
-    @Length(min = 6, message = "*Your password must have at least 6 characters")
-    @NotEmpty(message = "*Please provide your password")
-    private String userPassword;
+
 
     /**
      * gender of user
@@ -126,24 +120,6 @@ public class User {
      */
     public void setTypeOfUser(TypeOfUser typeOfUser) {
         this.typeOfUser = typeOfUser;
-    }
-
-    /**
-     *
-     * @return
-     * user password
-     */
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    /**
-     *
-     * @param userPassword
-     * set user password
-     */
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
     }
 
     /**
