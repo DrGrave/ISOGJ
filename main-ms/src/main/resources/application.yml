@@ -5,9 +5,9 @@ spring:
     isogj:
       host: 127.0.0.1 #${MYSQL_HOST:isogj-mysql}
       port: ${MYSQL_PORT:3306}
-      current_db: ISOGJDB
+      current_schema: isogjdb
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/${spring.datasource.isogj.current_db}?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/${spring.datasource.isogj.current_schema}?autoReconnect=true&useSSL=false
     username: root
     password:
     tomcat:
@@ -15,6 +15,7 @@ spring:
       max-active: 50
       max-idle: 20
       min-idle: 15
+    platform: mysql
   mvc.view:
     prefix: /templates/
     suffix: .html
@@ -42,5 +43,11 @@ logging.level:
 
 spring.queries.users-query: select email, user_password, active from user where email=?
 spring.queries.roles-query: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+
 flyway:
-  schemas:
+  schemas: ${spring.datasource.isogj.current_schema}
+  url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/?autoReconnect=true&useSSL=false
+  user: ${spring.datasource.username}
+  password: ${spring.datasource.password}
+  enabled: true
+
