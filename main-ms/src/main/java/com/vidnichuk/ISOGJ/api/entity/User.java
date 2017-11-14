@@ -91,12 +91,6 @@ public class User {
         @JoinColumn(name = "CityOfLiving")
     private City city;
 
-    /**
-     * user role many to many
-     */
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
 
     /**
      *
@@ -278,21 +272,5 @@ public class User {
         this.active = active;
     }
 
-    /**
-     *
-     * @return
-     * role of user
-     */
-    public Set<Role> getRoles() {
-        return roles;
-    }
 
-    /**
-     *
-     * @param roles
-     * set role to user
-     */
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

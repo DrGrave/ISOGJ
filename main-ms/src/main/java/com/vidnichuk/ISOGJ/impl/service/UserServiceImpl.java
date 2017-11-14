@@ -1,16 +1,13 @@
 package com.vidnichuk.ISOGJ.impl.service;
 
-import com.vidnichuk.ISOGJ.api.dao.RoleRepository;
 import com.vidnichuk.ISOGJ.api.dao.UserRepository;
-import com.vidnichuk.ISOGJ.api.entity.Role;
 import com.vidnichuk.ISOGJ.api.entity.User;
 import com.vidnichuk.ISOGJ.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -23,11 +20,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
+
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private
+    ShaPasswordEncoder shaPasswordEncoder;
 
     /**
      *
@@ -48,10 +45,8 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public void saveUser(User user) {
-        user.setUserPassword(bCryptPasswordEncoder.encode(user.getUserPassword()));
+        user.setUserPassword(shaPasswordEncoder.encodePassword(user.getUserPassword(), "fd"));
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Collections.singletonList(userRole)));
         userRepository.save(user);
     }
 }
