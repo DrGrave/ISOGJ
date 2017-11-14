@@ -1,6 +1,6 @@
 create table city
 (
-  id_city int auto_increment
+  id_city int not null auto_increment
     primary key,
   name_of_city varchar(255) null
 )
@@ -8,7 +8,7 @@ create table city
 
 create table company
 (
-  id_company int auto_increment
+  id_company int not null auto_increment
     primary key,
   date_of_creation_company datetime null,
   info_of_company varchar(255) null,
@@ -25,7 +25,7 @@ create index FKbk2fldd8i3j16sxhiv7u1wlum
 
 create table education
 (
-  id_of_education int auto_increment
+  id_of_education int not null auto_increment
     primary key,
   end_of_education datetime null,
   start_of_education datetime null,
@@ -54,7 +54,7 @@ create index FKaisuay6bqm69r0pd1omskh0l8
 
 create table experience
 (
-  id_experience int auto_increment
+  id_experience int not null auto_increment
     primary key,
   date_of_end datetime null,
   date_of_start datetime null,
@@ -75,8 +75,9 @@ create index FKsal35eberq8nmfvfis0bxp5j
 
 create table faculty
 (
-  id_faculty int auto_increment
+  id_faculty int not null auto_increment
     primary key,
+  name_of_faculty varchar(255) null,
   university int null
 )
 ;
@@ -92,7 +93,7 @@ foreign key (faculty) references faculty (id_faculty)
 
 create table gender
 (
-  id_gender int auto_increment
+  id_gender int not null auto_increment
     primary key,
   name_od_gender varchar(255) not null
 )
@@ -100,7 +101,7 @@ create table gender
 
 create table my_user_credentials
 (
-  id_user_credential int auto_increment
+  id_user_credential int not null auto_increment
     primary key,
   user_login varchar(255) null,
   user_password varchar(255) null,
@@ -114,7 +115,7 @@ create index FKsl5h9k6oaa8vevmbmi6rma6rd
 
 create table position
 (
-  id_of_position int auto_increment
+  id_of_position int not null auto_increment
     primary key,
   name_of_position varchar(255) null
 )
@@ -122,7 +123,7 @@ create table position
 
 create table school
 (
-  id_school int auto_increment
+  id_school int not null auto_increment
     primary key,
   name_of_school varchar(255) null,
   city int null,
@@ -142,7 +143,7 @@ foreign key (school) references school (id_school)
 
 create table skill
 (
-  id_skill int auto_increment
+  id_skill int not null auto_increment
     primary key,
   name_of_skill varchar(255) not null,
   type_of_skill int not null
@@ -155,7 +156,7 @@ create index FK2pq7nkn4vi1tw0f3sh9te20ak
 
 create table summary
 (
-  id_of_summary int auto_increment
+  id_of_summary int not null auto_increment
     primary key,
   text_of_summary varchar(255) null,
   user int null
@@ -168,7 +169,7 @@ create index FKsr71us8i74ib72m71y2jy21tc
 
 create table task
 (
-  id_of_task int auto_increment
+  id_of_task int not null auto_increment
     primary key,
   info_of_task varchar(255) null,
   name_of_task varchar(255) null,
@@ -182,7 +183,7 @@ create index FKhnxotnqsbea4shipxmjxk4a1v
 
 create table type_of_accepted
 (
-  id_type_of_accepted int auto_increment
+  id_type_of_accepted int not null auto_increment
     primary key,
   name_of_accepted varchar(255) null
 )
@@ -190,7 +191,7 @@ create table type_of_accepted
 
 create table type_of_education
 (
-  id_type_of_education int auto_increment
+  id_type_of_education int not null auto_increment
     primary key,
   name_type_of_education varchar(255) null
 )
@@ -203,7 +204,7 @@ foreign key (type_of_education) references type_of_education (id_type_of_educati
 
 create table type_of_skill
 (
-  id_type_of_skill int auto_increment
+  id_type_of_skill int not null auto_increment
     primary key,
   name_of_type_skill varchar(255) null
 )
@@ -216,7 +217,7 @@ foreign key (type_of_skill) references type_of_skill (id_type_of_skill)
 
 create table type_of_task
 (
-  id_type_of_task int auto_increment
+  id_type_of_task int not null auto_increment
     primary key,
   name_type_of_task varchar(255) null
 )
@@ -229,7 +230,7 @@ foreign key (type_of_task) references type_of_task (id_type_of_task)
 
 create table type_of_user
 (
-  id_type_of_user int auto_increment
+  id_type_of_user int not null auto_increment
     primary key,
   name_of_type_user varchar(255) null
 )
@@ -237,15 +238,15 @@ create table type_of_user
 
 create table type_of_vacancy
 (
-  id_type_of_vacancy int auto_increment
+  id_type_of_vacancy int not null auto_increment
     primary key,
-  name_type_of_vacancy int null
+  name_type_of_vacancy varchar(255) null
 )
 ;
 
 create table university
 (
-  id_university int auto_increment
+  id_university int not null auto_increment
     primary key,
   name_of_university varchar(255) null,
   city int null,
@@ -265,12 +266,11 @@ foreign key (university) references university (id_university)
 
 create table user
 (
-  user_id int auto_increment
+  user_id int not null auto_increment
     primary key,
   active int null,
   email varchar(255) not null,
   user_name varchar(255) not null,
-  user_password varchar(255) not null,
   user_patronymic varchar(255) not null,
   user_surname varchar(255) not null,
   city_of_living int null,
@@ -319,7 +319,7 @@ foreign key (user) references user (user_id)
 
 create table user_city_to_work
 (
-  id_user_city_to_work int auto_increment
+  id_user_city_to_work int not null auto_increment
     primary key,
   city int null,
   user int null,
@@ -340,7 +340,7 @@ create index FKigrnt8s3c2t56sv3jik9sc1xo
 
 create table user_company
 (
-  id_user_company int auto_increment
+  id_user_company int not null auto_increment
     primary key,
   company int null,
   position int null,
@@ -368,7 +368,7 @@ create index FKopbeqqs42qr4nhq4ew10dt069
 
 create table user_skill
 (
-  id_user_skill int auto_increment
+  id_user_skill int not null auto_increment
     primary key,
   skill_mark varchar(255) null,
   skill_practical_mark varchar(255) null,
@@ -398,7 +398,7 @@ create index FKrsvxrshr30q4756yoxncoaeyl
 
 create table vacancy
 (
-  id_vacancy int auto_increment
+  id_vacancy int not null auto_increment
     primary key,
   info_of_vacancy varchar(255) null,
   task int null,
@@ -420,7 +420,7 @@ create index FKg1qrdnkrpjlkt2fr9twump8pt
 
 create table vacancy_skill
 (
-  id_vacancy_skill int auto_increment
+  id_vacancy_skill int not null auto_increment
     primary key,
   skill int null,
   vacancy int null,
@@ -441,7 +441,7 @@ create index FKogk31vh34wanbyjgvq8yer6hi
 
 create table vacancy_user
 (
-  id_vacancy_user int auto_increment
+  id_vacancy_user int not null auto_increment
     primary key,
   if_user_accepted int null,
   if_company_accepted int null,

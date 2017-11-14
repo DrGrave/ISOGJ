@@ -3,7 +3,7 @@ spring:
   jpa.hibernate.ddl-auto: update
   datasource:
     isogj:
-      host: 127.0.0.1 #${MYSQL_HOST:isogj-mysql}
+      host: ${MYSQL_HOST:isogj-mysql}
       port: ${MYSQL_PORT:3306}
       current_schema: isogjdb
     driverClassName: com.mysql.jdbc.Driver

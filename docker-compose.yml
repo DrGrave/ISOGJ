@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.1'
 services:
   config-ms:
 
@@ -24,3 +24,13 @@ services:
             max-file: "10"
     ports:
       - 8080:8080
+
+
+
+  isogj-mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3306:3306
