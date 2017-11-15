@@ -1,9 +1,13 @@
 version: '3.1'
+
+networks:
+  isogj_subnet:
+    external:
+      name: isogj_subnet
+
 services:
   config-ms:
 
-    environment:
-      LALA: $CONFIG_SERVICE_PASSWORD
     build: config
     image: isogj/config-ms
     restart: always
@@ -13,6 +17,7 @@ services:
             max-file: "10"
     ports:
       - 8888:8888
+
 
   main-ms:
     build: main-ms
@@ -34,3 +39,6 @@ services:
      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
       - 3306:3306
+    networks:
+          isogj_subnet:
+            ipv4_address: 172.2.2.1
