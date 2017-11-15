@@ -11,6 +11,9 @@ services:
     build: config
     image: isogj/config-ms
     restart: always
+    networks:
+      isogj_subnet:
+        ipv4_address: 172.2.2.2
     logging:
           options:
             max-size: "10m"
@@ -23,6 +26,8 @@ services:
     build: main-ms
     image: isogj/main-ms
     restart: always
+    networks:
+      - isogj_subnet
     logging:
           options:
             max-size: "10m"
@@ -40,5 +45,5 @@ services:
     ports:
       - 3306:3306
     networks:
-          isogj_subnet:
-            ipv4_address: 172.2.2.1
+      isogj_subnet:
+        ipv4_address: 172.2.2.1
