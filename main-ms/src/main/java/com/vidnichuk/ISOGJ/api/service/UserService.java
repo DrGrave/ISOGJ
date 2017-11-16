@@ -22,4 +22,13 @@ public interface UserService {
      * save user object if not exist in DB
      */
     public void saveUser(User user);
+
+    /**
+     *
+     * @param id
+     * id of user
+     * @return
+     * user with this id
+     */
+    User findById(Integer id);
 }

@@ -48,4 +48,16 @@ public class UserServiceImpl implements UserService{
         user.setActive(1);
         userRepository.save(user);
     }
+
+    /**
+     *
+     * @param id
+     * id user
+     * @return
+     * user with this id
+     */
+    @Override
+    public User findById(Integer id) {
+        return userRepository.findByUserId(id);
+    }
 }
