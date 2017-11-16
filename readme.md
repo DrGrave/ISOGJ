@@ -16,7 +16,7 @@ _CREATE ISOGJ DOCKER SUBNET_
 docker network create --subnet=172.2.2.0/16 isogj_subnet
 ```
 
-#RUN APPLICATION
+# RUN APPLICATION
 
 To run all services
 ```bash
