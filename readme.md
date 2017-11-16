@@ -11,7 +11,7 @@ docker network create --subnet=172.2.2.0/16 isogj_subnet
 _ENVIRONMENTAL VARIABLES_
 
 MYSQL_HOST=172.2.2.1\
-CONFIG_SERVER_HOST=172.2.2.2
+
 
 If you use windows you should 
 use docker machine ip instead of subnet hosts.

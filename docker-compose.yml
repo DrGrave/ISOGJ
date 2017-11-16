@@ -6,22 +6,6 @@ networks:
       name: isogj_subnet
 
 services:
-  config-ms:
-
-    build: config
-    image: isogj/config-ms
-    restart: always
-    networks:
-      isogj_subnet:
-        ipv4_address: 172.2.2.2
-    logging:
-          options:
-            max-size: "10m"
-            max-file: "10"
-    ports:
-      - 8888:8888
-
-
   main-ms:
     build: main-ms
     image: isogj/main-ms

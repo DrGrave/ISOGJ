@@ -1,1 +1,1 @@
-include "main-ms", "gateway", "config"
+include "main-ms", "gateway"

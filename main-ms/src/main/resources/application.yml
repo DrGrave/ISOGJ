@@ -51,3 +51,6 @@ flyway:
   password: ${spring.datasource.password}
   enabled: true
 
+
+ololo:
+  lo: ${JAVA_HOME}
