@@ -12,6 +12,8 @@ services:
     restart: always
     networks:
       - isogj_subnet
+    depends_on:
+      - isogj-mysql
     logging:
           options:
             max-size: "10m"
@@ -19,7 +21,32 @@ services:
     ports:
       - 8080:8080
 
+  gateway:
+      build: gateway
+      image: isogj/gateway
+      restart: always
+      networks:
+        - isogj_subnet
+      logging:
+            options:
+              max-size: "10m"
+              max-file: "10"
+      ports:
+        - 3001:3001
 
+  registry:
+    build: registry
+    image: isogj/registry
+    restart: always
+    networks:
+      isogj_subnet:
+        ipv4_address: 172.2.2.2
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - 8761:8761
 
   isogj-mysql:
     image: mysql:5.7
