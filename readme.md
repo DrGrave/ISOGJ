@@ -16,15 +16,18 @@ _CREATE ISOGJ DOCKER SUBNET_
 docker network create --subnet=172.2.2.0/16 isogj_subnet
 ```
 
-_RUN APPLICATION_
+#RUN APPLICATION
 
 To run all services
 ```bash
 gradle build -x test
+docker-compose build
 docker-compose up -d
 ```
 
 To run certain services
 ```bash
 gradle build -x test
+docker-compose build
+docker-compose up -d service_1 service_2...
 ```
