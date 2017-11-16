@@ -47,7 +47,7 @@ public class LoginController {
      * user with this id
      */
     @GetMapping("/User/{id}")
-    public ResponseEntity<User> getSubjectsToProfessor(@PathVariable("id") Integer id){
+    public ResponseEntity<User> getUserById(@PathVariable("id") Integer id){
         User user = userService.findById(id);
         if (user != null){
             return new ResponseEntity<User>(user, HttpStatus.OK);

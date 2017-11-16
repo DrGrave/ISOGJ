@@ -12,7 +12,6 @@ public class LoginController {
     private static final String REST_SERVICE_URI = "http://localhost:8080";
 
     public String[] loginEvent(MyUserCredentials user) {
-        System.out.println("Testing create User API----------");
         try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders httpHeaders = new HttpHeaders();
