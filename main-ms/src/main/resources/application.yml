@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 
 spring:
   jpa.hibernate.ddl-auto: update
@@ -51,6 +54,18 @@ flyway:
   password: ${spring.datasource.password}
   enabled: true
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${REGISTRY_HOST:registry}:${REGISTRY_PORT:8761}/eureka/
+
 
 ololo:
   lo: ${JAVA_HOME}
+endpoints:
+  enabled: false
+
+
+
