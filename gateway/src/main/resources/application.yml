@@ -21,13 +21,18 @@ zuul:
       service: main-ms
       stripPrefix: true
       sensitiveHeaders:
+    oauth-ms:
+      path: /auth/**
+      service: oauth-ms
+      stripPrefix: true
+      sensitiveHeaders:
 
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://${REGISTRY_HOST:registry}:${REGISTRY_PORT:8761}/eureka/
+      defaultZone: http://${REGISTRY_HOST:localhost}:${REGISTRY_PORT:8761}/eureka/
 
 
 #    notification-service:

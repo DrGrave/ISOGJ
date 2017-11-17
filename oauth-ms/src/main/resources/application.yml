@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9999
 
 
 spring:
@@ -8,7 +8,7 @@ spring:
     isogj:
       host: ${MYSQL_HOST:isogj-mysql}
       port: ${MYSQL_PORT:3306}
-      current_schema: isogjdb
+      current_schema: isogjdb_oauth
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/${spring.datasource.isogj.current_schema}?autoReconnect=true&useSSL=false
     username: root
@@ -19,33 +19,17 @@ spring:
       max-idle: 20
       min-idle: 15
     platform: mysql
-  mvc.view:
-    prefix: /templates/
-    suffix: .html
-  session:
-    store-type: hash_map
-    jdbc:
-      initializer.enabled: true
-      table-name: SPRING_SESSION
   http.multipart:
     enabled: true
     max-file-size: 100mb
     max-request-size: 100mb
 
-spring.thymeleaf.cache: false
-
-
-server.session.cookie.max-age: 3600
-server.session.timeout: 60
 
 
 logging.level:
   org.springframework.security: DEBUG
   org.hibernate.SQL: DEBUG
   org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-spring.queries.users-query: select email, user_password, active from user where email=?
-spring.queries.roles-query: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
 
 flyway:
   schemas: ${spring.datasource.isogj.current_schema}
@@ -59,13 +43,14 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://${REGISTRY_HOST:registry}:${REGISTRY_PORT:8761}/eureka/
+      defaultZone: http://${REGISTRY_HOST:localhost}:${REGISTRY_PORT:8761}/eureka/
 
 
-ololo:
-  lo: ${JAVA_HOME}
-endpoints:
-  enabled: false
 
+com.vidnichuk.isogj.auth:
+  passwords:
+    gateWayMs: ${GATEWAY_SERVICE_PASSWORD:123}
+    mainMs: ${MAIN_SERVICE_PASSWORD:123}
+    oauthMs: ${OAUTH_SERVICE_PASSWORD:123}
 
 

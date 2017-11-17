@@ -1,1 +1,1 @@
-include "main-ms", "gateway", "registry"
+include "main-ms", "gateway", "registry", "oauth-ms"

@@ -14,14 +14,14 @@ public interface UserService {
      * @return
      * object of user
      */
-    public User findByEmail(String email);
+    User findByEmail(String email);
 
     /**
      *
      * @param user
      * save user object if not exist in DB
      */
-    public void saveUser(User user);
+    void saveUser(User user);
 
     /**
      *
