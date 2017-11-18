@@ -2,6 +2,8 @@ package com.vidnichuk.isogj.api.service;
 
 import com.vidnichuk.isogj.api.entity.User;
 
+import java.util.List;
+
 /**
  * Created by vadim on 16.10.17.
  * service to user object
@@ -31,4 +33,11 @@ public interface UserService {
      * user with this id
      */
     User findById(Integer id);
+
+    /**
+     *
+     * @return
+     * all users
+     */
+    List<User> getAllUsers();
 }

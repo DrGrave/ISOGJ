@@ -48,4 +48,16 @@ public class UserSkillServiceImpl implements UserSkillService{
     public void saveUserSkill(UserSkill userSkill) {
         userSkillRepository.save(userSkill);
     }
+
+    /**
+     *
+     * @param id
+     * id of user
+     * @return
+     * skills of user
+     */
+    @Override
+    public List<UserSkill> getUserSkillsByUserId(Integer id) {
+        return userSkillRepository.findAllByIdUser_UserId(id);
+    }
 }
