@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by vadim on 16.10.17.
  * implementation of user Service
@@ -55,5 +57,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findById(Integer id) {
         return userRepository.findByUserId(id);
+    }
+
+    /**
+     *
+     * @return
+     * all users
+     */
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

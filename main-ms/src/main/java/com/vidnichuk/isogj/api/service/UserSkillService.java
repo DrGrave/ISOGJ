@@ -32,4 +32,14 @@ public interface UserSkillService {
      * save user skill
      */
     void saveUserSkill(UserSkill userSkill);
+
+    /**
+     *
+     * @param id
+     * id of user
+     * @return
+     * user skills
+     *
+     */
+    List<UserSkill> getUserSkillsByUserId(Integer id);
 }
