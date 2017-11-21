@@ -21,6 +21,21 @@ services:
     ports:
       - 8080:8080
 
+  oauth-ms:
+    build: oauth-ms
+    image: isogj/oauth-ms
+    restart: always
+    networks:
+      - isogj_subnet
+    depends_on:
+      - isogj-mysql
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - 9999:9999
+
   gateway:
       build: gateway
       image: isogj/gateway
