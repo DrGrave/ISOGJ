@@ -21,6 +21,13 @@ jar {
     baseName = 'oauth-ms'
     version = '0.0.1-SNAPSHOT'
 }
+task copyCert(type: Copy) {
+    from '../keystore.p12'
+    into 'build/'
+}
+
+build.dependsOn.add(copyCert)
+
 repositories {
     mavenCentral()
 }

@@ -29,6 +29,13 @@ jar {
     }
 }
 
+task copyCert(type: Copy) {
+    from '../keystore.p12'
+    into 'build/'
+}
+
+build.dependsOn.add(copyCert)
+
 jar.dependsOn('buildFrontend')
 
 task installNpm (type: NpmTask) {
@@ -44,7 +51,6 @@ task buildFrontend(type: NpmTask, dependsOn: 'installNpm') {
     }
     args = ['run', 'build']
 }
-
 
 
 repositories {
