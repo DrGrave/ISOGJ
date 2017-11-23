@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-main-page',

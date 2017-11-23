@@ -6,7 +6,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MainPageComponent} from './main-page/main-page.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule, MatInputModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -18,7 +20,12 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatButtonModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

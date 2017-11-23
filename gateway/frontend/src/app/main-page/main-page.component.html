@@ -1,5 +1,18 @@
-<input type="text" [(ngModel)]="username">
-<input type="password" [(ngModel)]="password">
+<div class="login-page-input-form">
+  <form (submit)="authenticate($event)">
+    <div>
+      <mat-input-container>
+        <input matInput placeholder="login" type="text" [(ngModel)]="username" name="login">
+      </mat-input-container>
+    </div>
 
-<button (click)="authenticate($event)" >button</button>
+    <div>
+      <mat-input-container>
+        <input matInput placeholder="password" type="password" [(ngModel)]="password" name="password">
+      </mat-input-container>
+    </div>
+    <button class="loginButton" mat-button type="submit">button</button>
+  </form>
+</div>
+
 <div *ngIf="token != null &&  token.length > 0">Your token is {{token}}</div>
