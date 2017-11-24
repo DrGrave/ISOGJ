@@ -1,6 +1,6 @@
 package com.vidnichuk.isogj.config;
 
-import com.vidnichuk.isogj.service.MysqlUserDetailsService;
+import com.vidnichuk.isogj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +18,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private MysqlUserDetailsService userDetailsService;
+    private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -33,8 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userDetailsService).
-                passwordEncoder(passwordEncoder);
+        auth.userDetailsService(username ->  userService.loadUserByUsername(username)).
+                passwordEncoder(passwordEncoder());
     }
 
     @Bean

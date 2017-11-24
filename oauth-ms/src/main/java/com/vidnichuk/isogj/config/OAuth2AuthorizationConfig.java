@@ -1,7 +1,7 @@
 package com.vidnichuk.isogj.config;
 
 import com.vidnichuk.isogj.config.properties.AuthProperties;
-import com.vidnichuk.isogj.service.MysqlUserDetailsService;
+import com.vidnichuk.isogj.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     private Environment environment;
 
     @Autowired
-    private MysqlUserDetailsService userDetailsService;
+    private UserServiceImpl userService;
 
     @Autowired
     private TokenStore tokenStore;
@@ -67,7 +67,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .tokenStore(tokenStore)
-                .userDetailsService(userDetailsService)
+                .userDetailsService(username -> userService.loadUserByUsername(username))
                 .reuseRefreshTokens(false)
                 .authenticationManager(authenticationManager);
     }
