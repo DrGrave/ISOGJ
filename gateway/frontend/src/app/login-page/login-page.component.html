@@ -2,7 +2,7 @@
   <form (submit)="authenticate($event)">
     <div>
       <mat-input-container>
-        <input matInput placeholder="login" type="text" [(ngModel)]="username" name="login">
+        <input matInput placeholder="username" type="text" [(ngModel)]="username" name="username">
       </mat-input-container>
     </div>
 
@@ -11,7 +11,7 @@
         <input matInput placeholder="password" type="password" [(ngModel)]="password" name="password">
       </mat-input-container>
     </div>
-    <button class="loginButton" mat-button type="submit">button</button>
+    <button class="login-button" mat-button type="submit">log in</button>
   </form>
 </div>
 

@@ -1,31 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
-@Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
-})
-export class MainPageComponent implements OnInit {
+@Injectable()
+export class AuthenticationService {
 
-  private username: string;
-  private password: string;
-  private token: String;
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
 
-
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
-
-  }
-
-
-  private authenticate(event) {
-      this.login(this.username, this.password)
-        .subscribe(data => this.token = data.access_token);
-  }
 
   public login(username: string, password: string): Observable<any> {
     let urlSearchParams = new URLSearchParams();
@@ -50,5 +34,6 @@ export class MainPageComponent implements OnInit {
     console.log(headers);
     return headers;
   }
+
 
 }

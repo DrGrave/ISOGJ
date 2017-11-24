@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {MainPageComponent} from './main-page/main-page.component';
+import {LoginPageComponent} from './login-page/login-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/main', pathMatch: 'full'},
-  {path: 'main', component: MainPageComponent}
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'login', component: LoginPageComponent}
 ];
 
 @NgModule({
