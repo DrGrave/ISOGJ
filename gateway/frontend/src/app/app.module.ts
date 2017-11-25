@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatInputModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {AuthenticationService} from './shared/service/auth/authentication.service';
@@ -27,8 +27,8 @@ import {AuthenticationService} from './shared/service/auth/authentication.servic
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    SharedModule
-
+    SharedModule,
+    MatToolbarModule
   ],
   providers: [
     AuthenticationService
