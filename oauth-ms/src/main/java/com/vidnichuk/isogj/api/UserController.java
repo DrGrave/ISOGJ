@@ -3,13 +3,12 @@ package com.vidnichuk.isogj.api;
 import com.vidnichuk.isogj.model.User;
 import com.vidnichuk.isogj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -19,5 +18,12 @@ public class UserController {
     @PostMapping("/create")
     public Long createUser(@RequestBody User user) {
         return userService.createUser(user);
+    }
+
+
+//    @PreAuthorize("#oauth2.hasScope('api')")
+    @GetMapping("/current")
+    public User current(Principal principal) {
+        return userService.loadUserByUsername(principal.getName());
     }
 }
