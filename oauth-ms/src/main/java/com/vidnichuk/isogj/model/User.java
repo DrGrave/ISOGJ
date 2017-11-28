@@ -17,12 +17,12 @@ public class User implements UserDetails {
 
     @GeneratedValue
     @Id
-    Long id;
+    private Long id;
 
 
-    String username;
+    private String username;
 
-    String password;
+    private String password;
 
 
     public Long getId() {
@@ -37,7 +37,7 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setUsername(String userName) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
