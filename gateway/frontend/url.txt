@@ -1,2 +1,2 @@
-url to server /n
+url to server 
 your url is: https://aomwwblila.localtunnel.me
