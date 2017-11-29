@@ -8,8 +8,20 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
+/**
+ * mapper to user object
+ */
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
+
+    /**
+     *
+     * @param user
+     * map user object
+     * @return
+     * user DTO
+     */
     @Mappings({
             @Mapping(target = "userId", source = "user.userId"),
             @Mapping(target = "userName", source = "user.userName"),
@@ -18,6 +30,13 @@ public interface UserMapper {
     })
     UserDTO userToUserDTO(User user);
 
+    /**
+     *
+     * @param userDTO
+     * map user DTO
+     * @return
+     * user object
+     */
     @Mappings({
             @Mapping(target = "userId", source = "userDTO.userId"),
             @Mapping(target = "userName", source = "userDTO.userName"),
@@ -26,8 +45,22 @@ public interface UserMapper {
     })
     User userDTOtoUser(UserDTO userDTO);
 
+    /**
+     *
+     * @param userDTOList
+     * map user DTO list
+     * @return
+     * user object
+     */
     List<User> convertToListOfUserFromListOfUserDTO(List<UserDTO> userDTOList);
 
+    /**
+     *
+     * @param userList
+     * map user objects list
+     * @return
+     * user DTO list
+     */
     List<UserDTO> convertFromListOfUserDTOtoListOfUser(List<User> userList);
 
 }

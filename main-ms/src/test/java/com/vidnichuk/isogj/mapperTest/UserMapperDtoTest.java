@@ -13,6 +13,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 
+/**
+ * test to User DTO mapper
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -23,6 +26,9 @@ public class UserMapperDtoTest {
     @Autowired
     UserService userService;
 
+    /**
+     * try to map from entity to DTO
+     */
     @Test
     public void fromUserToUserDto(){
         User user = userService.findById(userService.getAllUsers().get(0).getUserId());
@@ -30,6 +36,9 @@ public class UserMapperDtoTest {
         System.out.print(userDTO.getUserId());
     }
 
+    /**
+     * try to map from DTO to entity
+     */
     @Test
     public void fromUserDtoToUser(){
         UserDTO userDTO = new UserDTO();

@@ -10,6 +10,13 @@ import java.util.List;
 
 public class UserMapperImpl implements UserMapper{
 
+    /**
+     *
+     * @param user
+     * map user object
+     * @return
+     * user DTO
+     */
     @Override
     public UserDTO userToUserDTO(User user) {
         if ( user == null ) {
@@ -23,6 +30,13 @@ public class UserMapperImpl implements UserMapper{
         return userDTO;
     }
 
+    /**
+     *
+     * @param userDTO
+     * map user DTO
+     * @return
+     * user object
+     */
     @Override
     public User userDTOtoUser(UserDTO userDTO) {
         if ( userDTO == null ) {
@@ -37,6 +51,13 @@ public class UserMapperImpl implements UserMapper{
 
     }
 
+    /**
+     *
+     * @param userDTOList
+     * map user DTO list
+     * @return
+     * user objects list
+     */
     @Override
     public List<User> convertToListOfUserFromListOfUserDTO(List<UserDTO> userDTOList) {
         if (userDTOList == null){
@@ -50,6 +71,13 @@ public class UserMapperImpl implements UserMapper{
         }
     }
 
+    /**
+     *
+     * @param userList
+     * map user objects list
+     * @return
+     * user DTO list
+     */
     @Override
     public List<UserDTO> convertFromListOfUserDTOtoListOfUser(List<User> userList) {
         if (userList == null){

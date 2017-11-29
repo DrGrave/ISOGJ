@@ -1,9 +1,25 @@
 package com.vidnichuk.isogj.api.dto;
 
+/**
+ * User dto object
+ */
 public class UserDTO {
+    /**
+     * user id
+     */
     private int userId;
+
+    /**
+     * user name
+     */
     private String userName;
+    /**
+     * user surname
+     */
     private String userSurname;
+    /**
+     * user patronymic
+     */
     private String userLastName;
 
     public int getUserId() {
