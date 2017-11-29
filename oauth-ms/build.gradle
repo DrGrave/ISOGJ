@@ -45,7 +45,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.security.oauth:spring-security-oauth2')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.security:spring-security-core')
+//    compile('org.springframework.security:spring-security-core')
     compile('mysql:mysql-connector-java')
     compile('org.flywaydb:flyway-core')
 
