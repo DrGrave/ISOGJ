@@ -1,10 +1,12 @@
 package com.vidnichuk.isogj.impl.service;
 
 import com.vidnichuk.isogj.api.dao.UserRepository;
+import com.vidnichuk.isogj.api.dto.UserDTO;
 import com.vidnichuk.isogj.api.entity.User;
+import com.vidnichuk.isogj.api.mappers.UserMapper;
 import com.vidnichuk.isogj.api.service.UserService;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +20,7 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
-
-
-    @Autowired
-    private
-    ShaPasswordEncoder shaPasswordEncoder;
+    private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     /**
      *
@@ -65,7 +63,7 @@ public class UserServiceImpl implements UserService{
      * all users
      */
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        return userMapper.convertFromListOfUserDTOtoListOfUser(userRepository.findAll());
     }
 }

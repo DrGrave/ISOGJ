@@ -12,11 +12,18 @@ import {MatButtonModule, MatInputModule, MatToolbarModule} from '@angular/materi
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {AuthenticationService} from './shared/service/auth/authentication.service';
+import {UserListPageComponent} from "./user-list-page/user-list-page.component";
+import {CompanyListPageComponent} from "./company-list-page/company-list-page.component";
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginPageComponent,
+    UserListPageComponent,
+    CompanyListPageComponent,
+
     LoginPageComponent,
     RegPageComponent
   ],

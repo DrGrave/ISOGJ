@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.service;
 
+import com.vidnichuk.isogj.api.dto.UserDTO;
 import com.vidnichuk.isogj.api.entity.User;
 
 import java.util.List;
@@ -39,5 +40,5 @@ public interface UserService {
      * @return
      * all users
      */
-    List<User> getAllUsers();
+    List<UserDTO> getAllUsers();
 }

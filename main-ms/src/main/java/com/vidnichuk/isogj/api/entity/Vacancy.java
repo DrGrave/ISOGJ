@@ -34,6 +34,7 @@ public class Vacancy {
         @JoinColumn(name = "Task")
     private Task task;
 
+
     /**
      *
      * @return
