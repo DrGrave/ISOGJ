@@ -1,6 +1,6 @@
 {
   "/auth/*":{
-    "target": "http://localhost:3001",
+    "target": "http://86.57.153.103:3001",
     "secure": false,
     "logLevel": "debug"
   }

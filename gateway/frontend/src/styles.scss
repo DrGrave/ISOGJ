@@ -25,3 +25,6 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
     padding: 0;
     margin: 0;
 }
+html, body{
+    height: 100%;
+}
