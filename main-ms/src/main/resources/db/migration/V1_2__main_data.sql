@@ -33,7 +33,7 @@ INSERT INTO isogjdb.my_user_credentials (user_login, user_password, user) VALUES
 INSERT INTO isogjdb.user_city_to_work (city, user) VALUES (1, 1);
 INSERT INTO isogjdb.user_company (company, position, user) VALUES (1, 1, 1);
 INSERT INTO isogjdb.user_skill (skill_mark, skill_practical_mark, id_marker, id_skill, id_user) VALUES ('6', '7', 2, 1, 1);
-INSERT INTO isogjdb.vacancy (info_of_vacancy, task, type_of_vacancy) VALUES ('Do work', 1, 1);
+INSERT INTO isogjdb.vacancy (info_of_vacancy, task, type_of_vacancy, company) VALUES ('Do work', 1, 1, 1);
 INSERT INTO isogjdb.vacancy_skill (skill, vacancy) VALUES (1, 1);
 INSERT INTO isogjdb.vacancy_user (if_user_accepted, if_company_accepted, user, vacancy) VALUES (2, 2, 1, 1);
 INSERT INTO isogjdb.education (end_of_education, start_of_education, faculty, school, type_of_education, user) VALUES ('2014-11-14 16:38:39', '2017-11-14 16:38:42', 1, null, 1, 1);

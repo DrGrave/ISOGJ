@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<ul class="users">
+  <li *ngFor="let user of users">
+    <span class="badge">{{user.userId}}</span> {{user.userName}}
+  </li>
+</ul>
+
 <body>
-<a routerLink="/user-list-page">Users</a>
 
 </body>
 </html>

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserListPageComponent } from './user-list-page.component';
 
-describe('LoginPageComponent', () => {
+describe('UserListPageComponent', () => {
   let component: UserListPageComponent;
   let fixture: ComponentFixture<UserListPageComponent>;
 

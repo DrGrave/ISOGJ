@@ -398,25 +398,34 @@ create index FKrsvxrshr30q4756yoxncoaeyl
 
 create table vacancy
 (
-  id_vacancy int not null auto_increment
-    primary key,
-  info_of_vacancy varchar(255) null,
-  task int null,
-  type_of_vacancy int null,
-  constraint FK88okuegm0qxj10q8nrp4odo97
-  foreign key (task) references task (id_of_task),
-  constraint FKg1qrdnkrpjlkt2fr9twump8pt
-  foreign key (type_of_vacancy) references type_of_vacancy (id_type_of_vacancy)
+	id_vacancy int auto_increment
+		primary key,
+	info_of_vacancy varchar(255) null,
+	company int null,
+	task int null,
+	type_of_vacancy int null,
+	constraint FKd8i1boc2bf2p3pmtgi3ucxyqf
+		foreign key (company) references company (id_company),
+	constraint FK88okuegm0qxj10q8nrp4odo97
+		foreign key (task) references task (id_of_task),
+	constraint FKg1qrdnkrpjlkt2fr9twump8pt
+		foreign key (type_of_vacancy) references type_of_vacancy (id_type_of_vacancy)
 )
 ;
 
 create index FK88okuegm0qxj10q8nrp4odo97
-  on vacancy (task)
+	on vacancy (task)
+;
+
+create index FKd8i1boc2bf2p3pmtgi3ucxyqf
+	on vacancy (company)
 ;
 
 create index FKg1qrdnkrpjlkt2fr9twump8pt
-  on vacancy (type_of_vacancy)
+	on vacancy (type_of_vacancy)
 ;
+
+
 
 create table vacancy_skill
 (

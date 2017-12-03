@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.impl.controller;
 
+import com.vidnichuk.isogj.api.dto.VacancyDTO;
 import com.vidnichuk.isogj.api.entity.Vacancy;
 import com.vidnichuk.isogj.api.service.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/Vacancy")
+@RequestMapping(path = "/vacancy")
 public class VacancyController {
     @Autowired
     private VacancyService vacancyService;
@@ -23,11 +24,11 @@ public class VacancyController {
       * @return
      * all vacancy
      */
-    @GetMapping("/")
-    public ResponseEntity<List<Vacancy>> getAllVacancy(){
-        List<Vacancy> vacancyList = vacancyService.getAllVacancy();
+    @GetMapping("/all")
+    public List<VacancyDTO> getAllVacancy(){
+        List<VacancyDTO> vacancyList = vacancyService.getAllVacancy();
         if (vacancyList != null){
-            return new ResponseEntity<List<Vacancy>>(vacancyList, HttpStatus.OK);
-        } return new ResponseEntity<List<Vacancy>>(HttpStatus.NOT_FOUND);
+            return  vacancyList;
+        } return null;
     }
 }

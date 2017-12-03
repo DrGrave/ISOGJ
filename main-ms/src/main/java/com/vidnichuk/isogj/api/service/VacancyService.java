@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.service;
 
+import com.vidnichuk.isogj.api.dto.VacancyDTO;
 import com.vidnichuk.isogj.api.entity.Vacancy;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface VacancyService {
      * @return
      * all vacancy
      */
-    List<Vacancy> getAllVacancy();
+    List<VacancyDTO> getAllVacancy();
 
     /**
      *

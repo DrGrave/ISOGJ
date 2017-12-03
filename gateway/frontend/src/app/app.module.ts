@@ -13,8 +13,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {AuthenticationService} from './shared/service/auth/authentication.service';
 import {UserListPageComponent} from "./user-list-page/user-list-page.component";
-import {CompanyListPageComponent} from "./company-list-page/company-list-page.component";
-
+import {CompanyListPageComponent} from "./vacancy-list-page/vacancy-list-page.component";
+import {VacancyService} from "./vacancy-list-page/vacancy-list-page.service";
+import {UserService} from "./user-list-page/user-list-page-service";
 
 
 @NgModule({
@@ -23,7 +24,6 @@ import {CompanyListPageComponent} from "./company-list-page/company-list-page.co
     LoginPageComponent,
     UserListPageComponent,
     CompanyListPageComponent,
-
     LoginPageComponent,
     RegPageComponent
   ],
@@ -40,7 +40,9 @@ import {CompanyListPageComponent} from "./company-list-page/company-list-page.co
     MatToolbarModule
   ],
   providers: [
-    AuthenticationService
+    VacancyService,
+    AuthenticationService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

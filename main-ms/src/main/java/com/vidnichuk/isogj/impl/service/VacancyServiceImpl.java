@@ -1,8 +1,11 @@
 package com.vidnichuk.isogj.impl.service;
 
 import com.vidnichuk.isogj.api.dao.VacancyRepository;
+import com.vidnichuk.isogj.api.dto.VacancyDTO;
 import com.vidnichuk.isogj.api.entity.Vacancy;
+import com.vidnichuk.isogj.api.mappers.VacancyMapper;
 import com.vidnichuk.isogj.api.service.VacancyService;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import java.util.List;
 
 @Service
 public class VacancyServiceImpl implements VacancyService{
+
+    private VacancyMapper vacancyMapper = Mappers.getMapper(VacancyMapper.class);
     @Autowired
     private VacancyRepository vacancyRepository;
 
@@ -24,8 +29,8 @@ public class VacancyServiceImpl implements VacancyService{
      * all vacancy
      */
     @Override
-    public List<Vacancy> getAllVacancy() {
-        return vacancyRepository.findAll();
+    public List<VacancyDTO> getAllVacancy() {
+        return vacancyMapper.fromListOfVacancyToListOfVacancyDTO(vacancyRepository.findAll());
     }
 
     /**

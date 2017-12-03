@@ -34,6 +34,31 @@ public class Vacancy {
         @JoinColumn(name = "Task")
     private Task task;
 
+    /**
+     * company of vacancy
+     */
+    @ManyToOne
+        @JoinColumn(name = "Company")
+    private Company company;
+
+
+    /**
+     *
+     * @return
+     * company object
+     */
+    public Company getCompany() {
+        return company;
+    }
+
+    /**
+     *
+     * @param company
+     * set company object
+     */
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     /**
      *
