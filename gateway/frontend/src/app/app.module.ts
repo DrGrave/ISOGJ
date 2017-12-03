@@ -5,8 +5,9 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {LoginPageComponent} from './login-page/login-page.component';
+import {RegPageComponent} from './registration/reg-page.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, /*FormControl, Validators*/} from '@angular/forms';
 import {MatButtonModule, MatInputModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
@@ -16,7 +17,8 @@ import {AuthenticationService} from './shared/service/auth/authentication.servic
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegPageComponent
   ],
   imports: [
     BrowserModule,
