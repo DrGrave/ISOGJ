@@ -11,8 +11,9 @@ export class RegPageComponent implements OnInit {
 
     constructor(private registerService : RegUserPageService){}
 
-    regUser : RegUser ;
-    regNew :RegUser;
+    regUser : RegUser;
+    regNew: RegUser;
+    secPass : string;
 
     ngOnInit(): void {
       this.regUser = new RegUser;
