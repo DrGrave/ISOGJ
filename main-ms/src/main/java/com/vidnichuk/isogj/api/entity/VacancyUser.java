@@ -17,7 +17,7 @@ public class VacancyUser {
      * vacancy object
      */
     @ManyToOne
-        @JoinColumn(name = "Vacancy")
+    @JoinColumn(name = "Vacancy")
     private Vacancy vacancy;
 
     /**
@@ -31,16 +31,12 @@ public class VacancyUser {
     /**
      * if accept user
      */
-    @ManyToOne
-        @JoinColumn(name = "IfUserAccepted")
-    private TypeOfAccepted ifAcceptedUser;
+    private Boolean ifAcceptedUser;
 
     /**
      * if company accept
      */
-    @ManyToOne
-        @JoinColumn(name = "IfCompanyAccepted")
-    private TypeOfAccepted ifCompanyAccepted;
+    private Boolean ifCompanyAccepted;
 
     /**
      *
@@ -101,7 +97,7 @@ public class VacancyUser {
      * @return
      * if accept user object
      */
-    public TypeOfAccepted getIfAcceptedUser() {
+    public Boolean getIfAcceptedUser() {
         return ifAcceptedUser;
     }
 
@@ -110,7 +106,7 @@ public class VacancyUser {
      * @param ifAcceptedUser
      * set if accept user
      */
-    public void setIfAcceptedUser(TypeOfAccepted ifAcceptedUser) {
+    public void setIfAcceptedUser(Boolean ifAcceptedUser) {
         this.ifAcceptedUser = ifAcceptedUser;
     }
 
@@ -119,7 +115,7 @@ public class VacancyUser {
      * @return
      * if company accept user
      */
-    public TypeOfAccepted getIfCompanyAccepted() {
+    public Boolean getIfCompanyAccepted() {
         return ifCompanyAccepted;
     }
 
@@ -128,7 +124,7 @@ public class VacancyUser {
      * @param ifCompanyAccepted
      * set if company accept user
      */
-    public void setIfCompanyAccepted(TypeOfAccepted ifCompanyAccepted) {
+    public void setIfCompanyAccepted(Boolean ifCompanyAccepted) {
         this.ifCompanyAccepted = ifCompanyAccepted;
     }
 }

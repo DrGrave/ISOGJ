@@ -1,5 +1,7 @@
 package com.vidnichuk.isogj.api.entity;
 
+import com.vidnichuk.isogj.api.entity.type.TypeOfEducation;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,27 +14,26 @@ import java.util.Date;
 public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idOfEducation;
+    private Long id;
 
     /**
      * type of education
      */
     @ManyToOne
-        @JoinColumn(name = "TypeOfEducation")
+    @JoinColumn(name = "TypeOfEducation")
     private TypeOfEducation typeOfEducation;
 
     /**
      * faculty of university
      */
     @ManyToOne
-        @JoinColumn(name = "Faculty")
     private Faculty faculty;
 
     /**
      * school of education
      */
     @ManyToOne
-        @JoinColumn(name = "School")
+    @JoinColumn(name = "School")
     private School school;
 
     /**
@@ -114,17 +115,17 @@ public class Education {
      * @return
      * id of education
      */
-    public int getIdOfEducation() {
-        return idOfEducation;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idOfEducation
+     * @param id
      * set id of education
      */
-    public void setIdOfEducation(int idOfEducation) {
-        this.idOfEducation = idOfEducation;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

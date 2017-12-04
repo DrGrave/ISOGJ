@@ -11,19 +11,18 @@ import javax.persistence.*;
 public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUniversity;
+    private Long id;
 
     /**
      * name of university
      */
-    @Column(name = "NameOfUniversity")
-    private String nameOfUniversity;
+    private String name;
 
     /**
      * city of locate university
      */
     @ManyToOne
-        @JoinColumn(name = "City")
+    @JoinColumn(name = "City")
     private City city;
 
     /**
@@ -49,17 +48,17 @@ public class University {
      * @return
      * id of university
      */
-    public int getIdUniversity() {
-        return idUniversity;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idUniversity
+     * @param id
      * set id of university
      */
-    public void setIdUniversity(int idUniversity) {
-        this.idUniversity = idUniversity;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -67,16 +66,16 @@ public class University {
      * @return
      * name of university
      */
-    public String getNameOfUniversity() {
-        return nameOfUniversity;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nameOfUniversity
+     * @param name
      * set name of university
      */
-    public void setNameOfUniversity(String nameOfUniversity) {
-        this.nameOfUniversity = nameOfUniversity;
+    public void setName(String name) {
+        this.name = name;
     }
 }

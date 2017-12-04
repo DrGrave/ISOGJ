@@ -1,5 +1,7 @@
 package com.vidnichuk.isogj.api.entity;
 
+import com.vidnichuk.isogj.api.entity.type.TypeOfVacancy;
+
 import javax.persistence.*;
 
 /**
@@ -12,26 +14,25 @@ import javax.persistence.*;
 public class Vacancy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idVacancy;
+    private Long id;
 
     /**
      * info of vacancy
      */
-    @Column(name = "InfoOfVacancy")
-    private String infoOfVacancy;
+    private String info;
 
     /**
      * type of vacancy object
      */
     @ManyToOne
-        @JoinColumn(name = "TypeOfVacancy")
+    @JoinColumn(name = "TypeOfVacancy")
     private TypeOfVacancy typeOfVacancy;
 
     /**
      * task object
      */
     @ManyToOne
-        @JoinColumn(name = "Task")
+    @JoinColumn(name = "Task")
     private Task task;
 
     /**
@@ -83,17 +84,17 @@ public class Vacancy {
      * @return
      * id of vacancy
      */
-    public int getIdVacancy() {
-        return idVacancy;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idVacancy
+     * @param id
      * set id ov vacancy
      */
-    public void setIdVacancy(int idVacancy) {
-        this.idVacancy = idVacancy;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -101,17 +102,17 @@ public class Vacancy {
      * @return
      * id of vacancy
      */
-    public String getInfoOfVacancy() {
-        return infoOfVacancy;
+    public String getInfo() {
+        return info;
     }
 
     /**
      *
-     * @param infoOfVacancy
+     * @param info
      * set id of vacancy
      */
-    public void setInfoOfVacancy(String infoOfVacancy) {
-        this.infoOfVacancy = infoOfVacancy;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     /**

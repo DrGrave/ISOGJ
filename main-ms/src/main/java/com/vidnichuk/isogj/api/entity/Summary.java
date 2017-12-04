@@ -12,19 +12,18 @@ public class Summary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idOfSummary;
+    private Long id;
 
     /**
      * text of summary
      */
-    @Column(name = "TextOfSummary")
-    private String textOfSummary;
+    private String text;
 
     /**
      * user object
      */
     @ManyToOne
-        @JoinColumn(name = "User")
+    @JoinColumn(name = "User")
     private User user;
 
     /**
@@ -50,17 +49,17 @@ public class Summary {
      * @return
      * id of summary
      */
-    public int getIdOfSummary() {
-        return idOfSummary;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idOfSummary
+     * @param id
      * set id of summary
      */
-    public void setIdOfSummary(int idOfSummary) {
-        this.idOfSummary = idOfSummary;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -68,16 +67,16 @@ public class Summary {
      * @return
      * text of summary
      */
-    public String getTextOfSummary() {
-        return textOfSummary;
+    public String getText() {
+        return text;
     }
 
     /**
      *
-     * @param textOfSummary
+     * @param text
      * set text of summary
      */
-    public void setTextOfSummary(String textOfSummary) {
-        this.textOfSummary = textOfSummary;
+    public void setText(String text) {
+        this.text = text;
     }
 }

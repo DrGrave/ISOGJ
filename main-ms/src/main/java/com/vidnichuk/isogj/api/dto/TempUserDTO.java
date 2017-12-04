@@ -1,19 +1,19 @@
 package com.vidnichuk.isogj.api.dto;
 
 public class TempUserDTO {
-    private String userPassword;
+    private String password;
     private String userLogin;
     private String userEmail;
     private String userName;
     private String userSurname;
     private String userPatronymic;
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserLogin() {

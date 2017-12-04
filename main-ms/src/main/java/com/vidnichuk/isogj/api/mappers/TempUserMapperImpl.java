@@ -8,24 +8,24 @@ public class TempUserMapperImpl implements TempUserMapper{
     @Override
     public TempUserDTO fromTempUserToTemUserDTO(TempUser tempUser) {
         TempUserDTO tempUserDTO = new TempUserDTO();
-        tempUserDTO.setUserEmail(tempUser.getUserEmail());
-        tempUserDTO.setUserLogin(tempUser.getUserLogin());
-        tempUserDTO.setUserName(tempUser.getUserName());
-        tempUserDTO.setUserPassword(tempUser.getUserPassword());
-        tempUserDTO.setUserPatronymic(tempUser.getUserPatronymic());
-        tempUserDTO.setUserSurname(tempUser.getUserSurname());
+        tempUserDTO.setUserEmail(tempUser.getEmail());
+        tempUserDTO.setUserLogin(tempUser.getUsername());
+        tempUserDTO.setUserName(tempUser.getFirstName());
+        tempUserDTO.setPassword(tempUser.getPassword());
+        tempUserDTO.setUserPatronymic(tempUser.getMiddleName());
+        tempUserDTO.setUserSurname(tempUser.getLastName());
         return tempUserDTO;
     }
 
     @Override
     public TempUser fromTempUserDTOToTempUser(TempUserDTO tempUserDTO) {
         TempUser tempUser = new TempUser();
-        tempUser.setUserEmail(tempUserDTO.getUserEmail());
-        tempUser.setUserLogin(tempUserDTO.getUserLogin());
-        tempUser.setUserName(tempUserDTO.getUserName());
-        tempUser.setUserPassword(tempUserDTO.getUserPassword());
-        tempUser.setUserPatronymic(tempUserDTO.getUserPatronymic());
-        tempUser.setUserSurname(tempUserDTO.getUserSurname());
+        tempUser.setEmail(tempUserDTO.getUserEmail());
+        tempUser.setUsername(tempUserDTO.getUserLogin());
+        tempUser.setFirstName(tempUserDTO.getUserName());
+        tempUser.setPassword(tempUserDTO.getPassword());
+        tempUser.setMiddleName(tempUserDTO.getUserPatronymic());
+        tempUser.setLastName(tempUserDTO.getUserSurname());
         return tempUser;
     }
 }

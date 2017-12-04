@@ -1,9 +1,6 @@
 package com.vidnichuk.isogj.impl.configuration;
 
 
-import com.vidnichuk.isogj.api.service.UserCredentialsService;
-import com.vidnichuk.isogj.impl.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -22,8 +19,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
+
+                .antMatchers("/lol").authenticated()
                 .antMatchers("/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated();
 
 

@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.api.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Vadim on 07.11.2017.
@@ -11,13 +12,13 @@ import javax.persistence.*;
 public class VacancySkill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idVacancySkill;
+    private Long id;
 
     /**
      * vacancy object
      */
     @ManyToOne
-        @JoinColumn(name = "Vacancy")
+    @JoinColumn(name = "Vacancy")
     private Vacancy vacancy;
 
     /**
@@ -32,17 +33,17 @@ public class VacancySkill {
      * @return
      * id of vacancy skill
      */
-    public int getIdVacancySkill() {
-        return idVacancySkill;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idVacancySkill
+     * @param id
      * set id of vacancy skill
      */
-    public void setIdVacancySkill(int idVacancySkill) {
-        this.idVacancySkill = idVacancySkill;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

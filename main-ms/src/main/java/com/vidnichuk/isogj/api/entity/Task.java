@@ -1,5 +1,7 @@
 package com.vidnichuk.isogj.api.entity;
 
+import com.vidnichuk.isogj.api.entity.type.TypeOfTask;
+
 import javax.persistence.*;
 
 /**
@@ -12,34 +14,32 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idOfTask;
+    private Long id;
 
     /**
      * name of task
      */
-    @Column(name = "NameOfTask")
-    private String nameOfTask;
+    private String name;
 
     /**
      * type of task
      */
     @ManyToOne
-        @JoinColumn(name = "TypeOfTask")
+    @JoinColumn(name = "TypeOfTask")
     private TypeOfTask typeOfTask;
 
     /**
      * info of task
      */
-    @Column(name = "InfoOfTask")
-    private String infoOfTask;
+    private String info;
 
     /**
      *
      * @return
      * id of task
      */
-    public int getIdOfTask() {
-        return idOfTask;
+    public Long getId() {
+        return id;
     }
 
     /**
@@ -62,11 +62,11 @@ public class Task {
 
     /**
      *
-     * @param idOfTask
+     * @param id
      * set id of task
      */
-    public void setIdOfTask(int idOfTask) {
-        this.idOfTask = idOfTask;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -74,17 +74,17 @@ public class Task {
      * @return
      * name of task
      */
-    public String getNameOfTask() {
-        return nameOfTask;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nameOfTask
+     * @param name
      * set name of task
      */
-    public void setNameOfTask(String nameOfTask) {
-        this.nameOfTask = nameOfTask;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -92,16 +92,16 @@ public class Task {
      * @return
      * info of task
      */
-    public String getInfoOfTask() {
-        return infoOfTask;
+    public String getInfo() {
+        return info;
     }
 
     /**
      *
-     * @param infoOfTask
+     * @param info
      * set info of task
      */
-    public void setInfoOfTask(String infoOfTask) {
-        this.infoOfTask = infoOfTask;
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

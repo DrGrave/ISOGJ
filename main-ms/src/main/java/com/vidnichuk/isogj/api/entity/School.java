@@ -11,27 +11,26 @@ import javax.persistence.*;
 public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idSchool;
+    private Long idSchool;
 
     /**
      * city of school location
      */
     @ManyToOne
-        @JoinColumn(name = "City")
+    @JoinColumn(name = "City")
     private City city;
 
     /**
      * name of school
      */
-    @Column(name = "NameOfSchool")
-    private String nameOfSchool;
+    private String name;
 
     /**
      *
      * @return
      * id of school
      */
-    public int getIdSchool() {
+    public Long getIdSchool() {
         return idSchool;
     }
 
@@ -40,7 +39,7 @@ public class School {
      * @param idSchool
      * set id of school
      */
-    public void setIdSchool(int idSchool) {
+    public void setIdSchool(Long idSchool) {
         this.idSchool = idSchool;
     }
 
@@ -67,16 +66,16 @@ public class School {
      * @return
      * name of school
      */
-    public String getNameOfSchool() {
-        return nameOfSchool;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nameOfSchool
+     * @param name
      * set name of school
      */
-    public void setNameOfSchool(String nameOfSchool) {
-        this.nameOfSchool = nameOfSchool;
+    public void setName(String name) {
+        this.name = name;
     }
 }

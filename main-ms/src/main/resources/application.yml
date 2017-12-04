@@ -3,12 +3,12 @@ server:
 
 
 spring:
-  jpa.hibernate.ddl-auto: validate
+  jpa.hibernate.ddl-auto: update
   datasource:
     isogj:
       host: ${MYSQL_HOST:isogj-mysql}
       port: ${MYSQL_PORT:3306}
-      current_schema: isogjdb
+      current_schema: isogj_account
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/${spring.datasource.isogj.current_schema}?autoReconnect=true&useSSL=false
     username: root
@@ -52,7 +52,7 @@ flyway:
   url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/?autoReconnect=true&useSSL=false
   user: ${spring.datasource.username}
   password: ${spring.datasource.password}
-  enabled: true
+  enabled: false
 
 eureka:
   instance:
@@ -68,4 +68,15 @@ endpoints:
   enabled: false
 
 
+
+security:
+  oauth2:
+    client:
+      clientId: ${spring.application.name}
+      accessTokenUri: http://localhost:9999/oauth/token
+      grant-type: client_credentials
+      scope: server
+      client-secret: ${MAIN_SERVICE_PASSWORD:123}
+    resource:
+      user-info-uri: http://localhost:9999/users/current
 

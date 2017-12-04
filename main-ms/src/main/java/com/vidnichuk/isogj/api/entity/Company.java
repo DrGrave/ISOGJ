@@ -13,14 +13,13 @@ public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idCompany;
+    private Long id;
 
     /**
      * name of company
      */
 
-    @Column(name = "NameOfCompany")
-    private String nameOfCompany;
+    private String name;
 
     /**
      * city of locate company
@@ -32,22 +31,20 @@ public class Company {
     /**
      * info of company
      */
-    @Column(name = "InfoOfCompany")
-    private String infoOfCompany;
+    private String info;
 
     /**
      * date of creation company
      */
-    @Column(name = "DateOfCreationCompany")
-    private Date dateOfCreationCompany;
+    private Date dateOfCreation;
 
     /**
      *
      * @return
      * id of company
      */
-    public int getIdOfCompany() {
-        return idCompany;
+    public Long getIdOfCompany() {
+        return id;
     }
 
     /**
@@ -55,8 +52,8 @@ public class Company {
      * @param idOfCompany
      * set id of info company
      */
-    public void setIdOfCompany(int idOfCompany) {
-        this.idCompany = idOfCompany;
+    public void setIdOfCompany(Long idOfCompany) {
+        this.id = idOfCompany;
     }
 
     /**
@@ -64,17 +61,17 @@ public class Company {
      * @return
      * name of company
      */
-    public String getNameOfCompany() {
-        return nameOfCompany;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nameOfCompany
+     * @param name
      * set name of company
      */
-    public void setNameOfCompany(String nameOfCompany) {
-        this.nameOfCompany = nameOfCompany;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -100,17 +97,17 @@ public class Company {
      * @return
      * info of company
      */
-    public String getInfoOfCompany() {
-        return infoOfCompany;
+    public String getInfo() {
+        return info;
     }
 
     /**
      *
-     * @param infoOfCompany
+     * @param info
      * set info of company
      */
-    public void setInfoOfCompany(String infoOfCompany) {
-        this.infoOfCompany = infoOfCompany;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     /**
@@ -118,16 +115,16 @@ public class Company {
      * @return
      * date of creation company
      */
-    public Date getDateOfCreationCompany() {
-        return dateOfCreationCompany;
+    public Date getDateOfCreation() {
+        return dateOfCreation;
     }
 
     /**
      *
-     * @param dateOfCreationCompany
+     * @param dateOfCreation
      * set date of creation company
      */
-    public void setDateOfCreationCompany(Date dateOfCreationCompany) {
-        this.dateOfCreationCompany = dateOfCreationCompany;
+    public void setDateOfCreation(Date dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
     }
 }

@@ -13,7 +13,7 @@ spring:
     isogj:
       host: ${MYSQL_HOST:isogj-mysql}
       port: ${MYSQL_PORT:3306}
-      current_schema: isogjdb_oauth
+      current_schema: isogj_oauth
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/${spring.datasource.isogj.current_schema}?autoReconnect=true&useSSL=false
     username: root

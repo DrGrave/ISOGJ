@@ -1,9 +1,11 @@
 package com.vidnichuk.isogj.api.entity;
 
+import com.vidnichuk.isogj.api.entity.type.TypeOfUser;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by vadim on 16.10.17.
@@ -17,36 +19,43 @@ public class User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
+    private int id;
+
+
+    /**
+     * username for identification and synchronization with other services.
+     */
+    @Column(name = "username", nullable = false)
+    private String username;
+
 
     /**
      * name of user
      */
 
-    @Column(name = "UserName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     @NotEmpty(message = "*Please provide your name")
-    private String userName;
+    private String firstName;
 
     /**
      * surname of user
      */
 
-    @Column(name = "UserSurname", nullable = false)
+    @Column(name = "last_name", nullable = false)
     @NotEmpty(message = "*Please provide your surname")
-    private String userSurname;
+    private String lastName;
 
     /**
      * is user online
      */
-    @Column(name = "active")
-    private int active;
+    private Boolean active;
 
     /**
      * patronymic of user
      */
-    @Column(name = "UserPatronymic", nullable = false)
+    @Column(name = "middle_name", nullable = false)
     @NotEmpty(message = "*Please provide your Patronymic")
-    private String userPatronymic;
+    private String middleName;
 
 
 
@@ -56,7 +65,7 @@ public class User {
     @Column(name = "Email", nullable = false)
     @Email(message = "*Please provide a valid email")
     @NotEmpty(message = "*Please provide a email")
-    private String userEmail;
+    private String email;
 
 
 
@@ -78,9 +87,24 @@ public class User {
      * city of living
      */
     @ManyToOne
-        @JoinColumn(name = "CityOfLiving")
+    @JoinColumn(name = "CityOfLiving")
     private City city;
 
+
+
+    @ManyToMany
+    @JoinTable(name = "possible_cities_to_work",
+            joinColumns = {@JoinColumn(name = "id_user")},
+            inverseJoinColumns = {@JoinColumn(name = "id_city")})
+    private Set<City> possibleCitiesToWork;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     /**
      *
@@ -123,17 +147,17 @@ public class User {
      * @return
      * id of user
      */
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
     /**
      *
-     * @param userId
+     * @param id
      * set id of user
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -141,17 +165,17 @@ public class User {
      * @return
      * user name
      */
-    public String getUserName() {
-        return userName;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
      *
-     * @param userName
+     * @param firstName
      * set user name
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
@@ -159,17 +183,17 @@ public class User {
      * @return
      * user surname
      */
-    public String getUserSurname() {
-        return userSurname;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
      *
-     * @param userSurname
+     * @param lastName
      * set user surname
      */
-    public void setUserSurname(String userSurname) {
-        this.userSurname = userSurname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
@@ -177,17 +201,17 @@ public class User {
      * @return
      * user patronymic
      */
-    public String getUserPatronymic() {
-        return userPatronymic;
+    public String getMiddleName() {
+        return middleName;
     }
 
     /**
      *
-     * @param userPatronymic
+     * @param middleName
      * set user patronymic
      */
-    public void setUserPatronymic(String userPatronymic) {
-        this.userPatronymic = userPatronymic;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     /**
@@ -195,17 +219,17 @@ public class User {
      * @return
      * user email
      */
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
     /**
      *
-     * @param userEmail
+     * @param email
      * set user email
      */
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -231,7 +255,7 @@ public class User {
      * @return
      * 1 is user online and 0 if user offline
      */
-    public int getActive() {
+    public Boolean getActive() {
         return active;
     }
 
@@ -240,9 +264,16 @@ public class User {
      * @param active
      * set active
      */
-    public void setActive(int active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
 
+    public Set<City> getPossibleCitiesToWork() {
+        return possibleCitiesToWork;
+    }
+
+    public void setPossibleCitiesToWork(Set<City> possibleCitiesToWork) {
+        this.possibleCitiesToWork = possibleCitiesToWork;
+    }
 }

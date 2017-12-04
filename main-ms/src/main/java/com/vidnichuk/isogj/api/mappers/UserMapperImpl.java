@@ -23,10 +23,10 @@ public class UserMapperImpl implements UserMapper{
             return null;
         }
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(user.getUserId());
-        userDTO.setUserName(user.getUserName());
-        userDTO.setUserLastName(user.getUserPatronymic());
-        userDTO.setUserSurname(user.getUserSurname());
+        userDTO.setUserId(user.getId());
+        userDTO.setUserName(user.getFirstName());
+        userDTO.setUserLastName(user.getMiddleName());
+        userDTO.setUserSurname(user.getLastName());
         return userDTO;
     }
 
@@ -43,9 +43,9 @@ public class UserMapperImpl implements UserMapper{
             return null;
         } else {
         User user = new User();
-            user.setUserName(userDTO.getUserName());
-            user.setUserSurname(userDTO.getUserSurname());
-            user.setUserPatronymic(userDTO.getUserLastName());
+            user.setFirstName(userDTO.getUserName());
+            user.setLastName(userDTO.getUserSurname());
+            user.setMiddleName(userDTO.getUserLastName());
             return user;
         }
 
