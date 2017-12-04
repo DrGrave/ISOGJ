@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {MatInputModule} from '@angular/material';
-
+import {Component, OnInit} from '@angular/core';
+import {RegUser} from "./reg-user";
+import {RegUserPageService} from "./reg-user-page.service";
 
 @Component({
     selector: 'reg-page',
@@ -10,9 +8,17 @@ import {MatInputModule} from '@angular/material';
     styleUrls: ['./reg-page.component.scss']
 })
 export class RegPageComponent implements OnInit {
-    
+
+    constructor(private registerService : RegUserPageService){}
+
+    regUser : RegUser ;
+    regNew :RegUser;
+
     ngOnInit(): void {
-	        
+      this.regUser = new RegUser;
     }
-    
+
+  private regMyUser(event) {
+    this.registerService.addRegUser(this.regUser).subscribe(user => this.regNew = user)
+  }
 }

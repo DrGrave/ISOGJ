@@ -15,7 +15,8 @@ import {AuthenticationService} from './shared/service/auth/authentication.servic
 import {UserListPageComponent} from "./user-list-page/user-list-page.component";
 import {CompanyListPageComponent} from "./vacancy-list-page/vacancy-list-page.component";
 import {VacancyService} from "./vacancy-list-page/vacancy-list-page.service";
-import {UserService} from "./user-list-page/user-list-page-service";
+import {UserService} from "./user-list-page/user-list-page.service";
+import {RegUserPageService} from "./registration/reg-user-page.service";
 
 
 @NgModule({
@@ -40,9 +41,10 @@ import {UserService} from "./user-list-page/user-list-page-service";
     MatToolbarModule
   ],
   providers: [
+    RegUserPageService,
     VacancyService,
     AuthenticationService,
-    UserService
+    UserService,
   ],
   bootstrap: [AppComponent]
 })

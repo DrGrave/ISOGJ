@@ -2,30 +2,31 @@
     <h1 class="page-select">
 	Регистрация
     </h1>
-    <div class="reg-inputs">
-           <form class="reg-form">
-              <mat-form-field class="full-width">
-                 <input matInput placeholder="Логин*">
-              </mat-form-field>
-              <mat-form-field class="full-width">
-                 <input matInput placeholder="E-mail*">
-              </mat-form-field>
-              <mat-form-field class="full-width">
-                 <input matInput type="password" placeholder="Пароль*">
-              </mat-form-field>
-              <mat-form-field class="full-width">
-                 <input matInput type="password" placeholder="Повторить пароль*">
-              </mat-form-field>
-              <mat-form-field class="full-width">
-                 <input matInput placeholder="Имя">
-              </mat-form-field>
-              <mat-form-field class="full-width">
-                 <input matInput placeholder="Фамилия">
-              </mat-form-field>
-              <mat-form-field class="full-width">
-                 <input matInput placeholder="Отчество">
-              </mat-form-field>
-              <button mat-raised-button color="primary">Отправить</button>
-           </form> 
+    <div class="reg-inputs" >
+           <form (submit)="regMyUser(event)">
+              <mat-input-container class="full-width">
+                 <input matInput placeholder="Логин*" type="text" [(ngModel)]= regUser.userLogin name="Login">
+              </mat-input-container>
+             <mat-input-container class="full-width">
+               <input matInput type="password" placeholder="Пароль*" name="Password" [(ngModel)]= regUser.userPassword>
+             </mat-input-container>
+             <mat-input-container class="full-width">
+               <input matInput type="password" placeholder="Повторить пароль*" name="Password" [(ngModel)]= regUser.userSecPassword>
+             </mat-input-container>
+              <mat-input-container class="full-width">
+                 <input matInput placeholder="E-mail*" type="email" name="Email" [(ngModel)]= regUser.userEmail>
+              </mat-input-container>
+              <mat-input-container class="full-width">
+                 <input matInput placeholder="Имя" type="text" name="Name" [(ngModel)]= regUser.userName>
+              </mat-input-container>
+              <mat-input-container class="full-width">
+                 <input matInput placeholder="Фамилия" type="text" name="Surname" [(ngModel)]= regUser.userSurname>
+              </mat-input-container>
+              <mat-input-container class="full-width">
+                 <input matInput placeholder="Отчество" type="text" name="Patronymic" [(ngModel)]= regUser.userPatronymic>
+              </mat-input-container>
+              <button type="submit" class="reg-button" mat-button color="primary" >Отправить</button>
+           </form>
     </div>
 </div>
+

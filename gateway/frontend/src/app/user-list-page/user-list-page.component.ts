@@ -1,7 +1,7 @@
 
 
 import {Component, OnInit} from "@angular/core";
-import {UserService} from "./user-list-page-service";
+import {UserService} from "./user-list-page.service";
 import {User} from "./user";
 
 @Component({
