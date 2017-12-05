@@ -13,7 +13,7 @@ const httpOptions = {
 
 @Injectable()
 export class RegUserPageService {
-  private userUrl = "/main/registration";
+  private userUrl = "/main/user/register";
   private checkLoginkUrl = "/main/checklogin?";
   private checkEmailUrl = "/main/checkemail?";
 
