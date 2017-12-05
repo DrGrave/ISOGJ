@@ -3,30 +3,36 @@
 	Регистрация
     </h1>
     <div class="reg-inputs" >
-           <form (submit)="regMyUser(event)">
+           <form #registrForm="ngForm" name="regForm" (submit)="regMyUser(event)" >
+             <form (submit)="checkLogin(event)">
               <mat-input-container class="full-width">
-                 <input matInput placeholder="Логин*" type="text" [(ngModel)]= regUser.username name="Login">
+                  <input matInput placeholder="Логин*" type="text" [(ngModel)]= regUser.username name="username" id="username" required minlength="4" (focusout)="checkLogin(event)">
               </mat-input-container>
+             </form>
              <mat-input-container class="full-width">
-               <input matInput type="password" placeholder="Пароль*" name="Password" [(ngModel)]= regUser.password>
+               <input matInput type="password" placeholder="Пароль*" name="Password" [(ngModel)]= regUser.password required minlength="8">
              </mat-input-container>
              <mat-input-container class="full-width">
-               <input matInput type="password" placeholder="Повторить пароль*" name="Password" [(ngModel)]= secPass>
+               <input matInput type="password" placeholder="Повторить пароль*" name="Password" [(ngModel)]= secPass required minlength="8">
              </mat-input-container>
+             <form ></form>
               <mat-input-container class="full-width">
-                 <input matInput placeholder="E-mail*" type="email" name="Email" [(ngModel)]= regUser.email>
+                 <input matInput placeholder="E-mail*" type="email" name="Email" [(ngModel)]= regUser.email required email="" (focusout)="checkLogin(event)">
               </mat-input-container>
               <mat-input-container class="full-width">
-                 <input matInput placeholder="Имя" type="text" name="Name" [(ngModel)]= regUser.firstName>
+                 <input matInput placeholder="Имя" type="text" name="Name" [(ngModel)]= regUser.firstName required minlength="4">
               </mat-input-container>
               <mat-input-container class="full-width">
-                 <input matInput placeholder="Фамилия" type="text" name="Surname" [(ngModel)]= regUser.middleName>
+                 <input matInput placeholder="Фамилия" type="text" name="Surname" [(ngModel)]= regUser.middleName required minlength="4">
               </mat-input-container>
               <mat-input-container class="full-width">
-                 <input matInput placeholder="Отчество" type="text" name="Patronymic" [(ngModel)]= regUser.lastName>
+                 <input matInput placeholder="Отчество" type="text" name="Patronymic" [(ngModel)]= regUser.lastName required minlength="4">
               </mat-input-container>
-              <button type="submit" class="reg-button" mat-button color="primary" >Отправить</button>
+              <button type="submit" class="reg-button" mat-button color="primary" [disabled]="!registrForm.valid">Отправить</button>
            </form>
     </div>
+
+
+
 </div>
 
