@@ -21,6 +21,16 @@ public class TempUser {
     private String lastName;
     private String middleName;
 
+    private String confirmLink;
+
+    public String getConfirmLink() {
+        return confirmLink;
+    }
+
+    public void setConfirmLink(String confirmLink) {
+        this.confirmLink = confirmLink;
+    }
+
     public Long getId() {
         return id;
     }

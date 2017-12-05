@@ -19,7 +19,7 @@ public class User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
 
     /**
@@ -147,7 +147,7 @@ public class User {
      * @return
      * id of user
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -156,7 +156,7 @@ public class User {
      * @param id
      * set id of user
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

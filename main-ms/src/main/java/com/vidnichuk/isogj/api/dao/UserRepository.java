@@ -12,12 +12,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, Long>{
 
     /**
-     * @param userEmail
+     * @param email
      * email of user
      * @return
      * user with this email
      */
-    User findByEmail(String userEmail);
+    User findByEmail(String email);
 
     /**
      *
@@ -26,5 +26,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
      * @return
      * user with this id
      */
-    User findById(int id);
+    User findById(Long id);
 }

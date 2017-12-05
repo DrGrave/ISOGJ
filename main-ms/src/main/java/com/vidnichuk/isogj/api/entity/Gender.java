@@ -22,8 +22,8 @@ public class Gender {
      * name of gender
      */
 
-    @Column(name = "NameOdGender", nullable = false)
-    private String nameOfGender;
+    @Column(name = "Name", nullable = false)
+    private String name;
 
     /**
      *
@@ -43,12 +43,12 @@ public class Gender {
      * @return
      * name of gender
      */
-    public String getNameOfGender() {
-        return nameOfGender;
+    public String getName() {
+        return name;
     }
 
-    public void setNameOfGender(String nameOfGender) {
-        this.nameOfGender = nameOfGender;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -58,6 +58,6 @@ public class Gender {
 
         Gender gender = (Gender) o;
 
-        return id == gender.id && (nameOfGender != null ? nameOfGender.equals(gender.nameOfGender) : gender.nameOfGender == null);
+        return id == gender.id && (name != null ? name.equals(gender.name) : gender.name == null);
     }
 }

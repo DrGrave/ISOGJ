@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSchool;
+    private Long id;
 
     /**
      * city of school location
@@ -30,17 +30,17 @@ public class School {
      * @return
      * id of school
      */
-    public Long getIdSchool() {
-        return idSchool;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idSchool
+     * @param id
      * set id of school
      */
-    public void setIdSchool(Long idSchool) {
-        this.idSchool = idSchool;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

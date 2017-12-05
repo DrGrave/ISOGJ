@@ -1,8 +1,10 @@
 package com.vidnichuk.isogj.api.entity;
 
 import com.vidnichuk.isogj.api.entity.type.TypeOfVacancy;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Vadim on 06.11.2017.
@@ -39,9 +41,23 @@ public class Vacancy {
      * company of vacancy
      */
     @ManyToOne
-        @JoinColumn(name = "Company")
+    @JoinColumn(name = "Company")
     private Company company;
 
+    @ManyToMany
+    @JoinTable(name = "vacancy_skills",
+        joinColumns = {@JoinColumn(name = "id_vacancy")},
+        inverseJoinColumns = {@JoinColumn(name = "id_skill")})
+    private Set<Skill> skills;
+
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
 
     /**
      *

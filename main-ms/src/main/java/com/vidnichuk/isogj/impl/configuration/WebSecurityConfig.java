@@ -20,21 +20,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
 
-                .antMatchers("/lol").authenticated()
                 .antMatchers("/**").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/user/register").permitAll();
+//                .anyRequest().authenticated();
 
 
-        http.logout()
-                // разрешаем делать логаут всем
-                .permitAll()
-                // указываем URL логаута
-                .logoutUrl("/logout")
-                .clearAuthentication(true)
-                .deleteCookies()
-                // указываем URL при удачном логауте
-                .logoutSuccessUrl("/home?logout")
-                // делаем не валидной текущую сессию
-                .invalidateHttpSession(true);
     }
 }

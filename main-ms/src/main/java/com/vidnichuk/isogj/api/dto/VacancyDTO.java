@@ -4,24 +4,24 @@ package com.vidnichuk.isogj.api.dto;
  * vacancy dto object
  */
 public class VacancyDTO {
-    private Long idVacancy;
-    private String infoOfVacancy;
+    private Long id;
+    private String info;
     private String typeOfVacancy;
 
-    public Long getIdVacancy() {
-        return idVacancy;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdVacancy(Long idVacancy) {
-        this.idVacancy = idVacancy;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getInfoOfVacancy() {
-        return infoOfVacancy;
+    public String getInfo() {
+        return info;
     }
 
-    public void setInfoOfVacancy(String infoOfVacancy) {
-        this.infoOfVacancy = infoOfVacancy;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public String getTypeOfVacancy() {

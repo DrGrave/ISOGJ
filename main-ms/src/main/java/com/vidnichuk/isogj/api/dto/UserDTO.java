@@ -7,51 +7,51 @@ public class UserDTO {
     /**
      * user id
      */
-    private int userId;
+    private Long id;
 
     /**
      * user name
      */
-    private String userName;
+    private String firstName;
     /**
      * user surname
      */
-    private String userSurname;
+    private String lastName;
     /**
      * user patronymic
      */
-    private String userLastName;
+    private String middleName;
 
-    public int getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUserSurname() {
-        return userSurname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUserSurname(String userSurname) {
-        this.userSurname = userSurname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getUserLastName() {
-        return userLastName;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
 }

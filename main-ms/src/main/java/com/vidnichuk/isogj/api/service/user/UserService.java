@@ -1,6 +1,7 @@
-package com.vidnichuk.isogj.api.service;
+package com.vidnichuk.isogj.api.service.user;
 
 import com.vidnichuk.isogj.api.dto.UserDTO;
+import com.vidnichuk.isogj.api.entity.TempUser;
 import com.vidnichuk.isogj.api.entity.User;
 
 import java.util.List;
@@ -19,12 +20,7 @@ public interface UserService {
      */
     User findByEmail(String email);
 
-    /**
-     *
-     * @param user
-     * save user object if not exist in DB
-     */
-    void saveUser(User user);
+
 
     /**
      *
@@ -33,12 +29,15 @@ public interface UserService {
      * @return
      * user with this id
      */
-    User findById(Integer id);
+    User findById(Long id);
 
     /**
      *
      * @return
      * all users
      */
-    List<UserDTO> getAllUsers();
+    List<User> getAllUsers();
+
+
+    void registerUser(TempUser tempUser);
 }

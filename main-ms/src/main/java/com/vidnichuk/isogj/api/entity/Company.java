@@ -43,7 +43,7 @@ public class Company {
      * @return
      * id of company
      */
-    public Long getIdOfCompany() {
+    public Long getId() {
         return id;
     }
 
@@ -52,7 +52,7 @@ public class Company {
      * @param idOfCompany
      * set id of info company
      */
-    public void setIdOfCompany(Long idOfCompany) {
+    public void setId(Long idOfCompany) {
         this.id = idOfCompany;
     }
 

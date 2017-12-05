@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class VacancyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idVacancyUser;
+    private Long id;
 
     /**
      * vacancy object
@@ -24,7 +24,7 @@ public class VacancyUser {
      * user object
      */
     @ManyToOne
-        @JoinColumn(name = "User")
+    @JoinColumn(name = "User")
     private User user;
 
 
@@ -43,17 +43,17 @@ public class VacancyUser {
      * @return
      * id of vacancy user
      */
-    public int getIdVacancyUser() {
-        return idVacancyUser;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idVacancyUser
+     * @param id
      * set id of vacancy
      */
-    public void setIdVacancyUser(int idVacancyUser) {
-        this.idVacancyUser = idVacancyUser;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
