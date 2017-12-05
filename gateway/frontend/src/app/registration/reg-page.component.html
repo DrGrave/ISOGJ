@@ -4,11 +4,9 @@
     </h1>
     <div class="reg-inputs" >
            <form #registrForm="ngForm" name="regForm" (submit)="regMyUser(event)" >
-             <form (submit)="checkLogin(event)">
               <mat-input-container class="full-width">
                   <input matInput placeholder="Логин*" type="text" [(ngModel)]= regUser.username name="username" id="username" required minlength="4" (focusout)="checkLogin(event)">
               </mat-input-container>
-             </form>
              <mat-input-container class="full-width">
                <input matInput type="password" placeholder="Пароль*" name="Password" [(ngModel)]= regUser.password required minlength="8">
              </mat-input-container>
@@ -17,7 +15,7 @@
              </mat-input-container>
              <form ></form>
               <mat-input-container class="full-width">
-                 <input matInput placeholder="E-mail*" type="email" name="Email" [(ngModel)]= regUser.email required email="" (focusout)="checkLogin(event)">
+                 <input matInput placeholder="E-mail*" type="email" name="Email" [(ngModel)]= regUser.email required email="" (focusout)="checkMail(event)">
               </mat-input-container>
               <mat-input-container class="full-width">
                  <input matInput placeholder="Имя" type="text" name="Name" [(ngModel)]= regUser.firstName required minlength="4">

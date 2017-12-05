@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {RegUser} from "./reg-user";
-import {RegUserCheck} from "./reg-user-check";
+import {isUndefined} from "util";
+import {validate} from "codelyzer/walkerFactory/walkerFn";
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,8 +14,9 @@ const httpOptions = {
 @Injectable()
 export class RegUserPageService {
   private userUrl = "/main/registration";
-  private checkUrl = "/main/usercheck";
-  regUserCheck : RegUserCheck = new RegUserCheck;
+  private checkLoginkUrl = "/main/checklogin?";
+  private checkEmailUrl = "/main/checkemail?";
+
 
   constructor(private http: HttpClient) {
   }
@@ -24,9 +27,20 @@ export class RegUserPageService {
   }
 
   checkLogin(regUser: RegUser): Observable<any> {
-    this.regUserCheck.username = regUser.username;
-    this.regUserCheck.email = regUser.email;
 
-    return this.http.post<RegUserCheck>(this.checkUrl, this.regUserCheck, httpOptions)
+    if (!isUndefined(regUser.username)) {
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('email', regUser.username);
+      return this.http.post(this.checkLoginkUrl + urlSearchParams.toString(), null, httpOptions)
+    }
+  }
+
+  checkEmail(regUser: RegUser): Observable<any>{
+    if (!isUndefined(regUser.email)) {
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('username', regUser.email);
+
+      return this.http.post(this.checkEmailUrl + urlSearchParams.toString(), null, httpOptions);
+    }
   }
 }
