@@ -20,6 +20,7 @@ export class RegPageComponent implements OnInit {
 
 
     ngOnInit(): void {
+      this.registerService
     }
 
   private regMyUser(event) {
@@ -28,10 +29,10 @@ export class RegPageComponent implements OnInit {
 
 
   checkLogin(event){
-      this.registerService.checkLogin(this.regUser).subscribe(data => this.loginField = data)
+        this.registerService.checkLogin(this.regUser).subscribe(data => this.loginField = data)
     }
 
-    checkMail(event){
-      this.registerService.checkEmail(this.regUser).subscribe(data => this.emailField = data)
+    checkMail(event) {
+        this.registerService.checkEmail(this.regUser).subscribe(data => this.emailField = data)
     }
 }

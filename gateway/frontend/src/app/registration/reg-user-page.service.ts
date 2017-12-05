@@ -27,20 +27,14 @@ export class RegUserPageService {
   }
 
   checkLogin(regUser: RegUser): Observable<any> {
-
-    if (!isUndefined(regUser.username)) {
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('email', regUser.username);
       return this.http.post(this.checkLoginkUrl + urlSearchParams.toString(), null, httpOptions)
-    }
   }
 
   checkEmail(regUser: RegUser): Observable<any>{
-    if (!isUndefined(regUser.email)) {
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('username', regUser.email);
-
       return this.http.post(this.checkEmailUrl + urlSearchParams.toString(), null, httpOptions);
-    }
   }
 }
