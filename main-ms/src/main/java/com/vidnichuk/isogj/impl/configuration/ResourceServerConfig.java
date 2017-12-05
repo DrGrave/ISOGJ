@@ -24,10 +24,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .anyRequest().authenticated()
                 .antMatchers("/swagger**", "/webjars/springfox**").permitAll()
                 .antMatchers("/user/register").permitAll()
-                ;
+                .anyRequest().authenticated()
+        ;
 
 
     }
