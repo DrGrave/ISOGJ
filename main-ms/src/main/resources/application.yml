@@ -3,7 +3,7 @@ server:
 
 
 spring:
-  jpa.hibernate.ddl-auto: update
+  jpa.hibernate.ddl-auto: validate
   datasource:
     isogj:
       host: ${MYSQL_HOST:isogj-mysql}
@@ -52,7 +52,7 @@ flyway:
   url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/?autoReconnect=true&useSSL=false
   user: ${spring.datasource.username}
   password: ${spring.datasource.password}
-  enabled: false
+  enabled: true
 
 eureka:
   instance:

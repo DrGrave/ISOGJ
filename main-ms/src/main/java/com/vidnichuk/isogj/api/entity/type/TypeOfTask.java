@@ -18,7 +18,7 @@ public class TypeOfTask {
      * name of type of task
      */
     @Column
-    private String nameTypeOfTask;
+    private String name;
 
     /**
      *
@@ -43,16 +43,16 @@ public class TypeOfTask {
      * @return
      * name of type of task
      */
-    public String getNameTypeOfTask() {
-        return nameTypeOfTask;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nameTypeOfTask
+     * @param name
      * set name of type of task
      */
-    public void setNameTypeOfTask(String nameTypeOfTask) {
-        this.nameTypeOfTask = nameTypeOfTask;
+    public void setName(String name) {
+        this.name = name;
     }
 }
