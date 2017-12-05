@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserLightWeightService userLightWeightService;
 
-    @PreAuthorize("hasRole('ROLE_ANONIMOUS')")
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @PostMapping("/register")
     public void registerUser(@Valid @RequestBody TempUserDTO tempUserDTO) {
         userLightWeightService.registerUser(tempUserDTO);

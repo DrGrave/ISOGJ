@@ -19,9 +19,6 @@ spring:
       max-idle: 20
       min-idle: 15
     platform: mysql
-  mvc.view:
-    prefix: /templates/
-    suffix: .html
   session:
     store-type: hash_map
     jdbc:
@@ -44,9 +41,6 @@ logging.level:
   org.hibernate.SQL: DEBUG
   org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
-spring.queries.users-query: select email, user_password, active from user where email=?
-spring.queries.roles-query: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
-
 flyway:
   schemas: ${spring.datasource.isogj.current_schema}
   url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/?autoReconnect=true&useSSL=false
@@ -61,9 +55,6 @@ eureka:
     serviceUrl:
       defaultZone: http://${REGISTRY_HOST:registry}:${REGISTRY_PORT:8761}/eureka/
 
-
-ololo:
-  lo: ${JAVA_HOME}
 endpoints:
   enabled: false
 
