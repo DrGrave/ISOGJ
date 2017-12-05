@@ -15,11 +15,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface VacancyMapper {
 
-    @Mapping(source = "typeOfVacancy.nameTypeOfVacancy", target = "typeOfVacancy" )
+    @Mapping(source = "typeOfVacancy.name", target = "typeOfVacancy" )
     VacancyDTO fromVacancyToVacancyDTO(Vacancy vacancy);
 
 
-    @Mapping(source = "typeOfVacancy", target = "typeOfVacancy.nameTypeOfVacancy")
+    @Mapping(source = "typeOfVacancy", target = "typeOfVacancy.name")
     Vacancy fromVacancyDtoToVacancy(VacancyDTO vacancyDTO);
 
     List<Vacancy> fromListOfVacancyDTOToListOfVacancy(List<VacancyDTO> vacancyDTOList);

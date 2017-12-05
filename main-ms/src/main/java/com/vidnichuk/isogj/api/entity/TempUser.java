@@ -1,67 +1,89 @@
 package com.vidnichuk.isogj.api.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "temp_user")
 public class TempUser {
-    private int idUserRegistration;
-    private String userPassword;
-    private String userLogin;
-    private String userEmail;
-    private String userName;
-    private String userSurname;
-    private String userPatronymic;
 
-    public int getIdUserRegistration() {
-        return idUserRegistration;
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String password;
+    private String username;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String middleName;
+
+    private String confirmLink;
+
+    public String getConfirmLink() {
+        return confirmLink;
     }
 
-    public void setIdUserRegistration(int idUserRegistration) {
-        this.idUserRegistration = idUserRegistration;
+    public void setConfirmLink(String confirmLink) {
+        this.confirmLink = confirmLink;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUserLogin() {
-        return userLogin;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUserSurname() {
-        return userSurname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUserSurname(String userSurname) {
-        this.userSurname = userSurname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUserPatronymic() {
-        return userPatronymic;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUserPatronymic(String userPatronymic) {
-        this.userPatronymic = userPatronymic;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 }

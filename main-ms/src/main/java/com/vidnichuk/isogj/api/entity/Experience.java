@@ -12,7 +12,7 @@ import java.util.Date;
 public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idExperience;
+    private Long id;
 
     /**
      * date of start work
@@ -81,17 +81,17 @@ public class Experience {
      * @return
      * id of experience
      */
-    public int getIdExperience() {
-        return idExperience;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idExperience
+     * @param id
      * set id of experience
      */
-    public void setIdExperience(int idExperience) {
-        this.idExperience = idExperience;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

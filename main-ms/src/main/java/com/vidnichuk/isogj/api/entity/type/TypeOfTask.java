@@ -1,34 +1,29 @@
-package com.vidnichuk.isogj.api.entity;
+package com.vidnichuk.isogj.api.entity.type;
 
 import javax.persistence.*;
 
 /**
  * Created by Vadim on 06.11.2017.
- * school entity
+ * type of task entity
  */
 @Entity
-@Table(name = "School")
-public class School {
+@Table(name = "TypeOfTask")
+public class TypeOfTask {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
-     * city of school location
+     * name of type of task
      */
-    @ManyToOne
-    @JoinColumn(name = "City")
-    private City city;
-
-    /**
-     * name of school
-     */
+    @Column
     private String name;
 
     /**
      *
      * @return
-     * id of school
+     * id of type of task
      */
     public Long getId() {
         return id;
@@ -37,7 +32,7 @@ public class School {
     /**
      *
      * @param id
-     * set id of school
+     * set id of type task
      */
     public void setId(Long id) {
         this.id = id;
@@ -46,25 +41,7 @@ public class School {
     /**
      *
      * @return
-     * city of school location
-     */
-    public City getCity() {
-        return city;
-    }
-
-    /**
-     *
-     * @param city
-     * set city of location
-     */
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    /**
-     *
-     * @return
-     * name of school
+     * name of type of task
      */
     public String getName() {
         return name;
@@ -73,7 +50,7 @@ public class School {
     /**
      *
      * @param name
-     * set name of school
+     * set name of type of task
      */
     public void setName(String name) {
         this.name = name;

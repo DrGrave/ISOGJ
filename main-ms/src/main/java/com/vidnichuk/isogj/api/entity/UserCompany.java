@@ -17,21 +17,21 @@ public class UserCompany {
      * user object
      */
     @ManyToOne
-        @JoinColumn(name = "User")
+    @JoinColumn(name = "User")
     private User user;
 
     /**
      * company object
      */
     @ManyToOne
-        @JoinColumn(name = "Company")
+    @JoinColumn(name = "Company")
     private Company company;
 
     /**
      * position in company object
      */
     @ManyToOne
-        @JoinColumn(name = "Position")
+    @JoinColumn(name = "Position")
     private Position position;
 
     /**
@@ -39,7 +39,7 @@ public class UserCompany {
      * @return
      * id of user company
      */
-    public int getIdUserCompany() {
+    public int getId() {
         return idUserCompany;
     }
 
@@ -48,7 +48,7 @@ public class UserCompany {
      * @param idUserCompany
      * set id of user company
      */
-    public void setIdUserCompany(int idUserCompany) {
+    public void setId(int idUserCompany) {
         this.idUserCompany = idUserCompany;
     }
 

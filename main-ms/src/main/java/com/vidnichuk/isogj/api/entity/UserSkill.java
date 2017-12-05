@@ -15,48 +15,46 @@ public class UserSkill {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUserSkill;
+    private Long id;
 
     /**
      * id user to many to many object
      */
     @ManyToOne
-        @JoinColumn(name = "idUser")
-    private User idUser;
+    @JoinColumn(name = "idUser")
+    private User user;
 
     /**
      * object of person who set the mark
      */
     @ManyToOne
-        @JoinColumn(name = "idMarker")
-    private User idMarker;
+    @JoinColumn(name = "idMarker")
+    private User marker;
 
     /**
      * id skill to many to many object
      */
     @ManyToOne
-        @JoinColumn(name = "idSkill")
-    private Skill idSkill;
+    @JoinColumn(name = "idSkill")
+    private Skill skill;
 
     /**
      * mark of theoretical skill
      */
-    @Column(name = "skillMark")
     private String skillMark;
 
     /**
      * mark of practical skill
      */
-    @Column(name = "skillPracticalMark")
     private String skillPracticalMark;
 
 
-    public int getIdUserSkill() {
-        return idUserSkill;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdUserSkill(int idUserSkill) {
-        this.idUserSkill = idUserSkill;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -64,17 +62,17 @@ public class UserSkill {
      * @return
      * user who set the mark
      */
-    public User getIdMarker() {
-        return idMarker;
+    public User getMarker() {
+        return marker;
     }
 
     /**
      *
-     * @param idMarker
+     * @param marker
      * set user who set the mark
      */
-    public void setIdMarker(User idMarker) {
-        this.idMarker = idMarker;
+    public void setMarker(User marker) {
+        this.marker = marker;
     }
 
     /**
@@ -118,17 +116,17 @@ public class UserSkill {
      * @return
      * return user object
      */
-    public User getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
     /**
      *
-     * @param idUser
+     * @param user
      * set user object to many to many object
      */
-    public void setIdUser(User idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
@@ -136,16 +134,16 @@ public class UserSkill {
      * @return
      * return skill object
      */
-    public Skill getIdSkill() {
-        return idSkill;
+    public Skill getSkill() {
+        return skill;
     }
 
     /**
      *
-     * @param idSkill
+     * @param skill
      * set skill object to many to many
      */
-    public void setIdSkill(Skill idSkill) {
-        this.idSkill = idSkill;
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 }

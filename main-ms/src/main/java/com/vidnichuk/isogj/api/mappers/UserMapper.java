@@ -22,12 +22,7 @@ public interface UserMapper {
      * @return
      * user DTO
      */
-    @Mappings({
-            @Mapping(target = "userId", source = "user.userId"),
-            @Mapping(target = "userName", source = "user.userName"),
-            @Mapping(target = "userSurname", source = "user.userSurname"),
-            @Mapping(target = "userLastName", source = "user.userPatronymic"),
-    })
+
     UserDTO userToUserDTO(User user);
 
     /**
@@ -37,12 +32,6 @@ public interface UserMapper {
      * @return
      * user object
      */
-    @Mappings({
-            @Mapping(target = "userId", source = "userDTO.userId"),
-            @Mapping(target = "userName", source = "userDTO.userName"),
-            @Mapping(target = "userSurname", source = "userDTO.userSurname"),
-            @Mapping(target = "userPatronymic", source = "userDTO.userLastName"),
-    })
     User userDTOtoUser(UserDTO userDTO);
 
     /**

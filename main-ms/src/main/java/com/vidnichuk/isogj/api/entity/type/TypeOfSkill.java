@@ -1,28 +1,31 @@
-package com.vidnichuk.isogj.api.entity;
+package com.vidnichuk.isogj.api.entity.type;
 
 import javax.persistence.*;
 
 /**
- * Created by Vadim on 06.11.2017.
- * position of user in company
+ * Created by Vadim on 03.11.2017.
+ * type of skill
  */
 @Entity
-@Table(name = "Position")
-public class Position {
+@Table(name = "TypeOfSkill")
+public class TypeOfSkill {
 
+    /**
+     * id of type
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
-     * name of position in job
+     * name of type
      */
     private String name;
 
     /**
      *
      * @return
-     * id of position
+     * id of type
      */
     public Long getId() {
         return id;
@@ -31,7 +34,7 @@ public class Position {
     /**
      *
      * @param id
-     * set id of position
+     * set id of type
      */
     public void setId(Long id) {
         this.id = id;
@@ -40,7 +43,7 @@ public class Position {
     /**
      *
      * @return
-     * name of position
+     * name of type
      */
     public String getName() {
         return name;
@@ -49,7 +52,7 @@ public class Position {
     /**
      *
      * @param name
-     * set name of position
+     * set name of type
      */
     public void setName(String name) {
         this.name = name;

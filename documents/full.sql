@@ -1,7 +1,7 @@
 USE isogjdb;
 
-INSERT INTO isogjdb.city (name_of_city) VALUES ('Minsk');
-INSERT INTO isogjdb.city (name_of_city) VALUES ('Brest');
+INSERT INTO isogjdb.city (name) VALUES ('Minsk');
+INSERT INTO isogjdb.city (name) VALUES ('Brest');
 INSERT INTO isogjdb.type_of_accepted (name_of_accepted) VALUES ('Accept');
 INSERT INTO isogjdb.type_of_accepted (name_of_accepted) VALUES ('Not');
 INSERT INTO isogjdb.type_of_education (name_type_of_education) VALUES ('High education');

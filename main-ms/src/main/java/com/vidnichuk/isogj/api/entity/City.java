@@ -16,31 +16,30 @@ public class City {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idCity;
+    private Long id;
 
 
     /**
      * name of city
      */
-    @Column(name = "NameOfCity")
-    private String nameOfCity;
+    private String name;
 
     /**
      *
      * @return
      * id of city
      */
-    public int getIdCity() {
-        return idCity;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idCity
+     * @param id
      * set id of city
      */
-    public void setIdCity(int idCity) {
-        this.idCity = idCity;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -48,16 +47,16 @@ public class City {
      * @return
      * name of city
      */
-    public String getNameOfCity() {
-        return nameOfCity;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nameOfCity
+     * @param name
      * set name of city
      */
-    public void setNameOfCity(String nameOfCity) {
-        this.nameOfCity = nameOfCity;
+    public void setName(String name) {
+        this.name = name;
     }
 }

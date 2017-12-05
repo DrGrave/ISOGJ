@@ -16,26 +16,26 @@ public class Gender {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idGender;
+    private Long id;
 
     /**
      * name of gender
      */
 
-    @Column(name = "NameOdGender", nullable = false)
-    private String nameOfGender;
+    @Column(name = "Name", nullable = false)
+    private String name;
 
     /**
      *
      * @return
      * gender id
      */
-    public int getIdGender() {
-        return idGender;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdGender(int idGender) {
-        this.idGender = idGender;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -43,12 +43,12 @@ public class Gender {
      * @return
      * name of gender
      */
-    public String getNameOfGender() {
-        return nameOfGender;
+    public String getName() {
+        return name;
     }
 
-    public void setNameOfGender(String nameOfGender) {
-        this.nameOfGender = nameOfGender;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -58,13 +58,6 @@ public class Gender {
 
         Gender gender = (Gender) o;
 
-        return idGender == gender.idGender && (nameOfGender != null ? nameOfGender.equals(gender.nameOfGender) : gender.nameOfGender == null);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idGender;
-        result = 31 * result + (nameOfGender != null ? nameOfGender.hashCode() : 0);
-        return result;
+        return id == gender.id && (name != null ? name.equals(gender.name) : gender.name == null);
     }
 }

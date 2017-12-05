@@ -11,53 +11,49 @@ import javax.persistence.*;
 public class VacancyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idVacancyUser;
+    private Long id;
 
     /**
      * vacancy object
      */
     @ManyToOne
-        @JoinColumn(name = "Vacancy")
+    @JoinColumn(name = "Vacancy")
     private Vacancy vacancy;
 
     /**
      * user object
      */
     @ManyToOne
-        @JoinColumn(name = "User")
+    @JoinColumn(name = "User")
     private User user;
 
 
     /**
      * if accept user
      */
-    @ManyToOne
-        @JoinColumn(name = "IfUserAccepted")
-    private TypeOfAccepted ifAcceptedUser;
+    private Boolean ifAcceptedUser;
 
     /**
      * if company accept
      */
-    @ManyToOne
-        @JoinColumn(name = "IfCompanyAccepted")
-    private TypeOfAccepted ifCompanyAccepted;
+    private Boolean ifCompanyAccepted;
 
     /**
      *
      * @return
      * id of vacancy user
      */
-    public int getIdVacancyUser() {
-        return idVacancyUser;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idVacancyUser
+     * @param id
      * set id of vacancy
      */
-    public void setIdVacancyUser(int idVacancyUser) {
-        this.idVacancyUser = idVacancyUser;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -101,7 +97,7 @@ public class VacancyUser {
      * @return
      * if accept user object
      */
-    public TypeOfAccepted getIfAcceptedUser() {
+    public Boolean getIfAcceptedUser() {
         return ifAcceptedUser;
     }
 
@@ -110,7 +106,7 @@ public class VacancyUser {
      * @param ifAcceptedUser
      * set if accept user
      */
-    public void setIfAcceptedUser(TypeOfAccepted ifAcceptedUser) {
+    public void setIfAcceptedUser(Boolean ifAcceptedUser) {
         this.ifAcceptedUser = ifAcceptedUser;
     }
 
@@ -119,7 +115,7 @@ public class VacancyUser {
      * @return
      * if company accept user
      */
-    public TypeOfAccepted getIfCompanyAccepted() {
+    public Boolean getIfCompanyAccepted() {
         return ifCompanyAccepted;
     }
 
@@ -128,7 +124,7 @@ public class VacancyUser {
      * @param ifCompanyAccepted
      * set if company accept user
      */
-    public void setIfCompanyAccepted(TypeOfAccepted ifCompanyAccepted) {
+    public void setIfCompanyAccepted(Boolean ifCompanyAccepted) {
         this.ifCompanyAccepted = ifCompanyAccepted;
     }
 }

@@ -11,24 +11,23 @@ import javax.persistence.*;
 public class Faculty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idFaculty;
+    private Long id;
 
-    @Column(name = "NameOfFaculty")
-    private String nameOfFaculty;
+    private String name;
 
     /**
      * object of university
      */
     @ManyToOne
-        @JoinColumn(name = "University")
+    @JoinColumn(name = "University")
     private University university;
 
-    public String getNameOfFaculty() {
-        return nameOfFaculty;
+    public String getName() {
+        return name;
     }
 
-    public void setNameOfFaculty(String nameOfFaculty) {
-        this.nameOfFaculty = nameOfFaculty;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -36,17 +35,17 @@ public class Faculty {
      * @return
      * id of faculty
      */
-    public int getIdFaculty() {
-        return idFaculty;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idFaculty
+     * @param id
      * set id of faculty
      */
-    public void setIdFaculty(int idFaculty) {
-        this.idFaculty = idFaculty;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

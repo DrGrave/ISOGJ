@@ -1,5 +1,7 @@
 package com.vidnichuk.isogj.api.entity;
 
+import com.vidnichuk.isogj.api.entity.type.TypeOfSkill;
+
 import javax.persistence.*;
 
 /**
@@ -16,19 +18,18 @@ public class Skill {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idSkill;
+    private Long id;
 
     /**
      * name of skill
      */
-    @Column(name = "NameOfSkill", nullable = false)
-    private String nameOfSkill;
+    private String name;
 
     /**
      * type of skill
      */
     @ManyToOne
-        @JoinColumn(name = "TypeOfSkill", nullable = false)
+    @JoinColumn(name = "TypeOfSkill", nullable = false)
     private TypeOfSkill typeOfSkill;
 
     /**
@@ -54,17 +55,17 @@ public class Skill {
      * @return
      * return id of skill
      */
-    public int getIdSkill() {
-        return idSkill;
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param idSkill
+     * @param id
      * get id of skill
      */
-    public void setIdSkill(int idSkill) {
-        this.idSkill = idSkill;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -72,16 +73,16 @@ public class Skill {
      * @return
      * return name of skill
      */
-    public String getNameOfSkill() {
-        return nameOfSkill;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nameOfSkill
+     * @param name
      * set name of skill to object
      */
-    public void setNameOfSkill(String nameOfSkill) {
-        this.nameOfSkill = nameOfSkill;
+    public void setName(String name) {
+        this.name = name;
     }
 }
