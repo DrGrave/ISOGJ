@@ -1,9 +1,9 @@
 export class RegUser{
-  userPassword : string;
-  userSecPassword : string;
-  userLogin : string;
-  userEmail :string;
-  userName :string;
-  userSurname :string;
-  userPatronymic :string;
+  id: number;
+  password: string;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
 }
