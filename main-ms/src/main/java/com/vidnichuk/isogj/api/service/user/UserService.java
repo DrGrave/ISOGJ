@@ -39,5 +39,8 @@ public interface UserService {
     List<User> getAllUsers();
 
 
+    User findByLogin(String login);
+
+
     void registerUser(TempUser tempUser);
 }

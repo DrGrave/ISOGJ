@@ -71,3 +71,5 @@ security:
     resource:
       user-info-uri: http://localhost:9999/users/current
 
+
+

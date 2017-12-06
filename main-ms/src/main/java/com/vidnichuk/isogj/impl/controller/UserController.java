@@ -4,6 +4,8 @@ import com.vidnichuk.isogj.api.dto.TempUserDTO;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ public class UserController {
     @Autowired
     private UserLightWeightService userLightWeightService;
 
+    @Autowired
+    private UserService userService;
+
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @PostMapping("/register")
@@ -25,15 +30,22 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/checklogin")
-    public void checkLogin(@RequestParam("username") String username){
-
-        System.out.print(username);
+    public HttpStatus checkLogin(@RequestParam("username") String username){
+        if (userService.findByLogin(username) == null && userLightWeightService.findByLogin(username) == null) {
+            return HttpStatus.OK;
+        }else {
+            return HttpStatus.CONFLICT;
+        }
     }
 
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/checkemail")
-    public void checkEmail(@RequestParam("email") String email){
-
+    public HttpStatus checkEmail(@RequestParam("email") String email){
+        if (userService.findByEmail(email) == null && userLightWeightService.findByEmail(email) == null){
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.CONFLICT;
+        }
     }
 }

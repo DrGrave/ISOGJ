@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {RegUser} from "./reg-user";
-import {isUndefined} from "util";
-import {validate} from "codelyzer/walkerFactory/walkerFn";
+
 
 
 const httpOptions = {
@@ -29,12 +28,12 @@ export class RegUserPageService {
   checkLogin(regUser: RegUser): Observable<any> {
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('username', regUser.username);
-      return this.http.post(this.checkLoginkUrl + urlSearchParams.toString(), null, httpOptions)
+      return this.http.get(this.checkLoginkUrl + urlSearchParams.toString(), httpOptions);
   }
 
   checkEmail(regUser: RegUser): Observable<any>{
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('email', regUser.email);
-      return this.http.post(this.checkEmailUrl + urlSearchParams.toString(), null, httpOptions);
+      return this.http.get(this.checkEmailUrl + urlSearchParams.toString(), httpOptions);
   }
 }

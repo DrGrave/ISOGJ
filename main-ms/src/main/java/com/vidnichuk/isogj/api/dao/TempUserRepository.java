@@ -5,4 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TempUserRepository extends JpaRepository<TempUser, Long> {
     TempUser findByConfirmLink(String confirmLink);
+
+    TempUser findByUsername(String username);
+
+    TempUser findByEmail(String email);
 }
