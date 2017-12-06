@@ -14,8 +14,8 @@ const httpOptions = {
 @Injectable()
 export class RegUserPageService {
   private userUrl = "/main/user/register";
-  private checkLoginkUrl = "/main/checklogin?";
-  private checkEmailUrl = "/main/checkemail?";
+  private checkLoginkUrl = "/main/user/checklogin?";
+  private checkEmailUrl = "/main/user/checkemail?";
 
 
   constructor(private http: HttpClient) {
@@ -28,13 +28,13 @@ export class RegUserPageService {
 
   checkLogin(regUser: RegUser): Observable<any> {
       let urlSearchParams = new URLSearchParams();
-      urlSearchParams.append('email', regUser.username);
+      urlSearchParams.append('username', regUser.username);
       return this.http.post(this.checkLoginkUrl + urlSearchParams.toString(), null, httpOptions)
   }
 
   checkEmail(regUser: RegUser): Observable<any>{
       let urlSearchParams = new URLSearchParams();
-      urlSearchParams.append('username', regUser.email);
+      urlSearchParams.append('email', regUser.email);
       return this.http.post(this.checkEmailUrl + urlSearchParams.toString(), null, httpOptions);
   }
 }

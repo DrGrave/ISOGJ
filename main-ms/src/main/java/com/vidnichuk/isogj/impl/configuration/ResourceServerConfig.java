@@ -30,6 +30,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/v2/api-docs",
                         "/webjars/**").permitAll()
                 .antMatchers("/user/register").permitAll()
+                .antMatchers("/user/checklogin").permitAll()
+                .antMatchers("/user/checkemail").permitAll()
                 .anyRequest().authenticated()
         ;
 
