@@ -34,8 +34,4 @@ public class FeignConfig {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
 
-    @Bean
-    public ResourceServerTokenServices tokenServices() {
-        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-    }
 }

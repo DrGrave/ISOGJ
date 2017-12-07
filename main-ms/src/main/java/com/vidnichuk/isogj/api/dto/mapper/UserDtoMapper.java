@@ -1,13 +1,7 @@
 package com.vidnichuk.isogj.api.dto.mapper;
 
-import com.vidnichuk.isogj.api.dto.model.AuthUserDto;
-import com.vidnichuk.isogj.api.dto.model.UserDto;
-import com.vidnichuk.isogj.api.model.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
-import java.util.List;
 
 /**
  * mapper to user object
@@ -16,5 +10,4 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface UserDtoMapper {
 
-    AuthUserDto userToUserDtoForAuth(User user);
 }

@@ -3,7 +3,7 @@ package com.vidnichuk.isogj.impl.service.user;
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
 import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
-import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
+import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
@@ -13,6 +13,7 @@ import com.vidnichuk.isogj.impl.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    private UserDtoMapper userDtoMapper;
+    private TempUserDtoMapper tempUserDtoMapper;
 
 
     private EmailService emailService = new EmailService();
@@ -77,6 +78,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void approveUser(String link) {
         TempUser tempUser = tempUserRepository.findByConfirmLink(link);
@@ -84,9 +86,10 @@ public class UserServiceImpl implements UserService {
         user.setTypeOfUser(typeOfUserRepository.findAll().get(0));
         userRepository.save(user);
         tempUserRepository.delete(tempUser);
-        authServiceClient.createUser(userDtoMapper.userToUserDtoForAuth(user));
+        authServiceClient.createUser(tempUserDtoMapper.fromTempUserToAuthUserDto(tempUser));
     }
 
+    @Transactional
     @Override
     public void registerUser(TempUser tempUser) {
         tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
@@ -97,7 +100,7 @@ public class UserServiceImpl implements UserService {
         }
 
         tempUser.setConfirmLink(uuid.toString());
-        emailService.sendEmail(tempUser);
         tempUserRepository.save(tempUser);
+        emailService.sendEmail(tempUser);
     }
 }

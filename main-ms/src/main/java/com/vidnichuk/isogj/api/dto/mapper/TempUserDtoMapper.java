@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.dto.mapper;
 
+import com.vidnichuk.isogj.api.dto.model.AuthUserDto;
 import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 import com.vidnichuk.isogj.api.model.TempUser;
 import org.mapstruct.Mapper;
@@ -16,4 +17,6 @@ public interface TempUserDtoMapper {
             @Mapping(target = "id", ignore = true)
     })
     TempUser fromTempUserDTOToTempUser(TempUserDto tempUserDto);
+
+    AuthUserDto fromTempUserToAuthUserDto(TempUser tempUser);
 }
