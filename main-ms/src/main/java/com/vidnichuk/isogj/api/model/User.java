@@ -58,7 +58,6 @@ public class User {
     private String middleName;
 
 
-
     /**
      * email of user
      */
@@ -66,7 +65,6 @@ public class User {
     @Email(message = "*Please provide a valid email")
     @NotEmpty(message = "*Please provide a email")
     private String email;
-
 
 
     /**
@@ -91,7 +89,6 @@ public class User {
     private City city;
 
 
-
     @ManyToMany
     @JoinTable(name = "possible_cities_to_work",
             joinColumns = {@JoinColumn(name = "id_user")},
@@ -107,162 +104,126 @@ public class User {
     }
 
     /**
-     *
-     * @return
-     * city of living
+     * @return city of living
      */
     public City getCity() {
         return city;
     }
 
     /**
-     *
-     * @param city
-     * set city of livng
+     * @param city set city of livng
      */
     public void setCity(City city) {
         this.city = city;
     }
 
     /**
-     *
-     * @return
-     * type of user object
+     * @return type of user object
      */
     public TypeOfUser getTypeOfUser() {
         return typeOfUser;
     }
 
     /**
-     *
-     * @param typeOfUser
-     * set type of user object
+     * @param typeOfUser set type of user object
      */
     public void setTypeOfUser(TypeOfUser typeOfUser) {
         this.typeOfUser = typeOfUser;
     }
 
     /**
-     *
-     * @return
-     * id of user
+     * @return id of user
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of user
+     * @param id set id of user
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * user name
+     * @return user name
      */
     public String getFirstName() {
         return firstName;
     }
 
     /**
-     *
-     * @param firstName
-     * set user name
+     * @param firstName set user name
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     /**
-     *
-     * @return
-     * user surname
+     * @return user surname
      */
     public String getLastName() {
         return lastName;
     }
 
     /**
-     *
-     * @param lastName
-     * set user surname
+     * @param lastName set user surname
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     /**
-     *
-     * @return
-     * user patronymic
+     * @return user patronymic
      */
     public String getMiddleName() {
         return middleName;
     }
 
     /**
-     *
-     * @param middleName
-     * set user patronymic
+     * @param middleName set user patronymic
      */
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
     /**
-     *
-     * @return
-     * user email
+     * @return user email
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     *
-     * @param email
-     * set user email
+     * @param email set user email
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     *
-     * @return
-     * user gender
+     * @return user gender
      */
     public Gender getGender() {
         return gender;
     }
 
     /**
-     *
-     * @param gender
-     * user gender
+     * @param gender user gender
      */
     public void setGender(Gender gender) {
         this.gender = gender;
     }
 
     /**
-     *
-     * @return
-     * 1 is user online and 0 if user offline
+     * @return 1 is user online and 0 if user offline
      */
     public Boolean getActive() {
         return active;
     }
 
     /**
-     *
-     * @param active
-     * set active
+     * @param active set active
      */
     public void setActive(Boolean active) {
         this.active = active;

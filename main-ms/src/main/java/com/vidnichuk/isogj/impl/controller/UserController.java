@@ -16,8 +16,6 @@ public class UserController {
     private UserLightWeightService userLightWeightService;
 
 
-
-
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @PostMapping("/register")
     public void registerUser(@Valid @RequestBody TempUserDto tempUserDto) {
@@ -26,20 +24,20 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/checklogin")
-    public boolean checkLogin(@RequestParam("username") String username){
-       return userLightWeightService.checkUsername(username);
+    public boolean checkLogin(@RequestParam("username") String username) {
+        return userLightWeightService.checkUsername(username);
     }
 
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/checkemail")
-    public boolean checkEmail(@RequestParam("email") String email){
-       return userLightWeightService.checkEmail(email);
+    public boolean checkEmail(@RequestParam("email") String email) {
+        return userLightWeightService.checkEmail(email);
     }
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/register")
-    public void approveRegister(@RequestParam("link") String link){
+    public void approveRegister(@RequestParam("link") String link) {
         userLightWeightService.approveRegistration(link);
     }
 }

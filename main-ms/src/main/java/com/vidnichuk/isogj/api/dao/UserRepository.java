@@ -9,22 +9,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * user repository class
  */
 
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
-     * @param email
-     * email of user
-     * @return
-     * user with this email
+     * @param email email of user
+     * @return user with this email
      */
     User findByEmail(String email);
 
     /**
-     *
-     * @param id
-     * id of user
-     * @return
-     * user with this id
+     * @param id id of user
+     * @return user with this id
      */
     User findById(Long id);
 

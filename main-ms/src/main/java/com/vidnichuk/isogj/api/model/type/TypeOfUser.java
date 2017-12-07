@@ -1,7 +1,6 @@
 package com.vidnichuk.isogj.api.model.type;
 
 
-
 import javax.persistence.*;
 
 
@@ -26,36 +25,28 @@ public class TypeOfUser {
     private String name;
 
     /**
-     *
-     * @return
-     * id of type
+     * @return id of type
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id type of user
+     * @param id set id type of user
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of type user
+     * @return name of type user
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of type user
+     * @param name set name of type user
      */
     public void setName(String name) {
         this.name = name;

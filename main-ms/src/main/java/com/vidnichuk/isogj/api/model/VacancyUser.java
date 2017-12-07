@@ -39,90 +39,70 @@ public class VacancyUser {
     private Boolean ifCompanyAccepted;
 
     /**
-     *
-     * @return
-     * id of vacancy user
+     * @return id of vacancy user
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of vacancy
+     * @param id set id of vacancy
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * vacancy object
+     * @return vacancy object
      */
     public Vacancy getVacancy() {
         return vacancy;
     }
 
     /**
-     *
-     * @param vacancy
-     * set vacancy object
+     * @param vacancy set vacancy object
      */
     public void setVacancy(Vacancy vacancy) {
         this.vacancy = vacancy;
     }
 
     /**
-     *
-     * @return
-     * user object
+     * @return user object
      */
     public User getUser() {
         return user;
     }
 
     /**
-     *
-     * @param user
-     * set user object
+     * @param user set user object
      */
     public void setUser(User user) {
         this.user = user;
     }
 
     /**
-     *
-     * @return
-     * if accept user object
+     * @return if accept user object
      */
     public Boolean getIfAcceptedUser() {
         return ifAcceptedUser;
     }
 
     /**
-     *
-     * @param ifAcceptedUser
-     * set if accept user
+     * @param ifAcceptedUser set if accept user
      */
     public void setIfAcceptedUser(Boolean ifAcceptedUser) {
         this.ifAcceptedUser = ifAcceptedUser;
     }
 
     /**
-     *
-     * @return
-     * if company accept user
+     * @return if company accept user
      */
     public Boolean getIfCompanyAccepted() {
         return ifCompanyAccepted;
     }
 
     /**
-     *
-     * @param ifCompanyAccepted
-     * set if company accept user
+     * @param ifCompanyAccepted set if company accept user
      */
     public void setIfCompanyAccepted(Boolean ifCompanyAccepted) {
         this.ifCompanyAccepted = ifCompanyAccepted;

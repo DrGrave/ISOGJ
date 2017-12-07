@@ -11,29 +11,20 @@ import java.util.List;
  */
 public interface UserService {
     /**
-     *
-     * @param email
-     * get email of user from frontend
-     * @return
-     * object of user
+     * @param email get email of user from frontend
+     * @return object of user
      */
     User findByEmail(String email);
 
 
-
     /**
-     *
-     * @param id
-     * id of user
-     * @return
-     * user with this id
+     * @param id id of user
+     * @return user with this id
      */
     User findById(Long id);
 
     /**
-     *
-     * @return
-     * all users
+     * @return all users
      */
     List<User> getAllUsers();
 
@@ -47,5 +38,5 @@ public interface UserService {
 
     boolean checkEmail(String email);
 
-    void approvedUser(String link);
+    void approveUser(String link);
 }

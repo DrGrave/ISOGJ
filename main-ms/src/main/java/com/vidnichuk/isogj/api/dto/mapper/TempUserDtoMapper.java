@@ -10,6 +10,7 @@ import org.mapstruct.Mappings;
 public interface TempUserDtoMapper {
 
     TempUserDto fromTempUserToTemUserDTO(TempUser tempUser);
+
     @Mappings({
             @Mapping(target = "confirmLink", ignore = true),
             @Mapping(target = "id", ignore = true)

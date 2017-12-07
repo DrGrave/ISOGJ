@@ -45,6 +45,7 @@ dependencies {
 
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
     compile('org.springframework.cloud:spring-cloud-starter-feign')
+    compile('org.springframework.cloud:spring-cloud-security')
 
     compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
     compile("org.mapstruct:mapstruct:${mapstructVersion}")

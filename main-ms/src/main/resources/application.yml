@@ -36,8 +36,6 @@ spring:
 
 
 
-spring.thymeleaf.cache: false
-
 
 server.session.cookie.max-age: 3600
 server.session.timeout: 60

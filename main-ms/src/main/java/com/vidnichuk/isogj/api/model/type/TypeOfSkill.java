@@ -23,36 +23,28 @@ public class TypeOfSkill {
     private String name;
 
     /**
-     *
-     * @return
-     * id of type
+     * @return id of type
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of type
+     * @param id set id of type
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of type
+     * @return name of type
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of type
+     * @param name set name of type
      */
     public void setName(String name) {
         this.name = name;

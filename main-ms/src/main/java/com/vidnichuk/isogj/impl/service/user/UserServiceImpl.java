@@ -3,10 +3,12 @@ package com.vidnichuk.isogj.impl.service.user;
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
 import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
+import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
 import com.vidnichuk.isogj.api.service.user.UserService;
+import com.vidnichuk.isogj.impl.client.AuthServiceClient;
 import com.vidnichuk.isogj.impl.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -30,10 +32,17 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private TypeOfUserRepository typeOfUserRepository;
 
+    @Autowired
+    private AuthServiceClient authServiceClient;
+
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private TempUserToUserMapper tempUserToUserMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private UserDtoMapper userDtoMapper;
 
 
     private EmailService emailService = new EmailService();
@@ -69,12 +78,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void approvedUser(String link) {
+    public void approveUser(String link) {
         TempUser tempUser = tempUserRepository.findByConfirmLink(link);
         User user = tempUserToUserMapper.tempUserToUser(tempUser);
         user.setTypeOfUser(typeOfUserRepository.findAll().get(0));
         userRepository.save(user);
         tempUserRepository.delete(tempUser);
+        authServiceClient.createUser(userDtoMapper.userToUserDtoForAuth(user));
     }
 
     @Override

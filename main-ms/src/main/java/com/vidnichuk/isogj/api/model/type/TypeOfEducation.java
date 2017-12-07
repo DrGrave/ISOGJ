@@ -19,36 +19,28 @@ public class TypeOfEducation {
     private String name;
 
     /**
-     *
-     * @return
-     * id of type education
+     * @return id of type education
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id type of education
+     * @param id set id type of education
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of type of education
+     * @return name of type of education
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of type education
+     * @param name set name of type education
      */
     public void setName(String name) {
         this.name = name;

@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface VacancyDtoMapper {
 
-    @Mapping(source = "typeOfVacancy.name", target = "typeOfVacancy" )
+    @Mapping(source = "typeOfVacancy.name", target = "typeOfVacancy")
     VacancyDto fromVacancyToVacancyDTO(Vacancy vacancy);
 
 

@@ -1,13 +1,8 @@
 package com.vidnichuk.isogj.api.dto.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-public class UserDto {
-
-    @NotBlank
+public class AuthUserDto {
     private String username;
 
-    @NotBlank
     private String password;
 
     public String getUsername() {

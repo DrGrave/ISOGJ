@@ -26,54 +26,42 @@ public class University {
     private City city;
 
     /**
-     *
-     * @return
-     * city of locate university
+     * @return city of locate university
      */
     public City getCity() {
         return city;
     }
 
     /**
-     *
-     * @param city
-     * set city of locate university
+     * @param city set city of locate university
      */
     public void setCity(City city) {
         this.city = city;
     }
 
     /**
-     *
-     * @return
-     * id of university
+     * @return id of university
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of university
+     * @param id set id of university
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of university
+     * @return name of university
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of university
+     * @param name set name of university
      */
     public void setName(String name) {
         this.name = name;

@@ -20,36 +20,28 @@ public class Position {
     private String name;
 
     /**
-     *
-     * @return
-     * id of position
+     * @return id of position
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of position
+     * @param id set id of position
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of position
+     * @return name of position
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of position
+     * @param name set name of position
      */
     public void setName(String name) {
         this.name = name;

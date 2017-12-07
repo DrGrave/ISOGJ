@@ -29,9 +29,9 @@ public class CustomUserInfoTokenServices extends UserInfoTokenServices {
         Authentication userAuthentication = auth2Authentication.getUserAuthentication();
 
         @SuppressWarnings("unchecked")
-        Set<String> scopes = extractScopes((Map<String, Object>)userAuthentication.getDetails());
+        Set<String> scopes = extractScopes((Map<String, Object>) userAuthentication.getDetails());
         @SuppressWarnings("unchecked")
-        String clientId = extractClientId((Map<String, Object>)userAuthentication.getDetails());
+        String clientId = extractClientId((Map<String, Object>) userAuthentication.getDetails());
         OAuth2Request request = new OAuth2Request(null, clientId,
                 null, true, scopes,
                 null, null, null, null);
@@ -42,17 +42,18 @@ public class CustomUserInfoTokenServices extends UserInfoTokenServices {
 
     /**
      * Extracting scopes of request
+     *
      * @param map of request details
      * @return set of scopes
      */
     @SuppressWarnings("unchecked")
     private Set<String> extractScopes(Map<String, Object> map) {
         if (map != null) {
-            Map<String, Object> oauth2Request = (Map<String, Object>)map.get("oauth2Request");
+            Map<String, Object> oauth2Request = (Map<String, Object>) map.get("oauth2Request");
             if (oauth2Request != null) {
                 Object scope = oauth2Request.get("scope");
                 if (scope instanceof Collection) {
-                    return new HashSet<>((Collection<String>)scope);
+                    return new HashSet<>((Collection<String>) scope);
                 }
             }
         }
@@ -62,13 +63,14 @@ public class CustomUserInfoTokenServices extends UserInfoTokenServices {
 
     /**
      * Extracting clientId of request.
+     *
      * @param map
      * @return
      */
     @SuppressWarnings("unchecked")
     private String extractClientId(Map<String, Object> map) {
         if (map != null) {
-            Map<String, Object> oauth2Request = (Map<String, Object>)map.get("oauth2Request");
+            Map<String, Object> oauth2Request = (Map<String, Object>) map.get("oauth2Request");
             if (oauth2Request != null) {
                 Object clientId = oauth2Request.get("clientId");
                 if (clientId instanceof String) {

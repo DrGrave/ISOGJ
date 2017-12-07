@@ -33,54 +33,42 @@ public class Skill {
     private TypeOfSkill typeOfSkill;
 
     /**
-     *
-     * @return
-     * type of skill
+     * @return type of skill
      */
     public TypeOfSkill getTypeOfSkill() {
         return typeOfSkill;
     }
 
     /**
-     *
-     * @param typeOfSkill
-     * set type of skill
+     * @param typeOfSkill set type of skill
      */
     public void setTypeOfSkill(TypeOfSkill typeOfSkill) {
         this.typeOfSkill = typeOfSkill;
     }
 
     /**
-     *
-     * @return
-     * return id of skill
+     * @return return id of skill
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * get id of skill
+     * @param id get id of skill
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * return name of skill
+     * @return return name of skill
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of skill to object
+     * @param name set name of skill to object
      */
     public void setName(String name) {
         this.name = name;

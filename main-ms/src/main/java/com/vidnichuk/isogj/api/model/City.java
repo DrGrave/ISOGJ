@@ -25,36 +25,28 @@ public class City {
     private String name;
 
     /**
-     *
-     * @return
-     * id of city
+     * @return id of city
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of city
+     * @param id set id of city
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of city
+     * @return name of city
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of city
+     * @param name set name of city
      */
     public void setName(String name) {
         this.name = name;

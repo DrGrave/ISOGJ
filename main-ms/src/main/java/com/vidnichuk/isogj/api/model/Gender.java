@@ -7,7 +7,7 @@ import javax.persistence.*;
  * gender of user
  */
 @Entity
-@Table(name="Gender")
+@Table(name = "Gender")
 public class Gender {
 
     /**
@@ -26,9 +26,7 @@ public class Gender {
     private String name;
 
     /**
-     *
-     * @return
-     * gender id
+     * @return gender id
      */
     public Long getId() {
         return id;
@@ -39,9 +37,7 @@ public class Gender {
     }
 
     /**
-     *
-     * @return
-     * name of gender
+     * @return name of gender
      */
     public String getName() {
         return name;

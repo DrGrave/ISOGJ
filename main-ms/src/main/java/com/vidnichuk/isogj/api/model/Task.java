@@ -34,72 +34,56 @@ public class Task {
     private String info;
 
     /**
-     *
-     * @return
-     * id of task
+     * @return id of task
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @return
-     * type of task
+     * @return type of task
      */
     public TypeOfTask getTypeOfTask() {
         return typeOfTask;
     }
 
     /**
-     *
-     * @param typeOfTask
-     * set type of task
+     * @param typeOfTask set type of task
      */
     public void setTypeOfTask(TypeOfTask typeOfTask) {
         this.typeOfTask = typeOfTask;
     }
 
     /**
-     *
-     * @param id
-     * set id of task
+     * @param id set id of task
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of task
+     * @return name of task
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of task
+     * @param name set name of task
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     *
-     * @return
-     * info of task
+     * @return info of task
      */
     public String getInfo() {
         return info;
     }
 
     /**
-     *
-     * @param info
-     * set info of task
+     * @param info set info of task
      */
     public void setInfo(String info) {
         this.info = info;

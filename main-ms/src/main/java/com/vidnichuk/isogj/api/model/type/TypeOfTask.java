@@ -21,36 +21,28 @@ public class TypeOfTask {
     private String name;
 
     /**
-     *
-     * @return
-     * id of type of task
+     * @return id of type of task
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of type task
+     * @param id set id of type task
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * name of type of task
+     * @return name of type of task
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * set name of type of task
+     * @param name set name of type of task
      */
     public void setName(String name) {
         this.name = name;

@@ -8,24 +8,24 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailService {
-    public void sendEmail(TempUser tempUser){
-        String host="smtp.gmail.com";
-        final String user="intsogj@gmail.com";//change accordingly  // TODO: 7.12.17 move to properties and inject via @Value
-        final String password="1346792c212C";//change accordingly
+    public void sendEmail(TempUser tempUser) {
+        String host = "smtp.gmail.com";
+        final String user = "intsogj@gmail.com";//change accordingly  // TODO: 7.12.17  inject via @Value
+        final String password = "1346792c212C";//change accordingly
 
-        String to=tempUser.getEmail();//change accordingly
+        String to = tempUser.getEmail();//change accordingly
 
         //Get the session object
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
-        props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(user,password);
+                        return new PasswordAuthentication(user, password);
                     }
                 });
 
@@ -33,7 +33,7 @@ public class EmailService {
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
-            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("Post authorization link");
             message.setText("Link: http://localhost:3001/main/user/register?link=" + tempUser.getConfirmLink());
 
@@ -42,7 +42,8 @@ public class EmailService {
 
             System.out.println("message sent successfully...");
 
-        } catch (MessagingException e) {e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -20,8 +20,6 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     private UserService userService;
 
 
-
-
     @Override
     public void registerUser(TempUserDto tempUserDto) {
         userService.registerUser(tempUserDtoMapper.fromTempUserDTOToTempUser(tempUserDto));
@@ -39,6 +37,6 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
 
     @Override
     public void approveRegistration(String link) {
-        userService.approvedUser(link);
+        userService.approveUser(link);
     }
 }

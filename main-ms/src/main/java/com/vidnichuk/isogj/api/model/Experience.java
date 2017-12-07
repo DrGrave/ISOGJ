@@ -41,90 +41,70 @@ public class Experience {
     private User user;
 
     /**
-     *
-     * @return
-     * previous company
+     * @return previous company
      */
     public Company getCompany() {
         return company;
     }
 
     /**
-     *
-     * @param company
-     * set previous company
+     * @param company set previous company
      */
     public void setCompany(Company company) {
         this.company = company;
     }
 
     /**
-     *
-     * @return
-     * user
+     * @return user
      */
     public User getUser() {
         return user;
     }
 
     /**
-     *
-     * @param user
-     * set user
+     * @param user set user
      */
     public void setUser(User user) {
         this.user = user;
     }
 
     /**
-     *
-     * @return
-     * id of experience
+     * @return id of experience
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of experience
+     * @param id set id of experience
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * date of start work
+     * @return date of start work
      */
     public Date getDateOfStart() {
         return dateOfStart;
     }
 
     /**
-     *
-     * @param dateOfStart
-     * set date of start of work
+     * @param dateOfStart set date of start of work
      */
     public void setDateOfStart(Date dateOfStart) {
         this.dateOfStart = dateOfStart;
     }
 
     /**
-     *
-     * @return
-     * date of end work
+     * @return date of end work
      */
     public Date getDateOfEnd() {
         return dateOfEnd;
     }
 
     /**
-     *
-     * @param dateOfEnd
-     * set date of end of work
+     * @param dateOfEnd set date of end of work
      */
     public void setDateOfEnd(Date dateOfEnd) {
         this.dateOfEnd = dateOfEnd;

@@ -35,72 +35,56 @@ public class UserCompany {
     private Position position;
 
     /**
-     *
-     * @return
-     * id of user company
+     * @return id of user company
      */
     public int getId() {
         return idUserCompany;
     }
 
     /**
-     *
-     * @param idUserCompany
-     * set id of user company
+     * @param idUserCompany set id of user company
      */
     public void setId(int idUserCompany) {
         this.idUserCompany = idUserCompany;
     }
 
     /**
-     *
-     * @return
-     * user object
+     * @return user object
      */
     public User getUser() {
         return user;
     }
 
     /**
-     *
-     * @param user
-     * set user object
+     * @param user set user object
      */
     public void setUser(User user) {
         this.user = user;
     }
 
     /**
-     *
-     * @return
-     * company object
+     * @return company object
      */
     public Company getCompany() {
         return company;
     }
 
     /**
-     *
-     * @param company
-     * set company object
+     * @param company set company object
      */
     public void setCompany(Company company) {
         this.company = company;
     }
 
     /**
-     *
-     * @return
-     * position in company object
+     * @return position in company object
      */
     public Position getPosition() {
         return position;
     }
 
     /**
-     *
-     * @param position
-     * set position in company
+     * @param position set position in company
      */
     public void setPosition(Position position) {
         this.position = position;

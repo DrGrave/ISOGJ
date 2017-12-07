@@ -46,8 +46,8 @@ public class Vacancy {
 
     @ManyToMany
     @JoinTable(name = "vacancy_skills",
-        joinColumns = {@JoinColumn(name = "id_vacancy")},
-        inverseJoinColumns = {@JoinColumn(name = "id_skill")})
+            joinColumns = {@JoinColumn(name = "id_vacancy")},
+            inverseJoinColumns = {@JoinColumn(name = "id_skill")})
     private Set<Skill> skills;
 
 
@@ -60,90 +60,70 @@ public class Vacancy {
     }
 
     /**
-     *
-     * @return
-     * company object
+     * @return company object
      */
     public Company getCompany() {
         return company;
     }
 
     /**
-     *
-     * @param company
-     * set company object
+     * @param company set company object
      */
     public void setCompany(Company company) {
         this.company = company;
     }
 
     /**
-     *
-     * @return
-     * type of vacancy object
+     * @return type of vacancy object
      */
     public TypeOfVacancy getTypeOfVacancy() {
         return typeOfVacancy;
     }
 
     /**
-     *
-     * @param typeOfVacancy
-     * set type of vacancy
+     * @param typeOfVacancy set type of vacancy
      */
     public void setTypeOfVacancy(TypeOfVacancy typeOfVacancy) {
         this.typeOfVacancy = typeOfVacancy;
     }
 
     /**
-     *
-     * @return
-     * id of vacancy
+     * @return id of vacancy
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id ov vacancy
+     * @param id set id ov vacancy
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * id of vacancy
+     * @return id of vacancy
      */
     public String getInfo() {
         return info;
     }
 
     /**
-     *
-     * @param info
-     * set id of vacancy
+     * @param info set id of vacancy
      */
     public void setInfo(String info) {
         this.info = info;
     }
 
     /**
-     *
-     * @return
-     * task object
+     * @return task object
      */
     public Task getTask() {
         return task;
     }
 
     /**
-     *
-     * @param task
-     * set task object
+     * @param task set task object
      */
     public void setTask(Task task) {
         this.task = task;

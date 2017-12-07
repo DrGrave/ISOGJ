@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import static org.springframework.util.Assert.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,6 +27,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long createUser(User user) {
+        isNull(userRepository.findOneByUsername(user.getUsername()), "User with given username already exists.");
+
         userRepository.save(user);
         return user.getId();
 

@@ -57,126 +57,98 @@ public class Education {
 
 
     /**
-     *
-     * @return
-     * user object
+     * @return user object
      */
     public User getUser() {
         return user;
     }
 
     /**
-     *
-     * @param user
-     * set object user
+     * @param user set object user
      */
     public void setUser(User user) {
         this.user = user;
     }
 
     /**
-     *
-     * @return
-     * date of start education
+     * @return date of start education
      */
     public Date getDateOfStart() {
         return dateOfStart;
     }
 
     /**
-     *
-     * @param dateOfStart
-     * set date of start work
+     * @param dateOfStart set date of start work
      */
     public void setDateOfStart(Date dateOfStart) {
         this.dateOfStart = dateOfStart;
     }
 
     /**
-     *
-     * @return
-     * date of end education
+     * @return date of end education
      */
     public Date getDateOfEnd() {
         return dateOfEnd;
     }
 
     /**
-     *
-     * @param dateOfEnd
-     * set date of end education
+     * @param dateOfEnd set date of end education
      */
     public void setDateOfEnd(Date dateOfEnd) {
         this.dateOfEnd = dateOfEnd;
     }
 
     /**
-     *
-     * @return
-     * id of education
+     * @return id of education
      */
     public Long getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * set id of education
+     * @param id set id of education
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
-     * type of education
+     * @return type of education
      */
     public TypeOfEducation getTypeOfEducation() {
         return typeOfEducation;
     }
 
     /**
-     *
-     * @param typeOfEducation
-     * set type of education
+     * @param typeOfEducation set type of education
      */
     public void setTypeOfEducation(TypeOfEducation typeOfEducation) {
         this.typeOfEducation = typeOfEducation;
     }
 
     /**
-     *
-     * @return
-     * faculty object
+     * @return faculty object
      */
     public Faculty getFaculty() {
         return faculty;
     }
 
     /**
-     *
-     * @param faculty
-     * set faculty object
+     * @param faculty set faculty object
      */
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
 
     /**
-     *
-     * @return
-     * school object
+     * @return school object
      */
     public School getSchool() {
         return school;
     }
 
     /**
-     *
-     * @param school
-     * set school object
+     * @param school set school object
      */
     public void setSchool(School school) {
         this.school = school;
