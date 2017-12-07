@@ -10,4 +10,6 @@ public interface UserLightWeightService {
     boolean checkUsername(String username);
 
     boolean checkEmail(String email);
+
+    void approveRegistration(String link);
 }

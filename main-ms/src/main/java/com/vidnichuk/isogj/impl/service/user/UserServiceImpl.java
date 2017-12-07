@@ -1,10 +1,14 @@
 package com.vidnichuk.isogj.impl.service.user;
 
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
+import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
 import com.vidnichuk.isogj.api.entity.TempUser;
 import com.vidnichuk.isogj.api.entity.User;
+import com.vidnichuk.isogj.api.mappers.TempUserMapper;
+import com.vidnichuk.isogj.api.mappers.TempUserToUserMapper;
 import com.vidnichuk.isogj.api.service.user.UserService;
+import com.vidnichuk.isogj.impl.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,15 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private TypeOfUserRepository typeOfUserRepository;
+
+    @Autowired
+    private TempUserToUserMapper tempUserToUserMapper;
+
+
+    private EmailService emailService = new EmailService();
 
     @Override
     public User findByEmail(String email) {
@@ -55,6 +68,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public void approvedUser(String link) {
+        TempUser tempUser = tempUserRepository.findByConfirmLink(link);
+        User user = tempUserToUserMapper.tempUserToUser(tempUser);
+        user.setTypeOfUser(typeOfUserRepository.findAll().get(0));
+        userRepository.save(user);
+    }
+
+    @Override
     public void registerUser(TempUser tempUser) {
         tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
 
@@ -64,7 +85,7 @@ public class UserServiceImpl implements UserService{
         }
 
         tempUser.setConfirmLink(uuid.toString());
-
+        emailService.sendEmail(tempUser);
         tempUserRepository.save(tempUser);
 
 

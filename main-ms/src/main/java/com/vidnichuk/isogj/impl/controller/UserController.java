@@ -39,4 +39,10 @@ public class UserController {
     public boolean checkEmail(@RequestParam("email") String email){
        return userLightWeightService.checkEmail(email);
     }
+
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
+    @GetMapping("/register")
+    public void approveRegister(@RequestParam("link") String link){
+        userLightWeightService.approveRegistration(link);
+    }
 }

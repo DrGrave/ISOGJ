@@ -39,4 +39,8 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
         return userService.checkEmail(email);
     }
 
+    @Override
+    public void approveRegistration(String link) {
+        userService.approvedUser(link);
+    }
 }

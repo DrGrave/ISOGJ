@@ -47,4 +47,6 @@ public interface UserService {
     boolean checkLogin(String username);
 
     boolean checkEmail(String email);
+
+    void approvedUser(String link);
 }

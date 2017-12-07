@@ -1,8 +1,13 @@
 package com.vidnichuk.isogj;
 
+import com.vidnichuk.isogj.api.dao.TempUserRepository;
+import com.vidnichuk.isogj.api.entity.TempUser;
+import com.vidnichuk.isogj.api.entity.User;
+import com.vidnichuk.isogj.api.mappers.TempUserToUserMapper;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +23,12 @@ import java.util.Properties;
 @Ignore
 public class IsogjApplicationTests {
 
+	@Autowired
+	private TempUserRepository repository;
+
+	@Autowired
+	private TempUserToUserMapper tempUserToUserMapper;
+
 
 
 	@Test
@@ -26,7 +37,7 @@ public class IsogjApplicationTests {
 			final String user="intsogj@gmail.com";//change accordingly
 			final String password="1346792c212C";//change accordingly
 
-			String to="VadiXPZL7@gmail.com";//change accordingly
+			String to="VadimXPZL@gmail.com";//change accordingly
 
 			//Get the session object
 			Properties props = new Properties();
@@ -47,7 +58,7 @@ public class IsogjApplicationTests {
 				MimeMessage message = new MimeMessage(session);
 				message.setFrom(new InternetAddress(user));
 				message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-				message.setSubject("javatpoint");
+				message.setSubject("Post authorization link");
 				message.setText("This is simple program of sending email using JavaMail API");
 
 				//send the message
@@ -57,6 +68,13 @@ public class IsogjApplicationTests {
 
 			} catch (MessagingException e) {e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void fromTmpUserToUser(){
+		TempUser tempUser = repository.findAll().get(0);
+		User user = tempUserToUserMapper.tempUserToUser(tempUser);
+		System.out.print(user);
 	}
 
 }
