@@ -10,7 +10,7 @@ import java.util.Properties;
 public class EmailService {
     public void sendEmail(TempUser tempUser){
         String host="smtp.gmail.com";
-        final String user="intsogj@gmail.com";//change accordingly
+        final String user="intsogj@gmail.com";//change accordingly  // TODO: 7.12.17 move to properties and inject via @Value
         final String password="1346792c212C";//change accordingly
 
         String to=tempUser.getEmail();//change accordingly
