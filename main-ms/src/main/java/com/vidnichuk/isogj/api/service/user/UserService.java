@@ -43,4 +43,8 @@ public interface UserService {
 
 
     void registerUser(TempUser tempUser);
+
+    boolean checkLogin(String username);
+
+    boolean checkEmail(String email);
 }

@@ -13,6 +13,8 @@ export class RegPageComponent implements OnInit {
 
     constructor(private registerService : RegUserPageService){}
     loginField : string;
+    ifLoginFree : boolean;
+    ifEmailFree :boolean;
     emailField : string;
     regUser : RegUser = new RegUser;
     regNew: RegUser;
@@ -29,10 +31,10 @@ export class RegPageComponent implements OnInit {
 
 
   checkLogin(event){
-        this.registerService.checkLogin(this.regUser).subscribe(data => this.loginField = data)
+        this.registerService.checkLogin(this.regUser).subscribe(data => this.ifLoginFree = data)
     }
 
     checkMail(event) {
-        this.registerService.checkEmail(this.regUser).subscribe(data => this.emailField = data)
+        this.registerService.checkEmail(this.regUser).subscribe(data => this.ifEmailFree = data)
     }
 }

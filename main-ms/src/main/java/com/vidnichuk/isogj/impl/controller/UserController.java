@@ -18,8 +18,7 @@ public class UserController {
     @Autowired
     private UserLightWeightService userLightWeightService;
 
-    @Autowired
-    private UserService userService;
+
 
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
@@ -30,22 +29,14 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/checklogin")
-    public HttpStatus checkLogin(@RequestParam("username") String username){
-        if (userService.findByLogin(username) == null && userLightWeightService.findByLogin(username) == null) {
-            return HttpStatus.OK;
-        }else {
-            return HttpStatus.CONFLICT;
-        }
+    public boolean checkLogin(@RequestParam("username") String username){
+       return userLightWeightService.checkUsername(username);
     }
 
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/checkemail")
-    public HttpStatus checkEmail(@RequestParam("email") String email){
-        if (userService.findByEmail(email) == null && userLightWeightService.findByEmail(email) == null){
-            return HttpStatus.OK;
-        } else {
-            return HttpStatus.CONFLICT;
-        }
+    public boolean checkEmail(@RequestParam("email") String email){
+       return userLightWeightService.checkEmail(email);
     }
 }

@@ -7,7 +7,7 @@ public interface UserLightWeightService {
 
     void registerUser(TempUserDTO tempUserDTO);
 
-    TempUser findByLogin(String username);
+    boolean checkUsername(String username);
 
-    TempUser findByEmail(String email);
+    boolean checkEmail(String email);
 }

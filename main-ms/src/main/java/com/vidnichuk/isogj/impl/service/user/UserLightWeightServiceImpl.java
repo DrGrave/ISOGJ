@@ -17,19 +17,12 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     @Autowired
     private TempUserMapper tempUserMapper;
 
-    @Autowired
-    private TempUserRepository tempUserRepository;
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserLightWeightService userLightWeightService;
 
-    @Override
-    public TempUser findByEmail(String email) {
-        return tempUserRepository.findByEmail(email);
-    }
+
 
     @Override
     public void registerUser(TempUserDTO tempUserDTO) {
@@ -37,7 +30,13 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     }
 
     @Override
-    public TempUser findByLogin(String username) {
-        return tempUserRepository.findByUsername(username);
+    public boolean checkUsername(String username) {
+        return userService.checkLogin(username);
     }
+
+    @Override
+    public boolean checkEmail(String email) {
+        return userService.checkEmail(email);
+    }
+
 }

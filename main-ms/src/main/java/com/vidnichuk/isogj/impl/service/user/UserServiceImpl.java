@@ -35,6 +35,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public boolean checkLogin(String username) {
+        return (userRepository.findByUsername(username) == null && tempUserRepository.findByUsername(username) == null);
+    }
+
+    @Override
+    public boolean checkEmail(String email) {
+        return (userRepository.findByEmail(email) == null && tempUserRepository.findByEmail(email) == null);
+    }
+
+    @Override
     public User findById(Long id) {
         return userRepository.findById(id);
     }

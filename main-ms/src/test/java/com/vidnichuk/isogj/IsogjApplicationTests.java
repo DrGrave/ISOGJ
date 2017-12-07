@@ -13,8 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Ignore
 public class IsogjApplicationTests {
 
+
+
 	@Test
-	public void contextLoads() {
+	public void contextLoads() throws Exception {
+
+	}
+
+	@Test
+	public void sendEma(){
 	}
 
 }
