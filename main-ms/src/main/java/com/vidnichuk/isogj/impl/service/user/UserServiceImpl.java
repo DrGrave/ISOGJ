@@ -73,6 +73,7 @@ public class UserServiceImpl implements UserService{
         User user = tempUserToUserMapper.tempUserToUser(tempUser);
         user.setTypeOfUser(typeOfUserRepository.findAll().get(0));
         userRepository.save(user);
+        tempUserRepository.delete(tempUser);
     }
 
     @Override
