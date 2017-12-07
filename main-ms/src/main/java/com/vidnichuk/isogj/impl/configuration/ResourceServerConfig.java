@@ -37,6 +37,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 
     }
+
+    /**
+     *
+     * @return user info token services bean
+     */
     @Bean
     ResourceServerTokenServices userInfoTokenServices(ResourceServerProperties sso) {
         CustomUserInfoTokenServices tokenServices = new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());

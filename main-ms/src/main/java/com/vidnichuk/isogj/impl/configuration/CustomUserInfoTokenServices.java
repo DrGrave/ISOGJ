@@ -9,8 +9,15 @@ import org.springframework.security.oauth2.provider.OAuth2Request;
 
 import java.util.*;
 
+
+/**
+ * Class that overrides UserInfoTokenServices from Spring Boot. It corrects scopes and clientId retrieve.
+ */
 public class CustomUserInfoTokenServices extends UserInfoTokenServices {
 
+    /**
+     * Override constructor because UserInfoTokenServices doesn't have default constructor.
+     */
     public CustomUserInfoTokenServices(String userInfoEndpointUrl, String clientId) {
         super(userInfoEndpointUrl, clientId);
     }
@@ -33,6 +40,11 @@ public class CustomUserInfoTokenServices extends UserInfoTokenServices {
         return new OAuth2Authentication(request, userAuthentication);
     }
 
+    /**
+     * Extracting scopes of request
+     * @param map of request details
+     * @return set of scopes
+     */
     @SuppressWarnings("unchecked")
     private Set<String> extractScopes(Map<String, Object> map) {
         if (map != null) {
@@ -48,6 +60,11 @@ public class CustomUserInfoTokenServices extends UserInfoTokenServices {
         return Collections.emptySet();
     }
 
+    /**
+     * Extracting clientId of request.
+     * @param map
+     * @return
+     */
     @SuppressWarnings("unchecked")
     private String extractClientId(Map<String, Object> map) {
         if (map != null) {

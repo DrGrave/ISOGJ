@@ -1,40 +1,37 @@
 import {Component, OnInit} from '@angular/core';
-import {RegUser} from "./reg-user";
-import {RegUserPageService} from "./reg-user-page.service";
-import {isUndefined} from "util";
+import {RegUser} from './reg-user';
+import {RegUserPageService} from './reg-user-page.service';
 
 
 @Component({
-    selector: 'reg-page',
-    templateUrl: './reg-page.component.html',
-    styleUrls: ['./reg-page.component.scss']
+  selector: 'app-reg-page',
+  templateUrl: './reg-page.component.html',
+  styleUrls: ['./reg-page.component.scss']
 })
 export class RegPageComponent implements OnInit {
 
-    constructor(private registerService : RegUserPageService){}
-    loginField : string;
-    ifLoginFree : boolean;
-    ifEmailFree :boolean;
-    emailField : string;
-    regUser : RegUser = new RegUser;
+    constructor(private registerService: RegUserPageService) {}
+    ifLoginFree: boolean;
+    ifEmailFree: boolean;
+    regUser: RegUser = new RegUser;
     regNew: RegUser;
-    secPass : string;
+    secPass: string;
 
 
-    ngOnInit(): void {
-      this.registerService
-    }
+  ngOnInit(): void {
+    this.registerService;
+  }
 
-  private regMyUser(event) {
-      this.registerService.addRegUser(this.regUser).subscribe(user => this.regNew = user)
+  private regMyUser() {
+    this.registerService.addRegUser(this.regUser).subscribe(user => this.regNew = user);
   }
 
 
-  checkLogin(event){
-        this.registerService.checkLogin(this.regUser).subscribe(data => this.ifLoginFree = data)
-    }
+  checkLogin() {
+    this.registerService.checkLogin(this.regUser).subscribe(data => this.ifLoginFree = data);
+  }
 
-    checkMail(event) {
-        this.registerService.checkEmail(this.regUser).subscribe(data => this.ifEmailFree = data)
-    }
+  checkMail() {
+    this.registerService.checkEmail(this.regUser).subscribe(data => this.ifEmailFree = data);
+  }
 }

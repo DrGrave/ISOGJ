@@ -1,9 +1,7 @@
 package com.vidnichuk.isogj.impl.service.user;
 
-import com.vidnichuk.isogj.api.dao.TempUserRepository;
-import com.vidnichuk.isogj.api.dto.TempUserDTO;
-import com.vidnichuk.isogj.api.entity.TempUser;
-import com.vidnichuk.isogj.api.mappers.TempUserMapper;
+import com.vidnichuk.isogj.api.dto.model.TempUserDto;
+import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    private TempUserMapper tempUserMapper;
+    private TempUserDtoMapper tempUserDtoMapper;
 
 
     @Autowired
@@ -25,8 +23,8 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
 
 
     @Override
-    public void registerUser(TempUserDTO tempUserDTO) {
-        userService.registerUser(tempUserMapper.fromTempUserDTOToTempUser(tempUserDTO));
+    public void registerUser(TempUserDto tempUserDto) {
+        userService.registerUser(tempUserDtoMapper.fromTempUserDTOToTempUser(tempUserDto));
     }
 
     @Override

@@ -3,10 +3,9 @@ package com.vidnichuk.isogj.impl.service.user;
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
 import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
-import com.vidnichuk.isogj.api.entity.TempUser;
-import com.vidnichuk.isogj.api.entity.User;
-import com.vidnichuk.isogj.api.mappers.TempUserMapper;
-import com.vidnichuk.isogj.api.mappers.TempUserToUserMapper;
+import com.vidnichuk.isogj.api.model.TempUser;
+import com.vidnichuk.isogj.api.model.User;
+import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import com.vidnichuk.isogj.impl.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,8 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private TypeOfUserRepository typeOfUserRepository;
 
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private TempUserToUserMapper tempUserToUserMapper;
 
@@ -88,7 +89,5 @@ public class UserServiceImpl implements UserService{
         tempUser.setConfirmLink(uuid.toString());
         emailService.sendEmail(tempUser);
         tempUserRepository.save(tempUser);
-
-
     }
 }

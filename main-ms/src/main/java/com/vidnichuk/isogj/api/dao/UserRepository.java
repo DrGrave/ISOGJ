@@ -1,6 +1,6 @@
 package com.vidnichuk.isogj.api.dao;
 
-import com.vidnichuk.isogj.api.entity.User;
+import com.vidnichuk.isogj.api.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

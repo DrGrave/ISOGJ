@@ -1,9 +1,9 @@
 package com.vidnichuk.isogj;
 
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
-import com.vidnichuk.isogj.api.entity.TempUser;
-import com.vidnichuk.isogj.api.entity.User;
-import com.vidnichuk.isogj.api.mappers.TempUserToUserMapper;
+import com.vidnichuk.isogj.api.model.TempUser;
+import com.vidnichuk.isogj.api.model.User;
+import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

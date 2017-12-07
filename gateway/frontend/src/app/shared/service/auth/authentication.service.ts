@@ -12,7 +12,7 @@ export class AuthenticationService {
 
 
   public login(username: string, password: string): Observable<any> {
-    let urlSearchParams = new URLSearchParams();
+    const urlSearchParams = new URLSearchParams();
 
     urlSearchParams.append('grant_type', 'password');
     urlSearchParams.append('username', username);
@@ -30,7 +30,7 @@ export class AuthenticationService {
   private getLoginHeader() {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    headers = headers.append("Authorization", "Basic " + btoa("browser:"));
+    headers = headers.append('Authorization', 'Basic ' + btoa('browser:'));
     console.log(headers);
     return headers;
   }

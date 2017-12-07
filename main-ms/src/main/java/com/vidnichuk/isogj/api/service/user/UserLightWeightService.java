@@ -1,11 +1,10 @@
 package com.vidnichuk.isogj.api.service.user;
 
-import com.vidnichuk.isogj.api.dto.TempUserDTO;
-import com.vidnichuk.isogj.api.entity.TempUser;
+import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 
 public interface UserLightWeightService {
 
-    void registerUser(TempUserDTO tempUserDTO);
+    void registerUser(TempUserDto tempUserDto);
 
     boolean checkUsername(String username);
 

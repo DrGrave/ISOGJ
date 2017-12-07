@@ -1,0 +1,35 @@
+package com.vidnichuk.isogj.impl.service.user;
+
+import com.vidnichuk.isogj.api.service.UserService;
+import com.vidnichuk.isogj.api.model.User;
+import com.vidnichuk.isogj.api.dao.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    @Override
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findOneByUsername(username);
+    }
+
+
+    @Override
+    public Long createUser(User user) {
+        userRepository.save(user);
+        return user.getId();
+
+    }
+
+
+}

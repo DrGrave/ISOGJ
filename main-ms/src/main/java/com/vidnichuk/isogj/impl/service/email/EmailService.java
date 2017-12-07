@@ -1,6 +1,6 @@
 package com.vidnichuk.isogj.impl.service.email;
 
-import com.vidnichuk.isogj.api.entity.TempUser;
+import com.vidnichuk.isogj.api.model.TempUser;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

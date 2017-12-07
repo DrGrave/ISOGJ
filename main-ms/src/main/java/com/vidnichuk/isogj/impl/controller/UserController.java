@@ -1,11 +1,8 @@
 package com.vidnichuk.isogj.impl.controller;
 
-import com.vidnichuk.isogj.api.dto.TempUserDTO;
+import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
-import com.vidnichuk.isogj.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +20,8 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @PostMapping("/register")
-    public void registerUser(@Valid @RequestBody TempUserDTO tempUserDTO) {
-        userLightWeightService.registerUser(tempUserDTO);
+    public void registerUser(@Valid @RequestBody TempUserDto tempUserDto) {
+        userLightWeightService.registerUser(tempUserDto);
     }
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")

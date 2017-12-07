@@ -1,8 +1,7 @@
 package com.vidnichuk.isogj.api.service.user;
 
-import com.vidnichuk.isogj.api.dto.UserDTO;
-import com.vidnichuk.isogj.api.entity.TempUser;
-import com.vidnichuk.isogj.api.entity.User;
+import com.vidnichuk.isogj.api.model.TempUser;
+import com.vidnichuk.isogj.api.model.User;
 
 import java.util.List;
 
