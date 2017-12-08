@@ -1,14 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
-import {User} from "./user";
-
-
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {User} from './user';
 
 
 @Injectable()
 export class UserService {
-  private userUrl = "/main/user/all";
+  private userUrl = '/api/main/user/all';
 
 
   constructor(private http: HttpClient) {
@@ -16,6 +14,6 @@ export class UserService {
 
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.userUrl)
+    return this.http.get<User[]>(this.userUrl);
   }
 }

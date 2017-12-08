@@ -12,11 +12,11 @@ import {MatButtonModule, MatInputModule, MatToolbarModule} from '@angular/materi
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {AuthenticationService} from './shared/service/auth/authentication.service';
-import {UserListPageComponent} from "./user-list-page/user-list-page.component";
-import {CompanyListPageComponent} from "./vacancy-list-page/vacancy-list-page.component";
-import {VacancyService} from "./vacancy-list-page/vacancy-list-page.service";
-import {UserService} from "./user-list-page/user-list-page.service";
-import {RegUserPageService} from "./registration/reg-user-page.service";
+import {UserListPageComponent} from './user-list-page/user-list-page.component';
+import {VacancyListPageComponent} from './vacancy-list-page/vacancy-list-page.component';
+import {VacancyService} from './vacancy-list-page/vacancy-list-page.service';
+import {UserService} from './user-list-page/user-list-page.service';
+import {RegUserPageService} from './registration/reg-user-page.service';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import {RegUserPageService} from "./registration/reg-user-page.service";
     AppComponent,
     LoginPageComponent,
     UserListPageComponent,
-    CompanyListPageComponent,
+    VacancyListPageComponent,
     LoginPageComponent,
     RegPageComponent
   ],

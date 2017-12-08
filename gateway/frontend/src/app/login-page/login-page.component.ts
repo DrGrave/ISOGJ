@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../shared/service/auth/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../shared/service/auth/authentication.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,8 +13,8 @@ export class LoginPageComponent implements OnInit {
   private token: String;
 
 
-
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService) {
+  }
 
   ngOnInit() {
 
@@ -24,10 +22,9 @@ export class LoginPageComponent implements OnInit {
 
 
   private authenticate(event) {
-      this.authenticationService.login(this.username, this.password)
-        .subscribe(data => this.token = data.access_token);
+    this.authenticationService.login(this.username, this.password)
+      .subscribe(data => this.token = data.access_token);
   }
-
 
 
 }

@@ -1,20 +1,20 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CompanyListPageComponent } from './vacancy-list-page.component';
+import {VacancyListPageComponent} from './vacancy-list-page.component';
 
 describe('VacancyListPageComponent', () => {
-  let component: CompanyListPageComponent;
-  let fixture: ComponentFixture<CompanyListPageComponent>;
+  let component: VacancyListPageComponent;
+  let fixture: ComponentFixture<VacancyListPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompanyListPageComponent ]
+      declarations: [VacancyListPageComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CompanyListPageComponent);
+    fixture = TestBed.createComponent(VacancyListPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

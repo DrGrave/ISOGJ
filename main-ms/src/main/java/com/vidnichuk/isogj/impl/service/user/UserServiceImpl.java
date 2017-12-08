@@ -7,13 +7,15 @@ import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
+import com.vidnichuk.isogj.api.service.mail.EmailService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import com.vidnichuk.isogj.impl.client.AuthServiceClient;
-import com.vidnichuk.isogj.impl.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import static org.springframework.util.Assert.*;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -45,8 +47,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private TempUserDtoMapper tempUserDtoMapper;
 
-
-    private EmailService emailService = new EmailService();
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public User findByEmail(String email) {
@@ -92,6 +94,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void registerUser(TempUser tempUser) {
+        String notUniqueUsername = "User with given username already exists.";
+        String notUniqueEmail = "User with given email already exists.";
+
+        isNull(userRepository.findByUsername(tempUser.getUsername()), notUniqueUsername);
+        isNull(userRepository.findByEmail(tempUser.getEmail()), notUniqueEmail);
+
+        isNull(tempUserRepository.findByUsername(tempUser.getUsername()), notUniqueUsername);
+        isNull(tempUserRepository.findByEmail(tempUser.getEmail()), notUniqueEmail);
+
         tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
 
         UUID uuid = UUID.randomUUID();
@@ -101,6 +112,6 @@ public class UserServiceImpl implements UserService {
 
         tempUser.setConfirmLink(uuid.toString());
         tempUserRepository.save(tempUser);
-        emailService.sendEmail(tempUser);
+        emailService.sendConfirmationEmail(tempUser);
     }
 }

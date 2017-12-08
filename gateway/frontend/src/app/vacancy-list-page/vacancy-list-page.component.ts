@@ -1,35 +1,28 @@
-
-
-import {Component, OnInit} from "@angular/core";
-import {User} from "../user-list-page/user";
-import {VacancyService} from "./vacancy-list-page.service";
-import {Vacancy} from "./vacancy";
+import {Component, OnInit} from '@angular/core';
+import {User} from '../user-list-page/user';
+import {VacancyService} from './vacancy-list-page.service';
+import {Vacancy} from './vacancy';
 
 @Component({
-  selector: 'app-company-list-page',
+  selector: 'app-vacancy-list-page',
   templateUrl: './vacancy-list-page.component.html',
   styleUrls: ['./vacancy-list-page.component.scss']
 })
 
-export class CompanyListPageComponent implements OnInit{
+export class VacancyListPageComponent implements OnInit {
 
+  vacancies: Vacancy[];
 
   ngOnInit(): void {
-    this.getVacancys()
+    this.getVacancys();
   }
 
-  constructor(private vacancyService: VacancyService){}
-  vacancys : Vacancy[];
-
-  getVacancys(): void{
-    this.vacancyService.getVacancy().subscribe(vacancy => this.vacancys = vacancy)
+  constructor(private vacancyService: VacancyService) {
   }
 
-
-
-
-
-
+  getVacancys(): void {
+    this.vacancyService.getVacancy().subscribe(vacancy => this.vacancies = vacancy);
+  }
 
 
 }

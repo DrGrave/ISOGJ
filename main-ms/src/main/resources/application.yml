@@ -2,6 +2,8 @@ server:
   port: 8080
 
 
+
+
 spring:
   jpa.hibernate.ddl-auto: validate
   datasource:
@@ -29,10 +31,18 @@ spring:
     max-file-size: 100mb
     max-request-size: 100mb
   mail:
-    port: 25
     username: intsogj@gmail.com
     password: 1346792c212C
-    protocol: smtp
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
 
 
 

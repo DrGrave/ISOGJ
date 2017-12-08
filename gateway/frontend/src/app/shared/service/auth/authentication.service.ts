@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
@@ -7,8 +7,8 @@ import {Observable} from 'rxjs/Observable';
 export class AuthenticationService {
 
   constructor(private http: HttpClient,
-              private router: Router) { }
-
+              private router: Router) {
+  }
 
 
   public login(username: string, password: string): Observable<any> {
@@ -22,13 +22,12 @@ export class AuthenticationService {
   }
 
   private getTokens(urlParameters: string): Observable<any> {
-    return this.http.post('/auth/oauth/token?' + urlParameters, null, {headers: this.getLoginHeader()});
+    return this.http.post('/api/auth/oauth/token?' + urlParameters, null, {headers: this.getLoginHeader()});
   }
 
 
-
   private getLoginHeader() {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     headers = headers.append('Authorization', 'Basic ' + btoa('browser:'));
     console.log(headers);

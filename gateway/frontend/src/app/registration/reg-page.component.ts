@@ -10,12 +10,14 @@ import {RegUserPageService} from './reg-user-page.service';
 })
 export class RegPageComponent implements OnInit {
 
-    constructor(private registerService: RegUserPageService) {}
-    ifLoginFree: boolean;
-    ifEmailFree: boolean;
-    regUser: RegUser = new RegUser;
-    regNew: RegUser;
-    secPass: string;
+  constructor(private registerService: RegUserPageService) {
+  }
+
+  ifLoginFree: boolean;
+  ifEmailFree: boolean;
+  regUser: RegUser = new RegUser;
+  regNew: RegUser;
+  secPass: string;
 
 
   ngOnInit(): void {

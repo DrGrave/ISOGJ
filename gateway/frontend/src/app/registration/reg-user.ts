@@ -1,4 +1,4 @@
-export class RegUser{
+export class RegUser {
   id: number;
   password: string;
   username: string;
