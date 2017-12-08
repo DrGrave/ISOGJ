@@ -17,6 +17,8 @@ import {VacancyListPageComponent} from './vacancy-list-page/vacancy-list-page.co
 import {VacancyService} from './vacancy-list-page/vacancy-list-page.service';
 import {UserService} from './user-list-page/user-list-page.service';
 import {RegUserPageService} from './registration/reg-user-page.service';
+import { EmailConfirmPageComponent } from './email-confirm-page/email-confirm-page.component';
+import {EmailConfimPageService} from "./email-confirm-page/email-confim-page.service";
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import {RegUserPageService} from './registration/reg-user-page.service';
     UserListPageComponent,
     VacancyListPageComponent,
     LoginPageComponent,
-    RegPageComponent
+    RegPageComponent,
+    EmailConfirmPageComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import {RegUserPageService} from './registration/reg-user-page.service';
     VacancyService,
     AuthenticationService,
     UserService,
+    EmailConfimPageService,
   ],
   bootstrap: [AppComponent]
 })
