@@ -76,15 +76,16 @@ endpoints:
 
 
 security:
+  oauth-ms-url: http://${OAUTH_MS_HOST:oauth-ms}:${OAUTH_MS_PORT:9999}
   oauth2:
     client:
       clientId: ${spring.application.name}
-      accessTokenUri: http://localhost:9999/oauth/token
+      accessTokenUri: ${security.oauth-ms-url}/oauth/token
       grant-type: client_credentials
       scope: server
       client-secret: ${MAIN_SERVICE_PASSWORD:123}
     resource:
-      user-info-uri: http://localhost:9999/users/current
+      user-info-uri: ${security.oauth-ms-url}/users/current
 
 
 
