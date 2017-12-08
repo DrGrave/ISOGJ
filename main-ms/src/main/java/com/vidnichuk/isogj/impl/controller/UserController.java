@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.impl.controller;
 
+import com.vidnichuk.isogj.api.dto.model.StatusDto;
 import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,9 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
-    @GetMapping("/register")
-    public void approveRegister(@RequestParam("link") String link) {
+    @PostMapping("/confirm")
+    public StatusDto approveRegister(@RequestParam("link") String link) {
         userLightWeightService.approveRegistration(link);
+        return new StatusDto("ok");
     }
 }

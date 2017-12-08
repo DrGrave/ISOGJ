@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router, RouterModule} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
-import {EmailConfimPageService} from "./email-confim-page.service";
-import {AppRoutingModule} from "../app-routing.module";
-
-
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {EmailConfirmPageService} from './email-confirm-page.service';
 
 
 @Component({
@@ -15,14 +12,14 @@ import {AppRoutingModule} from "../app-routing.module";
 export class EmailConfirmPageComponent implements OnInit {
 
   private id: number;
-  private ifOk: boolean;
   private error: string;
 
   private routeSubscription: Subscription;
   private querySubscription: Subscription;
-  myLink : string;
-  constructor(private activateRoute :ActivatedRoute, private emailConfService :EmailConfimPageService, private router: Router) {
-    this.routeSubscription = activateRoute.params.subscribe(params=>this.id=params['id']);
+  myLink: string;
+
+  constructor(private activateRoute: ActivatedRoute, private emailConfService: EmailConfirmPageService, private router: Router) {
+    this.routeSubscription = activateRoute.params.subscribe(params => this.id = params['id']);
     this.querySubscription = activateRoute.queryParams.subscribe(
       (queryParam: any) => {
         this.myLink = queryParam['link'];
@@ -31,12 +28,13 @@ export class EmailConfirmPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.emailConfService.sendLink(this.myLink).subscribe(data => this.ifOk = data);
-    if (this.ifOk == true){
-      this.router.navigateByUrl("/login");
-    } else {
-      this.error = 'Error in token';
-    }
-
+    this.emailConfService.sendLink(this.myLink)
+      .subscribe(data => {
+        if (data.code === 'ok') {
+          this.router.navigateByUrl('/login');
+        } else {
+          this.error = 'Error in token';
+        }
+      });
   }
 }
