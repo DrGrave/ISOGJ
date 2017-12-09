@@ -30,9 +30,12 @@ export class RegPageComponent implements OnInit {
   }
 
   private regMyUser() {
-    this.registerService.addRegUser(this.regUser).subscribe(user => {this.ifRegisterOk = user;
-    this.sucsReg() });
-
+    if (this.ifLoginFree && this.ifEmailFree) {
+      this.registerService.addRegUser(this.regUser).subscribe(user => {
+        this.ifRegisterOk = user;
+        this.sucsReg()
+      });
+    }
   }
 
   sucsReg(){
