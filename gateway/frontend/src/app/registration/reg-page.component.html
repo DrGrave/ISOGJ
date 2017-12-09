@@ -3,41 +3,71 @@
     Регистрация
   </h1>
   <div class="reg-inputs">
-    <form #registrForm="ngForm" name="regForm" (submit)="regMyUser()">
+    <form #f="ngForm" name="regForm" (submit)="regMyUser()">
       <mat-input-container class="full-width">
         <input matInput placeholder="Логин" type="text" [(ngModel)]=regUser.username name="username" id="username"
-               required minlength="4" (focusout)="checkLogin(event)">
+               required minlength="4" (focusout)="checkLogin(event)" #username="ngModel">
       </mat-input-container>
+      <span [hidden]="username.valid || (username.pristine && !f.submitted)" class="alert alert-danger">
+          Min length 4 chars.
+      </span>
+      <span>{{userNameError}}</span>
+
       <mat-input-container class="full-width">
-        <input matInput type="password" placeholder="Пароль" name="Password" [(ngModel)]=regUser.password required
-               minlength="8">
+        <input matInput placeholder="Пароль" type="password" class="form-control" name="password" [(ngModel)]="regUser.password"
+               required validateEqual="confirmPassword" reverse="true" #password="ngModel" minlength="8">
       </mat-input-container>
+      <span [hidden]="password.valid || (password.pristine && !f.submitted)" class="alert alert-danger">
+        Password is required
+      </span>
+
       <mat-input-container class="full-width">
-        <input matInput type="password" placeholder="Повторить пароль" name="Password" [(ngModel)]=secPass required
-               minlength="8">
+        <input matInput placeholder="Подтвердите пароль" type="password" class="form-control" name="confirmPassword" [(ngModel)]="secPass"
+               required validateEqual="password" reverse="false" #confirmPassword="ngModel" minlength="8">
       </mat-input-container>
-      <form></form>
+      <span [hidden]="confirmPassword.valid ||  (confirmPassword.pristine && !f.submitted)" class="alert alert-danger">
+        Password mismatch
+      </span>
+
       <mat-input-container class="full-width">
-        <input matInput placeholder="E-mail" type="email" name="Email" [(ngModel)]=regUser.email required email=""
-               (focusout)="checkMail(event)">
+        <input matInput placeholder="E-mail" type="email" name="Email" [(ngModel)]=regUser.email class="form-control"
+               (focusout)="checkMail(event)" required  #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
       </mat-input-container>
+      <span [hidden]="email.valid || (email.pristine && !f.submitted)" class="alert alert-danger">
+        Email is required and format should be <i>john@doe.com</i>.
+      </span>
+
+
       <mat-input-container class="full-width">
-        <input matInput placeholder="Имя" type="text" name="Name" [(ngModel)]=regUser.firstName required minlength="4">
+        <input matInput placeholder="Имя" type="text" name="FirstName" [(ngModel)]=regUser.firstName required minlength="4" #firstName="ngModel">
       </mat-input-container>
+      <span [hidden]="firstName.valid || (firstName.pristine && !f.submitted)">
+        Must contain more then 4 chars.
+      </span>
+
+
       <mat-input-container class="full-width">
         <input matInput placeholder="Фамилия" type="text" name="Surname" [(ngModel)]=regUser.middleName required
-               minlength="4">
+               minlength="4" #middleName="ngModel">
       </mat-input-container>
+      <span [hidden]="middleName.valid || (middleName.pristine && !f.submitted)">
+        Must contain more then 4 chars.
+      </span>
+
+
       <mat-input-container class="full-width">
         <input matInput placeholder="Отчество" type="text" name="Patronymic" [(ngModel)]=regUser.lastName required
-               minlength="4">
+               minlength="4" #lastName="ngModel">
       </mat-input-container>
-      <button type="submit" class="reg-button" mat-button color="primary" [disabled]="!registrForm.valid">Отправить
+      <span [hidden]="lastName.valid || (lastName.pristine && !f.submitted)">
+        Must contain more then 4 chars.
+      </span>
+
+      <button type="submit" class="reg-button" mat-button color="primary" [disabled]="!f.valid">Отправить
       </button>
     </form>
   </div>
 
 
-  {{ifLoginFree}}
 </div>
 
