@@ -4,7 +4,7 @@ import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 
 public interface UserLightWeightService {
 
-    void registerUser(TempUserDto tempUserDto);
+    boolean registerUser(TempUserDto tempUserDto);
 
     boolean checkUsername(String username);
 

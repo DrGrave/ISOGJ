@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void registerUser(TempUser tempUser) {
+    public boolean registerUser(TempUser tempUser) {
         String notUniqueUsername = "User with given username already exists.";
         String notUniqueEmail = "User with given email already exists.";
 
@@ -113,5 +113,6 @@ public class UserServiceImpl implements UserService {
         tempUser.setConfirmLink(uuid.toString());
         tempUserRepository.save(tempUser);
         emailService.sendConfirmationEmail(tempUser);
+        return true;
     }
 }

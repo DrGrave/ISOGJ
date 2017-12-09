@@ -20,6 +20,7 @@ import {RegUserPageService} from './registration/reg-user-page.service';
 import { EmailConfirmPageComponent } from './email-confirm-page/email-confirm-page.component';
 import {EmailConfirmPageService} from './email-confirm-page/email-confirm-page.service';
 import {EqualValidator} from "./registration/equal-validator.directive";
+import { RegistrationSuccessPageComponent } from './registration-success-page/registration-success-page.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {EqualValidator} from "./registration/equal-validator.directive";
     LoginPageComponent,
     RegPageComponent,
     EmailConfirmPageComponent,
-    EqualValidator
+    EqualValidator,
+    RegistrationSuccessPageComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RegUser} from './reg-user';
 import {RegUserPageService} from './reg-user-page.service';
 import {FormControl, FormGroup, NgModel, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -12,11 +13,12 @@ import {FormControl, FormGroup, NgModel, Validators} from "@angular/forms";
 
 export class RegPageComponent implements OnInit {
 
-  constructor(private registerService: RegUserPageService) {
+  constructor(private registerService: RegUserPageService, private router: Router) {
   }
 
   ifLoginFree: boolean;
   ifEmailFree: boolean;
+  ifRegisterOk: boolean;
   regUser: RegUser = new RegUser;
   regNew: RegUser;
   secPass: string;
@@ -24,11 +26,15 @@ export class RegPageComponent implements OnInit {
   emailError: string;
 
   ngOnInit(): void {
-    this.registerService;
   }
 
   private regMyUser() {
-    this.registerService.addRegUser(this.regUser).subscribe(user => this.regNew = user);
+    this.registerService.addRegUser(this.regUser).subscribe(user => this.ifRegisterOk = user);
+    if (this.ifRegisterOk == true){
+      this.router.navigateByUrl("/registration-success-page");
+    } else {
+      //error
+    }
   }
 
 

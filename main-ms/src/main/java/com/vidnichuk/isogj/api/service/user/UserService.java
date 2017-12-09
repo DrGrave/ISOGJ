@@ -32,7 +32,7 @@ public interface UserService {
     User findByLogin(String login);
 
 
-    void registerUser(TempUser tempUser);
+    boolean registerUser(TempUser tempUser);
 
     boolean checkLogin(String username);
 

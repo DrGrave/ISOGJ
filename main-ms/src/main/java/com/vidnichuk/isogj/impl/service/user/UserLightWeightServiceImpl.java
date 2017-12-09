@@ -21,8 +21,8 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
 
 
     @Override
-    public void registerUser(TempUserDto tempUserDto) {
-        userService.registerUser(tempUserDtoMapper.fromTempUserDTOToTempUser(tempUserDto));
+    public boolean registerUser(TempUserDto tempUserDto) {
+        return userService.registerUser(tempUserDtoMapper.fromTempUserDTOToTempUser(tempUserDto));
     }
 
     @Override
