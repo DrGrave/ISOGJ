@@ -3,6 +3,7 @@ import {RegUser} from './reg-user';
 import {RegUserPageService} from './reg-user-page.service';
 import {FormControl, FormGroup, NgModel, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {logger} from "codelyzer/util/logger";
 
 
 @Component({
@@ -29,8 +30,13 @@ export class RegPageComponent implements OnInit {
   }
 
   private regMyUser() {
-    this.registerService.addRegUser(this.regUser).subscribe(user => this.ifRegisterOk = user);
-    if (this.ifRegisterOk == true){
+    this.registerService.addRegUser(this.regUser).subscribe(user => {this.ifRegisterOk = user;
+    this.sucsReg() });
+
+  }
+
+  sucsReg(){
+    if (this.ifRegisterOk){
       this.router.navigateByUrl("/registration-success-page");
     } else {
       //error
@@ -39,8 +45,12 @@ export class RegPageComponent implements OnInit {
 
 
   checkLogin() {
-    this.registerService.checkLogin(this.regUser).subscribe(data => this.ifLoginFree = data);
-    if (this.ifLoginFree == false){
+    this.registerService.checkLogin(this.regUser).subscribe(data => {this.ifLoginFree = data;
+    this.logField() });
+  }
+
+  logField(){
+    if (!this.ifLoginFree){
       this.userNameError = "This username already exist"
     }else {
       this.userNameError = ""
@@ -48,8 +58,13 @@ export class RegPageComponent implements OnInit {
   }
 
   checkMail() {
-    this.registerService.checkEmail(this.regUser).subscribe(data => this.ifEmailFree = data);
-    if (this.ifEmailFree == false){
+    this.registerService.checkEmail(this.regUser).subscribe(data => {this.ifEmailFree = data;
+    this.mailField() });
+
+  }
+
+  mailField(){
+    if (!this.ifEmailFree){
       this.emailError = "This email already exist"
     }else {
       this.emailError = ""
