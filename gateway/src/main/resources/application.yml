@@ -40,6 +40,14 @@ eureka:
     serviceUrl:
       defaultZone: http://${REGISTRY_HOST:registry}:${REGISTRY_PORT:8761}/eureka/
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
 
 #    notification-service:
 #        path: /notifications/**
