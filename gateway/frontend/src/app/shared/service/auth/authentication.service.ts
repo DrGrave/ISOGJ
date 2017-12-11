@@ -30,7 +30,6 @@ export class AuthenticationService {
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     headers = headers.append('Authorization', 'Basic ' + btoa('browser:'));
-    console.log(headers);
     return headers;
   }
 
