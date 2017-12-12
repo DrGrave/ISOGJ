@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import static org.springframework.util.Assert.*;
 
 @Service
@@ -20,14 +22,19 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findOneByUsername(username);
     }
 
 
     @Override
+    @Transactional
     public Long createUser(User user) {
         isNull(userRepository.findOneByUsername(user.getUsername()), "User with given username already exists.");
+
+
+
 
         userRepository.save(user);
         return user.getId();

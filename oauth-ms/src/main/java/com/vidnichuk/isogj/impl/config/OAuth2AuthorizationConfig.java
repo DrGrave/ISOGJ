@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.impl.config;
 
+import com.vidnichuk.isogj.api.service.UserService;
 import com.vidnichuk.isogj.impl.config.properties.AuthProperties;
 import com.vidnichuk.isogj.impl.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     private AuthProperties authProperties;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private TokenStore tokenStore;
