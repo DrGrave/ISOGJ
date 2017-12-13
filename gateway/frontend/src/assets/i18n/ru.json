@@ -1,0 +1,10 @@
+{
+  "SIGN_UP": {
+    "TITLE": "Регистрация",
+    "VALIDATION": {
+      "EMAIL": {
+        "NOT_UNIQUE": "Не уникальный email"
+      }
+    }
+  }
+}

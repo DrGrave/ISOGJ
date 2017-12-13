@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterModule} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,12 @@ import {RouterModule} from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private translate: TranslateService) {
+    translate.addLangs(['en', 'ru']);
+    this.translate.setDefaultLang('en');
+    this.translate.use('ru');
+  }
+
+
 }

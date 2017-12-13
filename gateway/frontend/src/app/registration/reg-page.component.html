@@ -1,17 +1,17 @@
 <div>
   <h1 class="page-select">
-    Регистрация
+    {{ 'SIGN_UP.TITLE' | translate }}
   </h1>
   <div class="reg-inputs">
-    <form #f="ngForm" name="regForm" (submit)="regMyUser()">
+    <form #f name="regForm" (submit)="regMyUser()">
       <mat-input-container class="full-width">
         <input matInput placeholder="Логин" type="text" [(ngModel)]=regUser.username name="username" id="username"
                required minlength="4" (focusout)="checkLogin(event)" #username="ngModel">
+        <mat-hint [hidden]="ifLoginFree == null || ifLoginFree ">{{ 'SIGN_UP.VALIDATION.EMAIL.NOT_UNIQUE' | translate}}</mat-hint>
       </mat-input-container>
       <span [hidden]="username.valid || (username.pristine && !f.submitted)" class="alert alert-danger">
           Min length 4 chars.
       </span>
-      <span>{{userNameError}}</span>
 
       <mat-input-container class="full-width">
         <input matInput placeholder="Пароль" type="password" class="form-control" name="password" [(ngModel)]="regUser.password"

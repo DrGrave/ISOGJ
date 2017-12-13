@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable()
 export class RegUserPageService {
   private userUrl = '/api/main/user/register';
-  private checkLoginkUrl = '/api/main/user/checklogin?';
+  private checkLoginUrl = '/api/main/user/checklogin?';
   private checkEmailUrl = '/api/main/user/checkemail?';
 
 
@@ -24,15 +24,15 @@ export class RegUserPageService {
     return this.http.post<RegUser>(this.userUrl, regUser, httpOptions);
   }
 
-  checkLogin(regUser: RegUser): Observable<any> {
+  checkLogin(regUser: RegUser): Observable<boolean> {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('username', regUser.username);
-    return this.http.get(this.checkLoginkUrl + urlSearchParams.toString(), httpOptions);
+    return this.http.get<boolean>(this.checkLoginUrl + urlSearchParams.toString(), httpOptions);
   }
 
   checkEmail(regUser: RegUser): Observable<any> {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('email', regUser.email);
-    return this.http.get(this.checkEmailUrl + urlSearchParams.toString(), httpOptions);
+    return this.http.get<boolean>(this.checkEmailUrl + urlSearchParams.toString(), httpOptions);
   }
 }

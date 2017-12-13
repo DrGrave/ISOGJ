@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {RegUser} from './reg-user';
 import {RegUserPageService} from './reg-user-page.service';
-import {FormControl, FormGroup, NgModel, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {logger} from "codelyzer/util/logger";
+import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {logger} from 'codelyzer/util/logger';
 
 
 @Component({
@@ -30,17 +30,18 @@ export class RegPageComponent implements OnInit {
   }
 
   private regMyUser() {
+    console.log(this.ifLoginFree + ' ' + this.ifEmailFree)
     if (this.ifLoginFree && this.ifEmailFree) {
       this.registerService.addRegUser(this.regUser).subscribe(user => {
         this.ifRegisterOk = user;
-        this.sucsReg()
+        this.sucsReg();
       });
     }
   }
 
-  sucsReg(){
-    if (this.ifRegisterOk){
-      this.router.navigateByUrl("/registration-success-page");
+  sucsReg() {
+    if (this.ifRegisterOk) {
+      this.router.navigateByUrl('/registration-success-page');
     } else {
       //error
     }
@@ -48,29 +49,38 @@ export class RegPageComponent implements OnInit {
 
 
   checkLogin() {
-    this.registerService.checkLogin(this.regUser).subscribe(data => {this.ifLoginFree = data;
-    this.logField() });
+    this.registerService.checkLogin(this.regUser).subscribe(data => {
+      if (data === null) {
+        this.ifLoginFree = false;
+      } else {
+        this.ifLoginFree = data;
+      }
+      console.log(this.ifLoginFree);
+      this.logField();
+    });
   }
 
-  logField(){
-    if (!this.ifLoginFree){
-      this.userNameError = "This username already exist"
-    }else {
-      this.userNameError = ""
+  logField() {
+    if (!this.ifLoginFree) {
+      this.userNameError = 'This username already exist';
+    } else {
+      this.userNameError = '';
     }
   }
 
   checkMail() {
-    this.registerService.checkEmail(this.regUser).subscribe(data => {this.ifEmailFree = data;
-    this.mailField() });
+    this.registerService.checkEmail(this.regUser).subscribe(data => {
+      this.ifEmailFree = data;
+      this.mailField();
+    });
 
   }
 
-  mailField(){
-    if (!this.ifEmailFree){
-      this.emailError = "This email already exist"
-    }else {
-      this.emailError = ""
+  mailField() {
+    if (!this.ifEmailFree) {
+      this.emailError = 'This email already exist';
+    } else {
+      this.emailError = '';
     }
   }
 }
