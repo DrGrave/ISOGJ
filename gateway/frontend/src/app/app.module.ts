@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {RegPageComponent} from './registration/reg-page.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule, /*FormControl, Validators*/} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatInputModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
@@ -17,10 +17,10 @@ import {VacancyListPageComponent} from './vacancy-list-page/vacancy-list-page.co
 import {VacancyService} from './vacancy-list-page/vacancy-list-page.service';
 import {UserService} from './user-list-page/user-list-page.service';
 import {RegUserPageService} from './registration/reg-user-page.service';
-import { EmailConfirmPageComponent } from './email-confirm-page/email-confirm-page.component';
+import {EmailConfirmPageComponent} from './email-confirm-page/email-confirm-page.component';
 import {EmailConfirmPageService} from './email-confirm-page/email-confirm-page.service';
 import {EqualValidator} from './registration/equal-validator.directive';
-import { RegistrationSuccessPageComponent } from './registration-success-page/registration-success-page.component';
+import {RegistrationSuccessPageComponent} from './registration-success-page/registration-success-page.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 

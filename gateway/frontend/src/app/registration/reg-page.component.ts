@@ -1,9 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {RegUser} from './reg-user';
 import {RegUserPageService} from './reg-user-page.service';
-import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
+import {
+  AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, NgModel, ValidationErrors,
+  Validators
+} from '@angular/forms';
 import {Router} from '@angular/router';
 import {logger} from 'codelyzer/util/logger';
+import {ErrorStateMatcher} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
+import {Subject} from 'rxjs/Subject';
 
 
 @Component({
@@ -16,71 +23,74 @@ export class RegPageComponent implements OnInit {
 
   constructor(private registerService: RegUserPageService, private router: Router) {
   }
-
-  ifLoginFree: boolean;
-  ifEmailFree: boolean;
   ifRegisterOk: boolean;
   regUser: RegUser = new RegUser;
-  regNew: RegUser;
   secPass: string;
-  userNameError: string;
-  emailError: string;
+  matcher = new MyErrorStateMatcher();
+
+  regFormGroup: FormGroup;
+  passwordPattern = '^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{8,}$';
+
 
   ngOnInit(): void {
+    this.regFormGroup = new FormGroup({
+      username: new FormControl('', {
+        validators: [Validators.required, Validators.pattern('^[a-zA-Z]+$')],
+        asyncValidators: [this.uniqueLoginValidator.bind(this)]
+        }),
+      password: new FormControl('',
+        [Validators.required, Validators.pattern(this.passwordPattern)]),
+      confirmPassword: new FormControl('',
+        [Validators.required, Validators.pattern(this.passwordPattern)]),
+      email: new FormControl('',
+        [Validators.required, Validators.email]),
+      firstName: new FormControl('',
+        [Validators.required]),
+      middleName: new FormControl('',
+        [Validators.required]),
+      lastName: new FormControl('',
+        [Validators.required])
+    });
+
+
   }
 
   private regMyUser() {
-    console.log(this.ifLoginFree + ' ' + this.ifEmailFree)
-    if (this.ifLoginFree && this.ifEmailFree) {
-      this.registerService.addRegUser(this.regUser).subscribe(user => {
-        this.ifRegisterOk = user;
-        this.sucsReg();
-      });
-    }
+    this.registerService.addRegUser(this.regUser).subscribe(user => {
+      this.ifRegisterOk = user;
+      this.sucsReg();
+    });
   }
 
   sucsReg() {
     if (this.ifRegisterOk) {
       this.router.navigateByUrl('/registration-success-page');
     } else {
-      //error
     }
   }
 
 
-  checkLogin() {
-    this.registerService.checkLogin(this.regUser).subscribe(data => {
-      if (data === null) {
-        this.ifLoginFree = false;
-      } else {
-        this.ifLoginFree = data;
-      }
-      console.log(this.ifLoginFree);
-      this.logField();
+  uniqueLoginValidator(control: AbstractControl) {
+    console.log(control);
+    return this.registerService.checkLogin(control.value).map(data => {
+      return data ? null : {loginNotUnique: {value: true}};
     });
   }
 
-  logField() {
-    if (!this.ifLoginFree) {
-      this.userNameError = 'This username already exist';
-    } else {
-      this.userNameError = '';
-    }
-  }
 
-  checkMail() {
-    this.registerService.checkEmail(this.regUser).subscribe(data => {
-      this.ifEmailFree = data;
-      this.mailField();
+  uniqueEmailValidator(control: AbstractControl) {
+    this.registerService.checkEmail(control.value).map(data => {
+      return data ? null : {emailNotUnique: {value: true}};
     });
 
-  }
-
-  mailField() {
-    if (!this.ifEmailFree) {
-      this.emailError = 'This email already exist';
-    } else {
-      this.emailError = '';
-    }
   }
 }
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+

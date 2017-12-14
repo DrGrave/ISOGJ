@@ -3,8 +3,13 @@
     "TITLE": "Registration",
     "VALIDATION": {
       "EMAIL": {
-        "NOT_UNIQUE": "Not unique email"
+        "NOT_UNIQUE": "Email is already taken"
+      },
+      "USERNAME": {
+        "NOT_UNIQUE": "Username is already taken",
+        "PATTERN": "Username must contain only latin characters"
       }
+
     }
   }
 }

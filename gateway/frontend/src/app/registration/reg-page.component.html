@@ -3,71 +3,75 @@
     {{ 'SIGN_UP.TITLE' | translate }}
   </h1>
   <div class="reg-inputs">
-    <form #f name="regForm" (submit)="regMyUser()">
-      <mat-input-container class="full-width">
-        <input matInput placeholder="Логин" type="text" [(ngModel)]=regUser.username name="username" id="username"
-               required minlength="4" (focusout)="checkLogin(event)" #username="ngModel">
-        <mat-hint [hidden]="ifLoginFree == null || ifLoginFree ">{{ 'SIGN_UP.VALIDATION.EMAIL.NOT_UNIQUE' | translate}}</mat-hint>
+    <form #regForm name="regForm" (submit)="regMyUser()" [formGroup]="regFormGroup">
+      <mat-input-container class="full-width" >
+        <input matInput placeholder="Логин" type="text"
+               formControlName="username" #username [errorStateMatcher]="matcher" required>
+        <mat-error *ngIf="regFormGroup.controls.username.hasError('pattern')">sdf</mat-error>
+        <mat-error *ngIf="regFormGroup.controls.username.hasError('loginNotUnique')">{{ 'SIGN_UP.VALIDATION.LOGIN.NOT_UNIQUE' | translate}}</mat-error>
       </mat-input-container>
-      <span [hidden]="username.valid || (username.pristine && !f.submitted)" class="alert alert-danger">
+      {{regFormGroup.controls.username.errors | json}}
+      <span [hidden]="username.valid || (username.pristine && !regForm.submitted)" class="alert alert-danger">
           Min length 4 chars.
+
       </span>
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Пароль" type="password" class="form-control" name="password" [(ngModel)]="regUser.password"
-               required validateEqual="confirmPassword" reverse="true" #password="ngModel" minlength="8">
+        <input matInput placeholder="Пароль" type="password"  class="form-control" name="password" formControlName="password"
+               required validateEqual="confirmPassword" reverse="true" #password minlength="8">
       </mat-input-container>
-      <span [hidden]="password.valid || (password.pristine && !f.submitted)" class="alert alert-danger">
+      <span [hidden]="password.valid || (password.pristine && !regForm.submitted)" class="alert alert-danger">
         Password is required
       </span>
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Подтвердите пароль" type="password" class="form-control" name="confirmPassword" [(ngModel)]="secPass"
-               required validateEqual="password" reverse="false" #confirmPassword="ngModel" minlength="8">
+        <input matInput placeholder="Подтвердите пароль" type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword"
+               required validateEqual="password" reverse="false" minlength="8" #confirmPassword>
       </mat-input-container>
-      <span [hidden]="confirmPassword.valid ||  (confirmPassword.pristine && !f.submitted)" class="alert alert-danger">
+      <span [hidden]="confirmPassword.valid ||  (confirmPassword.pristine && !regForm.submitted)" class="alert alert-danger">
         Password mismatch
       </span>
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="E-mail" type="email" name="Email" [(ngModel)]=regUser.email class="form-control"
-               (focusout)="checkMail(event)" required  #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+        <input matInput placeholder="E-mail" type="email" name="Email" formControlName="email" class="form-control"
+               (focusout)="uniqueEmailValidator(event)" #email required >
       </mat-input-container>
-      <span [hidden]="email.valid || (email.pristine && !f.submitted)" class="alert alert-danger">
+      <span [hidden]="email.valid || (email.pristine && !regForm.submitted)" class="alert alert-danger">
         Email is required and format should be <i>john@doe.com</i>.
       </span>
 
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Имя" type="text" name="FirstName" [(ngModel)]=regUser.firstName required minlength="4" #firstName="ngModel">
+        <input matInput placeholder="Имя" type="text" name="FirstName" formControlName="firstName" required minlength="4" #firstName>
       </mat-input-container>
-      <span [hidden]="firstName.valid || (firstName.pristine && !f.submitted)">
+      <span [hidden]="firstName.valid || (firstName.pristine && !regForm.submitted)">
         Must contain more then 4 chars.
       </span>
 
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Фамилия" type="text" name="Surname" [(ngModel)]=regUser.middleName required
-               minlength="4" #middleName="ngModel">
+        <input matInput placeholder="Отчество" type="text" formControlName="middleName" required
+               minlength="4" #middleName>
       </mat-input-container>
-      <span [hidden]="middleName.valid || (middleName.pristine && !f.submitted)">
+      <span [hidden]="middleName.valid || (middleName.pristine && !regForm.submitted)">
         Must contain more then 4 chars.
       </span>
 
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Отчество" type="text" name="Patronymic" [(ngModel)]=regUser.lastName required
-               minlength="4" #lastName="ngModel">
+        <input matInput placeholder="Фамилия" type="text" formControlName="lastName" required
+               minlength="4" #lastName>
       </mat-input-container>
-      <span [hidden]="lastName.valid || (lastName.pristine && !f.submitted)">
+      <span [hidden]="lastName.valid || (lastName.pristine && !regForm.submitted)">
         Must contain more then 4 chars.
       </span>
 
-      <button type="submit" class="reg-button" mat-button color="primary" [disabled]="!f.valid">Отправить
+      <button type="submit" class="reg-button" mat-button color="primary" [disabled]="!regForm.valid">Отправить
       </button>
     </form>
   </div>
 
+  <span>{{regFormGroup.value | json}}</span>
 
 
 </div>

@@ -24,9 +24,9 @@ export class RegUserPageService {
     return this.http.post<RegUser>(this.userUrl, regUser, httpOptions);
   }
 
-  checkLogin(regUser: RegUser): Observable<boolean> {
+  checkLogin(username: string): Observable<boolean> {
     const urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('username', regUser.username);
+    urlSearchParams.append('username', username);
     return this.http.get<boolean>(this.checkLoginUrl + urlSearchParams.toString(), httpOptions);
   }
 
