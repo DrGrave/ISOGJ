@@ -9,4 +9,6 @@ public interface TempUserRepository extends JpaRepository<TempUser, Long> {
     TempUser findByUsername(String username);
 
     TempUser findByEmail(String email);
+
+    Long countAllByEmailIgnoreCase(String email);
 }

@@ -1,16 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {RegUser} from './reg-user';
 import {RegUserPageService} from './reg-user-page.service';
 import {
   AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, NgModel, ValidationErrors,
   Validators
 } from '@angular/forms';
 import {Router} from '@angular/router';
-import {logger} from 'codelyzer/util/logger';
 import {ErrorStateMatcher} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
-import {HttpClient} from '@angular/common/http';
-import {Subject} from 'rxjs/Subject';
 
 
 @Component({
@@ -24,9 +19,7 @@ export class RegPageComponent implements OnInit {
   constructor(private registerService: RegUserPageService, private router: Router) {
   }
   ifRegisterOk: boolean;
-  regUser: RegUser = new RegUser;
-  secPass: string;
-  matcher = new MyErrorStateMatcher();
+  loginAndEmailErrorStateMatcher = new LogintAndEmailErrorStateMatcher();
 
   regFormGroup: FormGroup;
   passwordPattern = '^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{8,}$';
@@ -42,12 +35,13 @@ export class RegPageComponent implements OnInit {
         [Validators.required, Validators.pattern(this.passwordPattern)]),
       confirmPassword: new FormControl('',
         [Validators.required, Validators.pattern(this.passwordPattern)]),
-      email: new FormControl('',
-        [Validators.required, Validators.email]),
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [this.uniqueEmailValidator.bind(this)]
+      }),
       firstName: new FormControl('',
         [Validators.required]),
-      middleName: new FormControl('',
-        [Validators.required]),
+      middleName: new FormControl(''),
       lastName: new FormControl('',
         [Validators.required])
     });
@@ -56,7 +50,7 @@ export class RegPageComponent implements OnInit {
   }
 
   private regMyUser() {
-    this.registerService.addRegUser(this.regUser).subscribe(user => {
+    this.registerService.addRegUser(this.regFormGroup.value).subscribe(user => {
       this.ifRegisterOk = user;
       this.sucsReg();
     });
@@ -71,26 +65,25 @@ export class RegPageComponent implements OnInit {
 
 
   uniqueLoginValidator(control: AbstractControl) {
-    console.log(control);
     return this.registerService.checkLogin(control.value).map(data => {
-      return data ? null : {loginNotUnique: {value: true}};
+      return data ? null : {loginUnique: {value: false}};
     });
   }
 
 
   uniqueEmailValidator(control: AbstractControl) {
-    this.registerService.checkEmail(control.value).map(data => {
-      return data ? null : {emailNotUnique: {value: true}};
+    return this.registerService.checkEmail(control.value).map(data => {
+      return data ? null : {emailUnique: {value: false}};
     });
 
   }
 }
 
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
+class LogintAndEmailErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted) );
   }
 }
 

@@ -1,14 +1,45 @@
 {
   "SIGN_UP": {
-    "TITLE": "Регистрация",
-    "VALIDATION": {
-      "EMAIL": {
-        "NOT_UNIQUE": "Этот адрес уже занят"
-      },
-      "USERNAME": {
-        "NOT_UNIQUE": "Этот логин уже занят",
-        "PATTERN": "Логин должен содержать только латинские символы"
+    "COMMON": {
+      "VALIDATION": {
+        "REQUIRED": "Обязательное поле"
       }
+    },
+    "TITLE": "Регистрация",
+    "USERNAME": {
+      "PLACEHOLDER": "Логин",
+      "VALIDATION": {
+        "NOT_UNIQUE": "Пользователь с таким логином уже зарегистрирован",
+        "PATTERN": "Имя пользователя может содержать только латинские символы"
+      }
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "Пароль",
+      "VALIDATION": {
+        "PATTERN": "Пароль должен содержать хотя бы одну цифру, один латинский символ и быть не короче восьми символов"
+      }
+    },
+    "CONFIRM_PASSWORD": {
+      "PLACEHOLDER": "Подтвердите пароль",
+      "VALIDATION": {
+        "NOT_EQUAL": "Пароли не совпадают"
+      }
+    },
+    "EMAIL": {
+      "PLACEHOLDER": "Электронная почта",
+      "VALIDATION": {
+        "NOT_UNIQUE": "Пользователь с таким адресом уже зарегистрирован",
+        "EMAIL": "Неверный email. Проверьте правильность указанного адреса"
+      }
+    },
+    "FIRST_NAME": {
+      "PLACEHOLDER": "Имя"
+    },
+    "MIDDLE_NAME": {
+      "PLACEHOLDER": "Отчество"
+    },
+    "LAST_NAME": {
+      "PLACEHOLDER": "Фамилия"
     }
   }
 }

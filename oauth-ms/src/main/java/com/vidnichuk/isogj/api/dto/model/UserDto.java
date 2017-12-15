@@ -13,15 +13,6 @@ public class UserDto {
     @NotBlank
     private String password;
 
-    private List<String> authorities;
-
-    public List<String> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<String> authorities) {
-        this.authorities = authorities;
-    }
 
     public String getUsername() {
         return username;

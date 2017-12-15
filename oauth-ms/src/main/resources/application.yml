@@ -15,7 +15,7 @@ spring:
       port: ${MYSQL_PORT:3306}
       current_schema: isogj_oauth
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/${spring.datasource.isogj.current_schema}?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://${spring.datasource.isogj.host}:${spring.datasource.isogj.port}/${spring.datasource.isogj.current_schema}?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
     username: root
     password:
     tomcat:

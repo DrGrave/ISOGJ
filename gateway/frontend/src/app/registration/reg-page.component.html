@@ -4,69 +4,91 @@
   </h1>
   <div class="reg-inputs">
     <form #regForm name="regForm" (submit)="regMyUser()" [formGroup]="regFormGroup">
-      <mat-input-container class="full-width" >
-        <input matInput placeholder="Логин" type="text"
-               formControlName="username" #username [errorStateMatcher]="matcher" required>
-        <mat-error *ngIf="regFormGroup.controls.username.hasError('pattern')">sdf</mat-error>
-        <mat-error *ngIf="regFormGroup.controls.username.hasError('loginNotUnique')">{{ 'SIGN_UP.VALIDATION.LOGIN.NOT_UNIQUE' | translate}}</mat-error>
+      <mat-input-container class="full-width">
+        <input matInput placeholder="{{ 'SIGN_UP.USERNAME.PLACEHOLDER' | translate }}"
+               type="text"
+               formControlName="username" #username
+               [errorStateMatcher]="loginAndEmailErrorStateMatcher" required>
+        <mat-error *ngIf="regFormGroup.controls.username.hasError('required')">
+          {{ 'SIGN_UP.COMMON.VALIDATION.REQUIRED' | translate }}
+        </mat-error>
+        <mat-error *ngIf="regFormGroup.controls.username.hasError('pattern')">
+          {{ 'SIGN_UP.USERNAME.VALIDATION.PATTERN' | translate }}
+        </mat-error>
+        <mat-error *ngIf="regFormGroup.controls.username.hasError('loginUnique')">
+          {{ 'SIGN_UP.USERNAME.VALIDATION.NOT_UNIQUE' | translate}}
+        </mat-error>
       </mat-input-container>
-      {{regFormGroup.controls.username.errors | json}}
-      <span [hidden]="username.valid || (username.pristine && !regForm.submitted)" class="alert alert-danger">
-          Min length 4 chars.
-
-      </span>
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Пароль" type="password"  class="form-control" name="password" formControlName="password"
-               required validateEqual="confirmPassword" reverse="true" #password minlength="8">
+        <input matInput placeholder="{{ 'SIGN_UP.PASSWORD.PLACEHOLDER' | translate }}" type="password"
+               class="form-control" formControlName="password"
+               required validateEqual="confirmPassword" reverse="true" #password>
+        <mat-error *ngIf="regFormGroup.controls.password.hasError('required')">
+          {{ 'SIGN_UP.COMMON.VALIDATION.REQUIRED' | translate }}
+        </mat-error>
+        <mat-error *ngIf="regFormGroup.controls.password.hasError('pattern')">
+          {{ 'SIGN_UP.PASSWORD.VALIDATION.PATTERN' | translate }}
+        </mat-error>
       </mat-input-container>
-      <span [hidden]="password.valid || (password.pristine && !regForm.submitted)" class="alert alert-danger">
-        Password is required
-      </span>
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Подтвердите пароль" type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword"
-               required validateEqual="password" reverse="false" minlength="8" #confirmPassword>
+        <input matInput placeholder="{{ 'SIGN_UP.CONFIRM_PASSWORD.PLACEHOLDER' | translate }}"
+               type="password"
+               class="form-control" name="confirmPassword"
+               formControlName="confirmPassword"
+               required validateEqual="password" reverse="false" #confirmPassword>
+        <mat-error *ngIf="regFormGroup.controls.confirmPassword.hasError('equal')">
+          {{'SIGN_UP.CONFIRM_PASSWORD.VALIDATION.NOT_EQUAL' | translate }}
+        </mat-error>
       </mat-input-container>
-      <span [hidden]="confirmPassword.valid ||  (confirmPassword.pristine && !regForm.submitted)" class="alert alert-danger">
-        Password mismatch
-      </span>
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="E-mail" type="email" name="Email" formControlName="email" class="form-control"
-               (focusout)="uniqueEmailValidator(event)" #email required >
+        <input matInput placeholder="{{ 'SIGN_UP.EMAIL.PLACEHOLDER' | translate }}"
+               type="email" formControlName="email" class="form-control"
+               [errorStateMatcher]="loginAndEmailErrorStateMatcher"
+               #email required>
+        <mat-error *ngIf="regFormGroup.controls.email.hasError('required')">
+          {{ 'SIGN_UP.COMMON.VALIDATION.REQUIRED' | translate }}
+        </mat-error>
+        <mat-error
+          *ngIf="regFormGroup.controls.email.hasError('email') && !regFormGroup.controls.email.hasError('required')">
+          {{ 'SIGN_UP.EMAIL.VALIDATION.EMAIL' | translate }}
+        </mat-error>
+        <mat-error *ngIf="regFormGroup.controls.email.hasError('emailUnique')">
+          {{ 'SIGN_UP.EMAIL.VALIDATION.NOT_UNIQUE' | translate}}
+        </mat-error>
       </mat-input-container>
-      <span [hidden]="email.valid || (email.pristine && !regForm.submitted)" class="alert alert-danger">
-        Email is required and format should be <i>john@doe.com</i>.
-      </span>
-
-
-      <mat-input-container class="full-width">
-        <input matInput placeholder="Имя" type="text" name="FirstName" formControlName="firstName" required minlength="4" #firstName>
-      </mat-input-container>
-      <span [hidden]="firstName.valid || (firstName.pristine && !regForm.submitted)">
-        Must contain more then 4 chars.
-      </span>
-
-
-      <mat-input-container class="full-width">
-        <input matInput placeholder="Отчество" type="text" formControlName="middleName" required
-               minlength="4" #middleName>
-      </mat-input-container>
-      <span [hidden]="middleName.valid || (middleName.pristine && !regForm.submitted)">
-        Must contain more then 4 chars.
-      </span>
+      {{regFormGroup.controls.email.errors | json}}
 
 
       <mat-input-container class="full-width">
-        <input matInput placeholder="Фамилия" type="text" formControlName="lastName" required
-               minlength="4" #lastName>
+        <input matInput placeholder="{{ 'SIGN_UP.FIRST_NAME.PLACEHOLDER' | translate }}"
+               type="text" name="FirstName" formControlName="firstName" required
+               #firstName>
+        <mat-error *ngIf="regFormGroup.controls.firstName.hasError('required')">
+          {{ 'SIGN_UP.COMMON.VALIDATION.REQUIRED' | translate }}
+        </mat-error>
       </mat-input-container>
-      <span [hidden]="lastName.valid || (lastName.pristine && !regForm.submitted)">
-        Must contain more then 4 chars.
-      </span>
 
-      <button type="submit" class="reg-button" mat-button color="primary" [disabled]="!regForm.valid">Отправить
+
+      <mat-input-container class="full-width">
+        <input matInput
+               placeholder="{{ 'SIGN_UP.MIDDLE_NAME.PLACEHOLDER' | translate }}"
+               type="text" formControlName="middleName"
+               #middleName>
+      </mat-input-container>
+
+      <mat-input-container class="full-width">
+        <input matInput
+               placeholder="{{ 'SIGN_UP.LAST_NAME.PLACEHOLDER' | translate }}"
+               type="text" formControlName="lastName" required
+               #lastName>
+        <mat-error *ngIf="regFormGroup.controls.lastName.hasError('required')">
+          {{ 'SIGN_UP.COMMON.VALIDATION.REQUIRED' | translate }}
+        </mat-error>
+      </mat-input-container>
+      <button type="submit" class="reg-button" mat-button color="primary" [disabled]="regFormGroup.invalid">Отправить
       </button>
     </form>
   </div>

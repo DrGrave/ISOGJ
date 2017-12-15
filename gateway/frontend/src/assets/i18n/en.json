@@ -1,15 +1,45 @@
 {
   "SIGN_UP": {
+    "COMMON": {
+      "VALIDATION": {
+        "REQUIRED": "Field is mandatory"
+      }
+    },
     "TITLE": "Registration",
-    "VALIDATION": {
-      "EMAIL": {
-        "NOT_UNIQUE": "Email is already taken"
-      },
-      "USERNAME": {
+    "USERNAME": {
+      "PLACEHOLDER": "Username",
+      "VALIDATION": {
         "NOT_UNIQUE": "Username is already taken",
         "PATTERN": "Username must contain only latin characters"
       }
-
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "Password",
+      "VALIDATION": {
+        "PATTERN": "Password must contain at least one digit, one latin character and at least 8 characters"
+      }
+    },
+    "CONFIRM_PASSWORD": {
+      "PLACEHOLDER": "Confirm password",
+      "VALIDATION": {
+        "NOT_EQUAL": "Passwords mismatch"
+      }
+    },
+    "EMAIL": {
+      "PLACEHOLDER": "Email",
+      "VALIDATION": {
+        "NOT_UNIQUE": "User with given email is already registered",
+        "EMAIL": "Invalid email. Provide correct address"
+      }
+    },
+    "FIRST_NAME": {
+      "PLACEHOLDER": "First name"
+    },
+    "MIDDLE_NAME": {
+      "PLACEHOLDER": "Middle name"
+    },
+    "LAST_NAME": {
+      "PLACEHOLDER": "Last name"
     }
   }
 }

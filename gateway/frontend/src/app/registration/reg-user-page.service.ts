@@ -30,9 +30,9 @@ export class RegUserPageService {
     return this.http.get<boolean>(this.checkLoginUrl + urlSearchParams.toString(), httpOptions);
   }
 
-  checkEmail(regUser: RegUser): Observable<any> {
+  checkEmail(email: string): Observable<any> {
     const urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('email', regUser.email);
+    urlSearchParams.append('email', email);
     return this.http.get<boolean>(this.checkEmailUrl + urlSearchParams.toString(), httpOptions);
   }
 }

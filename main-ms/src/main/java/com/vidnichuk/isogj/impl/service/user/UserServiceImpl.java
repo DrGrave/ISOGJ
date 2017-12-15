@@ -67,7 +67,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean checkEmail(String email) {
-        return (userRepository.findByEmail(email) == null && tempUserRepository.findByEmail(email) == null);
+        return (userRepository.countAllByEmailIgnoreCase(email).equals(0L)
+                && tempUserRepository.countAllByEmailIgnoreCase(email).equals(0L));
     }
 
     @Override
