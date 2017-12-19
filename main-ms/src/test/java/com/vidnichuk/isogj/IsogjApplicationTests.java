@@ -1,9 +1,16 @@
 package com.vidnichuk.isogj;
 
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
+import com.vidnichuk.isogj.api.dao.UserRepository;
+import com.vidnichuk.isogj.api.dao.UserSkillRepository;
+import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
+import com.vidnichuk.isogj.api.dto.mapper.UserSkillDtoMapper;
+import com.vidnichuk.isogj.api.dto.model.UserDto;
+import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
+import com.vidnichuk.isogj.api.model.UserSkill;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 @RunWith(SpringRunner.class)
@@ -28,6 +37,39 @@ public class IsogjApplicationTests {
 
 	@Autowired
 	private TempUserToUserMapper tempUserToUserMapper;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private UserSkillRepository userSkillRepository;
+
+	@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+	@Autowired
+	private UserDtoMapper userDtoMapper;
+
+	@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+	@Autowired
+	private UserSkillDtoMapper userSkillDtoMapper;
+
+
+	@Test
+	public void fromUserSkillToUserSkillDto(){
+		List<UserSkillDto> userSkillDtoList = new ArrayList<>();
+		for (UserSkill userSkill: userSkillRepository.findAllByUser_Id(1)){
+			userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
+		}
+		System.out.println(userSkillDtoList);
+	}
+
+	@Test
+	public void fromUserToUserDto(){
+		List<UserDto> userDtoList = new ArrayList<>();
+		for (User user: userRepository.findAll()){
+			userDtoList.add(userDtoMapper.fromUserToUserDto(user));
+		}
+		System.out.println(userDtoList);
+	}
 
 
 

@@ -4,6 +4,8 @@ import com.vidnichuk.isogj.api.dao.TempUserRepository;
 import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
+import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
+import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.springframework.util.Assert.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +49,10 @@ public class UserServiceImpl implements UserService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private TempUserDtoMapper tempUserDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private UserDtoMapper userDtoMapper;
 
     @Autowired
     private EmailService emailService;
@@ -77,8 +84,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        List<UserDto> userDtoList = new ArrayList<>();
+        for (User user: userRepository.findAll()){
+            userDtoList.add(userDtoMapper.fromUserToUserDto(user));
+        }
+        return userDtoList;
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.service.user;
 
+import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 
@@ -26,7 +27,7 @@ public interface UserService {
     /**
      * @return all users
      */
-    List<User> getAllUsers();
+    List<UserDto> getAllUsers();
 
 
     User findByLogin(String login);

@@ -1,6 +1,10 @@
+
+import {UserSkill} from "./userSkill";
+
 export class User {
-  userId: number;
-  userName: string;
-  userSurname: string;
-  userLastName: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  skill: UserSkill[];
 }

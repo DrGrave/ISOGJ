@@ -1,0 +1,53 @@
+.pic{
+  background: #CCA69E;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  float: left;
+}
+
+.text{
+  color: aqua;
+  font-size: 55px;
+  text-align: center;
+  padding-top: 25px;
+}
+
+.personalInformation{
+  padding-left: 125px;
+  word-wrap: break-word;
+  max-width: 595px;
+
+}
+
+.name{
+  margin: 10px;
+  font-size: 16pt;
+}
+
+.userInfo{
+  background-color: #fff;
+  width: 1200px;
+  height: auto;
+  margin-bottom: 7px;
+  padding: 2px;
+  float: left;
+}
+
+.cv{
+  width: 100%;
+  position: relative;
+}
+
+.skill-field{
+  float: left;
+  border: 1px solid #cfcfcf;
+  background: #f0f0f0;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 9pt;
+  padding: 0 7px;
+  margin-left: 3px;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}

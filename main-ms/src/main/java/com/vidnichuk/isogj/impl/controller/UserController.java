@@ -2,12 +2,14 @@ package com.vidnichuk.isogj.impl.controller;
 
 import com.vidnichuk.isogj.api.dto.model.StatusDto;
 import com.vidnichuk.isogj.api.dto.model.TempUserDto;
+import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -42,5 +44,11 @@ public class UserController {
     public StatusDto approveRegister(@RequestParam("link") String link) {
         userLightWeightService.approveRegistration(link);
         return new StatusDto("ok");
+    }
+
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
+    @GetMapping("/all")
+    public List<UserDto> getAllUser(){
+        return userLightWeightService.getAllUsers();
     }
 }

@@ -385,6 +385,8 @@ create table user_skill
   skill_mark varchar(255) null,
   skill_practical_mark varchar(255) null,
   id_marker bigint null,
+  start_skilling datetime null,
+  end_skilling datetime null,
   id_skill bigint null,
   id_user bigint null,
   constraint FK6pru830ugj5nuapp3nhdl2p9p

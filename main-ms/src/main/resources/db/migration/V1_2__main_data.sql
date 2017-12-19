@@ -27,7 +27,7 @@ INSERT INTO isogj_account.user (username, active, email, first_name, middle_name
 INSERT INTO isogj_account.user (username, active, email, first_name, middle_name, last_name, city_of_living, gender, type_of_user) VALUES ('Epam Systems', 1, 'Company', 'Company', 'Company', 'Company', 1, 1, 2);
 INSERT INTO isogj_account.possible_cities_to_work (id_user, id_city) VALUES (1, 1);
 INSERT INTO isogj_account.user_company (company, position, user) VALUES (1, 1, 1);
-INSERT INTO isogj_account.user_skill (skill_mark, skill_practical_mark, id_marker, id_skill, id_user) VALUES ('6', '7', 2, 1, 1);
+INSERT INTO isogj_account.user_skill (skill_mark, skill_practical_mark, id_marker, id_skill, id_user, start_skilling, end_skilling) VALUES ('6', '7', 2, 1, 1, '2015-11-14 16:39:36', '2017-11-14 16:39:38');
 INSERT INTO isogj_account.vacancy (info, task, type_of_vacancy, company) VALUES ('Do work', 1, 1, 1);
 INSERT INTO isogj_account.vacancy_skills (id_skill, id_vacancy) VALUES (1, 1);
 INSERT INTO isogj_account.vacancy_user (if_accepted_user , if_company_accepted, user, vacancy) VALUES (0, 0, 1, 1);

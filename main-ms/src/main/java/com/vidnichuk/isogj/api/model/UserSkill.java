@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.api.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Vadim on 02.11.2017.
@@ -31,6 +32,10 @@ public class UserSkill {
     @JoinColumn(name = "idMarker")
     private User marker;
 
+
+    private Date startSkilling;
+
+    private Date endSkilling;
     /**
      * id skill to many to many object
      */
@@ -48,6 +53,21 @@ public class UserSkill {
      */
     private String skillPracticalMark;
 
+    public Date getEndSkilling() {
+        return endSkilling;
+    }
+
+    public void setEndSkilling(Date endSkilling) {
+        this.endSkilling = endSkilling;
+    }
+
+    public Date getStartSkilling() {
+        return startSkilling;
+    }
+
+    public void setStartSkilling(Date startSkilling) {
+        this.startSkilling = startSkilling;
+    }
 
     public Long getId() {
         return id;

@@ -1,13 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<ul class="users">
-  <li *ngFor="let user of users">
-    <span class="badge">{{user.userId}}</span> {{user.userName}}
-  </li>
+<ul class="Users">
+  <div *ngFor="let user of users"
+      [class.selected]="user === selectedUser"
+      (click)="onSelect(user)" class="userInfo" style="box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .2);">
+    <div class="cv">
+
+        <div class="pic">
+            <div class="text">
+            {{user.firstName.charAt(0)}}
+            {{user.lastName.charAt(0)}}
+            </div>
+      </div>
+      <div class="personalInformation">
+        <span>{{user.lastName}} {{user.firstName}} {{user.middleName}}</span>
+      </div>
+      <div *ngFor="let skill of user.skill">
+        <span class="skill-field"> {{skill.skill.name}}</span>
+      </div>
+    </div>
+  </div>
+
 </ul>
+<div *ngIf="selectedUser">
 
-<body>
+  <h2>{{ selectedUser.firstName | uppercase }} Details</h2>
+  <div><span>id: </span>{{selectedUser.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedUser.lastName" placeholder="name">
+    </label>
+  </div>
 
-</body>
-</html>
+
+</div>
+
