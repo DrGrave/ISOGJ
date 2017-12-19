@@ -8,7 +8,7 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {RegPageComponent} from './registration/reg-page.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule, MatInputModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatInputModule, MatSelectModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {AuthenticationService} from './shared/service/auth/authentication.service';
@@ -23,6 +23,7 @@ import {EqualValidator} from './registration/equal-validator.directive';
 import {RegistrationSuccessPageComponent} from './registration-success-page/registration-success-page.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { LangSelectComponent } from './lang-select/lang-select.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -38,7 +39,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegPageComponent,
     EmailConfirmPageComponent,
     EqualValidator,
-    RegistrationSuccessPageComponent
+    RegistrationSuccessPageComponent,
+    LangSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     SharedModule,
     MatToolbarModule,
+    MatSelectModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

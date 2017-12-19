@@ -1,13 +1,14 @@
-<mat-toolbar>
-    <span>ISOGJ</span>
+<mat-toolbar class="main-toolbar">
+  <span>ISOGJ</span>
 
-      <!-- This fills the remaining space of the current row -->
-      <span class="example-fill-remaining-space"></span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
 
-      <a routerLink="/registration" mat-button>Регистрация</a>
-      <a routerLink="/company-list-page" mat-button>Vacancy</a>
-      <a routerLink="/user-list-page" mat-button>User</a>
+  <a routerLink="/registration" mat-button>Регистрация</a>
+  <a routerLink="/company-list-page" mat-button>Vacancy</a>
+  <a routerLink="/user-list-page" mat-button>User</a>
+  <app-lang-select></app-lang-select>
 </mat-toolbar>
 <div class="content">
-     <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

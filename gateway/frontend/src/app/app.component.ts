@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {RouterModule} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -8,12 +7,20 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
-
   constructor(private translate: TranslateService) {
     translate.addLangs(['en', 'ru']);
+    const currLang = localStorage.getItem('isogj-locale');
     this.translate.setDefaultLang('en');
-    this.translate.use('ru');
+    if (currLang == null) {
+
+      const browserLang = translate.getBrowserLang();
+
+      const lang = browserLang.match('^(en|ru)$') ? browserLang : translate.getDefaultLang();
+      translate.use(lang);
+      localStorage.setItem('isogj-locale', lang);
+    } else {
+      translate.use(currLang);
+    }
   }
 
 
