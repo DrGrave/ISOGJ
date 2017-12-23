@@ -44,21 +44,6 @@ public class Vacancy {
     @JoinColumn(name = "Company")
     private Company company;
 
-    @ManyToMany
-    @JoinTable(name = "vacancy_skills",
-            joinColumns = {@JoinColumn(name = "id_vacancy")},
-            inverseJoinColumns = {@JoinColumn(name = "id_skill")})
-    private Set<Skill> skills;
-
-
-    public Set<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
-    }
-
     /**
      * @return company object
      */

@@ -51,7 +51,11 @@ INSERT INTO isogj_account.user_skill (skill_mark, skill_practical_mark, id_marke
 INSERT INTO isogj_account.user_skill (skill_mark, skill_practical_mark, id_marker, start_skilling, end_skilling, id_skill, id_user) VALUES ('7', '8', 2, '2017-12-19 21:52:27', '2017-12-19 21:52:30', 10, 3);
 INSERT INTO isogj_account.user_skill (skill_mark, skill_practical_mark, id_marker, start_skilling, end_skilling, id_skill, id_user) VALUES ('7', '8', 2, '2017-12-19 21:52:27', '2017-12-19 21:52:30', 1, 3);
 INSERT INTO isogj_account.vacancy (info, task, type_of_vacancy, company) VALUES ('Do work', 1, 1, 1);
-INSERT INTO isogj_account.vacancy_skills (id_skill, id_vacancy) VALUES (1, 1);
+INSERT INTO isogj_account.vacancy_skill (expected_mark, skill, vacancy) VALUES ('6', 1, 1);
+INSERT INTO isogj_account.vacancy_skill (expected_mark, skill, vacancy) VALUES ('7', 2, 1);
+INSERT INTO isogj_account.vacancy_skill (expected_mark, skill, vacancy) VALUES ('7', 3, 1);
+INSERT INTO isogj_account.vacancy_skill (expected_mark, skill, vacancy) VALUES ('7', 4, 1);
+INSERT INTO isogj_account.vacancy_skill (expected_mark, skill, vacancy) VALUES ('8', 5, 1);
 INSERT INTO isogj_account.vacancy_user (if_accepted_user , if_company_accepted, user, vacancy) VALUES (0, 0, 1, 1);
 INSERT INTO isogj_account.education (end_of_education, start_of_education, faculty_id, school, type_of_education, user) VALUES ('2014-11-14 16:38:39', '2017-11-14 16:38:42', 1, null, 1, 1);
 INSERT INTO isogj_account.experience (date_of_end, date_of_start, prev_company, user) VALUES ('2015-11-14 16:39:36', '2017-11-14 16:39:38', 1, 1);
