@@ -3,10 +3,13 @@ package com.vidnichuk.isogj;
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
 import com.vidnichuk.isogj.api.dao.UserSkillRepository;
+import com.vidnichuk.isogj.api.dao.VacancyRepository;
 import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.UserSkillDtoMapper;
+import com.vidnichuk.isogj.api.dto.mapper.VacancyDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
+import com.vidnichuk.isogj.api.dto.model.VacancyDto;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
@@ -22,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -42,6 +46,9 @@ public class IsogjApplicationTests {
 	private UserRepository userRepository;
 
 	@Autowired
+	private VacancyRepository vacancyRepository;
+
+	@Autowired
 	private UserSkillRepository userSkillRepository;
 
 	@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -50,7 +57,18 @@ public class IsogjApplicationTests {
 
 	@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 	@Autowired
+	private VacancyDtoMapper vacancyDtoMapper;
+
+	@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+	@Autowired
 	private UserSkillDtoMapper userSkillDtoMapper;
+
+	@Test
+	public void fromVacancyToVacancyDto(){
+		VacancyDto vacancyDto = vacancyDtoMapper.fromVacancyToVacancyDTO(vacancyRepository.findAll().get(0));
+		System.out.println(vacancyDto);
+
+	}
 
 
 	@Test

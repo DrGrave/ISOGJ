@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<ul class="Vacancy">
+  <div *ngFor="let vacancy of vacancies"
+       [class.selected]="user === selectedUser"
+       (click)="onSelect(vacancy)" class="userInfo" style="box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .2);">
+    <div class="cv">
 
-<ul class="vacancys">
-  <li *ngFor="let vacancy of vacancies">
-    <span class="badge">{{vacancy.infoOfVacancy}}</span> {{vacancy.typeOfVacancy}}
-  </li>
+      <div class="pic">
+        <div class="text">
+          {{vacancy.companyName.charAt(0)}}
+          {{vacancy.companyName.charAt(1)}}
+        </div>
+      </div>
+      <div class="personalInformation">
+        <span>{{vacancy.info}} {{vacancy.typeOfVacancy}}</span>
+      </div>
+      <div *ngFor="let skill of vacancy.skills">
+        <span class="skill-field"> {{skill.skill.name}} {{skill.expectedMark}}</span>
+      </div>
+    </div>
+  </div>
+
 </ul>
-
-<body>
-
-</body>
-</html>

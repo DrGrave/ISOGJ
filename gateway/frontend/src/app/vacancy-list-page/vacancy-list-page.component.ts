@@ -12,6 +12,7 @@ import {Vacancy} from './vacancy';
 export class VacancyListPageComponent implements OnInit {
 
   vacancies: Vacancy[];
+  sellectedVacancy: Vacancy;
 
   ngOnInit(): void {
     this.getVacancys();
@@ -21,8 +22,20 @@ export class VacancyListPageComponent implements OnInit {
   }
 
   getVacancys(): void {
-    this.vacancyService.getVacancy().subscribe(vacancy => this.vacancies = vacancy);
+    this.vacancyService.getVacancy().subscribe(vacancy => {
+      this.vacancies = vacancy;
+      this.getAllSkills()
+    });
   }
 
+  getAllSkills(){
+    for (let i = 0; i < this.vacancies.length; i++){
+      this.vacancyService.getSkills(this.vacancies[i].id).subscribe( skills => this.vacancies[i].skills = skills);
+    }
+  }
 
+  onSelect(vacancy: Vacancy): void {
+    this.vacancyService.getSkills(vacancy.id).subscribe( skills => vacancy.skills = skills);
+    this.sellectedVacancy = vacancy;
+  }
 }

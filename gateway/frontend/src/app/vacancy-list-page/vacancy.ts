@@ -1,5 +1,9 @@
+import {VacancySkill} from "./vacancySkill";
+
 export class Vacancy {
-  idVacancy: number;
-  infoOfVacancy: string;
+  id: number;
+  info: string;
   typeOfVacancy: string;
+  companyName: string;
+  skills: VacancySkill[];
 }
