@@ -6,6 +6,7 @@ import {UserListPageComponent} from "./user-list-page/user-list-page.component";
 import {VacancyListPageComponent} from "./vacancy-list-page/vacancy-list-page.component";
 import {EmailConfirmPageComponent} from "./email-confirm-page/email-confirm-page.component";
 import {RegistrationSuccessPageComponent} from "./registration-success-page/registration-success-page.component";
+import {HomePageComponent} from "./home-page/home-page.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'user-list-page', component: UserListPageComponent},
   {path: 'company-list-page', component: VacancyListPageComponent},
   {path: 'email-confirm-page', component: EmailConfirmPageComponent},
-  {path: 'registration-success-page', component: RegistrationSuccessPageComponent}
+  {path: 'registration-success-page', component: RegistrationSuccessPageComponent},
+  {path: 'home-page', component: HomePageComponent}
 ];
 
 @NgModule({

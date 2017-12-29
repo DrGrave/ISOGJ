@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../shared/service/auth/authentication.service';
-import {MyToken} from "./myToken";
+
+import {Router} from "@angular/router";
 
 
 
@@ -13,11 +14,12 @@ export class LoginPageComponent implements OnInit {
 
   private username: string;
   private password: string;
+  private error: string;
 
-  private token: MyToken;
+  private token: string;
 
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
   }
 
   ngOnInit() {
@@ -28,7 +30,8 @@ export class LoginPageComponent implements OnInit {
   private authenticate(event) {
     this.authenticationService.login(this.username, this.password)
       .subscribe(data => {
-        this.token.token = data.access_token;
+        this.token = data.access_token;
+        this.router.navigateByUrl("/home-page");
       });
   }
 

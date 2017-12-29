@@ -24,6 +24,7 @@ import {RegistrationSuccessPageComponent} from './registration-success-page/regi
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { LangSelectComponent } from './lang-select/lang-select.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EmailConfirmPageComponent,
     EqualValidator,
     RegistrationSuccessPageComponent,
-    LangSelectComponent
+    LangSelectComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
