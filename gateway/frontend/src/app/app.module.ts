@@ -26,6 +26,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { LangSelectComponent } from './lang-select/lang-select.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
+  import {AuthGuard} from "./shared/service/auth/AuthGuard";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -72,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticationService,
     UserService,
     EmailConfirmPageService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })
