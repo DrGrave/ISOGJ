@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+  import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -25,6 +25,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { LangSelectComponent } from './lang-select/lang-select.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HeaderComponent } from './header/header.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -42,7 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EqualValidator,
     RegistrationSuccessPageComponent,
     LangSelectComponent,
-    HomePageComponent
+    HomePageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

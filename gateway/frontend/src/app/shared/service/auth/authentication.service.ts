@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
+import {SinginUser} from "./SinginUser";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+
 
 @Injectable()
 export class AuthenticationService {
@@ -10,14 +13,14 @@ export class AuthenticationService {
   constructor(private http: HttpClient,
               private router: Router) {
   }
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
-
-  public login(username: string, password: string): Observable<any> {
+  public login(user :SinginUser): Observable<any> {
     const urlSearchParams = new URLSearchParams();
 
     urlSearchParams.append('grant_type', 'password');
-    urlSearchParams.append('username', username);
-    urlSearchParams.append('password', password);
+    urlSearchParams.append('username', user.username);
+    urlSearchParams.append('password', user.password);
 
     return this.getTokens(urlSearchParams.toString())
       .do(data => {
@@ -27,7 +30,12 @@ export class AuthenticationService {
         if (data.refresh_token) {
           localStorage.setItem('refresh_token', data.refresh_token);
         }
+        this.loggedIn.next(true);
       });
+  }
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable(); // {2}
   }
 
   private getTokens(urlParameters: string): Observable<any> {
@@ -41,5 +49,9 @@ export class AuthenticationService {
     return headers;
   }
 
+  logout() {                            // {4}
+    this.loggedIn.next(false);
+    this.router.navigate(['/login']);
+  }
 
 }

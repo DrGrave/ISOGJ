@@ -7,6 +7,7 @@ import {VacancyListPageComponent} from "./vacancy-list-page/vacancy-list-page.co
 import {EmailConfirmPageComponent} from "./email-confirm-page/email-confirm-page.component";
 import {RegistrationSuccessPageComponent} from "./registration-success-page/registration-success-page.component";
 import {HomePageComponent} from "./home-page/home-page.component";
+import {AuthGuard} from "./shared/service/auth/AuthGuard";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: 'company-list-page', component: VacancyListPageComponent},
   {path: 'email-confirm-page', component: EmailConfirmPageComponent},
   {path: 'registration-success-page', component: RegistrationSuccessPageComponent},
-  {path: 'home-page', component: HomePageComponent}
+  {path: 'home-page', component: HomePageComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

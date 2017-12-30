@@ -1,18 +1,22 @@
 <div class="login-page-input-form">
-  <form (submit)="authenticate($event)">
-    <div>
-      <mat-input-container>
-        <input matInput placeholder="username" type="text" [(ngModel)]="username" name="username">
-      </mat-input-container>
-    </div>
 
-    <div>
-      <mat-input-container>
-        <input matInput placeholder="password" type="password" [(ngModel)]="password" name="password">
-      </mat-input-container>
-    </div>
-    {{error}}
-    <button class="login-button" mat-button type="submit">log in</button>
-  </form>
+      <form [formGroup]="form" (ngSubmit)="authenticate($event)">
+        <p>Sing in system</p>
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="User"
+                 formControlName="username" required>
+          <mat-error *ngIf="isFieldInvalid('username')">
+            Please inform your user name
+          </mat-error>
+        </mat-input-container>
+        <mat-input-container class="full-width-input">
+          <input matInput type="password" placeholder="Password"
+                 formControlName="password" required>
+          <mat-error *ngIf="isFieldInvalid('password')">
+            Please inform your password
+          </mat-error>
+        </mat-input-container>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
 </div>
 

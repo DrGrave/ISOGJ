@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../shared/service/auth/authentication.service';
 
 import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 
@@ -12,28 +13,46 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent implements OnInit {
 
-  private username: string;
-  private password: string;
+
   private error: string;
+  private formSubmitAttempt: boolean;
 
   private token: string;
 
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor( private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
   }
+
+  form: FormGroup;
 
   ngOnInit() {
-
+    this.form = this.fb.group({     // {5}
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
+
+
 
 
   private authenticate(event) {
-    this.authenticationService.login(this.username, this.password)
-      .subscribe(data => {
-        this.token = data.access_token;
-        this.router.navigateByUrl("/home-page");
-      });
+    if (this.form.valid) {
+      this.authenticationService.login(this.form.value)
+        .subscribe(data => {
+          this.token = data.access_token;
+          this.router.navigateByUrl("/home-page");
+        });
+    }
+    this.formSubmitAttempt = true;
   }
+
+  isFieldInvalid(field: string) { // {6}
+    return (
+      (!this.form.get(field).valid && this.form.get(field).touched) ||
+      (this.form.get(field).untouched && this.formSubmitAttempt)
+    );
+  }
+
 
 
 }

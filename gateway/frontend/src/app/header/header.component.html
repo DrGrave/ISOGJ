@@ -1,0 +1,13 @@
+<mat-toolbar color="milk">
+  <span>ISOGJ</span>
+  <div class="heads">
+    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
+    <button mat-button routerLink="/login" routerLinkActive="menu">Sing in</button>
+    <button mat-button routerLink="/registration" routerLinkActive="menu">Sing up</button>
+    <button mat-button routerLink="/company-list-page" routerLinkActive="menu">Vacancy</button>
+    <button mat-button routerLink="/user-list-page" routerLinkActive="menu">User</button>
+  </div>
+  <div class="lang-select">
+    <app-lang-select></app-lang-select>
+  </div>
+</mat-toolbar>
