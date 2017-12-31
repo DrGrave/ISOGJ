@@ -27,6 +27,7 @@ import { LangSelectComponent } from './lang-select/lang-select.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
   import {AuthGuard} from "./shared/service/auth/AuthGuard";
+  import {MatCardModule} from '@angular/material/card';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatCardModule,
     FormsModule,
     MatInputModule,
     BrowserAnimationsModule,

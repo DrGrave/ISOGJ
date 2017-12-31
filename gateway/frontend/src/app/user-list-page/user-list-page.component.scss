@@ -1,42 +1,19 @@
-.pic{
-  background: #CCA69E;
-  width: 120px;
-  height: 120px;
-  position: relative;
-  float: left;
+
+
+.mat-card {
+  width: 55%;
+  margin-top: 7px;
+  margin-left: 20%;
 }
 
-.text{
-  color: aqua;
-  font-size: 55px;
-  text-align: center;
-  padding-top: 25px;
+.mat-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
-.personalInformation{
-  padding-left: 125px;
-  word-wrap: break-word;
-  max-width: 595px;
-
-}
-
-.name{
-  margin: 10px;
-  font-size: 16pt;
-}
-
-.userInfo{
-  background-color: #fff;
-  width: 1200px;
-  height: auto;
-  margin-bottom: 7px;
-  padding: 2px;
-  float: left;
-}
-
-.cv{
-  width: 100%;
-  position: relative;
+.mat-card-content-cs{
+  margin-top: 17px;
+  width: 45%;
 }
 
 .skill-field{
@@ -50,12 +27,4 @@
   margin-left: 3px;
   margin-bottom: 3px;
   margin-top: 3px;
-}
-
-.user-list-class{
-  margin-left: 20%;
-  margin-top: 5px;
-  align-items: center;
-  justify-content: center;
-
 }
