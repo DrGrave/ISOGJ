@@ -40,4 +40,6 @@ public interface UserService {
     boolean checkEmail(String email);
 
     void approveUser(String link);
+
+    UserDto getUserWithMoreInfo(Long id);
 }

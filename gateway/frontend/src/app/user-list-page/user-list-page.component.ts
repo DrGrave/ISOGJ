@@ -3,8 +3,10 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "./user-list-page.service";
 import {User} from "./user";
-import {forEach} from "@angular/router/src/utils/collection";
-import {UserSkill} from "./userSkill";
+import {AuthenticationService} from "../shared/service/auth/authentication.service";
+import {Router} from "@angular/router";
+
+
 
 @Component({
   selector: 'app-user-list-page',
@@ -13,15 +15,17 @@ import {UserSkill} from "./userSkill";
 })
 
 export class UserListPageComponent implements OnInit{
-
+  token: string;
   ngOnInit(): void {
-    this.getUsers();
 
+    this.getUsers();
   }
 
-  constructor(private userService: UserService){}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ){}
   users : User[]  ;
-  skills: UserSkill[];
   user: User;
   selectedUser: User;
 
@@ -39,10 +43,15 @@ export class UserListPageComponent implements OnInit{
   }
 
   onSelect(user: User): void {
-    this.userService.getSkills(user.id).subscribe( skills => user.skill = skills);
-    this.selectedUser = user;
+
+    if (localStorage.getItem('access_token') != null) {
+      this.selectedUser = user;
+      this.token = localStorage.getItem('access_token');
+      this.router.navigateByUrl('/more-user-info-page?id=' + this.selectedUser.id)
+    }
   }
 
 
 }
+
 

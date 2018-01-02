@@ -1,6 +1,8 @@
 
 <script src="TypeOfSkill.ts"></script>
-<mat-card class="mat-card" *ngFor="let user of users">
+<mat-card class="mat-card" *ngFor="let user of users"
+          [class.selected]="user === selectedUser"
+          (click)="onSelect(user)">
   <mat-card-header class="mat-title-cs">
     <div mat-card-avatar class="mat-header-image"></div>
     <mat-card-title>{{user.lastName}} {{user.firstName}} {{user.middleName}}</mat-card-title>
@@ -17,3 +19,15 @@
     <!--<button mat-button>SHARE</button>-->
   <!--</mat-card-actions>-->
 </mat-card>
+
+<div *ngIf="selectedUser">
+      <h2>{{ selectedUser.firstName | uppercase }} Details</h2>
+      <div><span>id: </span>{{selectedUser.id}}</div>
+      <div>
+        <label>name:
+          <input [(ngModel)]="selectedUser.lastName" placeholder="name">
+          {{token}}
+        </label>
+      </div>
+
+</div>

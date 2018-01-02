@@ -28,8 +28,11 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
   import {AuthGuard} from "./shared/service/auth/AuthGuard";
   import {MatCardModule} from '@angular/material/card';
+  import {MatDialogModule} from '@angular/material';
+import { MoreUserInfoPageComponent } from './more-user-info-page/more-user-info-page.component';
+import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page-service";
 
-export function HttpLoaderFactory(http: HttpClient) {
+  export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
@@ -46,15 +49,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegistrationSuccessPageComponent,
     LangSelectComponent,
     HomePageComponent,
-    HeaderComponent
+    HeaderComponent,
+    MoreUserInfoPageComponent
   ],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
     FormsModule,
     MatInputModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -70,6 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
+    MoreUserInfoPageService,
     RegUserPageService,
     VacancyService,
     AuthenticationService,

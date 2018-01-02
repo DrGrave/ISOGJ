@@ -35,6 +35,11 @@ export class AuthenticationService {
   }
 
   get isLoggedIn() {
+    if (localStorage.getItem('access_token') != null){
+      this.loggedIn.next(true);
+    }else {
+      this.loggedIn.next(false);
+    }
     return this.loggedIn.asObservable(); // {2}
   }
 
@@ -49,7 +54,8 @@ export class AuthenticationService {
     return headers;
   }
 
-  logout() {                            // {4}
+  logout() {
+    localStorage.clear()// {4}
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }

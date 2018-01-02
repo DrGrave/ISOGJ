@@ -51,4 +51,10 @@ public class UserController {
     public List<UserDto> getAllUser(){
         return userLightWeightService.getAllUsers();
     }
+
+    @GetMapping("/moreuserinfo")
+    public UserDto getUserWithMoreInformation(@RequestParam("id") Long id){
+        return userLightWeightService.getUserWithMoreInformation(id);
+    }
+
 }

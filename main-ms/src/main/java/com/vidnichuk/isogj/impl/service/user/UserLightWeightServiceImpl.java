@@ -47,4 +47,9 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @Override
+    public UserDto getUserWithMoreInformation(Long id) {
+        return userService.getUserWithMoreInfo(id);
+    }
 }

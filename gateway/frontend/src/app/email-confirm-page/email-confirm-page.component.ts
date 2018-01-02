@@ -16,7 +16,7 @@ export class EmailConfirmPageComponent implements OnInit {
 
   private routeSubscription: Subscription;
   private querySubscription: Subscription;
-  myLink: string;
+  private myLink: string;
 
   constructor(private activateRoute: ActivatedRoute, private emailConfService: EmailConfirmPageService, private router: Router) {
     this.routeSubscription = activateRoute.params.subscribe(params => this.id = params['id']);

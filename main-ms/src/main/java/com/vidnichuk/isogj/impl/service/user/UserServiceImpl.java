@@ -127,4 +127,9 @@ public class UserServiceImpl implements UserService {
         emailService.sendConfirmationEmail(tempUser);
         return true;
     }
+
+    @Override
+    public UserDto getUserWithMoreInfo(Long id) {
+        return userDtoMapper.fromUserToUserDto(userRepository.findById(id));
+    }
 }

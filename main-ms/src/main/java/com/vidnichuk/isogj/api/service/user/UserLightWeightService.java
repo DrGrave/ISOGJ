@@ -16,4 +16,6 @@ public interface UserLightWeightService {
     void approveRegistration(String link);
 
     List<UserDto> getAllUsers();
+
+    UserDto getUserWithMoreInformation(Long id);
 }
