@@ -9,11 +9,13 @@
     <mat-card-subtitle>Univercity</mat-card-subtitle>
 
   </mat-card-header>
-  <mat-card-content class="mat-card-content-cs">
-    <div *ngFor="let skill of user.skill">
-      <span class="skill-field"> {{skill.skill.name}}</span>
-    </div>
-  </mat-card-content >
+  <div class="content-cs">
+    <mat-card-content class="mat-card-content-cs">
+      <div *ngFor="let skill of user.skill">
+        <span class="skill-field"> {{skill.skill.name}}</span>
+      </div>
+    </mat-card-content >
+  </div>
   <!--<mat-card-actions>-->
     <!--<button mat-button>LIKE</button>-->
     <!--<button mat-button>SHARE</button>-->

@@ -4,6 +4,7 @@
   width: 55%;
   margin-top: 7px;
   margin-left: 20%;
+
 }
 
 .mat-header-image {
@@ -13,7 +14,7 @@
 
 .mat-card-content-cs{
   margin-top: 17px;
-  width: 45%;
+  width: 100%;
 }
 
 .skill-field{
@@ -27,4 +28,8 @@
   margin-left: 3px;
   margin-bottom: 3px;
   margin-top: 3px;
+}
+
+.content-cs{
+  overflow: hidden;
 }

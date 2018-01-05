@@ -43,7 +43,6 @@ export class UserListPageComponent implements OnInit{
   }
 
   onSelect(user: User): void {
-
     if (localStorage.getItem('access_token') != null) {
       this.selectedUser = user;
       this.token = localStorage.getItem('access_token');
