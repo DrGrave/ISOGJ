@@ -8,7 +8,7 @@ create table city
   primary key,
   name varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -23,7 +23,7 @@ create table company
   constraint FKbk2fldd8i3j16sxhiv7u1wlum
   foreign key (city_of_company) references city (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 create index FKbk2fldd8i3j16sxhiv7u1wlum
@@ -41,7 +41,7 @@ create table education
   type_of_education bigint null,
   user bigint null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 create index FK198l9sf1b0xanx6mp4au0cmgf
@@ -71,7 +71,7 @@ create table experience
   constraint FKc19dq0h5qymr9epwviyngjxic
   foreign key (prev_company) references company (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -91,7 +91,7 @@ create table faculty
   name varchar(255) null,
   university bigint null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -111,7 +111,7 @@ create table gender
   primary key,
   name varchar(255) not null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -122,7 +122,7 @@ create table position
   primary key,
   name varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -135,7 +135,7 @@ create table possible_cities_to_work
   constraint FK2pykxv9f2pgdoa7298s3pxpgn
   foreign key (id_city) references city (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -153,7 +153,7 @@ create table school
   constraint FKfoakajih50nlit17nuymdsc4w
   foreign key (city) references city (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -174,7 +174,7 @@ create table skill
   name varchar(255) null,
   type_of_skill bigint not null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -190,7 +190,7 @@ create table summary
   text varchar(255) null,
   user bigint null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -207,7 +207,7 @@ create table task
   name varchar(255) null,
   type_of_task bigint null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -228,7 +228,7 @@ create table temp_user
   password varchar(255) null,
   username varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -238,7 +238,7 @@ create table type_of_education
   primary key,
   name varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -254,7 +254,7 @@ create table type_of_skill
   primary key,
   name varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -270,7 +270,7 @@ create table type_of_task
   primary key,
   name varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -286,7 +286,7 @@ create table type_of_user
   primary key,
   name varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -297,7 +297,7 @@ create table type_of_vacancy
   primary key,
   name varchar(255) null
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -311,7 +311,7 @@ create table university
   constraint FKgpb65dw0enw32ntji9bjuhr0l
   foreign key (city) references city (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -345,7 +345,7 @@ create table user
   constraint FKgcjmd56vdfe8y4uxwq5jb852d
   foreign key (type_of_user) references type_of_user (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -396,7 +396,7 @@ create table user_company
   constraint FKopbeqqs42qr4nhq4ew10dt069
   foreign key (user) references user (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -431,7 +431,7 @@ create table user_skill
   constraint FKkwwol8ie05lcjsko1qewnm6r7
   foreign key (id_user) references user (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -463,7 +463,7 @@ create table vacancy
   constraint FKg1qrdnkrpjlkt2fr9twump8pt
   foreign key (type_of_vacancy) references type_of_vacancy (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -492,7 +492,7 @@ create table vacancy_skill
   constraint FKogk31vh34wanbyjgvq8yer6hi
   foreign key (vacancy) references vacancy (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
@@ -518,7 +518,7 @@ create table vacancy_user
   constraint FKpe3ak6fx2jbgormipmkxy9rff
   foreign key (vacancy) references vacancy (id)
 )
-  engine=InnoDB
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 
