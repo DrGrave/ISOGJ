@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {HomePageService} from "./home-page.service";
-import {MyUser} from "./MyUser";
+import {Component, OnInit} from '@angular/core';
+import {HomePageService} from './home-page.service';
+import {MyUser} from './MyUser';
 
 @Component({
   selector: 'app-home-page',
@@ -8,14 +8,15 @@ import {MyUser} from "./MyUser";
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  myUser : MyUser;
+  myUser: MyUser;
   username: string;
+
   constructor(private homePageService: HomePageService) {
 
   }
 
   ngOnInit() {
-    this.homePageService.getUserByToken().subscribe(date => this.username = date);
+    this.homePageService.getUserByToken().subscribe(data => this.username = data);
   }
 
 
