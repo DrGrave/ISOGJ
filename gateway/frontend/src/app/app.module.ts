@@ -8,7 +8,7 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {RegPageComponent} from './registration/reg-page.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule, MatInputModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatChipsModule, MatInputModule, MatSelectModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {AuthenticationService} from './shared/service/auth/authentication.service';
@@ -31,6 +31,7 @@ import { HeaderComponent } from './header/header.component';
   import {MatDialogModule} from '@angular/material';
 import { MoreUserInfoPageComponent } from './more-user-info-page/more-user-info-page.component';
 import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page-service";
+  import {HomePageService} from "./home-page/home-page.service";
 
   export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -66,6 +67,7 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
     MatButtonModule,
     SharedModule,
     MatToolbarModule,
+    MatChipsModule,
     MatSelectModule,
     TranslateModule.forRoot({
       loader: {
@@ -79,6 +81,7 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
     MoreUserInfoPageService,
     RegUserPageService,
     VacancyService,
+    HomePageService,
     AuthenticationService,
     UserService,
     EmailConfirmPageService,

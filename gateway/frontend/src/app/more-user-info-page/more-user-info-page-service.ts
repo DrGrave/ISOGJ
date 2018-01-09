@@ -8,7 +8,7 @@ import {UserMoreInfo} from './UserMoreInfo';
 export class MoreUserInfoPageService {
   private infoUrl = '/api/main/user/moreuserinfo?';
 
-  httpOptions = {
+  private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
   };
 
