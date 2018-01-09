@@ -1,6 +1,6 @@
-import {TypeOfSkill} from "./TypeOfSkill";
+import {TypeOfSkill} from './TypeOfSkill';
 
-export class Skill{
+export class Skill {
   id: string;
   name: string;
   typeOfSkill: TypeOfSkill;

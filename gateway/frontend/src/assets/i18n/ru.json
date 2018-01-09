@@ -40,6 +40,9 @@
     },
     "LAST_NAME": {
       "PLACEHOLDER": "Фамилия"
+    },
+    "SUBMIT_BUTTON": {
+      "TEXT": "Отправить"
     }
   }
 }

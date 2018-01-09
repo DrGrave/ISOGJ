@@ -1,13 +1,11 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
-import {UserMoreInfo} from "./UserMoreInfo";
-
-
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {UserMoreInfo} from './UserMoreInfo';
 
 
 @Injectable()
-export class MoreUserInfoPageService{
+export class MoreUserInfoPageService {
   private infoUrl = '/api/main/user/moreuserinfo?';
 
   httpOptions = {

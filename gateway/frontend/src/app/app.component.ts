@@ -1,13 +1,10 @@
 import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import * as token from './login-page/login-page.component'
+import * as token from './login-page/login-page.component';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {

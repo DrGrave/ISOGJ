@@ -1,4 +1,4 @@
-export class TypeOfSkill{
-  id : number;
+export class TypeOfSkill {
+  id: number;
   name: string;
 }

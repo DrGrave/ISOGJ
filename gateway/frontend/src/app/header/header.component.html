@@ -1,5 +1,5 @@
 <mat-toolbar color="milk">
-  <span>ISOGJ</span>
+  <span class="example-fill-remaining-space">ISOGJ</span>
   <div class="heads">
     <div *ngIf="isLoggedIn$ | async; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
@@ -8,8 +8,8 @@
       <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
     </ng-template>
     <ng-template #elseBlock>
-      <button mat-button routerLink="/login" routerLinkActive="menu" >Sing in</button>
-      <button mat-button routerLink="/registration" routerLinkActive="menu" >Sing up</button>
+      <button mat-button routerLink="/login" routerLinkActive="menu" >Sign in</button>
+      <button mat-button routerLink="/registration" routerLinkActive="menu" >Sign up</button>
       <button mat-button routerLink="/company-list-page" routerLinkActive="menu">Vacancy</button>
       <button mat-button routerLink="/user-list-page" routerLinkActive="menu">User</button>
     </ng-template>

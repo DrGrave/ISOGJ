@@ -40,6 +40,9 @@
     },
     "LAST_NAME": {
       "PLACEHOLDER": "Last name"
+    },
+    "SUBMIT_BUTTON": {
+      "TEXT": "Submit"
     }
   }
 }
