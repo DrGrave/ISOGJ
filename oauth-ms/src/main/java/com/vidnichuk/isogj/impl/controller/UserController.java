@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/users")
@@ -29,5 +30,11 @@ public class UserController {
     @GetMapping("/current")
     public OAuth2Authentication current(OAuth2Authentication principal) {
         return principal;
+    }
+
+
+    @GetMapping("/username")
+    public String getUsername(Principal principal) {
+        return principal.getName();
     }
 }
