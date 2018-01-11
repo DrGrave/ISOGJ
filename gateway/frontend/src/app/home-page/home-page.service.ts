@@ -7,16 +7,16 @@ import {Observable} from 'rxjs/Observable';
 export class HomePageService {
   private myUserUrl = '/api/auth/users/username';
 
-  private httpOptions = {
-    headers: new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
-    responseType: 'text'
-  };
 
   constructor(private http: HttpClient) {
   }
 
 
   getUserByToken(): Observable<string> {
-    return this.http.get<string>(this.myUserUrl, this.httpOptions);
+    const httpOptions = {
+      headers: new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+      responseType: 'text' as 'json'
+    };
+    return this.http.get<string>(this.myUserUrl, httpOptions);
   }
 }
