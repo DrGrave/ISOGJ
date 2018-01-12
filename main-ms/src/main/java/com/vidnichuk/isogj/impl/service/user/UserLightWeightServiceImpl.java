@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.impl.service.user;
 
+import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
@@ -51,5 +52,10 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     @Override
     public UserDto getUserWithMoreInformation(Long id) {
         return userService.getUserWithMoreInfo(id);
+    }
+
+    @Override
+    public MeUserDto getUserByUsername(String username) {
+        return userService.getUserByUsername(username);
     }
 }

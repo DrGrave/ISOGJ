@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.service.user;
 
+import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
@@ -42,4 +43,6 @@ public interface UserService {
     void approveUser(String link);
 
     UserDto getUserWithMoreInfo(Long id);
+
+    MeUserDto getUserByUsername(String username);
 }

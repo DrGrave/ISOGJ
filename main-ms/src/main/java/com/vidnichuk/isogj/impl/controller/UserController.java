@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.impl.controller;
 
+import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.StatusDto;
 import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
@@ -55,6 +56,11 @@ public class UserController {
     @GetMapping("/moreuserinfo")
     public UserDto getUserWithMoreInformation(@RequestParam("id") Long id){
         return userLightWeightService.getUserWithMoreInformation(id);
+    }
+
+    @GetMapping("/me")
+    public MeUserDto getUserByUsername(@RequestParam("username") String username){
+        return userLightWeightService.getUserByUsername(username);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.service.user;
 
+import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
 
@@ -18,4 +19,6 @@ public interface UserLightWeightService {
     List<UserDto> getAllUsers();
 
     UserDto getUserWithMoreInformation(Long id);
+
+    MeUserDto getUserByUsername(String username);
 }

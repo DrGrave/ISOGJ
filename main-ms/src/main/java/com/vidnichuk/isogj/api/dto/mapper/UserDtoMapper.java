@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.dto.mapper;
 
+import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.model.User;
 import org.mapstruct.Mapper;
@@ -17,5 +18,5 @@ public interface UserDtoMapper {
 
     UserDto fromUserToUserDto(User user);
 
-
+    MeUserDto fromUserToMeUserDto(User user);
 }

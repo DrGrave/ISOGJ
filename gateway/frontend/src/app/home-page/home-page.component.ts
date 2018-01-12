@@ -16,8 +16,14 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.homePageService.getUserByToken().subscribe(data => this.username = data);
+    this.homePageService.getUserByToken().subscribe(data => {
+      this.username = data;
+      this.getMyAccaunt()
+    });
   }
 
 
+  getMyAccaunt(){
+    this.homePageService.getUserByUsername(this.username).subscribe( data => this.myUser = data);
+  }
 }

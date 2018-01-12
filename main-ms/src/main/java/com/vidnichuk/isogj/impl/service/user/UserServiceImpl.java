@@ -5,6 +5,7 @@ import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
+import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
@@ -131,5 +132,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserWithMoreInfo(Long id) {
         return userDtoMapper.fromUserToUserDto(userRepository.findById(id));
+    }
+
+    @Override
+    public MeUserDto getUserByUsername(String username) {
+        return userDtoMapper.fromUserToMeUserDto(userRepository.findByUsername(username));
     }
 }
