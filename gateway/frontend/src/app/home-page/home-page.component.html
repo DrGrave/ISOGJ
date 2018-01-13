@@ -1,11 +1,31 @@
-<div class="user-info">
+<div class="user-info" >
   <div class="main-info">
     <mat-card class="card-main">
       <mat-card-title>
-        {{myUser.firstName}}
+        <div mat-card-avatar class="mat-header-image"></div>
+        <div class="user-name">
+          {{myUser.firstName}}
+          {{myUser.lastName}}
+          {{myUser.middleName}}
+        </div>
+
       </mat-card-title>
       <mat-card-subtitle>
-        aducation
+        <mat-chip-list>
+          <mat-chip *ngFor="let educate of education">
+            {{educate.typeOfEducation.name}}.
+            <br>
+            University:
+            {{educate.faculty.university.name}}
+            <br>
+            Department:
+            {{educate.faculty.name}}
+            <br>
+            End education:
+            <br>
+            {{educate.dateOfEnd}}
+          </mat-chip>
+        </mat-chip-list>
       </mat-card-subtitle>
       <mat-card-content>
         work place

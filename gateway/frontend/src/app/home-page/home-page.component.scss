@@ -1,5 +1,5 @@
 .card-contacts{
-  min-width: 150px;
+  min-width: 200px;
   min-height: 200px;
   margin-top: 10px;
   margin-left: 10%;
@@ -7,7 +7,7 @@
 
 .card-main{
   min-height: 200px;
-  min-width: 150px;
+  min-width: 200px;
   margin-top: 10px;
   margin-left: 10%;
 }
@@ -37,4 +37,13 @@
 
 .skill-info{
   min-width: 70%;
+}
+
+.mat-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.user-name{
+  font-size: 15px;
 }
