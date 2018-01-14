@@ -27,7 +27,8 @@ public class Education {
      * faculty of university
      */
     @ManyToOne
-    private Faculty faculty;
+    @JoinColumn(name = "Department")
+    private Department department;
 
     /**
      * school of education
@@ -126,18 +127,12 @@ public class Education {
         this.typeOfEducation = typeOfEducation;
     }
 
-    /**
-     * @return faculty object
-     */
-    public Faculty getFaculty() {
-        return faculty;
+    public Department getDepartment() {
+        return department;
     }
 
-    /**
-     * @param faculty set faculty object
-     */
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     /**

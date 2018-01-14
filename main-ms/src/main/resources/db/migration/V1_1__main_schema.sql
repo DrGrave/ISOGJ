@@ -1,7 +1,3 @@
-SET character_set_client = utf8;
-SET character_set_results = utf8;
-SET character_set_connection = utf8;
-
 create table city
 (
   id bigint auto_increment
@@ -11,11 +7,10 @@ create table city
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 create table company
 (
-  id bigint auto_increment primary key,
+  id bigint auto_increment
+  primary key,
   date_of_creation datetime null,
   info varchar(255) null,
   name varchar(255) null,
@@ -30,18 +25,42 @@ create index FKbk2fldd8i3j16sxhiv7u1wlum
   on company (city_of_company)
 ;
 
+create table department
+(
+  id bigint auto_increment
+  primary key,
+  name varchar(255) null,
+  faculty bigint null
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FK6sk1ry6h6g5ejrihwm8haf88l
+  on department (faculty)
+;
+
 create table education
 (
   id bigint auto_increment
   primary key,
   end_of_education datetime null,
   start_of_education datetime null,
-  faculty_id bigint null,
+  department bigint null,
   school bigint null,
   type_of_education bigint null,
-  user bigint null
+  user bigint null,
+  constraint FK63tr6a4xjq3e62tq52gmt5twn
+  foreign key (department) references department (id)
 )
   engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FK63tr6a4xjq3e62tq52gmt5twn
+  on education (department)
+;
+
+create index FKaisuay6bqm69r0pd1omskh0l8
+  on education (school)
 ;
 
 create index FK198l9sf1b0xanx6mp4au0cmgf
@@ -50,14 +69,6 @@ create index FK198l9sf1b0xanx6mp4au0cmgf
 
 create index FK2mvosaxmdk20x35f654ykcplj
   on education (user)
-;
-
-create index FKaisuay6bqm69r0pd1omskh0l8
-  on education (school)
-;
-
-create index FKtchrwogqsqbxdtmm32cjdl7v2
-  on education (faculty_id)
 ;
 
 create table experience
@@ -73,8 +84,6 @@ create table experience
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create index FKc19dq0h5qymr9epwviyngjxic
   on experience (prev_company)
@@ -94,15 +103,13 @@ create table faculty
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 create index FKl1hcf6t7l10y28o108exht46d
   on faculty (university)
 ;
 
-alter table education
-  add constraint FKtchrwogqsqbxdtmm32cjdl7v2
-  foreign key (faculty_id) references faculty (id)
+alter table department
+  add constraint FK6sk1ry6h6g5ejrihwm8haf88l
+  foreign key (faculty) references faculty (id)
 ;
 
 create table gender
@@ -114,8 +121,6 @@ create table gender
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 create table position
 (
   id bigint auto_increment
@@ -124,8 +129,6 @@ create table position
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create table possible_cities_to_work
 (
@@ -137,8 +140,6 @@ create table possible_cities_to_work
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create index FK2pykxv9f2pgdoa7298s3pxpgn
   on possible_cities_to_work (id_city)
@@ -155,8 +156,6 @@ create table school
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create index FKfoakajih50nlit17nuymdsc4w
   on school (city)
@@ -177,8 +176,6 @@ create table skill
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 create index FK2pq7nkn4vi1tw0f3sh9te20ak
   on skill (type_of_skill)
 ;
@@ -192,8 +189,6 @@ create table summary
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create index FKsr71us8i74ib72m71y2jy21tc
   on summary (user)
@@ -209,8 +204,6 @@ create table task
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create index FKhnxotnqsbea4shipxmjxk4a1v
   on task (type_of_task)
@@ -231,7 +224,6 @@ create table temp_user
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
 create table type_of_education
 (
   id bigint auto_increment
@@ -241,11 +233,18 @@ create table type_of_education
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 alter table education
   add constraint FK198l9sf1b0xanx6mp4au0cmgf
   foreign key (type_of_education) references type_of_education (id)
+;
+
+create table type_of_link
+(
+  id bigint auto_increment
+  primary key,
+  name varchar(255) null
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 create table type_of_skill
@@ -256,8 +255,6 @@ create table type_of_skill
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 alter table skill
   add constraint FK2pq7nkn4vi1tw0f3sh9te20ak
@@ -273,8 +270,6 @@ create table type_of_task
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 alter table task
   add constraint FKhnxotnqsbea4shipxmjxk4a1v
   foreign key (type_of_task) references type_of_task (id)
@@ -289,8 +284,6 @@ create table type_of_user
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 create table type_of_vacancy
 (
   id bigint auto_increment
@@ -299,8 +292,6 @@ create table type_of_vacancy
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create table university
 (
@@ -313,8 +304,6 @@ create table university
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create index FKgpb65dw0enw32ntji9bjuhr0l
   on university (city)
@@ -348,7 +337,9 @@ create table user
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
+create index FKkrcm363wm8xl5ydosqnynmhym
+  on user (city_of_living)
+;
 
 create index FK1isrcw5olh4k3cddck2x7um5p
   on user (gender)
@@ -356,10 +347,6 @@ create index FK1isrcw5olh4k3cddck2x7um5p
 
 create index FKgcjmd56vdfe8y4uxwq5jb852d
   on user (type_of_user)
-;
-
-create index FKkrcm363wm8xl5ydosqnynmhym
-  on user (city_of_living)
 ;
 
 alter table education
@@ -399,18 +386,39 @@ create table user_company
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
+create index FKi6q4u3i9d85h47qjn7w7p9687
+  on user_company (company)
+;
 
 create index FKc1goa9mr96odm0l38subly2jf
   on user_company (position)
 ;
 
-create index FKi6q4u3i9d85h47qjn7w7p9687
-  on user_company (company)
-;
-
 create index FKopbeqqs42qr4nhq4ew10dt069
   on user_company (user)
+;
+
+create table user_link
+(
+  id bigint auto_increment
+  primary key,
+  link varchar(255) null,
+  type_of_link bigint null,
+  user bigint null,
+  constraint FK87htt7kka5c380ilp3vk0efqm
+  foreign key (type_of_link) references type_of_link (id),
+  constraint FKb6w40vevtg43uda0m72yddfb7
+  foreign key (user) references user (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FK87htt7kka5c380ilp3vk0efqm
+  on user_link (type_of_link)
+;
+
+create index FKb6w40vevtg43uda0m72yddfb7
+  on user_link (user)
 ;
 
 create table user_skill
@@ -434,18 +442,16 @@ create table user_skill
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
-
 create index FK6pru830ugj5nuapp3nhdl2p9p
   on user_skill (id_marker)
 ;
 
-create index FKkwwol8ie05lcjsko1qewnm6r7
-  on user_skill (id_user)
-;
-
 create index FKrsvxrshr30q4756yoxncoaeyl
   on user_skill (id_skill)
+;
+
+create index FKkwwol8ie05lcjsko1qewnm6r7
+  on user_skill (id_user)
 ;
 
 create table vacancy
@@ -466,14 +472,12 @@ create table vacancy
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-
+create index FKd8i1boc2bf2p3pmtgi3ucxyqf
+  on vacancy (company)
+;
 
 create index FK88okuegm0qxj10q8nrp4odo97
   on vacancy (task)
-;
-
-create index FKd8i1boc2bf2p3pmtgi3ucxyqf
-  on vacancy (company)
 ;
 
 create index FKg1qrdnkrpjlkt2fr9twump8pt
@@ -494,8 +498,6 @@ create table vacancy_skill
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
-
 
 create index FKk10dm3uxe9tlepfwottw6q072
   on vacancy_skill (skill)
@@ -520,7 +522,6 @@ create table vacancy_user
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
-
 
 create index FKgqk92dw8f09b5kttg02uff0rm
   on vacancy_user (user)

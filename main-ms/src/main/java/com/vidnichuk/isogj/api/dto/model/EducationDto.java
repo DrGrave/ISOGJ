@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.dto.model;
 
+import com.vidnichuk.isogj.api.model.Department;
 import com.vidnichuk.isogj.api.model.Faculty;
 import com.vidnichuk.isogj.api.model.School;
 import com.vidnichuk.isogj.api.model.type.TypeOfEducation;
@@ -11,7 +12,7 @@ public class EducationDto {
     private TypeOfEducation typeOfEducation;
     private Date dateOfEnd;
     private Date dateOfStart;
-    private Faculty faculty;
+    private Department department;
     private School school;
 
     public Long getId() {
@@ -46,12 +47,12 @@ public class EducationDto {
         this.dateOfStart = dateOfStart;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public School getSchool() {
