@@ -5,6 +5,7 @@ import {MyUser} from "./MyUser";
 import {Education} from "./Education";
 import {UserCompany} from "./UserCompany";
 import {UserSkill} from "../user-list-page/userSkill";
+import {UserLink} from "./UserLink";
 
 
 @Injectable()
@@ -14,6 +15,7 @@ export class HomePageService {
   private thisEducationUrl = '/api/main/education/?id=';
   private thisCompanyUrl = '/api/main/company/user/?id=';
   private thisUserSkills = '/api/main/skill/authorize/userskills/?id=';
+  private thisUserLinks = '/api/main/user/links/?id=';
 
 
   constructor(private http: HttpClient) {
@@ -55,4 +57,12 @@ export class HomePageService {
     };
     return this.http.get<UserSkill[]>(this.thisUserSkills + id, httpOptions)
   }
+
+  getUserLinks(id: number): Observable<UserLink[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<UserLink[]>( this.thisUserLinks + id, httpOptions)
+  }
+
 }

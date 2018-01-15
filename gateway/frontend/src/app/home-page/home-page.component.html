@@ -2,7 +2,7 @@
   <div class="main-info">
     <mat-card class="card-main">
       <mat-card-title>
-        <div mat-card-avatar class="mat-header-image"></div>
+        <div mat-card-avatar class="mat-header-image"><img src="{{imgLink.link}}"></div>
         <div class="user-name">
           {{myUser.firstName}}
           {{myUser.lastName}}
@@ -45,11 +45,15 @@
 
     <mat-card class="card-contacts">
       <mat-card-title>
-        contact info
+        Contact info:
       </mat-card-title>
-      <mat-card-subtitle>
-        contact info
-      </mat-card-subtitle>
+      <mat-chip-list>
+        <mat-chip *ngFor="let link of links">
+          {{link.typeOfLink.name}}
+          <br>
+          {{link.link}}
+        </mat-chip>
+      </mat-chip-list>
     </mat-card>
   </div>
 
@@ -70,6 +74,9 @@
 
     <mat-card class="card-history">
       <mat-card-title>history</mat-card-title>
+      <mat-card-subtitle>
+        Sum history
+      </mat-card-subtitle>
     </mat-card>
   </div>
 </div>

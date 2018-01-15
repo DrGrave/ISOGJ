@@ -7,6 +7,7 @@ import {TypeOfEducation} from "./TypeOfEducation";
 import {School} from "./School";
 import {forEach} from "@angular/router/src/utils/collection";
 import {UserCompany} from "./UserCompany";
+import {UserLink} from "./UserLink";
 
 @Component({
   selector: 'app-home-page',
@@ -18,6 +19,8 @@ export class HomePageComponent implements OnInit {
   username: string;
   education: Education[];
   userCompany: UserCompany[];
+  imgLink: UserLink;
+  links: UserLink[];
 
 
   constructor(private homePageService: HomePageService) {
@@ -26,6 +29,7 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imgLink = new UserLink();
     this.homePageService.getUserByToken().subscribe(data => {
       this.username = data;
       this.getMyAccount()
@@ -38,6 +42,7 @@ export class HomePageComponent implements OnInit {
   getMyAccount(){
     this.homePageService.getUserByUsername(this.username).subscribe( data => {
       this.myUser = data;
+      this.getMyLinks();
       this.getMyEducation();
       this.getMyCompany();
       this.getMySkills();
@@ -59,6 +64,13 @@ export class HomePageComponent implements OnInit {
   getMySkills(){
     this.homePageService.getMySkills(this.myUser.id).subscribe( skillDate => {
       this.myUser.skill = skillDate;
+    })
+  }
+
+  getMyLinks(){
+    this.homePageService.getUserLinks(this.myUser.id).subscribe( linksDate =>{
+      this.links = linksDate;
+      this.imgLink = this.links[0];
     })
   }
 }
