@@ -15,4 +15,28 @@ public class Department {
 
     @Column(name = "Name")
     private String name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

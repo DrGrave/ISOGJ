@@ -5,6 +5,7 @@
     <ng-template #thenBlock>
       <button mat-button routerLink="/company-list-page" routerLinkActive="menu">Vacancy</button>
       <button mat-button routerLink="/user-list-page" routerLinkActive="menu">User</button>
+      <button mat-button routerLink="/home-page" routerLinkActive="menu">Home</button>
       <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
     </ng-template>
     <ng-template #elseBlock>

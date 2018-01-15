@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/company")
 public class CompanyController {
@@ -16,7 +18,7 @@ public class CompanyController {
     private CompanyLightWeightService companyLightWeightService;
 
     @GetMapping("/user")
-    public UserCompanyDto findEducationByUserId(@RequestParam("id") long id){
+    public List<UserCompanyDto> findEducationByUserId(@RequestParam("id") long id){
         return companyLightWeightService.getUserCompanyByUserId(id);
     }
 

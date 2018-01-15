@@ -7,13 +7,15 @@ import com.vidnichuk.isogj.api.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     @Autowired
     private CompanyService companyService;
 
     @Override
-    public UserCompanyDto getUserCompanyByUserId(long id) {
+    public List<UserCompanyDto> getUserCompanyByUserId(long id) {
         return companyService.findCompanyByUserId(id);
     }
 }

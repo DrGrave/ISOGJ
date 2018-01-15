@@ -30,7 +30,7 @@ public class SkillServiceImpl implements SkillService{
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private VacancySkillDtoMapper vacancySkillDtoMapper;
-
+    
     @Override
     public List<UserSkillDto> findAllSkillsByUserId(long id) {
         List<UserSkillDto> userSkillDtoList = new ArrayList<>();
@@ -41,11 +41,22 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public List<VacancySkillDto> findAllSkillsByVacancyId(Long id) {
+    public List<VacancySkillDto> findAllSkillsByVacancyId(long id) {
         List<VacancySkillDto> vacancySkillDtoList = new ArrayList<>();
         for (VacancySkill vacancySkill : vacancySkillRepository.findAllByVacancy_Id(id)){
             vacancySkillDtoList.add(vacancySkillDtoMapper.fromVacancySkillToVacancySkillDto(vacancySkill));
         }
         return vacancySkillDtoList;
+    }
+
+
+
+    @Override
+    public List<UserSkillDto> findAuthorizedSkillsByUserId(long id) {
+        List<UserSkillDto> userSkillDtoList = new ArrayList<>();
+        for (UserSkill userSkill : userSkillRepository.findAllByUser_Id(id)){
+            userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
+        }
+        return userSkillDtoList;
     }
 }

@@ -23,4 +23,9 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     public List<VacancySkillDto> findAllVacancySkillsById(Long id) {
         return skillService.findAllSkillsByVacancyId(id);
     }
+
+    @Override
+    public List<UserSkillDto> findAuthorizedUserSkillsById(long id) {
+        return skillService.findAllSkillsByUserId(id);
+    }
 }

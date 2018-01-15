@@ -10,5 +10,7 @@ public interface SkillService {
 
     List<UserSkillDto> findAllSkillsByUserId(long id);
 
-    List<VacancySkillDto> findAllSkillsByVacancyId(Long id);
+    List<VacancySkillDto> findAllSkillsByVacancyId(long id);
+
+    List<UserSkillDto> findAuthorizedSkillsByUserId(long id);
 }

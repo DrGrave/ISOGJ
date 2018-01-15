@@ -24,4 +24,9 @@ public class UserSkillController {
     public List<UserSkillDto> findUserSkillsById(@RequestParam("id") long id){
         return skillLightWeightService.findAllSkillsById(id);
     }
+
+    @GetMapping("/authorize/userskills")
+    public List<UserSkillDto> authorizedFindUserSkillsById(@RequestParam("id") long id){
+        return skillLightWeightService.findAuthorizedUserSkillsById(id);
+    }
 }

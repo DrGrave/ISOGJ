@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.vidnichuk.isogj.api.model.type.TypeOfEducation;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Education {
     /**
      * faculty of university
      */
+
     @ManyToOne
     @JoinColumn(name = "Department")
     private Department department;

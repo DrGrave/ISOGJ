@@ -10,4 +10,6 @@ public interface SkillLightWeightService {
     List<UserSkillDto> findAllSkillsById(long idUser);
 
     List<VacancySkillDto> findAllVacancySkillsById(Long id);
+
+    List<UserSkillDto> findAuthorizedUserSkillsById(long id);
 }

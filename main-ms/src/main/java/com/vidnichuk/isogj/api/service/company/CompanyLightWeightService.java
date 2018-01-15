@@ -3,7 +3,9 @@ package com.vidnichuk.isogj.api.service.company;
 
 import com.vidnichuk.isogj.api.dto.model.UserCompanyDto;
 
+import java.util.List;
+
 
 public interface CompanyLightWeightService {
-    UserCompanyDto getUserCompanyByUserId(long id);
+    List<UserCompanyDto> getUserCompanyByUserId(long id);
 }

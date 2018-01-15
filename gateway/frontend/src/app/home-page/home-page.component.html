@@ -16,10 +16,13 @@
             {{educate.typeOfEducation.name}}.
             <br>
             University:
-            {{educate.faculty.university.name}}
+            {{educate.department.faculty.university.name}}
+            <br>
+            Faculty:
+            {{educate.department.faculty.name}}
             <br>
             Department:
-            {{educate.faculty.name}}
+            {{educate.department.name}}
             <br>
             End education:
             <br>
@@ -27,8 +30,15 @@
           </mat-chip>
         </mat-chip-list>
       </mat-card-subtitle>
+      <mat-card-subtitle>
+        <mat-chip-list>
+          <mat-chip *ngFor="let company of userCompany">
+            {{company.company.name}}
+            {{company.position.name}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card-subtitle>
       <mat-card-content>
-        work place
       </mat-card-content>
     </mat-card>
 
@@ -41,11 +51,19 @@
       </mat-card-subtitle>
     </mat-card>
   </div>
+
   <div class="skill-info">
     <mat-card class="card-skill">
       <mat-card-title>
-        skills
+        Skills
       </mat-card-title>
+      <mat-card-content>
+        <mat-chip-list>
+          <mat-chip *ngFor="let skill of myUser.skill">
+            {{skill.skill.name}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
     </mat-card>
 
     <mat-card class="card-history">
