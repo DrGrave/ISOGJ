@@ -9,16 +9,9 @@
   </mat-card-header>
 
   <mat-card-content class="mat-card-content-cs">
-    <mat-form-field class="skill-mat-field">
       <mat-chip-list>
           <mat-chip class="chip" *ngFor="let skill of vacancy.skills">{{skill.skill.name}}</mat-chip>
       </mat-chip-list>
-    </mat-form-field>
   </mat-card-content >
-
-  <!--<mat-card-actions>-->
-    <!--<button mat-button>LIKE</button>-->
-    <!--<button mat-button>SHARE</button>-->
-  <!--</mat-card-actions>-->
 </mat-card>
 

@@ -8,7 +8,10 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {RegPageComponent} from './registration/reg-page.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule, MatChipsModule, MatInputModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule, MatChipsModule, MatIconModule, MatInputModule, MatSelectModule,
+  MatToolbarModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {AuthenticationService} from './shared/service/auth/authentication.service';
@@ -68,6 +71,7 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
     SharedModule,
     MatToolbarModule,
     MatChipsModule,
+    MatIconModule,
     MatSelectModule,
     TranslateModule.forRoot({
       loader: {

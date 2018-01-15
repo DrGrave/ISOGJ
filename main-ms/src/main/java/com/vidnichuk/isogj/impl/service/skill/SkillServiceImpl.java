@@ -30,7 +30,7 @@ public class SkillServiceImpl implements SkillService{
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private VacancySkillDtoMapper vacancySkillDtoMapper;
-    
+
     @Override
     public List<UserSkillDto> findAllSkillsByUserId(long id) {
         List<UserSkillDto> userSkillDtoList = new ArrayList<>();
