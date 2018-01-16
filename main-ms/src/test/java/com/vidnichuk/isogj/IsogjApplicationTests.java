@@ -6,11 +6,9 @@ import com.vidnichuk.isogj.api.dto.model.EducationDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
 import com.vidnichuk.isogj.api.dto.model.VacancyDto;
-import com.vidnichuk.isogj.api.model.Education;
-import com.vidnichuk.isogj.api.model.TempUser;
-import com.vidnichuk.isogj.api.model.User;
-import com.vidnichuk.isogj.api.model.UserSkill;
+import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.education.EducationLightWeightService;
+import com.vidnichuk.isogj.api.service.skill.SkillLightWeightService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,15 +42,14 @@ public class IsogjApplicationTests {
 	@Autowired
 	private EducationDtoMapper educationDtoMapper;
 
+	@Autowired
+	private SkillLightWeightService skillLightWeightService;
+
+
 	@Test
 	public void fromVacancyToVacancyDto(){
-		List<Education> education = new  ArrayList<>();
-		List<EducationDto> educationDto = new ArrayList<>();
-		educationDto = educationLightWeightService.getEducationById((long)2);
-		for(Education education1 : education){
-			educationDto.add(educationDtoMapper.formEducationToEducationDto(education1));
-		}
-		System.out.print(educationDto);
+		List<Skill> skills = skillLightWeightService.findAddSkill("");
+		System.out.print(skills);
 	}
 
 

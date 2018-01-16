@@ -9,6 +9,7 @@ import {RegPageComponent} from './registration/reg-page.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
+  MatAutocompleteModule,
   MatButtonModule, MatChipsModule, MatIconModule, MatInputModule, MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
@@ -71,6 +72,7 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
     SharedModule,
     MatToolbarModule,
     MatChipsModule,
+    MatAutocompleteModule,
     MatIconModule,
     MatSelectModule,
     TranslateModule.forRoot({

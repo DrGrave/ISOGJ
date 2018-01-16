@@ -8,6 +8,17 @@ import {School} from "./School";
 import {forEach} from "@angular/router/src/utils/collection";
 import {UserCompany} from "./UserCompany";
 import {UserLink} from "./UserLink";
+import {FormControl, FormGroup} from "@angular/forms";
+import {Observable} from "rxjs/Observable";
+import {startWith} from "rxjs/operators";
+import {map} from 'rxjs/operators/map';
+import {Skill} from "../user-list-page/skill";
+
+
+
+export class User {
+  constructor(public name: string) { }
+}
 
 @Component({
   selector: 'app-home-page',
@@ -21,14 +32,36 @@ export class HomePageComponent implements OnInit {
   userCompany: UserCompany[];
   imgLink: UserLink;
   links: UserLink[];
+  skills: Skill[];
+  inputSkill: FormGroup;
 
+  myControl = new FormControl();
+  filteredOptions: Observable<User[]>;
+
+  displayFn(skill?: Skill): string | undefined {
+    return skill ? skill.name : undefined;
+  }
+
+
+  filter(name: string): User[] {
+    return this.skills.filter(option =>
+      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
 
   constructor(private homePageService: HomePageService) {
     this.myUser = new MyUser();
     this.education = [];
+    this.skills = [];
   }
 
   ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith<string | Skill>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this.filter(name) : this.skills.slice())
+      );
+
     this.imgLink = new UserLink();
     this.homePageService.getUserByToken().subscribe(data => {
       this.username = data;
@@ -46,6 +79,7 @@ export class HomePageComponent implements OnInit {
       this.getMyEducation();
       this.getMyCompany();
       this.getMySkills();
+      this.getSkills();
     });
   }
 
@@ -71,6 +105,12 @@ export class HomePageComponent implements OnInit {
     this.homePageService.getUserLinks(this.myUser.id).subscribe( linksDate =>{
       this.links = linksDate;
       this.imgLink = this.links[0];
+    })
+  }
+
+  getSkills(){
+    this.homePageService.getAddedSkills("").subscribe( skillsDate =>{
+      this.skills = skillsDate;
     })
   }
 }

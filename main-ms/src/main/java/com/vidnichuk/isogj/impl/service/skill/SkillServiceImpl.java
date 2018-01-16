@@ -1,11 +1,13 @@
 package com.vidnichuk.isogj.impl.service.skill;
 
+import com.vidnichuk.isogj.api.dao.SkillRepository;
 import com.vidnichuk.isogj.api.dao.UserSkillRepository;
 import com.vidnichuk.isogj.api.dao.VacancySkillRepository;
 import com.vidnichuk.isogj.api.dto.mapper.UserSkillDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.VacancySkillDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
 import com.vidnichuk.isogj.api.dto.model.VacancySkillDto;
+import com.vidnichuk.isogj.api.model.Skill;
 import com.vidnichuk.isogj.api.model.UserSkill;
 import com.vidnichuk.isogj.api.model.VacancySkill;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
@@ -30,6 +32,9 @@ public class SkillServiceImpl implements SkillService{
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private VacancySkillDtoMapper vacancySkillDtoMapper;
+
+    @Autowired
+    private SkillRepository skillRepository;
 
     @Override
     public List<UserSkillDto> findAllSkillsByUserId(long id) {
@@ -58,5 +63,15 @@ public class SkillServiceImpl implements SkillService{
             userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
         }
         return userSkillDtoList;
+    }
+
+    @Override
+    public List<Skill> findAddSkill(String name) {
+        List<Skill> skills = skillRepository.findAllByNameContains(name);
+        if (skills.size() > 6){
+            return skills.subList(0,5);
+        }else {
+            return skillRepository.findAllByNameContains(name);
+        }
     }
 }
