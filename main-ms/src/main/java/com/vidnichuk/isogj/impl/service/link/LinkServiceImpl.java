@@ -25,8 +25,15 @@ public class LinkServiceImpl implements LinkService{
     public List<UserLinkDto> findAllUserLinks(Long id) {
         List<UserLinkDto> userLinkDtos = new ArrayList<>();
         for (UserLink userLink : userLinkRepository.findAllByUserId(id)){
-            userLinkDtos.add(userLinkDtoMapper.fromUserLinkToUserLinkDto(userLink));
+            if (userLink.getTypeOfLink().getId() != 1) {
+                userLinkDtos.add(userLinkDtoMapper.fromUserLinkToUserLinkDto(userLink));
+            }
         }
         return userLinkDtos;
+    }
+
+    @Override
+    public UserLinkDto getUserImgByUserId(long id) {
+        return userLinkDtoMapper.fromUserLinkToUserLinkDto(userLinkRepository.findByUserIdAndTypeOfLinkId(id, 1));
     }
 }

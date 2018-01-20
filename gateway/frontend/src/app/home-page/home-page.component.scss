@@ -21,7 +21,7 @@
 
 
 .card-skill{
-  min-width: 60%;
+  min-width: 80%;
   margin-top: 10px;
   margin-left: 10%;
 }
@@ -37,12 +37,23 @@
 
 .skill-info{
   min-width: 70%;
+
 }
 
 .mat-header-image {
-  background-size: cover;
+  min-width: 100px;
+  min-height: 100px;
 }
 
 .user-name{
+  margin-top: 5px;
   font-size: 15px;
+}
+
+.add-skill{
+  display: inline-flex;
+}
+
+.add-new-skill{
+  margin-left: 40%;
 }

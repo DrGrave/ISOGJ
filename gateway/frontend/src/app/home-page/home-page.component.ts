@@ -2,18 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {HomePageService} from './home-page.service';
 import {MyUser} from './MyUser';
 import {Education} from "./Education";
-import {Faculty} from "./Faculty";
-import {TypeOfEducation} from "./TypeOfEducation";
-import {School} from "./School";
-import {forEach} from "@angular/router/src/utils/collection";
 import {UserCompany} from "./UserCompany";
 import {UserLink} from "./UserLink";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {startWith} from "rxjs/operators";
 import {map} from 'rxjs/operators/map';
 import {Skill} from "../user-list-page/skill";
-
+import {Gender} from "./Gender";
+import {Router} from "@angular/router";
+import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 
 
 export class User {
@@ -32,34 +30,46 @@ export class HomePageComponent implements OnInit {
   userCompany: UserCompany[];
   imgLink: UserLink;
   links: UserLink[];
-  skills: Skill[];
-  inputSkill: FormGroup;
+  skills: string;
+  options: Skill[];
+  skillName: string;
+  selectSkill: Skill;
+  show: boolean = false;
+  inputSkillName = new FormControl();
+  typeOfSkillControl = new FormControl('', [Validators.required]);
+  typeOfSkills: TypeOfSkill[];
+  newSkill: string;
+
+
+
+
+
+  constructor(private homePageService: HomePageService, private router: Router) {
+    this.myUser = new MyUser();
+    this.education = [];
+    this.myUser.gender = new Gender();
+    this.options = [];
+    this.selectSkill = new Skill();
+  }
 
   myControl = new FormControl();
-  filteredOptions: Observable<User[]>;
+  filteredOptions: Observable<Skill[]>;
 
+  filter(name: string): Skill[] {
+    this.getSkills(name);
+    this.skillName = name;
+    return this.options.filter(option =>
+      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
   displayFn(skill?: Skill): string | undefined {
     return skill ? skill.name : undefined;
   }
-
-
-  filter(name: string): User[] {
-    return this.skills.filter(option =>
-      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
-  }
-
-  constructor(private homePageService: HomePageService) {
-    this.myUser = new MyUser();
-    this.education = [];
-    this.skills = [];
-  }
-
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith<string | Skill>(''),
         map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this.filter(name) : this.skills.slice())
+        map(name => name ? this.filter(name) : this.options.slice())
       );
 
     this.imgLink = new UserLink();
@@ -75,11 +85,13 @@ export class HomePageComponent implements OnInit {
   getMyAccount(){
     this.homePageService.getUserByUsername(this.username).subscribe( data => {
       this.myUser = data;
+      this.getImg();
       this.getMyLinks();
       this.getMyEducation();
       this.getMyCompany();
       this.getMySkills();
-      this.getSkills();
+      this.getSkills("");
+
     });
   }
 
@@ -104,13 +116,41 @@ export class HomePageComponent implements OnInit {
   getMyLinks(){
     this.homePageService.getUserLinks(this.myUser.id).subscribe( linksDate =>{
       this.links = linksDate;
-      this.imgLink = this.links[0];
     })
   }
 
-  getSkills(){
-    this.homePageService.getAddedSkills("").subscribe( skillsDate =>{
-      this.skills = skillsDate;
+  getSkills(name: string){
+    this.homePageService.getAddedSkills(name).subscribe( skillsDate =>{
+      this.options = skillsDate;
     })
+  }
+
+  getImg(){
+    this.homePageService.getUserImg(this.myUser.id).subscribe( img =>{
+      this.imgLink = img;
+    })
+  }
+
+  addSkill(){
+    this.selectSkill = this.options.filter(item => item.name === this.skillName)[0];
+    if (typeof this.selectSkill !== 'undefined'){
+      this.homePageService.addSkill(this.selectSkill, this.myUser.id).subscribe( skillsDate => this.myUser.skill = skillsDate );
+      this.skills = this.selectSkill.name;
+    } else {
+      this.skills = 'undefined';
+    }
+  }
+
+  getAllTypesOfSkill(){
+    this.homePageService.getAllTypesOfSkills().subscribe( typeOfSkillsDate => this.typeOfSkills = typeOfSkillsDate);
+  }
+
+  showAddSkill(){
+      this.show = !this.show;
+      this.getAllTypesOfSkill();
+  }
+
+  acceptCreateSkill(){
+    this.newSkill = "DO ME"
   }
 }

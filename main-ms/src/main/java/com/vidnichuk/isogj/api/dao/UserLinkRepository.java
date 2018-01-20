@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UserLinkRepository extends JpaRepository<UserLink, Long>{
     List<UserLink> findAllByUserId(long id);
+    UserLink findByUserIdAndTypeOfLinkId(long userId, long typeOfLink);
 }

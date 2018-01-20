@@ -7,6 +7,7 @@ import {UserCompany} from "./UserCompany";
 import {UserSkill} from "../user-list-page/userSkill";
 import {UserLink} from "./UserLink";
 import {Skill} from "../user-list-page/skill";
+import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 
 
 @Injectable()
@@ -18,6 +19,9 @@ export class HomePageService {
   private thisUserSkills = '/api/main/skill/authorize/userskills/?id=';
   private thisUserLinks = '/api/main/user/links/?id=';
   private thisSkillsUrl = '/api/main/skill/add/?name=';
+  private thisImg = '/api/main/user/img/?id=';
+  private thisAddSkillUrl = '/api/main/skill/authorize/add/?id=';
+  private getTypesOfSkillsUrl = '/api/main/skill/authorize/typesofskills';
 
 
   constructor(private http: HttpClient) {
@@ -74,4 +78,24 @@ export class HomePageService {
     return this.http.get<Skill[]>( this.thisSkillsUrl + nameSkill, httpOptions);
   }
 
+  getUserImg(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<UserLink>(this.thisImg + id, httpOptions);
+  }
+
+  addSkill(sellectSkill: Skill, id: number): Observable<UserSkill[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserSkill[]>(this.thisAddSkillUrl + id,sellectSkill , httpOptions);
+  }
+
+  getAllTypesOfSkills(): Observable<TypeOfSkill[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<TypeOfSkill[]>(this.getTypesOfSkillsUrl, httpOptions)
+  }
 }

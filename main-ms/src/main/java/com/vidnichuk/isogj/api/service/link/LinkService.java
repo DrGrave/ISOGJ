@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface LinkService {
     List<UserLinkDto> findAllUserLinks(Long id);
+    UserLinkDto getUserImgByUserId(long id);
 }

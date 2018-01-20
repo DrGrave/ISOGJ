@@ -21,4 +21,9 @@ public class LinkController {
     public List<UserLinkDto> findUserLinksByUserId(@RequestParam("id") long id){
         return linkLightWeightService.getLinksToUser(id);
     }
+
+    @GetMapping("/img")
+    public UserLinkDto getUserImg(@RequestParam("id") long id){
+        return linkLightWeightService.getImgToUser(id);
+    }
 }

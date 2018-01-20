@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface LinkLightWeightService {
     List<UserLinkDto> getLinksToUser(Long id);
+
+    UserLinkDto getImgToUser(long id);
 }

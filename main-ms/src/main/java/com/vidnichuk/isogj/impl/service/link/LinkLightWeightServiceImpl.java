@@ -17,4 +17,9 @@ public class LinkLightWeightServiceImpl implements LinkLightWeightService{
     public List<UserLinkDto> getLinksToUser(Long id) {
         return linkService.findAllUserLinks(id);
     }
+
+    @Override
+    public UserLinkDto getImgToUser(long id) {
+        return linkService.getUserImgByUserId(id);
+    }
 }

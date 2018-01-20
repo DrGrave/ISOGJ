@@ -9,36 +9,33 @@
           {{myUser.middleName}}
         </div>
 
-      </mat-card-title>
-      <mat-card-subtitle>
-        <mat-chip-list>
-          <mat-chip *ngFor="let educate of education">
-            {{educate.typeOfEducation.name}}.
-            <br>
-            University:
-            {{educate.department.faculty.university.name}}
-            <br>
-            Faculty:
-            {{educate.department.faculty.name}}
-            <br>
-            Department:
-            {{educate.department.name}}
-            <br>
-            End education:
-            <br>
-            {{educate.dateOfEnd}}
-          </mat-chip>
-        </mat-chip-list>
-      </mat-card-subtitle>
-      <mat-card-subtitle>
-        <mat-chip-list>
-          <mat-chip *ngFor="let company of userCompany">
-            {{company.company.name}}
-            {{company.position.name}}
 
-          </mat-chip>
-        </mat-chip-list>
-      </mat-card-subtitle>
+      </mat-card-title>
+      <mat-card-content>
+        {{myUser.gender.name}}
+      </mat-card-content>
+      <mat-card-content *ngFor="let educate of education">
+        {{educate.typeOfEducation.name}}.
+        <br>
+        University:
+        {{educate.department.faculty.university.name}}
+        <br>
+        Faculty:
+        {{educate.department.faculty.name}}
+        <br>
+        Department:
+        {{educate.department.name}}
+        <br>
+        End education:
+        <br>
+        {{educate.dateOfEnd}}
+      </mat-card-content>
+      <mat-card-content *ngFor="let company of userCompany">
+        Work:
+        {{company.company.name}}
+        Position:
+        {{company.position.name}}
+      </mat-card-content>
       <mat-card-content>
       </mat-card-content>
     </mat-card>
@@ -47,13 +44,15 @@
       <mat-card-title>
         Contact info:
       </mat-card-title>
-      <mat-chip-list>
-        <mat-chip *ngFor="let link of links">
-          {{link.typeOfLink.name}}
-          <br>
-          {{link.link}}
-        </mat-chip>
-      </mat-chip-list>
+      <mat-card-content>
+        Email:
+        {{myUser.email}}
+      </mat-card-content>
+      <mat-card-content *ngFor="let link of links">
+        {{link.typeOfLink.name}}:
+
+        {{link.link}}
+      </mat-card-content>
     </mat-card>
   </div>
 
@@ -70,22 +69,55 @@
           </mat-chip>
         </mat-chip-list>
       </mat-card-content>
-      <mat-card-content>
-        <mat-form-field>
-          <input type="text" placeholder="Assignee" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="skills">
-              {{ option.name }}
-            </mat-option>
-          </mat-autocomplete>
+      <div class="add-skill">
+        <mat-card-content>
+          <form (submit)="addSkill()">
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Add skill" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+          </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-content class="add-new-skill">
+          <button mat-button (click)="showAddSkill()">{{show ? 'Hide' : 'Show'}}
+            Create new skill
+          </button>
+        </mat-card-content>
+      </div>
+      <div *ngIf="show">
+
+
+        <mat-form-field onsubmit="acceptCreateSkill()">
+          <input type="text" placeholder="Skill name" matInput [formControl]="inputSkillName" required>
         </mat-form-field>
-      </mat-card-content>
+
+
+        <mat-form-field>
+          <mat-select placeholder="Type of skill*" [formControl]="typeOfSkillControl" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let type of typeOfSkills" [value]="typeOfSkills">
+              {{type.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="typeOfSkillControl.hasError('required')">Please choose type of skill</mat-error>
+        </mat-form-field>
+
+        <button mat-button (click)="acceptCreateSkill()"> Accept
+        </button>
+        {{newSkill}}
+
+      </div>
     </mat-card>
 
     <mat-card class="card-history">
       <mat-card-title>history</mat-card-title>
       <mat-card-subtitle>
-        Sum history
+        History:
+        {{skills}}
       </mat-card-subtitle>
     </mat-card>
   </div>

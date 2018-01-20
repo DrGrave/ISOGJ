@@ -1,8 +1,6 @@
 package com.vidnichuk.isogj.impl.service.skill;
 
-import com.vidnichuk.isogj.api.dao.SkillRepository;
-import com.vidnichuk.isogj.api.dao.UserSkillRepository;
-import com.vidnichuk.isogj.api.dao.VacancySkillRepository;
+import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.UserSkillDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.VacancySkillDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
@@ -10,6 +8,7 @@ import com.vidnichuk.isogj.api.dto.model.VacancySkillDto;
 import com.vidnichuk.isogj.api.model.Skill;
 import com.vidnichuk.isogj.api.model.UserSkill;
 import com.vidnichuk.isogj.api.model.VacancySkill;
+import com.vidnichuk.isogj.api.model.type.TypeOfSkill;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +34,12 @@ public class SkillServiceImpl implements SkillService{
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private TypeOfSkillRepository typeOfSkillRepository;
 
     @Override
     public List<UserSkillDto> findAllSkillsByUserId(long id) {
@@ -73,5 +78,25 @@ public class SkillServiceImpl implements SkillService{
         }else {
             return skillRepository.findAllByNameContains(name);
         }
+    }
+
+    @Override
+    public List<UserSkillDto> addAndGetSkillsToUser(Skill skill, long id) {
+        if (userSkillRepository.findByUserIdAndSkillId(id, skill.getId()) == null) {
+            UserSkill userSkill = new UserSkill();
+            userSkill.setSkill(skill);
+            userSkill.setUser(userRepository.findById(id));
+            userSkillRepository.save(userSkill);
+        }
+        List<UserSkillDto> userSkillDtoList = new ArrayList<>();
+        for (UserSkill thisSkill: userSkillRepository.findAllByUser_Id(id)){
+            userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(thisSkill));
+        }
+        return userSkillDtoList;
+    }
+
+    @Override
+    public List<TypeOfSkill> getAllTypesOfSkill() {
+        return typeOfSkillRepository.findAll();
     }
 }
