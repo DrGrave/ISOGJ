@@ -89,29 +89,29 @@
           </button>
         </mat-card-content>
       </div>
-      <div *ngIf="show">
+      <form [formGroup]="inputSkillForm">
+        <div *ngIf="show">
 
 
-        <mat-form-field onsubmit="acceptCreateSkill()">
-          <input type="text" placeholder="Skill name" matInput [formControl]="inputSkillName" required>
-        </mat-form-field>
+          <mat-form-field onsubmit="acceptCreateSkill()">
+            <input type="text" placeholder="Skill name" matInput formControlName="nameOfNewSkill" required>
+          </mat-form-field>
 
 
-        <mat-form-field>
-          <mat-select placeholder="Type of skill*" [formControl]="typeOfSkillControl" required>
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let type of typeOfSkills" [value]="typeOfSkills">
-              {{type.name}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="typeOfSkillControl.hasError('required')">Please choose type of skill</mat-error>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Type of skill*" [formControl]="typeOfSkillControl" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let type of typeOfSkills" [value]="typeOfSkills" (click)="refine($event, type)">
+                {{type.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="typeOfSkillControl.hasError('required')">Please choose type of skill</mat-error>
+          </mat-form-field>
 
-        <button mat-button (click)="acceptCreateSkill()"> Accept
-        </button>
-        {{newSkill}}
-
-      </div>
+          <button mat-button (click)="acceptCreateSkill()"> Accept
+          </button>
+        </div>
+      </form>
     </mat-card>
 
     <mat-card class="card-history">

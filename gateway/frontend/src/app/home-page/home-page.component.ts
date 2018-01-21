@@ -4,7 +4,7 @@ import {MyUser} from './MyUser';
 import {Education} from "./Education";
 import {UserCompany} from "./UserCompany";
 import {UserLink} from "./UserLink";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {startWith} from "rxjs/operators";
 import {map} from 'rxjs/operators/map';
@@ -12,6 +12,7 @@ import {Skill} from "../user-list-page/skill";
 import {Gender} from "./Gender";
 import {Router} from "@angular/router";
 import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
+import {NewSkill} from "./NewSkill";
 
 
 export class User {
@@ -35,21 +36,25 @@ export class HomePageComponent implements OnInit {
   skillName: string;
   selectSkill: Skill;
   show: boolean = false;
-  inputSkillName = new FormControl();
   typeOfSkillControl = new FormControl('', [Validators.required]);
   typeOfSkills: TypeOfSkill[];
-  newSkill: string;
+  newSkill: NewSkill;
+  inputSkillForm: FormGroup;
+  addedSkill = new Skill();
 
 
 
 
 
-  constructor(private homePageService: HomePageService, private router: Router) {
+  constructor(private homePageService: HomePageService, private router: Router, private fb: FormBuilder) {
     this.myUser = new MyUser();
     this.education = [];
     this.myUser.gender = new Gender();
     this.options = [];
     this.selectSkill = new Skill();
+    this.newSkill = new NewSkill();
+    this.addedSkill = new Skill();
+    this.addedSkill.typeOfSkill = new TypeOfSkill();
   }
 
   myControl = new FormControl();
@@ -61,10 +66,18 @@ export class HomePageComponent implements OnInit {
     return this.options.filter(option =>
       option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
+
+
   displayFn(skill?: Skill): string | undefined {
     return skill ? skill.name : undefined;
   }
+
+
   ngOnInit() {
+    this.inputSkillForm = this.fb.group({
+      nameOfNewSkill: ['', Validators.required]
+    });
+
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith<string | Skill>(''),
@@ -91,7 +104,6 @@ export class HomePageComponent implements OnInit {
       this.getMyCompany();
       this.getMySkills();
       this.getSkills("");
-
     });
   }
 
@@ -151,6 +163,13 @@ export class HomePageComponent implements OnInit {
   }
 
   acceptCreateSkill(){
-    this.newSkill = "DO ME"
+    this.newSkill = this.inputSkillForm.value;
+    this.addedSkill.name = this.newSkill.nameOfNewSkill;
+    this.show = !this.show;
+    this.homePageService.addNewSkill(this.addedSkill).subscribe() ;
+  }
+
+  refine($event, item) {
+    this.addedSkill.typeOfSkill = item;
   }
 }

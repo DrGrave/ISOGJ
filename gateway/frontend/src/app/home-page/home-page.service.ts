@@ -22,6 +22,7 @@ export class HomePageService {
   private thisImg = '/api/main/user/img/?id=';
   private thisAddSkillUrl = '/api/main/skill/authorize/add/?id=';
   private getTypesOfSkillsUrl = '/api/main/skill/authorize/typesofskills';
+  private addSkillUrl = '/api/main/skill/authorize/addnew';
 
 
   constructor(private http: HttpClient) {
@@ -97,5 +98,12 @@ export class HomePageService {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.get<TypeOfSkill[]>(this.getTypesOfSkillsUrl, httpOptions)
+  }
+
+  addNewSkill(newSkill: Skill) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post(this.addSkillUrl,newSkill ,httpOptions)
   }
 }

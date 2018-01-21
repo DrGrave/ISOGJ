@@ -45,4 +45,9 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     public List<TypeOfSkill> getAllTypesOfSkill() {
         return skillService.getAllTypesOfSkill();
     }
+
+    @Override
+    public void addNewSkill(Skill skill) {
+        skillService.addNewSkill(skill);
+    }
 }

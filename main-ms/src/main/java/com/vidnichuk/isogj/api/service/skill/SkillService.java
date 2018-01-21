@@ -21,4 +21,6 @@ public interface SkillService {
     List<UserSkillDto> addAndGetSkillsToUser(Skill skill, long id);
 
     List<TypeOfSkill> getAllTypesOfSkill();
+
+    void addNewSkill(Skill skill);
 }
