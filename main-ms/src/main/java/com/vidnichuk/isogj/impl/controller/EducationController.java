@@ -28,7 +28,7 @@ public class EducationController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/userlist")
-    public N_A_EducationDto findLastEducationByUserId(@RequestParam("id") long id){
+    public List<N_A_EducationDto> findLastEducationByUserId(@RequestParam("id") long id){
         return educationLightWeightService.getLastEducationByUserId(id);
     }
 }

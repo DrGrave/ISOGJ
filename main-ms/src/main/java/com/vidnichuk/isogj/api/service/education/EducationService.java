@@ -9,5 +9,5 @@ import java.util.List;
 public interface EducationService {
     List<EducationDto> findEducationById(Long id);
 
-    N_A_EducationDto getLastEducationByUserId(long id);
+    List<N_A_EducationDto> getLastEducationByUserId(long id);
 }

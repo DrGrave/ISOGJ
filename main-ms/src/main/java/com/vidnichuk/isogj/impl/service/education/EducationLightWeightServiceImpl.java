@@ -21,7 +21,7 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     }
 
     @Override
-    public N_A_EducationDto getLastEducationByUserId(long id) {
+    public List<N_A_EducationDto> getLastEducationByUserId(long id) {
         return educationService.getLastEducationByUserId(id);
     }
 }

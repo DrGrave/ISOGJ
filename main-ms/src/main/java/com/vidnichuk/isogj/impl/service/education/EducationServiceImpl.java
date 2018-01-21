@@ -34,13 +34,11 @@ public class EducationServiceImpl implements EducationService{
     }
 
     @Override
-    public N_A_EducationDto getLastEducationByUserId(long id) {
-        if (educationRepository.findByUserIdAndTypeOfEducation_Id(id, 1) != null) {
-            return educationDtoMapper.fromEducationToNAEducationDto(educationRepository.findByUserIdAndTypeOfEducation_Id(id, 1));
-        }else if (educationRepository.findByUserIdAndTypeOfEducation_Id(id, 3) != null){
-            return educationDtoMapper.fromEducationToNAEducationDto(educationRepository.findByUserIdAndTypeOfEducation_Id(id, 3));
-        }else if (educationRepository.findByUserIdAndTypeOfEducation_Id(id, 2) != null){
-            return educationDtoMapper.fromEducationToNAEducationDto(educationRepository.findByUserIdAndTypeOfEducation_Id(id, 2));
-        }else return null;
+    public List<N_A_EducationDto> getLastEducationByUserId(long id) {
+        List<N_A_EducationDto> n_a_educationDtoList = new ArrayList<>();
+        for (Education education: educationRepository.findAllByUserIdOrderByDateOfEnd(id)){
+            n_a_educationDtoList.add(educationDtoMapper.fromEducationToNAEducationDto(education));
+        }
+        return n_a_educationDtoList;
     }
 }

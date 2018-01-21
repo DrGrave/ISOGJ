@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EducationRepository extends JpaRepository<Education, Long> {
     List<Education> findAllByUser_Id(long id);
-    Education findByUserIdAndTypeOfEducation_Id(long userId, long typeOfEdId);
+    List<Education> findAllByUserIdOrderByDateOfEnd(long userId);
 }

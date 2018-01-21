@@ -9,5 +9,5 @@ public interface EducationLightWeightService {
 
     List<EducationDto> getEducationById(Long id);
 
-    N_A_EducationDto getLastEducationByUserId(long id);
+    List<N_A_EducationDto> getLastEducationByUserId(long id);
 }

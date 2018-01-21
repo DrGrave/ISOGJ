@@ -9,5 +9,5 @@ export class User {
   middleName: string;
   skill: UserSkill[];
   imgLink: string;
-  education: EducationDto;
+  education: EducationDto[];
 }

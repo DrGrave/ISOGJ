@@ -3,6 +3,8 @@ import {UserService} from './user-list-page.service';
 import {User} from './user';
 import {Router} from '@angular/router';
 import {UserLink} from "../home-page/UserLink";
+import {EducationDto} from "./EducationDto";
+import {Department} from "../home-page/Department";
 
 
 @Component({

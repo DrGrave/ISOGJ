@@ -37,7 +37,7 @@ export class UserService {
     return this.http.get<UserLink>(this.thisImg + id, httpOptions);
   }
 
-  getUserAducation(id: number): Observable<EducationDto>{
-    return this.http.get<EducationDto>(this.getUserAducUrl + id, httpOptions);
+  getUserAducation(id: number): Observable<EducationDto[]>{
+    return this.http.get<EducationDto[]>(this.getUserAducUrl + id, httpOptions);
   }
 }
