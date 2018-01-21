@@ -6,7 +6,12 @@
   <mat-card-header class="mat-title-cs">
     <div mat-card-avatar class="mat-header-image"><img src="{{user.imgLink}}" width="45" height="45"></div>
     <mat-card-title>{{user.lastName}} {{user.firstName}} {{user.middleName}}</mat-card-title>
-    <mat-card-subtitle>Univercity</mat-card-subtitle>
+    <mat-card-subtitle>
+      Department:
+      {{user.education.department.name}}.
+      University:
+      {{user.education.department.faculty.university.name}}
+    </mat-card-subtitle>
 
   </mat-card-header>
   <div class="content-cs">

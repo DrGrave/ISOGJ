@@ -16,7 +16,6 @@ export class UserListPageComponent implements OnInit {
   users: User[];
   user: User;
   selectedUser: User;
-  imgLinks: UserLink[];
 
   ngOnInit(): void {
 
@@ -38,6 +37,7 @@ export class UserListPageComponent implements OnInit {
     for (let i = 0; i < this.users.length; i++) {
       this.userService.getSkills(this.users[i].id).subscribe(skills => this.users[i].skill = skills);
       this.userService.getUserImg(this.users[i].id).subscribe( img => this.users[i].imgLink = img.link);
+      this.userService.getUserAducation(this.users[i].id).subscribe( education => this.users[i].education = education);
     }
   }
 

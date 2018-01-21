@@ -1,5 +1,6 @@
 
 import {UserSkill} from "./userSkill";
+import {EducationDto} from "./EducationDto";
 
 export class User {
   id: number;
@@ -8,4 +9,5 @@ export class User {
   middleName: string;
   skill: UserSkill[];
   imgLink: string;
+  education: EducationDto;
 }

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {User} from './user';
 import {UserSkill} from "./userSkill";
 import {UserLink} from "../home-page/UserLink";
+import {EducationDto} from "./EducationDto";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -14,6 +15,7 @@ export class UserService {
   private userUrl = '/api/main/user/all';
   private skillUrl = '/api/main/skill/userskills?';
   private thisImg = '/api/main/user/userlistimg/?id=';
+  private getUserAducUrl = '/api/main/education/userlist/?id=';
 
 
 
@@ -33,5 +35,9 @@ export class UserService {
 
   getUserImg(id: number) {
     return this.http.get<UserLink>(this.thisImg + id, httpOptions);
+  }
+
+  getUserAducation(id: number): Observable<EducationDto>{
+    return this.http.get<EducationDto>(this.getUserAducUrl + id, httpOptions);
   }
 }

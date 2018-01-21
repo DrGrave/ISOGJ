@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.impl.service.education;
 
 import com.vidnichuk.isogj.api.dto.model.EducationDto;
+import com.vidnichuk.isogj.api.dto.model.N_A_EducationDto;
 import com.vidnichuk.isogj.api.service.education.EducationLightWeightService;
 import com.vidnichuk.isogj.api.service.education.EducationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     @Override
     public List<EducationDto> getEducationById(Long id) {
         return educationService.findEducationById(id);
+    }
+
+    @Override
+    public N_A_EducationDto getLastEducationByUserId(long id) {
+        return educationService.getLastEducationByUserId(id);
     }
 }
