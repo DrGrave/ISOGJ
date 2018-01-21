@@ -7,4 +7,5 @@ export class User {
   lastName: string;
   middleName: string;
   skill: UserSkill[];
+  imgLink: string;
 }

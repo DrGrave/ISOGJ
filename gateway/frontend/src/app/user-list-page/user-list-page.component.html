@@ -4,7 +4,7 @@
           [class.selected]="user === selectedUser"
           (click)="onSelect(user)">
   <mat-card-header class="mat-title-cs">
-    <div mat-card-avatar class="mat-header-image"></div>
+    <div mat-card-avatar class="mat-header-image"><img src="{{user.imgLink}}" width="45" height="45"></div>
     <mat-card-title>{{user.lastName}} {{user.firstName}} {{user.middleName}}</mat-card-title>
     <mat-card-subtitle>Univercity</mat-card-subtitle>
 

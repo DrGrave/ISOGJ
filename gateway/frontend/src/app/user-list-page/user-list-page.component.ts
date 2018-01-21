@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from './user-list-page.service';
 import {User} from './user';
 import {Router} from '@angular/router';
+import {UserLink} from "../home-page/UserLink";
 
 
 @Component({
@@ -15,6 +16,7 @@ export class UserListPageComponent implements OnInit {
   users: User[];
   user: User;
   selectedUser: User;
+  imgLinks: UserLink[];
 
   ngOnInit(): void {
 
@@ -35,6 +37,7 @@ export class UserListPageComponent implements OnInit {
   getAllSkills() {
     for (let i = 0; i < this.users.length; i++) {
       this.userService.getSkills(this.users[i].id).subscribe(skills => this.users[i].skill = skills);
+      this.userService.getUserImg(this.users[i].id).subscribe( img => this.users[i].imgLink = img.link);
     }
   }
 

@@ -2,7 +2,7 @@
   <div class="main-info">
     <mat-card class="card-main">
       <mat-card-title>
-        <div mat-card-avatar class="mat-header-image"><img src="{{imgLink.link}}"></div>
+        <div mat-card-avatar class="mat-header-image"><img src="{{imgLink.link}}" width="100" height="100"></div>
         <div class="user-name">
           {{myUser.firstName}}
           {{myUser.lastName}}
@@ -12,6 +12,7 @@
 
       </mat-card-title>
       <mat-card-content>
+        Gender:
         {{myUser.gender.name}}
       </mat-card-content>
       <mat-card-content *ngFor="let educate of education">
