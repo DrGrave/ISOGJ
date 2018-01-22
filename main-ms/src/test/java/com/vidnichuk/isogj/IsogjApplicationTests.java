@@ -2,10 +2,7 @@ package com.vidnichuk.isogj;
 
 import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.*;
-import com.vidnichuk.isogj.api.dto.model.EducationDto;
-import com.vidnichuk.isogj.api.dto.model.UserDto;
-import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
-import com.vidnichuk.isogj.api.dto.model.VacancyDto;
+import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.education.EducationLightWeightService;
 import com.vidnichuk.isogj.api.service.skill.SkillLightWeightService;
@@ -33,23 +30,34 @@ public class IsogjApplicationTests {
 
 
 
-	@Autowired
-	private EducationRepository educationRepository;
+
 
 	@Autowired
 	private EducationLightWeightService educationLightWeightService;
 
-	@Autowired
-	private EducationDtoMapper educationDtoMapper;
 
 	@Autowired
 	private SkillLightWeightService skillLightWeightService;
 
+	@Autowired
+	private SkillDtoMapper skillDtoMapper;
+
+	@Autowired
+	private SkillRepository skillRepository;
+
+	@Autowired
+	private EducationRepository educationRepository;
+
+
+	@Autowired
+	private EducationDtoMapper educationDtoMapper;
+
 
 	@Test
 	public void fromVacancyToVacancyDto(){
-		List<Skill> skills = skillLightWeightService.findAddSkill("");
-		System.out.print(skills);
+		System.out.println("dd");
+		EducationDto educationDto = educationDtoMapper.formEducationToEducationDto(educationRepository.findAll().get(0));
+		System.out.println(educationDto);
 	}
 
 

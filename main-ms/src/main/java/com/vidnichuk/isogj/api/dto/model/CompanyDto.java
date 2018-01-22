@@ -8,7 +8,7 @@ import com.vidnichuk.isogj.api.model.City;
 public class CompanyDto {
     private long id;
     private String name;
-    private City city;
+    private CityDto cityOfCompany;
 
     public long getId() {
         return id;
@@ -26,11 +26,13 @@ public class CompanyDto {
         this.name = name;
     }
 
-    public City getCity() {
-        return city;
+    public CityDto getCityOfCompany() {
+        return cityOfCompany;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCityOfCompany(CityDto cityOfCompany) {
+        this.cityOfCompany = cityOfCompany;
     }
+
+
 }

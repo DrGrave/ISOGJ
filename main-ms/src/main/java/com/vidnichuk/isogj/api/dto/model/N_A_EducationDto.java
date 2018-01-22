@@ -6,8 +6,8 @@ import com.vidnichuk.isogj.api.model.type.TypeOfEducation;
 
 public class N_A_EducationDto {
     private Long id;
-    private TypeOfEducation typeOfEducation;
-    private Department department;
+    private TypeOfEducationDto typeOfEducation;
+    private DepartmentDto department;
     private School school;
 
     public Long getId() {
@@ -18,19 +18,19 @@ public class N_A_EducationDto {
         this.id = id;
     }
 
-    public TypeOfEducation getTypeOfEducation() {
+    public TypeOfEducationDto getTypeOfEducation() {
         return typeOfEducation;
     }
 
-    public void setTypeOfEducation(TypeOfEducation typeOfEducation) {
+    public void setTypeOfEducation(TypeOfEducationDto typeOfEducation) {
         this.typeOfEducation = typeOfEducation;
     }
 
-    public Department getDepartment() {
+    public DepartmentDto getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(DepartmentDto department) {
         this.department = department;
     }
 

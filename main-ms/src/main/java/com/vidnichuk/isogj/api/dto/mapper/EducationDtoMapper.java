@@ -9,5 +9,6 @@ import org.mapstruct.Mapper;
 public interface EducationDtoMapper {
 
     EducationDto formEducationToEducationDto(Education education);
+
     N_A_EducationDto fromEducationToNAEducationDto(Education education);
 }

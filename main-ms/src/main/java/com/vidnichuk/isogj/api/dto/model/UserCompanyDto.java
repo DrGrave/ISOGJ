@@ -5,7 +5,7 @@ import com.vidnichuk.isogj.api.model.Position;
 
 public class UserCompanyDto {
     private Long idUserCompany;
-    private Company company;
+    private CompanyDto company;
     private Position position;
 
     public Long getIdUserCompany() {
@@ -16,11 +16,11 @@ public class UserCompanyDto {
         this.idUserCompany = idUserCompany;
     }
 
-    public Company getCompany() {
+    public CompanyDto getCompany() {
         return company;
     }
 
-    public void setCompany(Company company) {
+    public void setCompany(CompanyDto company) {
         this.company = company;
     }
 
