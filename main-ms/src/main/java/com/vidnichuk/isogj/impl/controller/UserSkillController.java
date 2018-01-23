@@ -3,7 +3,7 @@ package com.vidnichuk.isogj.impl.controller;
 
 import com.vidnichuk.isogj.api.dto.model.SkillDto;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
-import com.vidnichuk.isogj.api.model.Skill;
+
 import com.vidnichuk.isogj.api.service.skill.SkillLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,5 +33,10 @@ public class UserSkillController {
     @PostMapping("/authorize/add")
     public List<UserSkillDto> authorizedAddedUserSkills(@Valid @RequestBody SkillDto skill, @RequestParam("id") long id){
         return skillLightWeightService.addAndGetSkillsToUser(skill, id);
+    }
+
+    @PostMapping("/authorize/delete")
+    public List<UserSkillDto> authorizedDeleteUserSkill(@Valid @RequestBody UserSkillDto userSkillDto, @RequestParam("id") long id){
+        return skillLightWeightService.deleteSkills(userSkillDto, id);
     }
 }

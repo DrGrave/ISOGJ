@@ -23,6 +23,7 @@ export class HomePageService {
   private thisAddSkillUrl = '/api/main/skill/authorize/add/?id=';
   private getTypesOfSkillsUrl = '/api/main/skill/authorize/typesofskills';
   private addSkillUrl = '/api/main/skill/authorize/addnew';
+  private removeSkillUrl = '/api/main/skill/authorize/delete/?id=';
 
 
   constructor(private http: HttpClient) {
@@ -106,4 +107,15 @@ export class HomePageService {
     };
     return this.http.post(this.addSkillUrl,newSkill ,httpOptions)
   }
+
+  removeSkills(id :number, userSkill: UserSkill): Observable<UserSkill[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserSkill[]>(this.removeSkillUrl + id,userSkill, httpOptions);
+  }
+
+
 }
+
+

@@ -10,4 +10,5 @@ public interface UserSkillDtoMapper {
 
     @Mapping(source = "marker.id", target = "marker")
     UserSkillDto fromUserSkillToUserSkillDto(UserSkill userSkill);
+
 }

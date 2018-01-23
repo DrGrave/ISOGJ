@@ -66,10 +66,22 @@
         <mat-chip-list>
           <mat-chip *ngFor="let skill of myUser.skill">
             {{skill.skill.name}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            <mat-icon matChipRemove *ngIf="removable" (click)="removeSkill($event, skill)">R</mat-icon>
           </mat-chip>
         </mat-chip-list>
       </mat-card-content>
+
+      <div class="remove-skill">
+        <mat-card-content>
+          <button mat-button (click)="showRemoveSkill()">
+            Change.
+          </button>
+        </mat-card-content>
+      </div>
+
+
+
+
       <div class="add-skill">
         <mat-card-content>
           <form (submit)="addSkill()">

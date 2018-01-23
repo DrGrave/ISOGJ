@@ -4,8 +4,6 @@ import com.vidnichuk.isogj.api.dto.model.SkillDto;
 import com.vidnichuk.isogj.api.dto.model.TypeOfSkillDto;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
 import com.vidnichuk.isogj.api.dto.model.VacancySkillDto;
-import com.vidnichuk.isogj.api.model.Skill;
-import com.vidnichuk.isogj.api.model.type.TypeOfSkill;
 import com.vidnichuk.isogj.api.service.skill.SkillLightWeightService;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +49,10 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     @Override
     public void addNewSkill(SkillDto skill) {
         skillService.addNewSkill(skill);
+    }
+
+    @Override
+    public List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, long id) {
+        return skillService.deleteSkills(userSkillDto, id);
     }
 }

@@ -122,7 +122,16 @@ public class SkillServiceImpl implements SkillService{
 
     @Override
     public void addNewSkill(SkillDto skill) {
-
         skillRepository.save(skillDtoMapper.fromSkillDtoToSkillMapper(skill));
+    }
+
+    @Override
+    public List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, long id) {
+        List<UserSkillDto> userSkillDtoList = new ArrayList<>();
+        userSkillRepository.delete(userSkillDto.getId());
+        for (UserSkill userSkill : userSkillRepository.findAllByUser_Id(id)){
+            userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
+        }
+        return userSkillDtoList;
     }
 }

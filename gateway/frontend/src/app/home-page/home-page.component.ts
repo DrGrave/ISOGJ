@@ -13,6 +13,7 @@ import {Gender} from "./Gender";
 import {Router} from "@angular/router";
 import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 import {NewSkill} from "./NewSkill";
+import {UserSkill} from "../user-list-page/userSkill";
 
 
 export class User {
@@ -41,6 +42,10 @@ export class HomePageComponent implements OnInit {
   newSkill: NewSkill;
   inputSkillForm: FormGroup;
   addedSkill = new Skill();
+  removable: boolean = false;
+  userSkills: List<UserSkill>;
+  tempUserSkill: UserSkill[];
+  removeSkillArray: UserSkill[];
 
 
 
@@ -55,6 +60,9 @@ export class HomePageComponent implements OnInit {
     this.newSkill = new NewSkill();
     this.addedSkill = new Skill();
     this.addedSkill.typeOfSkill = new TypeOfSkill();
+    this.userSkills = new List<UserSkill>();
+    this.tempUserSkill = [];
+    this.removeSkillArray = []
   }
 
   myControl = new FormControl();
@@ -104,6 +112,7 @@ export class HomePageComponent implements OnInit {
       this.getMyCompany();
       this.getMySkills();
       this.getSkills("");
+
     });
   }
 
@@ -122,6 +131,7 @@ export class HomePageComponent implements OnInit {
   getMySkills(){
     this.homePageService.getMySkills(this.myUser.id).subscribe( skillDate => {
       this.myUser.skill = skillDate;
+      this.tempUserSkill = skillDate;
     })
   }
 
@@ -172,4 +182,35 @@ export class HomePageComponent implements OnInit {
   refine($event, item) {
     this.addedSkill.typeOfSkill = item;
   }
+
+  showRemoveSkill(){
+    this.removable = !this.removable;
+  }
+
+  removeSkill($event, skill){
+    this.homePageService.removeSkills(this.myUser.id, skill).subscribe(skill => this.myUser.skill = skill);
+  }
+
 }
+
+class List<T> {
+  private items: Array<T>;
+
+  constructor() {
+    this.items = [];
+  }
+
+  size(): number {
+    return this.items.length;
+  }
+
+  add(value: T): void {
+    this.items.push(value);
+  }
+
+  get(index: number): T {
+    return this.items[index];
+  }
+}
+
+
