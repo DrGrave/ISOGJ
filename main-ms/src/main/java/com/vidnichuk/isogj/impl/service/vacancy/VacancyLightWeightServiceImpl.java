@@ -1,6 +1,6 @@
 package com.vidnichuk.isogj.impl.service.vacancy;
 
-import com.vidnichuk.isogj.api.dto.model.VacancyDto;
+import com.vidnichuk.isogj.api.dto.model.N_A_VacancyDto;
 import com.vidnichuk.isogj.api.service.vacancy.VacancyLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class VacancyLightWeightServiceImpl implements VacancyLightWeightService{
 
 
     @Override
-    public List<VacancyDto> getAllVacancy() {
+    public List<N_A_VacancyDto> getAllVacancy() {
         return vacancyService.findAllVacancyDto();
     }
 }

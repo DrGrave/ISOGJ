@@ -3,7 +3,7 @@ package com.vidnichuk.isogj.api.dto.model;
 /**
  * vacancy dto object
  */
-public class VacancyDto {
+public class N_A_VacancyDto {
     private Long id;
     private String info;
     private String typeOfVacancy;

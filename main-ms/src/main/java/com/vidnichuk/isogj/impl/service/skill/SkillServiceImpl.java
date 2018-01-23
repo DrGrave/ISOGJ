@@ -1,8 +1,12 @@
 package com.vidnichuk.isogj.impl.service.skill;
 
 import com.vidnichuk.isogj.api.dao.*;
+import com.vidnichuk.isogj.api.dto.mapper.SkillDtoMapper;
+import com.vidnichuk.isogj.api.dto.mapper.TypeOfSkillDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.UserSkillDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.VacancySkillDtoMapper;
+import com.vidnichuk.isogj.api.dto.model.SkillDto;
+import com.vidnichuk.isogj.api.dto.model.TypeOfSkillDto;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
 import com.vidnichuk.isogj.api.dto.model.VacancySkillDto;
 import com.vidnichuk.isogj.api.model.Skill;
@@ -41,6 +45,15 @@ public class SkillServiceImpl implements SkillService{
     @Autowired
     private TypeOfSkillRepository typeOfSkillRepository;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private SkillDtoMapper skillDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private TypeOfSkillDtoMapper typeOfSkillDtoMapper;
+
+
     @Override
     public List<UserSkillDto> findAllSkillsByUserId(long id) {
         List<UserSkillDto> userSkillDtoList = new ArrayList<>();
@@ -71,20 +84,23 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public List<Skill> findAddSkill(String name) {
+    public List<SkillDto> findAddSkill(String name) {
         List<Skill> skills = skillRepository.findAllByNameContains(name);
+        List<SkillDto> skillDtos = new ArrayList<>();
         if (skills.size() > 6){
-            return skills.subList(0,5);
-        }else {
-            return skillRepository.findAllByNameContains(name);
+            skills = skills.subList(0,5);
         }
+        for (Skill skill : skills){
+            skillDtos.add(skillDtoMapper.fromSkillToSkillDtoMapper(skill));
+        }
+        return skillDtos;
     }
 
     @Override
-    public List<UserSkillDto> addAndGetSkillsToUser(Skill skill, long id) {
+    public List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, long id) {
         if (userSkillRepository.findByUserIdAndSkillId(id, skill.getId()) == null) {
             UserSkill userSkill = new UserSkill();
-            userSkill.setSkill(skill);
+            userSkill.setSkill(skillRepository.findSkillById(skill.getId()));
             userSkill.setUser(userRepository.findById(id));
             userSkillRepository.save(userSkill);
         }
@@ -96,12 +112,17 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public List<TypeOfSkill> getAllTypesOfSkill() {
-        return typeOfSkillRepository.findAll();
+    public List<TypeOfSkillDto> getAllTypesOfSkill() {
+        List<TypeOfSkillDto> typeOfSkillDtos = new ArrayList<>();
+        for (TypeOfSkill typeOfSkill: typeOfSkillRepository.findAll()){
+            typeOfSkillDtos.add(typeOfSkillDtoMapper.fromTypeOfSkillToTypeOfSkillDto(typeOfSkill));
+        }
+        return typeOfSkillDtos;
     }
 
     @Override
-    public void addNewSkill(Skill skill) {
-        skillRepository.save(skill);
+    public void addNewSkill(SkillDto skill) {
+
+        skillRepository.save(skillDtoMapper.fromSkillDtoToSkillMapper(skill));
     }
 }

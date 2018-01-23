@@ -1,5 +1,7 @@
 package com.vidnichuk.isogj.impl.service.skill;
 
+import com.vidnichuk.isogj.api.dto.model.SkillDto;
+import com.vidnichuk.isogj.api.dto.model.TypeOfSkillDto;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
 import com.vidnichuk.isogj.api.dto.model.VacancySkillDto;
 import com.vidnichuk.isogj.api.model.Skill;
@@ -32,22 +34,22 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     }
 
     @Override
-    public List<Skill> findAddSkill(String name) {
+    public List<SkillDto> findAddSkill(String name) {
         return skillService.findAddSkill(name);
     }
 
     @Override
-    public List<UserSkillDto> addAndGetSkillsToUser(Skill skill, long id) {
+    public List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, long id) {
         return skillService.addAndGetSkillsToUser(skill, id);
     }
 
     @Override
-    public List<TypeOfSkill> getAllTypesOfSkill() {
+    public List<TypeOfSkillDto> getAllTypesOfSkill() {
         return skillService.getAllTypesOfSkill();
     }
 
     @Override
-    public void addNewSkill(Skill skill) {
+    public void addNewSkill(SkillDto skill) {
         skillService.addNewSkill(skill);
     }
 }

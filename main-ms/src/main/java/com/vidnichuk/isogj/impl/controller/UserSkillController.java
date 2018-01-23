@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.impl.controller;
 
 
+import com.vidnichuk.isogj.api.dto.model.SkillDto;
 import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
 import com.vidnichuk.isogj.api.model.Skill;
 import com.vidnichuk.isogj.api.service.skill.SkillLightWeightService;
@@ -30,7 +31,7 @@ public class UserSkillController {
     }
 
     @PostMapping("/authorize/add")
-    public List<UserSkillDto> authorizedAddedUserSkills(@Valid @RequestBody Skill skill, @RequestParam("id") long id){
+    public List<UserSkillDto> authorizedAddedUserSkills(@Valid @RequestBody SkillDto skill, @RequestParam("id") long id){
         return skillLightWeightService.addAndGetSkillsToUser(skill, id);
     }
 }

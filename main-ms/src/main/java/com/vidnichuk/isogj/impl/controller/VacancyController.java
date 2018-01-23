@@ -1,6 +1,6 @@
 package com.vidnichuk.isogj.impl.controller;
 
-import com.vidnichuk.isogj.api.dto.model.VacancyDto;
+import com.vidnichuk.isogj.api.dto.model.N_A_VacancyDto;
 
 import com.vidnichuk.isogj.api.service.vacancy.VacancyLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class VacancyController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/all")
-    public List<VacancyDto> getListOfVacancy(){
+    public List<N_A_VacancyDto> getListOfVacancy(){
         return vacancyLightWeightService.getAllVacancy();
     }
 }
