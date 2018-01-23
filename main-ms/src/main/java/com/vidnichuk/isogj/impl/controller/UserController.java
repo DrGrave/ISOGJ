@@ -1,9 +1,6 @@
 package com.vidnichuk.isogj.impl.controller;
 
-import com.vidnichuk.isogj.api.dto.model.MeUserDto;
-import com.vidnichuk.isogj.api.dto.model.StatusDto;
-import com.vidnichuk.isogj.api.dto.model.TempUserDto;
-import com.vidnichuk.isogj.api.dto.model.UserDto;
+import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -62,5 +59,7 @@ public class UserController {
     public MeUserDto getUserByUsername(@RequestParam("username") String username){
         return userLightWeightService.getUserByUsername(username);
     }
+
+
 
 }

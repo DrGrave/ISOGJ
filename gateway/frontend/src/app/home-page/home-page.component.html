@@ -11,10 +11,12 @@
 
 
       </mat-card-title>
+      <div *ngIf="!showUserInfoEdit">
       <mat-card-content>
         Gender:
         {{myUser.gender.name}}
       </mat-card-content>
+
       <mat-card-content *ngFor="let educate of education">
         {{educate.typeOfEducation.name}}.
         <br>
@@ -37,7 +39,21 @@
         Position:
         {{company.position.name}}
       </mat-card-content>
+      </div>
+      <div *ngIf="showUserInfoEdit">
+        <mat-card-content>
+          <mat-form-field>
+            <mat-select placeholder="Gender*" [formControl]="genderControl">
+              <mat-option *ngFor="let gender of genderList" [value]="selectedGender" (click)="refine($event, gender)">
+                {{gender.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+
+      </div>
       <mat-card-content>
+        <button mat-button (click)="showEditUserInfo()">Edit.</button>
       </mat-card-content>
     </mat-card>
 

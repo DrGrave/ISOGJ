@@ -8,6 +8,7 @@ import {UserSkill} from "../user-list-page/userSkill";
 import {UserLink} from "./UserLink";
 import {Skill} from "../user-list-page/skill";
 import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
+import {Gender} from "./Gender";
 
 
 @Injectable()
@@ -24,6 +25,7 @@ export class HomePageService {
   private getTypesOfSkillsUrl = '/api/main/skill/authorize/typesofskills';
   private addSkillUrl = '/api/main/skill/authorize/addnew';
   private removeSkillUrl = '/api/main/skill/authorize/delete/?id=';
+  private getGenders = '/api/main/gender/authorize/all';
 
 
   constructor(private http: HttpClient) {
@@ -116,6 +118,12 @@ export class HomePageService {
   }
 
 
+  getAllGenders():Observable<Gender[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<Gender[]>(this.getGenders, httpOptions);
+  }
 }
 
 

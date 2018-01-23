@@ -1,6 +1,6 @@
 package com.vidnichuk.isogj.api.dto.model;
 
-import com.vidnichuk.isogj.api.model.City;
+
 import com.vidnichuk.isogj.api.model.Gender;
 
 public class MeUserDto {
@@ -21,9 +21,9 @@ public class MeUserDto {
 
     private String email;
 
-    private City city;
+    private CityDto city;
 
-    private Gender gender;
+    private GenderDto gender;
 
 
     public Long getId() {
@@ -66,19 +66,19 @@ public class MeUserDto {
         this.email = email;
     }
 
-    public City getCity() {
+    public CityDto getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(CityDto city) {
         this.city = city;
     }
 
-    public Gender getGender() {
+    public GenderDto getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(GenderDto gender) {
         this.gender = gender;
     }
 }

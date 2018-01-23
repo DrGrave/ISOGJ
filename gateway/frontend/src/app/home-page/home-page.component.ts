@@ -13,7 +13,6 @@ import {Gender} from "./Gender";
 import {Router} from "@angular/router";
 import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 import {NewSkill} from "./NewSkill";
-import {UserSkill} from "../user-list-page/userSkill";
 
 
 export class User {
@@ -38,14 +37,17 @@ export class HomePageComponent implements OnInit {
   selectSkill: Skill;
   show: boolean = false;
   typeOfSkillControl = new FormControl('', [Validators.required]);
+  genderControl: FormControl;
   typeOfSkills: TypeOfSkill[];
   newSkill: NewSkill;
   inputSkillForm: FormGroup;
   addedSkill = new Skill();
   removable: boolean = false;
-  userSkills: List<UserSkill>;
-  tempUserSkill: UserSkill[];
-  removeSkillArray: UserSkill[];
+  showUserInfoEdit: boolean = false;
+  genderList: Gender[];
+  selectedGender: Gender;
+
+
 
 
 
@@ -56,13 +58,11 @@ export class HomePageComponent implements OnInit {
     this.education = [];
     this.myUser.gender = new Gender();
     this.options = [];
+    this.genderList= [];
     this.selectSkill = new Skill();
     this.newSkill = new NewSkill();
     this.addedSkill = new Skill();
     this.addedSkill.typeOfSkill = new TypeOfSkill();
-    this.userSkills = new List<UserSkill>();
-    this.tempUserSkill = [];
-    this.removeSkillArray = []
   }
 
   myControl = new FormControl();
@@ -82,6 +82,7 @@ export class HomePageComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.inputSkillForm = this.fb.group({
       nameOfNewSkill: ['', Validators.required]
     });
@@ -131,7 +132,6 @@ export class HomePageComponent implements OnInit {
   getMySkills(){
     this.homePageService.getMySkills(this.myUser.id).subscribe( skillDate => {
       this.myUser.skill = skillDate;
-      this.tempUserSkill = skillDate;
     })
   }
 
@@ -191,25 +191,17 @@ export class HomePageComponent implements OnInit {
     this.homePageService.removeSkills(this.myUser.id, skill).subscribe(skill => this.myUser.skill = skill);
   }
 
-}
+  showEditUserInfo(){
 
-class List<T> {
-  private items: Array<T>;
+    this.showUserInfoEdit = !this.showUserInfoEdit;
+    this.getAllGenders();
+    this.genderControl = new FormControl(this.myUser.gender);
+    this.selectedGender = this.myUser.gender;
 
-  constructor() {
-    this.items = [];
   }
 
-  size(): number {
-    return this.items.length;
-  }
-
-  add(value: T): void {
-    this.items.push(value);
-  }
-
-  get(index: number): T {
-    return this.items[index];
+  getAllGenders(){
+    this.homePageService.getAllGenders().subscribe( genders => this.genderList = genders);
   }
 }
 
