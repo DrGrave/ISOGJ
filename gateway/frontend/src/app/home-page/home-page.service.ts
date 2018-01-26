@@ -26,6 +26,7 @@ export class HomePageService {
   private addSkillUrl = '/api/main/skill/authorize/addnew';
   private removeSkillUrl = '/api/main/skill/authorize/delete/?id=';
   private getGenders = '/api/main/gender/authorize/all';
+  private changeGenderUrl = '/api/main/user/changegender/?id=';
 
 
   constructor(private http: HttpClient) {
@@ -123,6 +124,13 @@ export class HomePageService {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.get<Gender[]>(this.getGenders, httpOptions);
+  }
+
+  changeGender(gender: Gender, id: number): Observable<Gender>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<Gender>(this.changeGenderUrl + id, gender, httpOptions);
   }
 }
 

@@ -3,10 +3,13 @@ package com.vidnichuk.isogj.impl.service.user;
 import com.vidnichuk.isogj.api.dao.TempUserRepository;
 import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
+import com.vidnichuk.isogj.api.dto.mapper.GenderDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
+import com.vidnichuk.isogj.api.dto.model.GenderDto;
 import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
+import com.vidnichuk.isogj.api.model.Gender;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
@@ -54,6 +57,10 @@ public class UserServiceImpl implements UserService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private UserDtoMapper userDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private GenderDtoMapper genderDtoMapper;
 
     @Autowired
     private EmailService emailService;
@@ -137,5 +144,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public MeUserDto getUserByUsername(String username) {
         return userDtoMapper.fromUserToMeUserDto(userRepository.findByUsername(username));
+    }
+
+    @Override
+    public GenderDto changeGender(GenderDto gender, long id) {
+        User user = userRepository.findById(id);
+        user.setGender(genderDtoMapper.fromGenderDtoToGender(gender));
+        userRepository.save(user);
+        return genderDtoMapper.fromGenderToGenderDto(user.getGender());
     }
 }

@@ -37,7 +37,7 @@ export class HomePageComponent implements OnInit {
   selectSkill: Skill;
   show: boolean = false;
   typeOfSkillControl = new FormControl('', [Validators.required]);
-  genderControl: FormControl;
+  genderControl: FormControl = new FormControl('', [Validators.required]);
   typeOfSkills: TypeOfSkill[];
   newSkill: NewSkill;
   inputSkillForm: FormGroup;
@@ -46,7 +46,6 @@ export class HomePageComponent implements OnInit {
   showUserInfoEdit: boolean = false;
   genderList: Gender[];
   selectedGender: Gender;
-
 
 
 
@@ -195,13 +194,22 @@ export class HomePageComponent implements OnInit {
 
     this.showUserInfoEdit = !this.showUserInfoEdit;
     this.getAllGenders();
-    this.genderControl = new FormControl(this.myUser.gender);
+
     this.selectedGender = this.myUser.gender;
 
   }
 
   getAllGenders(){
     this.homePageService.getAllGenders().subscribe( genders => this.genderList = genders);
+  }
+
+  applyChangeGender(){
+    this.homePageService.changeGender(this.selectedGender, this.myUser.id).subscribe( gender => this.myUser.gender = gender);
+    this.showUserInfoEdit = !this.showUserInfoEdit;
+  }
+
+  genderApply($event, gender){
+    this.selectedGender = gender;
   }
 }
 

@@ -17,6 +17,26 @@
         {{myUser.gender.name}}
       </mat-card-content>
 
+      </div>
+      <div *ngIf="showUserInfoEdit">
+        <mat-card-content>
+          <mat-form-field>
+            <mat-select placeholder="{{selectedGender.name}}" [formControl]="genderControl">
+              <mat-option *ngFor="let gender of genderList" [value]="selectedGender" (click)="genderApply($event, gender)">
+                {{gender.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+      </div>
+      <mat-card-content>
+        <button mat-button (click)="showEditUserInfo()">Edit.</button>
+      </mat-card-content>
+
+      <mat-card-content *ngIf="showUserInfoEdit">
+        <button mat-button (click)="applyChangeGender()">Apply.</button>
+      </mat-card-content>
+
       <mat-card-content *ngFor="let educate of education">
         {{educate.typeOfEducation.name}}.
         <br>
@@ -39,22 +59,8 @@
         Position:
         {{company.position.name}}
       </mat-card-content>
-      </div>
-      <div *ngIf="showUserInfoEdit">
-        <mat-card-content>
-          <mat-form-field>
-            <mat-select placeholder="Gender*" [formControl]="genderControl">
-              <mat-option *ngFor="let gender of genderList" [value]="selectedGender" (click)="refine($event, gender)">
-                {{gender.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card-content>
 
-      </div>
-      <mat-card-content>
-        <button mat-button (click)="showEditUserInfo()">Edit.</button>
-      </mat-card-content>
+
     </mat-card>
 
     <mat-card class="card-contacts">
@@ -117,10 +123,9 @@
           </button>
         </mat-card-content>
       </div>
+
       <form [formGroup]="inputSkillForm">
         <div *ngIf="show">
-
-
           <mat-form-field onsubmit="acceptCreateSkill()">
             <input type="text" placeholder="Skill name" matInput formControlName="nameOfNewSkill" required>
           </mat-form-field>

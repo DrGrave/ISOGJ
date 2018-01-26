@@ -1,9 +1,11 @@
 package com.vidnichuk.isogj.impl.service.user;
 
+import com.vidnichuk.isogj.api.dto.model.GenderDto;
 import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.TempUserDto;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
+import com.vidnichuk.isogj.api.model.Gender;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     @Autowired
     private UserService userService;
 
+    @Override
+    public GenderDto changeGender(GenderDto gender, long id) {
+        return userService.changeGender(gender, id);
+    }
 
     @Override
     public boolean registerUser(TempUserDto tempUserDto) {
