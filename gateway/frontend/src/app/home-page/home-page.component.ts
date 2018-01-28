@@ -13,10 +13,14 @@ import {Gender} from "./Gender";
 import {Router} from "@angular/router";
 import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 import {NewSkill} from "./NewSkill";
+import {City} from "./City";
+import {University} from "./University";
 
 
 export class User {
   constructor(public name: string) { }
+
+
 }
 
 @Component({
@@ -46,6 +50,11 @@ export class HomePageComponent implements OnInit {
   showUserInfoEdit: boolean = false;
   genderList: Gender[];
   selectedGender: Gender;
+  isChangeEducation: boolean[];
+  isChangeWork: boolean[];
+  universityOption: University[];
+  universityName: string;
+
 
 
 
@@ -57,15 +66,21 @@ export class HomePageComponent implements OnInit {
     this.education = [];
     this.myUser.gender = new Gender();
     this.options = [];
-    this.genderList= [];
+    this.genderList = [];
+    this.universityOption =[];
     this.selectSkill = new Skill();
     this.newSkill = new NewSkill();
     this.addedSkill = new Skill();
     this.addedSkill.typeOfSkill = new TypeOfSkill();
+    this.myUser.city = new City();
+    this.isChangeEducation = [];
+    this.isChangeWork = [];
   }
 
   myControl = new FormControl();
   filteredOptions: Observable<Skill[]>;
+  universityControll = new FormControl();
+  filteredUniversity: Observable<University[]>;
 
   filter(name: string): Skill[] {
     this.getSkills(name);
@@ -74,17 +89,37 @@ export class HomePageComponent implements OnInit {
       option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
+  universityFilter(name: string): University[]{
+    this.getUniversity(name);
+    this.universityName = name;
+    return this.universityOption.filter(
+      option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
+  }
+
+  getUniversity(name: string){
+    this.homePageService.getUniversitys(name).subscribe( universityDate => {this.universityOption = universityDate});
+  }
 
   displayFn(skill?: Skill): string | undefined {
     return skill ? skill.name : undefined;
   }
 
+  displayEducationFn(university?: University): string | undefined {
+    return university ? university.name : undefined;
+  }
 
   ngOnInit() {
 
     this.inputSkillForm = this.fb.group({
       nameOfNewSkill: ['', Validators.required]
     });
+
+    this.filteredUniversity = this.universityControll.valueChanges
+      .pipe(
+        startWith<string | University>(''),
+        map( value => typeof value === 'string' ? value : value.name),
+        map( name => name ? this.universityFilter(name) : this.universityOption.slice())
+      );
 
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -210,6 +245,63 @@ export class HomePageComponent implements OnInit {
 
   genderApply($event, gender){
     this.selectedGender = gender;
+  }
+
+  changeCity(){
+
+  }
+
+
+  addEducation(){
+
+  }
+
+  changeWork(work){
+    this.isChangeWork[work.idUserCompany] = !this.isChangeWork[work.idUserCompany];
+  }
+
+  addWork(){
+
+  }
+
+  changeEmail(){
+
+  }
+
+  changeLink(link){
+
+  }
+
+  addLink(){
+
+  }
+
+  editSkill(skill){
+
+  }
+
+  applyChangeEducation(){
+
+  }
+
+  changeEducation(educate){
+    this.isChangeEducation[educate.id] = !this.isChangeEducation[educate.id];
+  }
+
+  deleteEducation(educate){
+
+  }
+
+  applyChangeCompany(){
+
+  }
+
+  deleteWork(company){
+
+  }
+
+  changeUniversity(educate) {
+
   }
 }
 

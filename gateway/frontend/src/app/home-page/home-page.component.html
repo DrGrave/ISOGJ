@@ -29,6 +29,7 @@
           </mat-form-field>
         </mat-card-content>
       </div>
+
       <mat-card-content>
         <button mat-button (click)="showEditUserInfo()">Edit.</button>
       </mat-card-content>
@@ -38,6 +39,7 @@
       </mat-card-content>
 
       <mat-card-content *ngFor="let educate of education">
+        <div *ngIf="!isChangeEducation[educate.id]">
         {{educate.typeOfEducation.name}}.
         <br>
         University:
@@ -52,12 +54,61 @@
         End education:
         <br>
         {{educate.dateOfEnd}}
+        </div>
+
+        <div *ngIf="isChangeEducation[educate.id]">
+          <mat-card-content>
+            <form (submit)="changeUniversity(educate)">
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="University: {{educate.department.faculty.university.name}}" aria-label="Assignee" matInput [formControl]="universityControll" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayEducationFn">
+                  <mat-option *ngFor="let option of filteredUniversity | async" [value]="option">
+                    {{ option.name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+        </div>
+
+        <mat-card-content>
+          <button mat-button (click)="changeEducation(educate)">Ch</button>
+        </mat-card-content>
+
+        <div *ngIf="isChangeEducation[educate.id]" class="change-education">
+          <mat-card-content>
+            <button mat-button (click)="applyChangeEducation()">apply</button>
+          </mat-card-content>
+          <mat-card-content>
+            <button mat-button (click)="deleteEducation(educate)">delete</button>
+          </mat-card-content>
+        </div>
       </mat-card-content>
+
+      <mat-card-content>
+        <button mat-button (click)="addEducation()">Add</button>
+      </mat-card-content>
+
       <mat-card-content *ngFor="let company of userCompany">
         Work:
         {{company.company.name}}
         Position:
         {{company.position.name}}
+
+        <mat-card-content>
+          <button mat-button (click)="changeWork(company)">Ch</button>
+        </mat-card-content>
+
+        <div class="change-work" *ngIf="isChangeWork[company.idUserCompany]">
+          <mat-card-content>
+            <button mat-button (click)="applyChangeCompany()">apply</button>
+            <button mat-button (click)="deleteWork(company)">delete</button>
+          </mat-card-content>
+        </div>
+      </mat-card-content>
+
+      <mat-card-content>
+        <button mat-button (click)="addWork()">Add</button>
       </mat-card-content>
 
 
@@ -65,16 +116,33 @@
 
     <mat-card class="card-contacts">
       <mat-card-title>
+        City: {{myUser.city.name}}
+        <mat-card-content>
+          <button mat-button (click)="changeCity()">Ch</button>
+        </mat-card-content>
+      </mat-card-title>
+      <mat-card-title>
         Contact info:
       </mat-card-title>
       <mat-card-content>
         Email:
         {{myUser.email}}
+        <mat-card-content>
+          <button mat-button (click)="changeEmail()">Ch</button>
+        </mat-card-content>
       </mat-card-content>
       <mat-card-content *ngFor="let link of links">
         {{link.typeOfLink.name}}:
 
         {{link.link}}
+
+        <mat-card-content>
+          <button mat-button (click)="changeLink(link)">Ch</button>
+        </mat-card-content>
+      </mat-card-content>
+
+      <mat-card-content>
+        <button mat-button (click)="addLink()">Add</button>
       </mat-card-content>
     </mat-card>
   </div>
@@ -88,7 +156,8 @@
         <mat-chip-list>
           <mat-chip *ngFor="let skill of myUser.skill">
             {{skill.skill.name}}
-            <mat-icon matChipRemove *ngIf="removable" (click)="removeSkill($event, skill)">R</mat-icon>
+            <button mat-button class="skill-button" (click)="editSkill(skill)" [disabled]="!removable">C</button>
+            <button mat-button class="skill-button" (click)="removeSkill($event, skill)" [disabled]="!removable">R</button>
           </mat-chip>
         </mat-chip-list>
       </mat-card-content>
@@ -132,8 +201,7 @@
 
 
           <mat-form-field>
-            <mat-select placeholder="Type of skill*" [formControl]="typeOfSkillControl" required>
-              <mat-option>--</mat-option>
+            <mat-select placeholder="Type of skill*" [formControl]="typeOfSkillControl">
               <mat-option *ngFor="let type of typeOfSkills" [value]="typeOfSkills" (click)="refine($event, type)">
                 {{type.name}}
               </mat-option>
@@ -141,7 +209,7 @@
             <mat-error *ngIf="typeOfSkillControl.hasError('required')">Please choose type of skill</mat-error>
           </mat-form-field>
 
-          <button mat-button (click)="acceptCreateSkill()"> Accept
+          <button mat-button (click)="acceptCreateSkill()" [disabled]="inputSkillForm.invalid"> Accept
           </button>
         </div>
       </form>

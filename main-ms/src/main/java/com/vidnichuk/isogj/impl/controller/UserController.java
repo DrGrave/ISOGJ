@@ -1,7 +1,6 @@
 package com.vidnichuk.isogj.impl.controller;
 
 import com.vidnichuk.isogj.api.dto.model.*;
-import com.vidnichuk.isogj.api.model.Gender;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

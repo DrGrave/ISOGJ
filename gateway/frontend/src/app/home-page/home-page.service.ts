@@ -9,6 +9,7 @@ import {UserLink} from "./UserLink";
 import {Skill} from "../user-list-page/skill";
 import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 import {Gender} from "./Gender";
+import {University} from "./University";
 
 
 @Injectable()
@@ -27,6 +28,7 @@ export class HomePageService {
   private removeSkillUrl = '/api/main/skill/authorize/delete/?id=';
   private getGenders = '/api/main/gender/authorize/all';
   private changeGenderUrl = '/api/main/user/changegender/?id=';
+  private getUniversityByName = '/api/main/university/all/?name=';
 
 
   constructor(private http: HttpClient) {
@@ -131,6 +133,13 @@ export class HomePageService {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.post<Gender>(this.changeGenderUrl + id, gender, httpOptions);
+  }
+
+  getUniversitys(name: string): Observable<University[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<University[]>(this.getUniversityByName + name ,httpOptions);
   }
 }
 

@@ -31,4 +31,5 @@ public class EducationController {
     public List<N_A_EducationDto> findLastEducationByUserId(@RequestParam("id") long id){
         return educationLightWeightService.getLastEducationByUserId(id);
     }
+
 }
