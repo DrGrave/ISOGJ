@@ -58,6 +58,16 @@
 
         <div *ngIf="isChangeEducation[educate.id]">
           <mat-card-content>
+            <mat-form-field>
+              <mat-select placeholder="{{educate.typeOfEducation.name}}" [formControl]="typeOfEducationControl">
+                <mat-option *ngFor="let type of typesOfEducation" [value]="selectedTypeOfEducation" (click)="typeOfEducationApply($event, type)">
+                  {{type.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-content>
             <form (submit)="changeUniversity(educate)">
               <mat-form-field class="example-full-width">
                 <input type="text" placeholder="University: {{educate.department.faculty.university.name}}" aria-label="Assignee" matInput [formControl]="universityControll" [matAutocomplete]="auto">

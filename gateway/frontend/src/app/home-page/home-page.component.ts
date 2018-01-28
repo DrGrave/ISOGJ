@@ -15,6 +15,7 @@ import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 import {NewSkill} from "./NewSkill";
 import {City} from "./City";
 import {University} from "./University";
+import {TypeOfEducation} from "./TypeOfEducation";
 
 
 export class User {
@@ -54,7 +55,8 @@ export class HomePageComponent implements OnInit {
   isChangeWork: boolean[];
   universityOption: University[];
   universityName: string;
-
+  typesOfEducation: TypeOfEducation[];
+  selectedTypeOfEducation: TypeOfEducation;
 
 
 
@@ -75,12 +77,14 @@ export class HomePageComponent implements OnInit {
     this.myUser.city = new City();
     this.isChangeEducation = [];
     this.isChangeWork = [];
+    this.typesOfEducation = [];
   }
 
   myControl = new FormControl();
   filteredOptions: Observable<Skill[]>;
   universityControll = new FormControl();
   filteredUniversity: Observable<University[]>;
+  typeOfEducationControl = new FormControl();
 
   filter(name: string): Skill[] {
     this.getSkills(name);
@@ -301,6 +305,10 @@ export class HomePageComponent implements OnInit {
   }
 
   changeUniversity(educate) {
+
+  }
+
+  typeOfEducationApply($event, gender){
 
   }
 }
