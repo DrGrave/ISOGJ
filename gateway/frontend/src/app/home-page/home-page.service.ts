@@ -10,6 +10,9 @@ import {Skill} from "../user-list-page/skill";
 import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
 import {Gender} from "./Gender";
 import {University} from "./University";
+import {TypeOfEducation} from "./TypeOfEducation";
+import {Department} from "./Department";
+import {Faculty} from "./Faculty";
 
 
 @Injectable()
@@ -29,6 +32,11 @@ export class HomePageService {
   private getGenders = '/api/main/gender/authorize/all';
   private changeGenderUrl = '/api/main/user/changegender/?id=';
   private getUniversityByName = '/api/main/university/all/?name=';
+  private getTypesOfEducation = '/api/main/education/types';
+  private getFacultyUrl = '/api/main/faculty/?name=';
+  private getDepartmentUrl = 'api/main/department/?name=';
+  private changeEducationUrl = 'api/main/education/change/?id=';
+  private addEducationUrl = 'api/main/education/add/?id=';
 
 
   constructor(private http: HttpClient) {
@@ -140,6 +148,41 @@ export class HomePageService {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.get<University[]>(this.getUniversityByName + name ,httpOptions);
+  }
+
+  getAllTypesOfEducation(): Observable<TypeOfEducation[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<TypeOfEducation[]>(this.getTypesOfEducation, httpOptions);
+  }
+
+  getDepartments(name: string, faculty: Faculty): Observable<Department[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<Department[]>(this.getDepartmentUrl, faculty,httpOptions);
+  }
+
+  getFaculty(name: string, university: University): Observable<Faculty[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<Faculty[]>(this.getFacultyUrl, university,httpOptions);
+  }
+
+  changeEducation(changedEducation: Education, id: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<any>(this.changeEducationUrl + id, changedEducation, httpOptions)
+  }
+
+  addEducation(education: Education, id: number): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<any>(this.addEducationUrl + id, education, httpOptions)
   }
 }
 

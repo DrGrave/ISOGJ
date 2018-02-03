@@ -16,6 +16,8 @@ import {NewSkill} from "./NewSkill";
 import {City} from "./City";
 import {University} from "./University";
 import {TypeOfEducation} from "./TypeOfEducation";
+import {Department} from "./Department";
+import {Faculty} from "./Faculty";
 
 
 export class User {
@@ -54,9 +56,18 @@ export class HomePageComponent implements OnInit {
   isChangeEducation: boolean[];
   isChangeWork: boolean[];
   universityOption: University[];
+  departmentOption: Department[];
+  facultyOption: Faculty[];
+  departmentName: string;
   universityName: string;
   typesOfEducation: TypeOfEducation[];
   selectedTypeOfEducation: TypeOfEducation;
+  selectedUniversity: University;
+  selectedFaculty: Faculty;
+  selectedDepartment: Department;
+  changedEducation: Education;
+  newEducation: Education;
+  private facultyName: string;
 
 
 
@@ -78,13 +89,22 @@ export class HomePageComponent implements OnInit {
     this.isChangeEducation = [];
     this.isChangeWork = [];
     this.typesOfEducation = [];
+    this.departmentOption = [];
+    this.facultyOption = [];
+    this.changedEducation = new Education();
+    this.newEducation = new Education();
   }
 
   myControl = new FormControl();
   filteredOptions: Observable<Skill[]>;
-  universityControll = new FormControl();
+  universityControl = new FormControl();
   filteredUniversity: Observable<University[]>;
+  filteredDepartment: Observable<Department[]>;
+  filteredFaculty: Observable<Faculty[]>;
   typeOfEducationControl = new FormControl();
+  departmentControl = new FormControl();
+  facultyControl = new FormControl();
+  ifAddEducationClicked: boolean = false;
 
   filter(name: string): Skill[] {
     this.getSkills(name);
@@ -100,6 +120,35 @@ export class HomePageComponent implements OnInit {
       option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
   }
 
+  departmentFilter(name: string): Department[]{
+    this.selectedFaculty = this.facultyOption.filter( item => item.name === this.facultyName)[0];
+    this.getDepartment(name);
+    this.departmentName = name;
+    return this.departmentOption.filter(
+    option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
+
+  }
+
+  facultyFilter(name: string): Faculty[]{
+    this.selectedUniversity = this.universityOption.filter(item => item.name === this.universityName)[0];
+    this.getFaculty(name);
+    this.facultyName = name;
+    return this.facultyOption.filter(
+      option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
+  }
+
+  getDepartment(name: string){
+    this.homePageService.getDepartments(name, this.selectedFaculty).subscribe( departmentDate => {
+      this.departmentOption = departmentDate;
+    })
+  }
+
+  getFaculty(name: string){
+    this.homePageService.getFaculty(name, this.selectedUniversity).subscribe( facultyDate => {
+      this.facultyOption = facultyDate;
+    })
+  }
+
   getUniversity(name: string){
     this.homePageService.getUniversitys(name).subscribe( universityDate => {this.universityOption = universityDate});
   }
@@ -112,17 +161,41 @@ export class HomePageComponent implements OnInit {
     return university ? university.name : undefined;
   }
 
+  displayDepartmentFn(department?: Department): string | undefined{
+    return department ? department.name : undefined;
+  }
+
+  displayFacultyFn(faculty?: Faculty): string | undefined{
+    return faculty ? faculty.name : undefined;
+  }
+
   ngOnInit() {
 
     this.inputSkillForm = this.fb.group({
       nameOfNewSkill: ['', Validators.required]
     });
 
-    this.filteredUniversity = this.universityControll.valueChanges
+
+
+    this.filteredUniversity = this.universityControl.valueChanges
       .pipe(
         startWith<string | University>(''),
         map( value => typeof value === 'string' ? value : value.name),
         map( name => name ? this.universityFilter(name) : this.universityOption.slice())
+      );
+
+    this.filteredFaculty = this.facultyControl.valueChanges
+      .pipe(
+        startWith<string | Faculty>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map( name => name ? this.facultyFilter(name) : this.facultyOption.slice())
+      );
+
+    this.filteredDepartment = this.departmentControl.valueChanges
+      .pipe(
+        startWith<string | Department>(''),
+        map( value => typeof  value === 'string' ? value : value.name),
+        map(name => name ? this.departmentFilter(name) : this.departmentOption.slice())
       );
 
     this.filteredOptions = this.myControl.valueChanges
@@ -247,6 +320,10 @@ export class HomePageComponent implements OnInit {
     this.showUserInfoEdit = !this.showUserInfoEdit;
   }
 
+  getAllTypesOfEducation(){
+    this.homePageService.getAllTypesOfEducation().subscribe( typesEducation => this.typesOfEducation = typesEducation);
+  }
+
   genderApply($event, gender){
     this.selectedGender = gender;
   }
@@ -257,7 +334,7 @@ export class HomePageComponent implements OnInit {
 
 
   addEducation(){
-
+    this.ifAddEducationClicked = !this.ifAddEducationClicked;
   }
 
   changeWork(work){
@@ -284,12 +361,17 @@ export class HomePageComponent implements OnInit {
 
   }
 
-  applyChangeEducation(){
-
+  applyChangeEducation(educate){
+    this.selectedDepartment = this.departmentOption.filter(item => item.name === this.departmentName)[0];
+    this.changedEducation = educate;
+    this.changedEducation.department = this.selectedDepartment;
+    this.homePageService.changeEducation(this.changedEducation, this.myUser.id).subscribe(date => {
+    })
   }
 
   changeEducation(educate){
     this.isChangeEducation[educate.id] = !this.isChangeEducation[educate.id];
+    this.getAllTypesOfEducation();
   }
 
   deleteEducation(educate){
@@ -308,8 +390,24 @@ export class HomePageComponent implements OnInit {
 
   }
 
-  typeOfEducationApply($event, gender){
+  typeOfEducationApply($event, type){
+    this.selectedTypeOfEducation = type;
+  }
 
+  changeFaculty(educate: Education) {
+
+  }
+
+  changeDepartment(educate: Education) {
+
+  }
+
+  applyAddEducation() {
+    this.selectedDepartment = this.departmentOption.filter(item => item.name === this.departmentName)[0];
+    this.newEducation.department = this.selectedDepartment;
+    this.newEducation.typeOfEducation = this.selectedTypeOfEducation;
+    this.homePageService.addEducation(this.newEducation, this.myUser.id).subscribe();
+    //todo return all educations and add it to front
   }
 }
 

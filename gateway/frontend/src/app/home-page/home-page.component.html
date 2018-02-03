@@ -38,7 +38,7 @@
         <button mat-button (click)="applyChangeGender()">Apply.</button>
       </mat-card-content>
 
-      <mat-card-content *ngFor="let educate of education">
+      <mat-card *ngFor="let educate of education">
         <div *ngIf="!isChangeEducation[educate.id]">
         {{educate.typeOfEducation.name}}.
         <br>
@@ -56,7 +56,8 @@
         {{educate.dateOfEnd}}
         </div>
 
-        <div *ngIf="isChangeEducation[educate.id]">
+        <mat-card-content *ngIf="isChangeEducation[educate.id]">
+          <div>
           <mat-card-content>
             <mat-form-field>
               <mat-select placeholder="{{educate.typeOfEducation.name}}" [formControl]="typeOfEducationControl">
@@ -67,10 +68,82 @@
             </mat-form-field>
           </mat-card-content>
 
+          </div>
+            <div *ngIf="isChangeEducation[educate.id]">
+              <mat-card-content>
+                <form (submit)="changeUniversity(educate)">
+                  <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="University: {{educate.department.faculty.university.name}}" aria-label="Assignee" matInput [formControl]="universityControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayEducationFn">
+                      <mat-option *ngFor="let option of filteredUniversity | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </mat-card-content>
+            </div>
+
+            <div *ngIf="isChangeEducation[educate.id]">
+              <form (submit)="changeFaculty(educate)">
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Faculty: {{educate.department.faculty.name}}" aria-label="Assignee" matInput [formControl]="facultyControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFacultyFn">
+                    <mat-option *ngFor="let option of filteredFaculty | async" [value]="option">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+            </div>
+
+
+
+            <div *ngIf="isChangeEducation[educate.id]">
+              <form (submit)="changeDepartment(educate)">
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Department: {{educate.department.name}}" aria-label="Assignee" matInput [formControl]="departmentControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartmentFn">
+                    <mat-option *ngFor="let option of filteredDepartment | async" [value]="option">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+            </div>
+        </mat-card-content>
+
+        <mat-card-content>
+          <button mat-button (click)="changeEducation(educate)">Ch</button>
+        </mat-card-content>
+
+        <div *ngIf="isChangeEducation[educate.id]" class="change-education">
           <mat-card-content>
-            <form (submit)="changeUniversity(educate)">
+            <button mat-button (click)="applyChangeEducation(educate)">apply</button>
+          </mat-card-content>
+          <mat-card-content>
+            <button mat-button (click)="deleteEducation(educate)">delete</button>
+          </mat-card-content>
+        </div>
+      </mat-card>
+
+
+
+      <mat-card *ngIf="ifAddEducationClicked">
+          <mat-card-content *ngIf="ifAddEducationClicked">
+            <mat-form-field>
+              <mat-select placeholder="Type of education" [formControl]="typeOfEducationControl">
+                <mat-option *ngFor="let type of typesOfEducation" [value]="selectedTypeOfEducation" (click)="typeOfEducationApply($event, type)">
+                  {{type.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-content *ngIf="ifAddEducationClicked">
+            <form (submit)="changeUniversity()">
               <mat-form-field class="example-full-width">
-                <input type="text" placeholder="University: {{educate.department.faculty.university.name}}" aria-label="Assignee" matInput [formControl]="universityControll" [matAutocomplete]="auto">
+                <input type="text" placeholder="University" aria-label="Assignee" matInput [formControl]="universityControl" [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayEducationFn">
                   <mat-option *ngFor="let option of filteredUniversity | async" [value]="option">
                     {{ option.name }}
@@ -79,21 +152,35 @@
               </mat-form-field>
             </form>
           </mat-card-content>
-        </div>
 
-        <mat-card-content>
-          <button mat-button (click)="changeEducation(educate)">Ch</button>
-        </mat-card-content>
 
-        <div *ngIf="isChangeEducation[educate.id]" class="change-education">
-          <mat-card-content>
-            <button mat-button (click)="applyChangeEducation()">apply</button>
-          </mat-card-content>
-          <mat-card-content>
-            <button mat-button (click)="deleteEducation(educate)">delete</button>
-          </mat-card-content>
-        </div>
-      </mat-card-content>
+          <form (submit)="changeFaculty()" *ngIf="ifAddEducationClicked">
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Faculty" aria-label="Assignee" matInput [formControl]="facultyControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFacultyFn">
+                <mat-option *ngFor="let option of filteredFaculty | async" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+          <form (submit)="changeDepartment()" *ngIf="ifAddEducationClicked">
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Department" aria-label="Assignee" matInput [formControl]="departmentControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartmentFn">
+                <mat-option *ngFor="let option of filteredDepartment | async" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+        <button mat-button (click)="applyAddEducation()">Apply</button>
+
+      </mat-card>
+
+
 
       <mat-card-content>
         <button mat-button (click)="addEducation()">Add</button>
@@ -120,9 +207,10 @@
       <mat-card-content>
         <button mat-button (click)="addWork()">Add</button>
       </mat-card-content>
-
-
     </mat-card>
+
+
+
 
     <mat-card class="card-contacts">
       <mat-card-title>
@@ -166,7 +254,6 @@
         <mat-chip-list>
           <mat-chip *ngFor="let skill of myUser.skill">
             {{skill.skill.name}}
-            <button mat-button class="skill-button" (click)="editSkill(skill)" [disabled]="!removable">C</button>
             <button mat-button class="skill-button" (click)="removeSkill($event, skill)" [disabled]="!removable">R</button>
           </mat-chip>
         </mat-chip-list>

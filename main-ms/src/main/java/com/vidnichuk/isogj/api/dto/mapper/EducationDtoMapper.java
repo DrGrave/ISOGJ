@@ -10,5 +10,7 @@ public interface EducationDtoMapper {
 
     EducationDto formEducationToEducationDto(Education education);
 
+    Education fromEducationDtoToEducation(EducationDto educationDto);
+
     N_A_EducationDto fromEducationToNAEducationDto(Education education);
 }

@@ -3,14 +3,13 @@ package com.vidnichuk.isogj.impl.controller;
 import com.vidnichuk.isogj.api.dto.model.EducationDto;
 
 import com.vidnichuk.isogj.api.dto.model.N_A_EducationDto;
+import com.vidnichuk.isogj.api.dto.model.TypeOfEducationDto;
 import com.vidnichuk.isogj.api.service.education.EducationLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -30,6 +29,21 @@ public class EducationController {
     @GetMapping("/userlist")
     public List<N_A_EducationDto> findLastEducationByUserId(@RequestParam("id") long id){
         return educationLightWeightService.getLastEducationByUserId(id);
+    }
+
+    @GetMapping("/types")
+    public List<TypeOfEducationDto> getAllTypesOfEducation(){
+        return educationLightWeightService.getAllTypesOfEducation();
+    }
+
+    @PostMapping("/change")
+    public void changeEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+        educationLightWeightService.changeEducation(educationDto, id);
+    }
+
+    @PostMapping("/add")
+    public void addEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+        educationLightWeightService.addEducation(educationDto, id);
     }
 
 }
