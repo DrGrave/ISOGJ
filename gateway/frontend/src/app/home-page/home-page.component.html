@@ -117,6 +117,18 @@
                 </mat-form-field>
               </form>
             </div>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker1" placeholder="Value binding" value="{{convertDate(educate.dateOfStart)}}" (dateChange)="changeStartEvent($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Value binding" value="{{convertDate(educate.dateOfEnd)}}" (dateChange)="changeEndEvent($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          {{test}}
         </mat-card-content>
 
         <mat-card-content>

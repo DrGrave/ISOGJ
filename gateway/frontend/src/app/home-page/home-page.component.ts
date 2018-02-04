@@ -18,6 +18,7 @@ import {University} from "./University";
 import {TypeOfEducation} from "./TypeOfEducation";
 import {Department} from "./Department";
 import {Faculty} from "./Faculty";
+import {MatDatepickerInputEvent} from "@angular/material";
 
 
 
@@ -63,7 +64,10 @@ export class HomePageComponent implements OnInit {
   changedEducation: Education;
   newEducation: Education;
   private facultyName: string;
+  changedDateOfStart: Date;
+  changedDateOfEnd: Date;
 
+  test: string;
 
 
 
@@ -359,7 +363,15 @@ export class HomePageComponent implements OnInit {
   applyChangeEducation(educate){
     this.selectedDepartment = this.departmentOption.filter(item => item.name === this.departmentName)[0];
     this.changedEducation = educate;
-    this.changedEducation.department = this.selectedDepartment;
+    if (this.selectedDepartment != null) {
+      this.changedEducation.department = this.selectedDepartment;
+    }
+    if (this.changedDateOfStart != null){
+      this.changedEducation.dateOfStart = this.changedDateOfStart.getTime();
+    }
+    if (this.changedDateOfEnd != null){
+      this.changedEducation.dateOfEnd = this.changedDateOfEnd.getTime();
+    }
     this.homePageService.changeEducation(this.changedEducation, this.myUser.id).subscribe(date => {
     })
   }
@@ -406,7 +418,15 @@ export class HomePageComponent implements OnInit {
   }
 
   convertDate(dateOfEnd: number): String {
-    return new Date(dateOfEnd).toISOString()
+    return new Date(dateOfEnd).toISOString();
+  }
+
+  changeStartEvent(event: MatDatepickerInputEvent<Date>) {
+    this.changedDateOfStart = event.value;
+  }
+
+  changeEndEvent(event: MatDatepickerInputEvent<Date>) {
+    this.changedDateOfEnd = event.value;
   }
 }
 
