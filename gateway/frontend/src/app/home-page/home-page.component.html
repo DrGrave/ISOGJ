@@ -205,24 +205,84 @@
       </mat-card-content>
 
       <mat-card-content *ngFor="let company of userCompany">
-        <div *ngIf="!isChangeWork[company.idUserCompany]">
-          Work:
-          {{company.company.name}}
-          Position:
-          {{company.position.name}}
-        </div>
+          <div *ngIf="!isChangeWork[company.idUserCompany]">
+            Work:
+            {{company.company.name}}
+            Position:
+            {{company.position.name}}
+            {{company.idUserCompany}}
+          </div>
+
+          <div *ngIf="isChangeWork[company.idUserCompany]">
+              <div class="change-work" *ngIf="isChangeWork[company.idUserCompany]">
+                <form (submit)="changeCompany()" *ngIf="isChangeWork[company.idUserCompany]">
+                  <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Company:{{company.company.name}}" aria-label="Assignee" matInput [formControl]="companyControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCompanyFn">
+                      <mat-option *ngFor="let option of filteredCompany | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+
+                <form (submit)="changePosition()" *ngIf="isChangeWork[company.idUserCompany]">
+                  <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Position:{{company.position.name}}" aria-label="Assignee" matInput [formControl]="positionControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPositionFn">
+                      <mat-option *ngFor="let option of filteredPosition | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+
+            </div>
+
+
+
+            <mat-card-content>
+              <button mat-button (click)="applyChangeCompany(company)">apply</button>
+
+              <button mat-button (click)="deleteWork(company)">delete</button>
+            </mat-card-content>
+          </div>
+
         <mat-card-content>
           <button mat-button (click)="changeWork(company)">Ch</button>
         </mat-card-content>
 
-        <div class="change-work" *ngIf="isChangeWork[company.idUserCompany]">
-          <mat-card-content>
-            <button mat-button (click)="applyChangeCompany(company)">apply</button>
-            <button mat-button (click)="deleteWork(company)">delete</button>
-          </mat-card-content>
-        </div>
+
       </mat-card-content>
 
+      <mat-card-content *ngIf="isAddCompanyAdd">
+        <form (submit)="changeCompany()" *ngIf="isAddCompanyAdd">
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Company" aria-label="Assignee" matInput [formControl]="companyControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCompanyFn">
+              <mat-option *ngFor="let option of filteredCompany | async" [value]="option">
+                {{ option.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+
+        <form (submit)="changePosition()" *ngIf="isAddCompanyAdd">
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Position" aria-label="Assignee" matInput [formControl]="positionControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPositionFn">
+              <mat-option *ngFor="let option of filteredPosition | async" [value]="option">
+                {{ option.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+
+        <mat-card-content>
+          <button mat-button (click)="applyAddWork()">apply</button>
+          <button mat-button (click)="declineCompany()">decline</button>
+        </mat-card-content>
+      </mat-card-content>
       <mat-card-content>
         <button mat-button (click)="addWork()">Add</button>
       </mat-card-content>

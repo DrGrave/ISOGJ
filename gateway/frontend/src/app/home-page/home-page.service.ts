@@ -13,6 +13,9 @@ import {University} from "./University";
 import {TypeOfEducation} from "./TypeOfEducation";
 import {Department} from "./Department";
 import {Faculty} from "./Faculty";
+import {Company} from "./Company";
+import {Position} from "./Position";
+import {User} from "../user-list-page/user";
 
 
 @Injectable()
@@ -38,6 +41,11 @@ export class HomePageService {
   private changeEducationUrl = 'api/main/education/change/?id=';
   private addEducationUrl = 'api/main/education/add/?id=';
   private deleteEducationUrl = 'api/main/education/delete/?id=';
+  private getCompanysUrl = 'api/main/company/getname/?name=';
+  private getPositionsUrl = 'api/main/company/position/getname/?name=';
+  private changeCompanyUrl = 'api/main/company/change/?id=';
+  private addCompanyUrl = 'api/main/company/add/?id=';
+  private deleteCompanyUrl = 'api/main/company/delete/?id=';
 
 
   constructor(private http: HttpClient) {
@@ -191,6 +199,41 @@ export class HomePageService {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.post<Education[]>(this.deleteEducationUrl +id, educate, httpOptions);
+  }
+
+  getCompanys(name: string): Observable<Company[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<Company[]>(this.getCompanysUrl + name, httpOptions);
+  }
+
+  getPositions(name: string): Observable<Position[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<Position[]>(this.getPositionsUrl + name, httpOptions);
+  }
+
+  changeCompany(company: UserCompany, id: number): Observable<UserCompany[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserCompany[]>(this.changeCompanyUrl + id, company, httpOptions);
+  }
+
+  addCompany(company: UserCompany, id: number): Observable<UserCompany[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserCompany[]>(this.addCompanyUrl +id, company, httpOptions);
+  }
+
+  deleteCompany(company: User, id: number): Observable<UserCompany[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserCompany[]>(this.deleteCompanyUrl + id, company, httpOptions);
   }
 }
 

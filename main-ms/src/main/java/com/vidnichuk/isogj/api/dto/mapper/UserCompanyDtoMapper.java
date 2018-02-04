@@ -8,4 +8,6 @@ import org.mapstruct.Mapper;
 public interface UserCompanyDtoMapper {
 
     UserCompanyDto fromUserCompanyToUserCompanyDto(UserCompany userCompany);
+
+    UserCompany fromUserCompanyDtoToUserCompany(UserCompanyDto userCompanyDto);
 }

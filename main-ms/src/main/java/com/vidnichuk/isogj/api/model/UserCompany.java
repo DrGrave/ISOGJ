@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class UserCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUserCompany;
+    private Long idUserCompany;
 
     /**
      * user object
@@ -37,16 +37,18 @@ public class UserCompany {
     /**
      * @return id of user company
      */
-    public int getId() {
+    public Long getIdUserCompany() {
         return idUserCompany;
     }
 
     /**
      * @param idUserCompany set id of user company
      */
-    public void setId(int idUserCompany) {
+    public void setIdUserCompany(Long idUserCompany) {
         this.idUserCompany = idUserCompany;
     }
+
+
 
     /**
      * @return user object

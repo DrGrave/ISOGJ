@@ -371,7 +371,7 @@ alter table summary
 
 create table user_company
 (
-  id_user_company int auto_increment
+  id_user_company bigint auto_increment
   primary key,
   company bigint null,
   position bigint null,

@@ -19,6 +19,8 @@ import {TypeOfEducation} from "./TypeOfEducation";
 import {Department} from "./Department";
 import {Faculty} from "./Faculty";
 import {MatDatepickerInputEvent} from "@angular/material";
+import {Company} from "./Company";
+import {Position} from "./Position";
 
 
 
@@ -53,19 +55,27 @@ export class HomePageComponent implements OnInit {
   isChangeWork: boolean[];
   universityOption: University[];
   departmentOption: Department[];
+  companyOption: Company[];
+  positionOption: Position[];
   facultyOption: Faculty[];
   departmentName: string;
   universityName: string;
+  companyName: string;
+  positionName: string;
   typesOfEducation: TypeOfEducation[];
   selectedTypeOfEducation: TypeOfEducation;
   selectedUniversity: University;
   selectedFaculty: Faculty;
   selectedDepartment: Department;
+  selectedCompany: Company;
+  selectedPosition: Position;
   changedEducation: Education;
   newEducation: Education;
   private facultyName: string;
   changedDateOfStart: Date;
   changedDateOfEnd: Date;
+  isAddCompanyAdd: boolean = false;
+  addNewWork: UserCompany;
 
   test: string;
 
@@ -89,9 +99,12 @@ export class HomePageComponent implements OnInit {
     this.isChangeWork = [];
     this.typesOfEducation = [];
     this.departmentOption = [];
+    this.companyOption = [];
+    this.positionOption = [];
     this.facultyOption = [];
     this.changedEducation = new Education();
     this.newEducation = new Education();
+    this.addNewWork = new UserCompany();
   }
 
   myControl = new FormControl();
@@ -100,10 +113,29 @@ export class HomePageComponent implements OnInit {
   filteredUniversity: Observable<University[]>;
   filteredDepartment: Observable<Department[]>;
   filteredFaculty: Observable<Faculty[]>;
+  filteredCompany: Observable<Company[]>;
+  filteredPosition: Observable<Position[]>;
   typeOfEducationControl = new FormControl();
   departmentControl = new FormControl();
   facultyControl = new FormControl();
   ifAddEducationClicked: boolean = false;
+  companyControl = new FormControl();
+  positionControl = new FormControl();
+
+
+  companyFilter(name: string): Company[]{
+    this.getCompanys(name);
+    this.companyName = name;
+    return this.companyOption.filter( option =>
+     option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
+  }
+
+  positionFilter(name: string): Position[]{
+    this.getPositions(name);
+    this.positionName = name;
+    return this.positionOption.filter(option =>
+     option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0)
+  }
 
   filter(name: string): Skill[] {
     this.getSkills(name);
@@ -152,6 +184,13 @@ export class HomePageComponent implements OnInit {
     this.homePageService.getUniversitys(name).subscribe( universityDate => {this.universityOption = universityDate});
   }
 
+  displayCompanyFn(company?: Company): string | undefined{
+    return company ? company.name: undefined;
+  }
+  displayPositionFn(position?: Position): string | undefined{
+    return position ? position.name: undefined;
+  }
+
   displayFn(skill?: Skill): string | undefined {
     return skill ? skill.name : undefined;
   }
@@ -174,7 +213,19 @@ export class HomePageComponent implements OnInit {
       nameOfNewSkill: ['', Validators.required]
     });
 
+    this.filteredCompany = this.companyControl.valueChanges
+      .pipe(
+        startWith<string | Company>(''),
+        map( value => typeof value === 'string' ? value : value.name),
+        map( name => name ? this.companyFilter(name) : this.companyOption.slice())
+      );
 
+    this.filteredPosition = this.positionControl.valueChanges
+      .pipe(
+        startWith<string | Position>(''),
+        map( value => typeof  value === 'string' ? value : value.name),
+        map(name =>name ? this.positionFilter(name) : this.positionOption.slice())
+      );
 
     this.filteredUniversity = this.universityControl.valueChanges
       .pipe(
@@ -336,12 +387,12 @@ export class HomePageComponent implements OnInit {
     this.ifAddEducationClicked = !this.ifAddEducationClicked;
   }
 
-  changeWork(work){
-    this.isChangeWork[work.idUserCompany] = !this.isChangeWork[work.idUserCompany];
+  changeWork(company){
+    this.isChangeWork[company.idUserCompany] = !this.isChangeWork[company.idUserCompany];
   }
 
   addWork(){
-
+    this.isAddCompanyAdd = !this.isAddCompanyAdd;
   }
 
   changeEmail(){
@@ -373,7 +424,8 @@ export class HomePageComponent implements OnInit {
       this.changedEducation.dateOfEnd = this.changedDateOfEnd.getTime();
     }
     this.homePageService.changeEducation(this.changedEducation, this.myUser.id).subscribe(date => {
-    })
+    });
+    this.isChangeEducation[educate.id] = !this.isChangeEducation[educate.id];
   }
 
   changeEducation(educate){
@@ -385,12 +437,19 @@ export class HomePageComponent implements OnInit {
     this.homePageService.deleteEducation(educate, this.myUser.id).subscribe( date => this.education = date);
   }
 
-  applyChangeCompany(){
-
+  applyChangeCompany(company){
+    if (this.selectedCompany != null){
+      company.company = this.selectedCompany;
+    }
+    if (this.selectedPosition != null){
+      company.position = this.selectedPosition;
+    }
+    this.homePageService.changeCompany(company, this.myUser.id).subscribe(date => this.userCompany = date);
+    this.isChangeWork[company.idUserCompany] = !this.isChangeWork[company.idUserCompany];
   }
 
   deleteWork(company){
-
+    this.homePageService.deleteCompany(company, this.myUser.id).subscribe(date => this.userCompany = date);
   }
 
   changeUniversity(educate) {
@@ -427,6 +486,33 @@ export class HomePageComponent implements OnInit {
 
   changeEndEvent(event: MatDatepickerInputEvent<Date>) {
     this.changedDateOfEnd = event.value;
+  }
+
+  changeCompany() {
+    this.selectedCompany = this.companyOption.filter(item => item.name === this.companyName)[0];
+  }
+
+  changePosition() {
+    this.selectedPosition = this.positionOption.filter(item => item.name === this.positionName)[0];
+  }
+
+  private getCompanys(name: string) {
+    this.homePageService.getCompanys(name).subscribe(companys => this.companyOption = companys);
+  }
+
+  private getPositions(name: string) {
+    this.homePageService.getPositions(name).subscribe( positions => this.positionOption = positions);
+  }
+
+  applyAddWork() {
+    this.addNewWork.company = this.companyOption.filter(item => item.name === this.companyName)[0];
+    this.addNewWork.position = this.positionOption.filter(item => item.name === this.positionName)[0];
+    this.homePageService.addCompany(this.addNewWork, this.myUser.id).subscribe(date => this.userCompany = date);
+    this.isAddCompanyAdd = !this.isAddCompanyAdd;
+  }
+
+  declineCompany() {
+    this.isAddCompanyAdd = !this.isAddCompanyAdd;
   }
 }
 
