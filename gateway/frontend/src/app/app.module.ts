@@ -10,7 +10,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatAutocompleteModule,
-  MatButtonModule, MatChipsModule, MatIconModule, MatInputModule, MatSelectModule,
+  MatButtonModule, MatChipsModule, MatDatepickerModule, MatIconModule, MatInputModule, MatNativeDateModule,
+  MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -30,12 +31,12 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { LangSelectComponent } from './lang-select/lang-select.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
-  import {AuthGuard} from "./shared/service/auth/AuthGuard";
-  import {MatCardModule} from '@angular/material/card';
-  import {MatDialogModule} from '@angular/material';
+import {AuthGuard} from "./shared/service/auth/AuthGuard";
+import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material';
 import { MoreUserInfoPageComponent } from './more-user-info-page/more-user-info-page.component';
 import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page-service";
-  import {HomePageService} from "./home-page/home-page.service";
+import {HomePageService} from "./home-page/home-page.service";
 
   export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -58,7 +59,6 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
     MoreUserInfoPageComponent
   ],
   imports: [
-
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -70,9 +70,11 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
     ReactiveFormsModule,
     MatButtonModule,
     SharedModule,
+    MatDatepickerModule,
     MatToolbarModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatNativeDateModule,
     MatIconModule,
     MatSelectModule,
     TranslateModule.forRoot({

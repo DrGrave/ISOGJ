@@ -37,6 +37,7 @@ export class HomePageService {
   private getDepartmentUrl = 'api/main/department/?name=';
   private changeEducationUrl = 'api/main/education/change/?id=';
   private addEducationUrl = 'api/main/education/add/?id=';
+  private deleteEducationUrl = 'api/main/education/delete/?id=';
 
 
   constructor(private http: HttpClient) {
@@ -171,18 +172,25 @@ export class HomePageService {
     return this.http.post<Faculty[]>(this.getFacultyUrl, university,httpOptions);
   }
 
-  changeEducation(changedEducation: Education, id: number): Observable<any> {
+  changeEducation(changedEducation: Education, id: number): Observable<Education[]> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
-    return this.http.post<any>(this.changeEducationUrl + id, changedEducation, httpOptions)
+    return this.http.post<Education[]>(this.changeEducationUrl + id, changedEducation, httpOptions)
   }
 
-  addEducation(education: Education, id: number): Observable<any>{
+  addEducation(education: Education, id: number): Observable<Education[]>{
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
-    return this.http.post<any>(this.addEducationUrl + id, education, httpOptions)
+    return this.http.post<Education[]>(this.addEducationUrl + id, education, httpOptions)
+  }
+
+  deleteEducation(educate: Education, id: number): Observable<Education[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<Education[]>(this.deleteEducationUrl +id, educate, httpOptions);
   }
 }
 

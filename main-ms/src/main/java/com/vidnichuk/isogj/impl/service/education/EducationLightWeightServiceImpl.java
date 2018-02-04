@@ -32,12 +32,18 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     }
 
     @Override
-    public void changeEducation(EducationDto educationDto, Long id) {
-        educationService.changeEducation(educationDto, id);
+    public List<EducationDto> changeEducation(EducationDto educationDto, Long id) {
+        return educationService.changeEducation(educationDto, id);
+
     }
 
     @Override
-    public void addEducation(EducationDto educationDto, Long id) {
-        educationService.addEducation(educationDto, id);
+    public List<EducationDto> addEducation(EducationDto educationDto, Long id) {
+        return educationService.addEducation(educationDto, id);
+    }
+
+    @Override
+    public List<EducationDto> deleteEducation(EducationDto educationDto, Long id) {
+        return educationService.deleteEducation(educationDto, id);
     }
 }

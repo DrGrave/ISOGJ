@@ -20,11 +20,6 @@ import {Department} from "./Department";
 import {Faculty} from "./Faculty";
 
 
-export class User {
-  constructor(public name: string) { }
-
-
-}
 
 @Component({
   selector: 'app-home-page',
@@ -375,7 +370,7 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteEducation(educate){
-
+    this.homePageService.deleteEducation(educate, this.myUser.id).subscribe( date => this.education = date);
   }
 
   applyChangeCompany(){
@@ -406,8 +401,12 @@ export class HomePageComponent implements OnInit {
     this.selectedDepartment = this.departmentOption.filter(item => item.name === this.departmentName)[0];
     this.newEducation.department = this.selectedDepartment;
     this.newEducation.typeOfEducation = this.selectedTypeOfEducation;
-    this.homePageService.addEducation(this.newEducation, this.myUser.id).subscribe();
-    //todo return all educations and add it to front
+    this.homePageService.addEducation(this.newEducation, this.myUser.id).subscribe(date => this.education = date);
+    this.ifAddEducationClicked = !this.ifAddEducationClicked;
+  }
+
+  convertDate(dateOfEnd: number): String {
+    return new Date(dateOfEnd).toISOString()
   }
 }
 

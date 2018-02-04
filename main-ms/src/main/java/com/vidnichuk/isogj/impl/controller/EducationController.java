@@ -37,13 +37,18 @@ public class EducationController {
     }
 
     @PostMapping("/change")
-    public void changeEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
-        educationLightWeightService.changeEducation(educationDto, id);
+    public List<EducationDto> changeEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+        return educationLightWeightService.changeEducation(educationDto, id);
     }
 
     @PostMapping("/add")
-    public void addEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
-        educationLightWeightService.addEducation(educationDto, id);
+    public List<EducationDto> addEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+        return educationLightWeightService.addEducation(educationDto, id);
+    }
+
+    @PostMapping("/delete")
+    public List<EducationDto> deleteEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+        return educationLightWeightService.deleteEducation(educationDto, id);
     }
 
 }

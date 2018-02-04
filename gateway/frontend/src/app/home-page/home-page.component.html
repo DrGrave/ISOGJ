@@ -50,10 +50,16 @@
         <br>
         Department:
         {{educate.department.name}}
-        <br>
-        End education:
-        <br>
-        {{educate.dateOfEnd}}
+          <mat-form-field>
+            <input matInput [matDatepicker]="dp2" placeholder="Date of start education" value="{{convertDate(educate.dateOfStart)}}" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+            <mat-datepicker #dp2 ></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="dp3" placeholder="Date of end education" value="{{convertDate(educate.dateOfEnd)}}" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 ></mat-datepicker>
+          </mat-form-field>
         </div>
 
         <mat-card-content *ngIf="isChangeEducation[educate.id]">
@@ -187,18 +193,19 @@
       </mat-card-content>
 
       <mat-card-content *ngFor="let company of userCompany">
-        Work:
-        {{company.company.name}}
-        Position:
-        {{company.position.name}}
-
+        <div *ngIf="!isChangeWork[company.idUserCompany]">
+          Work:
+          {{company.company.name}}
+          Position:
+          {{company.position.name}}
+        </div>
         <mat-card-content>
           <button mat-button (click)="changeWork(company)">Ch</button>
         </mat-card-content>
 
         <div class="change-work" *ngIf="isChangeWork[company.idUserCompany]">
           <mat-card-content>
-            <button mat-button (click)="applyChangeCompany()">apply</button>
+            <button mat-button (click)="applyChangeCompany(company)">apply</button>
             <button mat-button (click)="deleteWork(company)">delete</button>
           </mat-card-content>
         </div>

@@ -5,7 +5,6 @@ import com.vidnichuk.isogj.api.dao.TypeOfEducationRepository;
 import com.vidnichuk.isogj.api.dao.UserRepository;
 import com.vidnichuk.isogj.api.dto.mapper.EducationDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.TypeOfEducationDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.TypeOfSkillDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.EducationDto;
 import com.vidnichuk.isogj.api.dto.model.N_A_EducationDto;
 import com.vidnichuk.isogj.api.dto.model.TypeOfEducationDto;
@@ -67,16 +66,36 @@ public class EducationServiceImpl implements EducationService{
     }
 
     @Override
-    public void changeEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> changeEducation(EducationDto educationDto, Long id) {
         Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
         education.setUser(userRepository.findById(id));
         educationRepository.save(education);
+        List<EducationDto> educationDtoList = new ArrayList<>();
+        for (Education educ: educationRepository.findAllByUser_Id(id)){
+            educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educ));
+        }
+        return educationDtoList;
     }
 
     @Override
-    public void addEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> addEducation(EducationDto educationDto, Long id) {
+        List<EducationDto> educationDtoList = new ArrayList<>();
         Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
         education.setUser(userRepository.findById(id));
         educationRepository.save(education);
+        for (Education educate: educationRepository.findAllByUser_Id(id)){
+            educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educate));
+        }
+        return educationDtoList;
+    }
+
+    @Override
+    public List<EducationDto> deleteEducation(EducationDto educationDto, Long id) {
+        educationRepository.delete(educationDtoMapper.fromEducationDtoToEducation(educationDto));
+        List<EducationDto> educationDtoList = new ArrayList<>();
+        for (Education educ: educationRepository.findAllByUser_Id(id)){
+            educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educ));
+        }
+        return educationDtoList;
     }
 }

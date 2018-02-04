@@ -14,7 +14,9 @@ public interface EducationService {
 
     List<TypeOfEducationDto> getAllTypesOfEducation();
 
-    void changeEducation(EducationDto educationDto, Long id);
+    List<EducationDto> changeEducation(EducationDto educationDto, Long id);
 
-    void addEducation(EducationDto educationDto, Long id);
+    List<EducationDto> addEducation(EducationDto educationDto, Long id);
+
+    List<EducationDto> deleteEducation(EducationDto educationDto, Long id);
 }
