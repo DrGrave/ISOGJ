@@ -16,6 +16,8 @@ import {Faculty} from "./Faculty";
 import {Company} from "./Company";
 import {Position} from "./Position";
 import {User} from "../user-list-page/user";
+import {City} from "./City";
+import {TypeOfLink} from "./TypeOfLink";
 
 
 @Injectable()
@@ -46,11 +48,45 @@ export class HomePageService {
   private changeCompanyUrl = 'api/main/company/change/?id=';
   private addCompanyUrl = 'api/main/company/add/?id=';
   private deleteCompanyUrl = 'api/main/company/delete/?id=';
+  private getCityUrl = 'api/main/city/?name=';
+  private applyCityUrl = 'api/main/user/city/?id=';
+  private getAllTypesOfLinks = 'api/main/user/links/all';
+  private changeLinkUrl = 'api/main/user/links/change/?id=';
+  private addLinkUrl = 'api/main/user/links/add/?id=';
+  private changeImgUrl = 'api/main/user/links/img/change/?id=';
+  private deleteLinkUrl = 'api/main/user/links/delete/?id=';
 
 
   constructor(private http: HttpClient) {
   }
 
+  deleteLink(userLink: UserLink, id: number): Observable<UserLink[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserLink[]>(this.deleteLinkUrl + id, userLink, httpOptions);
+  }
+
+  changeImg(userLink: UserLink, id: number): Observable<UserLink>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserLink>(this.changeImgUrl + id, userLink, httpOptions);
+  }
+
+  changeLink(userLink: UserLink, id: number): Observable<UserLink[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserLink[]>(this.changeLinkUrl + id, userLink, httpOptions);
+  }
+
+  addLink(userLink: UserLink, id: number): Observable<UserLink[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<UserLink[]>(this.addLinkUrl + id, userLink, httpOptions);
+  }
 
   getUserByToken(): Observable<string> {
     const httpOptions = {
@@ -61,7 +97,7 @@ export class HomePageService {
   }
 
   getUserByUsername(username: String): Observable<MyUser>{
-  const httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.get<MyUser>(this.thisUser + username, httpOptions)
@@ -234,6 +270,27 @@ export class HomePageService {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.post<UserCompany[]>(this.deleteCompanyUrl + id, company, httpOptions);
+  }
+
+  getCity(name: string): Observable<City[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<City[]>(this.getCityUrl + name, httpOptions);
+  }
+
+  addCity(city: City, id: number): Observable<City>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<City>(this.applyCityUrl + id, city, httpOptions);
+  }
+
+  getAllTypesOfLink(): Observable<TypeOfLink[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.get<TypeOfLink[]>(this.getAllTypesOfLinks, httpOptions);
   }
 }
 

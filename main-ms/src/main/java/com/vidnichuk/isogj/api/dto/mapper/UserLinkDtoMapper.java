@@ -7,4 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserLinkDtoMapper {
     UserLinkDto fromUserLinkToUserLinkDto(UserLink userLink);
+    UserLink fromUserLinkDtoToUserLink(UserLinkDto userLinkDto);
 }

@@ -1,5 +1,6 @@
 package com.vidnichuk.isogj.api.service.user;
 
+import com.vidnichuk.isogj.api.dto.model.CityDto;
 import com.vidnichuk.isogj.api.dto.model.GenderDto;
 import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
@@ -49,4 +50,6 @@ public interface UserService {
     MeUserDto getUserByUsername(String username);
 
     GenderDto changeGender(GenderDto gender, long id);
+
+    CityDto changeCity(CityDto cityDto, long id);
 }

@@ -1,9 +1,6 @@
 package com.vidnichuk.isogj.api.service.user;
 
-import com.vidnichuk.isogj.api.dto.model.GenderDto;
-import com.vidnichuk.isogj.api.dto.model.MeUserDto;
-import com.vidnichuk.isogj.api.dto.model.TempUserDto;
-import com.vidnichuk.isogj.api.dto.model.UserDto;
+import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.Gender;
 
 import java.util.List;
@@ -25,4 +22,6 @@ public interface UserLightWeightService {
     MeUserDto getUserByUsername(String username);
 
     GenderDto changeGender(GenderDto gender, long id);
+
+    CityDto changeCity(CityDto cityDto, long id);
 }

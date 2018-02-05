@@ -292,12 +292,27 @@
 
 
     <mat-card class="card-contacts">
-      <mat-card-title>
+      <mat-card-title *ngIf="!ifCityChange">
         City: {{myUser.city.name}}
-        <mat-card-content>
-          <button mat-button (click)="changeCity()">Ch</button>
-        </mat-card-content>
       </mat-card-title>
+      <mat-card-content *ngIf="ifCityChange">
+
+        <form (submit)="changeCityFormfild()" *ngIf="ifCityChange">
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="City: {{myUser.city.name}}" aria-label="Assignee" matInput [formControl]="cityControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCityFn">
+              <mat-option *ngFor="let option of filteredCity | async" [value]="option">
+                {{ option.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+
+        <button mat-button (click)="applyChangeCity()">Apply</button>
+      </mat-card-content>
+      <mat-card-content>
+        <button mat-button (click)="changeCity()">Ch</button>
+      </mat-card-content>
       <mat-card-title>
         Contact info:
       </mat-card-title>
@@ -309,13 +324,55 @@
         </mat-card-content>
       </mat-card-content>
       <mat-card-content *ngFor="let link of links">
+        <mat-card-content *ngIf="!isLinkChange[link.id]">
         {{link.typeOfLink.name}}:
 
         {{link.link}}
+        </mat-card-content>
+
+        <mat-card-content *ngIf="isLinkChange[link.id]">
+          <form [formGroup]="changeLinkForm">
+            <mat-form-field>
+              <mat-select placeholder="{{link.typeOfLink.name}}" [formControl]="typeOfLinkControl">
+                <mat-option *ngFor="let type of typeOfLinks" [value]="selectedTypeOfLink" (click)="typeOfLinksApply($event, type)">
+                  {{type.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="{{link.link}}" formControlName="linkTextControl" matInput required>
+            </mat-form-field>
+          </form>
+
+          <button mat-button (click)="deleteLink(link)">Delete</button>
+          <button mat-button (click)="applyChangeLink(link)">apply</button>
+        </mat-card-content>
 
         <mat-card-content>
           <button mat-button (click)="changeLink(link)">Ch</button>
         </mat-card-content>
+      </mat-card-content>
+
+      <mat-card-content *ngIf="isAddLink">
+
+        <form [formGroup]="addLinkForm">
+          <mat-form-field>
+            <mat-select placeholder="Type of link" [formControl]="typeOfLinkControl">
+              <mat-option *ngFor="let type of typeOfLinks" [value]="selectedTypeOfLinkAdd" (click)="typeOfLinksAddApply($event, type)">
+                {{type.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Link" formControlName="linkTextControlAdd" matInput required>
+          </mat-form-field>
+        </form>
+
+
+        <button mat-button (click)="applyAdd()">Apply</button>
+
       </mat-card-content>
 
       <mat-card-content>
@@ -372,7 +429,7 @@
       <form [formGroup]="inputSkillForm">
         <div *ngIf="show">
           <mat-form-field onsubmit="acceptCreateSkill()">
-            <input type="text" placeholder="Skill name" matInput formControlName="nameOfNewSkill" required>
+            <input type="text" placeholder="Skill name" matInput formControlName="nameOfNewSkill" required >
           </mat-form-field>
 
 

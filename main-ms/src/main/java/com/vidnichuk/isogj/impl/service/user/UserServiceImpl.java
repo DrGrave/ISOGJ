@@ -1,18 +1,15 @@
 package com.vidnichuk.isogj.impl.service.user;
 
-import com.vidnichuk.isogj.api.dao.TempUserRepository;
-import com.vidnichuk.isogj.api.dao.TypeOfUserRepository;
-import com.vidnichuk.isogj.api.dao.UserRepository;
-import com.vidnichuk.isogj.api.dto.mapper.GenderDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
+import com.vidnichuk.isogj.api.dao.*;
+import com.vidnichuk.isogj.api.dto.mapper.*;
+import com.vidnichuk.isogj.api.dto.model.CityDto;
 import com.vidnichuk.isogj.api.dto.model.GenderDto;
 import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
 import com.vidnichuk.isogj.api.model.Gender;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
-import com.vidnichuk.isogj.api.dto.mapper.TempUserToUserMapper;
+import com.vidnichuk.isogj.api.model.UserLink;
 import com.vidnichuk.isogj.api.service.mail.EmailService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import com.vidnichuk.isogj.impl.client.AuthServiceClient;
@@ -45,6 +42,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AuthServiceClient authServiceClient;
 
+    @Autowired
+    private UserLinkRepository userLinkRepository;
+
+    @Autowired
+    private TypeOfLinkRepository typeOfLinkRepository;
+
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -61,6 +64,10 @@ public class UserServiceImpl implements UserService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private GenderDtoMapper genderDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private CityDtoMapper cityDtoMapper;
 
     @Autowired
     private EmailService emailService;
@@ -107,6 +114,11 @@ public class UserServiceImpl implements UserService {
         User user = tempUserToUserMapper.tempUserToUser(tempUser);
         user.setTypeOfUser(typeOfUserRepository.findAll().get(0));
         userRepository.save(user);
+        UserLink userLink = new UserLink();
+        userLink.setUser(user);
+        userLink.setLink("http://www.zoofirma.ru/images/stories/2012/05/07/capybara1.jpg");
+        userLink.setTypeOfLink(typeOfLinkRepository.findByName("Img"));
+        userLinkRepository.save(userLink);
         tempUserRepository.delete(tempUser);
         authServiceClient.createUser(tempUserDtoMapper.fromTempUserToAuthUserDto(tempUser));
     }
@@ -152,5 +164,13 @@ public class UserServiceImpl implements UserService {
         user.setGender(genderDtoMapper.fromGenderDtoToGender(gender));
         userRepository.save(user);
         return genderDtoMapper.fromGenderToGenderDto(user.getGender());
+    }
+
+    @Override
+    public CityDto changeCity(CityDto cityDto, long id) {
+        User user = userRepository.findById(id);
+        user.setCity(cityDtoMapper.fromCityDtoToCity(cityDto));
+        userRepository.save(user);
+        return cityDtoMapper.fromCityToCityDto(user.getCity());
     }
 }

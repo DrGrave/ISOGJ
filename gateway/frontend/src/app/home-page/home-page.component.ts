@@ -21,6 +21,8 @@ import {Faculty} from "./Faculty";
 import {MatDatepickerInputEvent} from "@angular/material";
 import {Company} from "./Company";
 import {Position} from "./Position";
+import {TypeOfLink} from "./TypeOfLink";
+import {NewLink} from "./NewLink";
 
 
 
@@ -62,6 +64,7 @@ export class HomePageComponent implements OnInit {
   universityName: string;
   companyName: string;
   positionName: string;
+  cityName: string;
   typesOfEducation: TypeOfEducation[];
   selectedTypeOfEducation: TypeOfEducation;
   selectedUniversity: University;
@@ -76,6 +79,16 @@ export class HomePageComponent implements OnInit {
   changedDateOfEnd: Date;
   isAddCompanyAdd: boolean = false;
   addNewWork: UserCompany;
+  ifCityChange: boolean = false;
+  selectedCity: City;
+  cityOption: City[];
+  isLinkChange: boolean[];
+  typeOfLinks: TypeOfLink[];
+  changedLink: UserLink;
+  isAddLink: boolean = false;
+  newNewLink: NewLink;
+
+  newLink: UserLink;
 
   test: string;
 
@@ -100,11 +113,16 @@ export class HomePageComponent implements OnInit {
     this.typesOfEducation = [];
     this.departmentOption = [];
     this.companyOption = [];
+    this.cityOption = [];
     this.positionOption = [];
     this.facultyOption = [];
     this.changedEducation = new Education();
     this.newEducation = new Education();
     this.addNewWork = new UserCompany();
+    this.isLinkChange = [];
+    this.newLink = new UserLink();
+    this.changedLink = new UserLink();
+    this.newNewLink = new NewLink();
   }
 
   myControl = new FormControl();
@@ -121,6 +139,14 @@ export class HomePageComponent implements OnInit {
   ifAddEducationClicked: boolean = false;
   companyControl = new FormControl();
   positionControl = new FormControl();
+  cityControl = new FormControl();
+  filteredCity: Observable<City[]>;
+  typeOfLinkControl = new FormControl();
+  selectedTypeOfLink: TypeOfLink;
+  changeLinkForm: FormGroup;
+  addLinkForm: FormGroup;
+  selectedTypeOfLinkAdd: TypeOfLink;
+
 
 
   companyFilter(name: string): Company[]{
@@ -168,6 +194,14 @@ export class HomePageComponent implements OnInit {
       option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
   }
 
+  cityFilter(name: string): City[]{
+    this.selectedCity = this.cityOption.filter(item => item.name === this.cityName)[0];
+    this.getCity(name);
+    this.cityName = name;
+    return this.cityOption.filter(
+      option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
+  }
+
   getDepartment(name: string){
     this.homePageService.getDepartments(name, this.selectedFaculty).subscribe( departmentDate => {
       this.departmentOption = departmentDate;
@@ -182,6 +216,10 @@ export class HomePageComponent implements OnInit {
 
   getUniversity(name: string){
     this.homePageService.getUniversitys(name).subscribe( universityDate => {this.universityOption = universityDate});
+  }
+
+  displayCityFn(city?: City): string | undefined{
+    return city ? city.name: undefined;
   }
 
   displayCompanyFn(company?: Company): string | undefined{
@@ -212,6 +250,21 @@ export class HomePageComponent implements OnInit {
     this.inputSkillForm = this.fb.group({
       nameOfNewSkill: ['', Validators.required]
     });
+
+    this.changeLinkForm = this.fb.group({
+        linkTextControl: ['', Validators.required]}
+    );
+
+    this.addLinkForm = this.fb.group({
+      linkTextControlAdd: ['', Validators.required]}
+      );
+
+    this.filteredCity = this.cityControl.valueChanges
+      .pipe(
+        startWith<string | City>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map( name => name ? this.cityFilter(name) : this.cityOption.slice())
+      );
 
     this.filteredCompany = this.companyControl.valueChanges
       .pipe(
@@ -379,7 +432,7 @@ export class HomePageComponent implements OnInit {
   }
 
   changeCity(){
-
+    this.ifCityChange = !this.ifCityChange;
   }
 
 
@@ -400,14 +453,16 @@ export class HomePageComponent implements OnInit {
   }
 
   changeLink(link){
-
+    this.isLinkChange[link.id] = !this.isLinkChange[link.id];
+    this.homePageService.getAllTypesOfLink().subscribe( date => this.typeOfLinks = date);
   }
 
   addLink(){
-
+    this.isAddLink = !this.isAddLink;
+    this.homePageService.getAllTypesOfLink().subscribe( date => this.typeOfLinks = date);
   }
 
-  editSkill(skill){
+  editSkill(){
 
   }
 
@@ -423,7 +478,7 @@ export class HomePageComponent implements OnInit {
     if (this.changedDateOfEnd != null){
       this.changedEducation.dateOfEnd = this.changedDateOfEnd.getTime();
     }
-    this.homePageService.changeEducation(this.changedEducation, this.myUser.id).subscribe(date => {
+    this.homePageService.changeEducation(this.changedEducation, this.myUser.id).subscribe(date => { this.education = date
     });
     this.isChangeEducation[educate.id] = !this.isChangeEducation[educate.id];
   }
@@ -452,7 +507,7 @@ export class HomePageComponent implements OnInit {
     this.homePageService.deleteCompany(company, this.myUser.id).subscribe(date => this.userCompany = date);
   }
 
-  changeUniversity(educate) {
+  changeUniversity() {
 
   }
 
@@ -460,11 +515,11 @@ export class HomePageComponent implements OnInit {
     this.selectedTypeOfEducation = type;
   }
 
-  changeFaculty(educate: Education) {
+  changeFaculty() {
 
   }
 
-  changeDepartment(educate: Education) {
+  changeDepartment() {
 
   }
 
@@ -476,7 +531,7 @@ export class HomePageComponent implements OnInit {
     this.ifAddEducationClicked = !this.ifAddEducationClicked;
   }
 
-  convertDate(dateOfEnd: number): String {
+  static convertDate(dateOfEnd: number): String {
     return new Date(dateOfEnd).toISOString();
   }
 
@@ -513,6 +568,52 @@ export class HomePageComponent implements OnInit {
 
   declineCompany() {
     this.isAddCompanyAdd = !this.isAddCompanyAdd;
+  }
+
+  applyChangeCity() {
+    this.homePageService.addCity(this.cityOption.filter(item => item.name === this.cityName)[0] ,this.myUser.id).subscribe(item => this.myUser.city = item);
+    this.ifCityChange = !this.ifCityChange;
+  }
+
+  changeCityFormfild() {
+
+  }
+
+  private getCity(name: string) {
+    this.homePageService.getCity(name).subscribe( date => this.cityOption = date);
+  }
+
+  typeOfLinksApply($event, type: TypeOfLink) {
+    this.selectedTypeOfLink = type;
+  }
+
+  applyChangeLink(link) {
+    this.changedLink = link;
+    this.newNewLink = this.changeLinkForm.value;
+    this.changedLink.link = this.newNewLink.linkTextControl;
+
+    if (this.selectedTypeOfLink != null){
+      this.changedLink.typeOfLink = this.selectedTypeOfLink;
+    }
+    this.homePageService.changeLink(link, this.myUser.id).subscribe( date => this.links = date);
+    this.isLinkChange[link.id] = !this.isLinkChange[link.id];
+  }
+
+  typeOfLinksAddApply($event, type: TypeOfLink) {
+    this.selectedTypeOfLinkAdd = type;
+  }
+
+  applyAdd() {
+    this.newLink.typeOfLink = this.selectedTypeOfLinkAdd;
+    this.newNewLink = this.addLinkForm.value;
+    this.newLink.link = this.newNewLink.linkTextControlAdd;
+
+    this.homePageService.addLink(this.newLink, this.myUser.id).subscribe(date => this.links = date);
+    this.isAddLink = !this.isAddLink;
+  }
+
+  deleteLink(link: UserLink) {
+
   }
 }
 
