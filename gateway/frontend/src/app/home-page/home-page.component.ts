@@ -531,7 +531,7 @@ export class HomePageComponent implements OnInit {
     this.ifAddEducationClicked = !this.ifAddEducationClicked;
   }
 
-  static convertDate(dateOfEnd: number): String {
+  convertDate(dateOfEnd: number): String {
     return new Date(dateOfEnd).toISOString();
   }
 
