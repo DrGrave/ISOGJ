@@ -98,4 +98,18 @@ public class LinkServiceImpl implements LinkService{
         userLinkRepository.save(us);
         return userLinkDtoMapper.fromUserLinkToUserLinkDto(us);
     }
+
+    @Override
+    public List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, long id) {
+        UserLink userLink = userLinkDtoMapper.fromUserLinkDtoToUserLink(userLinkDto);
+        userLink.setUser(userRepository.findById(id));
+        userLinkRepository.delete(userLink);
+        List<UserLinkDto> userLinkDtos = new ArrayList<>();
+        for (UserLink usLink : userLinkRepository.findAllByUserId(id)){
+            if (usLink.getTypeOfLink().getId() != 1) {
+                userLinkDtos.add(userLinkDtoMapper.fromUserLinkToUserLinkDto(usLink));
+            }
+        }
+        return userLinkDtos;
+    }
 }

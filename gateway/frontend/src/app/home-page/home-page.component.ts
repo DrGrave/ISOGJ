@@ -87,6 +87,8 @@ export class HomePageComponent implements OnInit {
   changedLink: UserLink;
   isAddLink: boolean = false;
   newNewLink: NewLink;
+  isChangeImg: boolean = false;
+  changeImg: UserLink;
 
   newLink: UserLink;
 
@@ -123,6 +125,7 @@ export class HomePageComponent implements OnInit {
     this.newLink = new UserLink();
     this.changedLink = new UserLink();
     this.newNewLink = new NewLink();
+    this.changeImg = new UserLink();
   }
 
   myControl = new FormControl();
@@ -146,6 +149,7 @@ export class HomePageComponent implements OnInit {
   changeLinkForm: FormGroup;
   addLinkForm: FormGroup;
   selectedTypeOfLinkAdd: TypeOfLink;
+  changeImgLink: FormGroup;
 
 
 
@@ -258,6 +262,11 @@ export class HomePageComponent implements OnInit {
     this.addLinkForm = this.fb.group({
       linkTextControlAdd: ['', Validators.required]}
       );
+
+    this.changeImgLink = this.fb.group({
+      nameOfNewImgLink: ['', Validators.required]
+      }
+    );
 
     this.filteredCity = this.cityControl.valueChanges
       .pipe(
@@ -437,6 +446,9 @@ export class HomePageComponent implements OnInit {
 
 
   addEducation(){
+
+
+    this.homePageService.getAllTypesOfEducation().subscribe( typesEducation => this.typesOfEducation = typesEducation);
     this.ifAddEducationClicked = !this.ifAddEducationClicked;
   }
 
@@ -527,6 +539,12 @@ export class HomePageComponent implements OnInit {
     this.selectedDepartment = this.departmentOption.filter(item => item.name === this.departmentName)[0];
     this.newEducation.department = this.selectedDepartment;
     this.newEducation.typeOfEducation = this.selectedTypeOfEducation;
+    if (this.changedDateOfStart != null){
+      this.newEducation.dateOfStart = this.changedDateOfStart.getTime();
+    }
+    if (this.changedDateOfEnd != null){
+      this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
+    }
     this.homePageService.addEducation(this.newEducation, this.myUser.id).subscribe(date => this.education = date);
     this.ifAddEducationClicked = !this.ifAddEducationClicked;
   }
@@ -613,7 +631,23 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteLink(link: UserLink) {
+    this.homePageService.deleteLink(link, this.myUser.id).subscribe(date => this.links = date);
+    this.isLinkChange[link.id] = !this.isLinkChange[link.id];
+  }
 
+  changeImage() {
+    this.isChangeImg = !this.isChangeImg;
+  }
+
+  acceptChangeImg(){
+
+  }
+
+  applyImgLink() {
+    this.newNewLink = this.changeImgLink.value;
+    this.changeImg.link = this.newNewLink.nameOfNewImgLink;
+    this.homePageService.changeImg(this.changeImg, this.myUser.id).subscribe( date => this.imgLink = date);
+    this.isChangeImg = !this.isChangeImg;
   }
 }
 

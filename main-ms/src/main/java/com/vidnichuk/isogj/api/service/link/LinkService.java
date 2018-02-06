@@ -16,4 +16,6 @@ public interface LinkService {
     List<UserLinkDto> addLink(UserLinkDto userLinkDto, long id);
 
     UserLinkDto addUserImg(UserLinkDto userLinkDto, long id);
+
+    List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, long id);
 }

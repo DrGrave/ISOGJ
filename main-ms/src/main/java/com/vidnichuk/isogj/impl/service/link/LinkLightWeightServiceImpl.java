@@ -43,4 +43,9 @@ public class LinkLightWeightServiceImpl implements LinkLightWeightService{
     public UserLinkDto addUserImg(UserLinkDto userLinkDto, long id) {
         return linkService.addUserImg(userLinkDto, id);
     }
+
+    @Override
+    public List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, long id) {
+        return linkService.deleteLink(userLinkDto, id);
+    }
 }

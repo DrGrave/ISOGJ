@@ -2,33 +2,75 @@
   min-width: 200px;
   min-height: 200px;
   margin-top: 10px;
+  margin-left: 5%;
+}
+
+.title-main{
+  display: inline-flex;
+}
+
+.user-main-info{
+  padding-left: 10px;
+}
+.education-card{
+  max-width: 150px;
+}
+
+.education-group{
+  display: inline-flex;
+  max-width: 300px;
+}
+
+.company-class{
+  min-width: 150px;
+}
+
+.link-group{
+  margin-top: 10px;
+  display: inline-flex;
   margin-left: 10%;
+}
+
+.link-class{
+  max-width: 150px;
+  min-width: 150px;
+  max-height: 200px;
+}
+
+.company-group{
+  display: inline-flex;
 }
 
 .card-main{
   min-height: 200px;
-  min-width: 200px;
+  min-width: 400px;
   margin-top: 10px;
-  margin-left: 10%;
 }
 
 .card-history{
-  min-width: 60%;
+  min-width: 80%;
   margin-top: 10px;
-  margin-left: 10%;
+  margin-left: 25%;
 }
 
+.button-grouph{
+  display: inline-flex;
+}
 
+.link-info{
+  margin-left: 8%;
+}
 
 .card-skill{
   min-width: 80%;
   margin-top: 10px;
-  margin-left: 10%;
+  margin-left: 25%;
 }
 
 .user-info{
   display: inline-flex;
-  min-width: 90%;
+  min-width: 100%;
+
 }
 
 .main-info{
@@ -36,8 +78,9 @@
 }
 
 .skill-info{
+  margin-left: 5%;
   min-width: 70%;
-
+  max-height: 60px;
 }
 
 .mat-header-image {
@@ -67,9 +110,38 @@
 }
 
 .skill-button{
-  max-width: 5px;
+
+  color: red;
 }
+
 
 .change-education{
   display: inline-flex;
+}
+
+.date-info{
+  max-width: 100%;
+  //max-height: 45px;
+  //min-height: 45px;
+}
+.height-class{
+  max-width: 100%;
+  //max-height: 45px;
+  //min-height: 45px;
+
+}
+
+.date-info-datepicker{
+  max-width: 100%;
+  //max-height: 45px;
+  //min-height: 45px;
+  font-size: 15px;
+}
+
+.gender{
+  display: inline-flex;
+}
+.city-class{
+  display: inline-flex;
+  font-size: 15px;
 }

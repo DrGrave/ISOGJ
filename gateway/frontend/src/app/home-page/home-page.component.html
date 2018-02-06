@@ -1,71 +1,122 @@
 <div class="user-info" >
   <div class="main-info">
     <mat-card class="card-main">
-      <mat-card-title>
+      <mat-card-title class="title-main">
         <div mat-card-avatar class="mat-header-image"><img src="{{imgLink.link}}" width="100" height="100"></div>
-        <div class="user-name">
-          {{myUser.firstName}}
-          {{myUser.lastName}}
-          {{myUser.middleName}}
+
+        <div class="user-main-info">
+          <div class="user-name">
+            {{myUser.firstName}}
+            {{myUser.lastName}}
+            {{myUser.middleName}}
+          </div>
+          <mat-card-content>
+            Email:
+            {{myUser.email}}
+          </mat-card-content>
+          <div class="gender">
+          <div *ngIf="!showUserInfoEdit">
+            <mat-card-content>
+              Gender:
+              {{myUser.gender.name}}
+            </mat-card-content>
+
+          </div>
+            <div *ngIf="showUserInfoEdit">
+              <mat-card-content>
+                <mat-form-field>
+                  <mat-select placeholder="{{selectedGender.name}}" [formControl]="genderControl">
+                    <mat-option *ngFor="let gender of genderList" [value]="selectedGender" (click)="genderApply($event, gender)">
+                      {{gender.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-card-content>
+            </div>
+            <div class="button-grouph">
+                <button mat-icon-button="" (click)="showEditUserInfo()">E</button>
+                <button mat-icon-button="" (click)="applyChangeGender()" *ngIf="showUserInfoEdit">A</button>
+            </div>
+          </div>
+          <div class="city-class">
+            <mat-card-title *ngIf="!ifCityChange" class="city-class">
+              City: {{myUser.city.name}}
+            </mat-card-title>
+            <mat-card-content *ngIf="ifCityChange">
+
+              <form (submit)="changeCityFormfild()" *ngIf="ifCityChange">
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="City: {{myUser.city.name}}" aria-label="Assignee" matInput [formControl]="cityControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCityFn">
+                    <mat-option *ngFor="let option of filteredCity | async" [value]="option">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+
+
+            </mat-card-content>
+            <div class="button-grouph">
+
+                <button mat-icon-button="" (click)="changeCity()">E</button>
+                <button mat-icon-button="" (click)="applyChangeCity()" *ngIf="ifCityChange">A</button>
+
+            </div>
+          </div>
+
         </div>
-
-
       </mat-card-title>
-      <div *ngIf="!showUserInfoEdit">
-      <mat-card-content>
-        Gender:
-        {{myUser.gender.name}}
-      </mat-card-content>
 
-      </div>
-      <div *ngIf="showUserInfoEdit">
-        <mat-card-content>
-          <mat-form-field>
-            <mat-select placeholder="{{selectedGender.name}}" [formControl]="genderControl">
-              <mat-option *ngFor="let gender of genderList" [value]="selectedGender" (click)="genderApply($event, gender)">
-                {{gender.name}}
-              </mat-option>
-            </mat-select>
+      <mat-card-content *ngIf="isChangeImg">
+        <form [formGroup]="changeImgLink">
+          <mat-form-field onsubmit="acceptChangeImg()">
+            <input type="text" placeholder="Img link" matInput formControlName="nameOfNewImgLink" required >
           </mat-form-field>
-        </mat-card-content>
-      </div>
-
-      <mat-card-content>
-        <button mat-button (click)="showEditUserInfo()">Edit.</button>
+          <button mat-button (click)="applyImgLink()">Apply</button>
+        </form>
       </mat-card-content>
 
-      <mat-card-content *ngIf="showUserInfoEdit">
-        <button mat-button (click)="applyChangeGender()">Apply.</button>
-      </mat-card-content>
+      <button mat-button (click)="changeImage()">E</button>
+    </mat-card>
 
-      <mat-card *ngFor="let educate of education">
+
+    <div class="education-group">
+      <mat-card *ngFor="let educate of education" class="education-card">
         <div *ngIf="!isChangeEducation[educate.id]">
-        {{educate.typeOfEducation.name}}.
-        <br>
-        University:
-        {{educate.department.faculty.university.name}}
-        <br>
-        Faculty:
-        {{educate.department.faculty.name}}
-        <br>
-        Department:
-        {{educate.department.name}}
-          <mat-form-field>
-            <input matInput [matDatepicker]="dp2" placeholder="Date of start education" value="{{convertDate(educate.dateOfStart)}}" disabled>
-            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
-            <mat-datepicker #dp2 ></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="dp3" placeholder="Date of end education" value="{{convertDate(educate.dateOfEnd)}}" disabled>
-            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-            <mat-datepicker #dp3 ></mat-datepicker>
-          </mat-form-field>
+          <div class="height-class">
+          {{educate.typeOfEducation.name}}.
+          </div>
+          <div class="height-class">
+          University:
+          {{educate.department.faculty.university.name}}
+          </div>
+            <div class="height-class">
+          Faculty:
+          {{educate.department.faculty.name}}
+            </div>
+              <div class="height-class">
+            Department:
+            {{educate.department.name}}
+              </div>
+
+            <mat-form-field class="date-info-datepicker">
+              <input matInput [matDatepicker]="dp2" placeholder="Date of start" value="{{convertDate(educate.dateOfStart)}}" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2 ></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="date-info-datepicker">
+              <input matInput [matDatepicker]="dp3" placeholder="Date of end" value="{{convertDate(educate.dateOfEnd)}}" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 ></mat-datepicker>
+            </mat-form-field>
+
         </div>
 
         <mat-card-content *ngIf="isChangeEducation[educate.id]">
-          <div>
+          <div class="height-class">
           <mat-card-content>
-            <mat-form-field>
+            <mat-form-field class="date-info">
               <mat-select placeholder="{{educate.typeOfEducation.name}}" [formControl]="typeOfEducationControl">
                 <mat-option *ngFor="let type of typesOfEducation" [value]="selectedTypeOfEducation" (click)="typeOfEducationApply($event, type)">
                   {{type.name}}
@@ -75,10 +126,10 @@
           </mat-card-content>
 
           </div>
-            <div *ngIf="isChangeEducation[educate.id]">
+            <div *ngIf="isChangeEducation[educate.id]" class="height-class">
               <mat-card-content>
                 <form (submit)="changeUniversity(educate)">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field class="date-info">
                     <input type="text" placeholder="University: {{educate.department.faculty.university.name}}" aria-label="Assignee" matInput [formControl]="universityControl" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayEducationFn">
                       <mat-option *ngFor="let option of filteredUniversity | async" [value]="option">
@@ -90,9 +141,9 @@
               </mat-card-content>
             </div>
 
-            <div *ngIf="isChangeEducation[educate.id]">
+            <div *ngIf="isChangeEducation[educate.id]" class="height-class">
               <form (submit)="changeFaculty(educate)">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="date-info">
                   <input type="text" placeholder="Faculty: {{educate.department.faculty.name}}" aria-label="Assignee" matInput [formControl]="facultyControl" [matAutocomplete]="auto">
                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFacultyFn">
                     <mat-option *ngFor="let option of filteredFaculty | async" [value]="option">
@@ -105,9 +156,9 @@
 
 
 
-            <div *ngIf="isChangeEducation[educate.id]">
+            <div *ngIf="isChangeEducation[educate.id]" class="height-class">
               <form (submit)="changeDepartment(educate)">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="date-info">
                   <input type="text" placeholder="Department: {{educate.department.name}}" aria-label="Assignee" matInput [formControl]="departmentControl" [matAutocomplete]="auto">
                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartmentFn">
                     <mat-option *ngFor="let option of filteredDepartment | async" [value]="option">
@@ -118,38 +169,39 @@
               </form>
             </div>
 
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker1" placeholder="Value binding" value="{{convertDate(educate.dateOfStart)}}" (dateChange)="changeStartEvent($event)">
+          <mat-form-field class="date-info-datepicker">
+            <input matInput [matDatepicker]="picker1" placeholder="Date of start" value="{{convertDate(educate.dateOfStart)}}" (dateChange)="changeStartEvent($event)">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker2" placeholder="Value binding" value="{{convertDate(educate.dateOfEnd)}}" (dateChange)="changeEndEvent($event)">
+          <mat-form-field class="date-info-datepicker">
+            <input matInput [matDatepicker]="picker2" placeholder="Date of end" value="{{convertDate(educate.dateOfEnd)}}" (dateChange)="changeEndEvent($event)">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
-          {{test}}
         </mat-card-content>
-
-        <mat-card-content>
-          <button mat-button (click)="changeEducation(educate)">Ch</button>
-        </mat-card-content>
-
-        <div *ngIf="isChangeEducation[educate.id]" class="change-education">
+        <div class="button-grouph">
           <mat-card-content>
-            <button mat-button (click)="applyChangeEducation(educate)">apply</button>
+            <button mat-button (click)="changeEducation(educate)">E</button>
           </mat-card-content>
-          <mat-card-content>
-            <button mat-button (click)="deleteEducation(educate)">delete</button>
-          </mat-card-content>
+
+          <div *ngIf="isChangeEducation[educate.id]" class="change-education">
+            <mat-card-content>
+              <button mat-button (click)="applyChangeEducation(educate)">apply</button>
+            </mat-card-content>
+            <mat-card-content>
+              <button mat-button (click)="deleteEducation(educate)">delete</button>
+            </mat-card-content>
+          </div>
         </div>
       </mat-card>
+    </div>
 
 
 
       <mat-card *ngIf="ifAddEducationClicked">
-          <mat-card-content *ngIf="ifAddEducationClicked">
-            <mat-form-field>
+          <mat-card-content *ngIf="ifAddEducationClicked" class="height-class">
+            <mat-form-field class="height-class">
               <mat-select placeholder="Type of education" [formControl]="typeOfEducationControl">
                 <mat-option *ngFor="let type of typesOfEducation" [value]="selectedTypeOfEducation" (click)="typeOfEducationApply($event, type)">
                   {{type.name}}
@@ -160,7 +212,7 @@
 
           <mat-card-content *ngIf="ifAddEducationClicked">
             <form (submit)="changeUniversity()">
-              <mat-form-field class="example-full-width">
+              <mat-form-field class="height-class">
                 <input type="text" placeholder="University" aria-label="Assignee" matInput [formControl]="universityControl" [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayEducationFn">
                   <mat-option *ngFor="let option of filteredUniversity | async" [value]="option">
@@ -173,7 +225,7 @@
 
 
           <form (submit)="changeFaculty()" *ngIf="ifAddEducationClicked">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="height-class">
               <input type="text" placeholder="Faculty" aria-label="Assignee" matInput [formControl]="facultyControl" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFacultyFn">
                 <mat-option *ngFor="let option of filteredFaculty | async" [value]="option">
@@ -184,7 +236,7 @@
           </form>
 
           <form (submit)="changeDepartment()" *ngIf="ifAddEducationClicked">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="height-class">
               <input type="text" placeholder="Department" aria-label="Assignee" matInput [formControl]="departmentControl" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartmentFn">
                 <mat-option *ngFor="let option of filteredDepartment | async" [value]="option">
@@ -194,17 +246,32 @@
             </mat-form-field>
           </form>
 
-        <button mat-button (click)="applyAddEducation()">Apply</button>
+        <mat-form-field class="date-info-datepicker">
+          <input matInput [matDatepicker]="picker1" placeholder="Date of start" value="Date of start" (dateChange)="changeStartEvent($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="date-info-datepicker">
+          <input matInput [matDatepicker]="picker2" placeholder="Date of end" value="Date of end" (dateChange)="changeEndEvent($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+
 
       </mat-card>
 
+      <div class="button-grouph">
+        <mat-card-content>
+          <button mat-button (click)="addEducation()">Add education</button>
+        </mat-card-content>
+        <mat-card-content *ngIf="ifAddEducationClicked">
+          <button mat-button (click)="applyAddEducation()">Apply education</button>
+        </mat-card-content>
+      </div>
 
-
-      <mat-card-content>
-        <button mat-button (click)="addEducation()">Add</button>
-      </mat-card-content>
-
-      <mat-card-content *ngFor="let company of userCompany">
+    <div class="company-group">
+      <mat-card *ngFor="let company of userCompany" class="company-class">
           <div *ngIf="!isChangeWork[company.idUserCompany]">
             Work:
             {{company.company.name}}
@@ -216,7 +283,7 @@
           <div *ngIf="isChangeWork[company.idUserCompany]">
               <div class="change-work" *ngIf="isChangeWork[company.idUserCompany]">
                 <form (submit)="changeCompany()" *ngIf="isChangeWork[company.idUserCompany]">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field class="date-info">
                     <input type="text" placeholder="Company:{{company.company.name}}" aria-label="Assignee" matInput [formControl]="companyControl" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCompanyFn">
                       <mat-option *ngFor="let option of filteredCompany | async" [value]="option">
@@ -227,7 +294,7 @@
                 </form>
 
                 <form (submit)="changePosition()" *ngIf="isChangeWork[company.idUserCompany]">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field class="date-info">
                     <input type="text" placeholder="Position:{{company.position.name}}" aria-label="Assignee" matInput [formControl]="positionControl" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPositionFn">
                       <mat-option *ngFor="let option of filteredPosition | async" [value]="option">
@@ -241,20 +308,22 @@
 
 
 
-            <mat-card-content>
-              <button mat-button (click)="applyChangeCompany(company)">apply</button>
 
-              <button mat-button (click)="deleteWork(company)">delete</button>
+          </div>
+          <div class="button-grouph">
+
+            <mat-card-content>
+              <button mat-button (click)="changeWork(company)">E</button>
+            </mat-card-content>
+            <mat-card-content *ngIf="isChangeWork[company.idUserCompany]">
+              <button mat-button (click)="applyChangeCompany(company)">Apply</button>
+              <button mat-button (click)="deleteWork(company)">Delete</button>
             </mat-card-content>
           </div>
 
-        <mat-card-content>
-          <button mat-button (click)="changeWork(company)">Ch</button>
-        </mat-card-content>
-
-
-      </mat-card-content>
-
+      </mat-card>
+    </div>
+    <mat-card *ngIf="isAddCompanyAdd">
       <mat-card-content *ngIf="isAddCompanyAdd">
         <form (submit)="changeCompany()" *ngIf="isAddCompanyAdd">
           <mat-form-field class="example-full-width">
@@ -277,111 +346,29 @@
             </mat-autocomplete>
           </mat-form-field>
         </form>
-
-        <mat-card-content>
-          <button mat-button (click)="applyAddWork()">apply</button>
-          <button mat-button (click)="declineCompany()">decline</button>
-        </mat-card-content>
-      </mat-card-content>
-      <mat-card-content>
-        <button mat-button (click)="addWork()">Add</button>
       </mat-card-content>
     </mat-card>
 
-
-
-
-    <mat-card class="card-contacts">
-      <mat-card-title *ngIf="!ifCityChange">
-        City: {{myUser.city.name}}
-      </mat-card-title>
-      <mat-card-content *ngIf="ifCityChange">
-
-        <form (submit)="changeCityFormfild()" *ngIf="ifCityChange">
-          <mat-form-field class="example-full-width">
-            <input type="text" placeholder="City: {{myUser.city.name}}" aria-label="Assignee" matInput [formControl]="cityControl" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCityFn">
-              <mat-option *ngFor="let option of filteredCity | async" [value]="option">
-                {{ option.name }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </form>
-
-        <button mat-button (click)="applyChangeCity()">Apply</button>
-      </mat-card-content>
-      <mat-card-content>
-        <button mat-button (click)="changeCity()">Ch</button>
-      </mat-card-content>
-      <mat-card-title>
-        Contact info:
-      </mat-card-title>
-      <mat-card-content>
-        Email:
-        {{myUser.email}}
-        <mat-card-content>
-          <button mat-button (click)="changeEmail()">Ch</button>
-        </mat-card-content>
-      </mat-card-content>
-      <mat-card-content *ngFor="let link of links">
-        <mat-card-content *ngIf="!isLinkChange[link.id]">
-        {{link.typeOfLink.name}}:
-
-        {{link.link}}
-        </mat-card-content>
-
-        <mat-card-content *ngIf="isLinkChange[link.id]">
-          <form [formGroup]="changeLinkForm">
-            <mat-form-field>
-              <mat-select placeholder="{{link.typeOfLink.name}}" [formControl]="typeOfLinkControl">
-                <mat-option *ngFor="let type of typeOfLinks" [value]="selectedTypeOfLink" (click)="typeOfLinksApply($event, type)">
-                  {{type.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-              <input type="text" placeholder="{{link.link}}" formControlName="linkTextControl" matInput required>
-            </mat-form-field>
-          </form>
-
-          <button mat-button (click)="deleteLink(link)">Delete</button>
-          <button mat-button (click)="applyChangeLink(link)">apply</button>
-        </mat-card-content>
-
-        <mat-card-content>
-          <button mat-button (click)="changeLink(link)">Ch</button>
-        </mat-card-content>
-      </mat-card-content>
-
-      <mat-card-content *ngIf="isAddLink">
-
-        <form [formGroup]="addLinkForm">
-          <mat-form-field>
-            <mat-select placeholder="Type of link" [formControl]="typeOfLinkControl">
-              <mat-option *ngFor="let type of typeOfLinks" [value]="selectedTypeOfLinkAdd" (click)="typeOfLinksAddApply($event, type)">
-                {{type.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width">
-            <input type="text" placeholder="Link" formControlName="linkTextControlAdd" matInput required>
-          </mat-form-field>
-        </form>
-
-
-        <button mat-button (click)="applyAdd()">Apply</button>
-
-      </mat-card-content>
+    <div class="button-grouph">
 
       <mat-card-content>
-        <button mat-button (click)="addLink()">Add</button>
+        <button mat-button (click)="addWork()">Add work</button>
       </mat-card-content>
-    </mat-card>
+      <mat-card-content *ngIf="isAddCompanyAdd">
+        <button mat-button (click)="applyAddWork()">Apply</button>
+        <button mat-button (click)="declineCompany()">Decline</button>
+      </mat-card-content>
+    </div>
+
+
+
+
   </div>
 
-  <div class="skill-info">
+
+
+
+    <div class="skill-info">
     <mat-card class="card-skill">
       <mat-card-title>
         Skills
@@ -390,7 +377,9 @@
         <mat-chip-list>
           <mat-chip *ngFor="let skill of myUser.skill">
             {{skill.skill.name}}
-            <button mat-button class="skill-button" (click)="removeSkill($event, skill)" [disabled]="!removable">R</button>
+
+              <button mat-icon-button=""  (click)="removeSkill($event, skill)" [disabled]="!removable" class="skill-button" >X</button>
+
           </mat-chip>
         </mat-chip-list>
       </mat-card-content>
@@ -442,8 +431,7 @@
             <mat-error *ngIf="typeOfSkillControl.hasError('required')">Please choose type of skill</mat-error>
           </mat-form-field>
 
-          <button mat-button (click)="acceptCreateSkill()" [disabled]="inputSkillForm.invalid"> Accept
-          </button>
+          <button mat-button (click)="acceptCreateSkill()" [disabled]="inputSkillForm.invalid"> Accept</button>
         </div>
       </form>
     </mat-card>
@@ -456,4 +444,71 @@
       </mat-card-subtitle>
     </mat-card>
   </div>
+
+  <div class="link-info">
+    <div class="link-group">
+      <mat-card *ngFor="let link of links" class="link-class">
+        <mat-card-content *ngIf="!isLinkChange[link.id]">
+          {{link.typeOfLink.name}}:
+
+          {{link.link}}
+        </mat-card-content>
+
+        <mat-card-content *ngIf="isLinkChange[link.id]">
+          <form [formGroup]="changeLinkForm">
+            <mat-form-field class="date-info">
+              <mat-select placeholder="{{link.typeOfLink.name}}" [formControl]="typeOfLinkControl">
+                <mat-option *ngFor="let type of typeOfLinks" [value]="selectedTypeOfLink" (click)="typeOfLinksApply($event, type)">
+                  {{type.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="date-info">
+              <input type="text" placeholder="{{link.link}}" formControlName="linkTextControl" matInput required>
+            </mat-form-field>
+          </form>
+
+
+        </mat-card-content>
+        <div class="button-grouph">
+          <mat-card-content>
+            <button mat-button (click)="changeLink(link)">E</button>
+          </mat-card-content>
+          <mat-card-content *ngIf="isLinkChange[link.id]">
+            <button mat-button (click)="deleteLink(link)">Delete</button>
+            <button mat-button (click)="applyChangeLink(link)">Apply</button>
+          </mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+
+    <mat-card *ngIf="isAddLink">
+      <mat-card-content *ngIf="isAddLink">
+
+        <form [formGroup]="addLinkForm">
+          <mat-form-field class="date-info">
+            <mat-select placeholder="Type of link" [formControl]="typeOfLinkControl">
+              <mat-option *ngFor="let type of typeOfLinks" [value]="selectedTypeOfLinkAdd" (click)="typeOfLinksAddApply($event, type)">
+                {{type.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="date-info">
+            <input type="text" placeholder="Link" formControlName="linkTextControlAdd" matInput required>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <div class="button-grouph">
+      <mat-card-content *ngIf="isAddLink">
+        <button mat-button (click)="applyAdd()">Apply</button>
+      </mat-card-content>
+      <mat-card-content>
+        <button mat-button (click)="addLink()">Add contact</button>
+      </mat-card-content>
+    </div>
+  </div>
+
 </div>

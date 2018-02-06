@@ -6,7 +6,6 @@ import com.vidnichuk.isogj.api.dto.model.CityDto;
 import com.vidnichuk.isogj.api.dto.model.GenderDto;
 import com.vidnichuk.isogj.api.dto.model.MeUserDto;
 import com.vidnichuk.isogj.api.dto.model.UserDto;
-import com.vidnichuk.isogj.api.model.Gender;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.model.UserLink;
@@ -46,7 +45,13 @@ public class UserServiceImpl implements UserService {
     private UserLinkRepository userLinkRepository;
 
     @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
     private TypeOfLinkRepository typeOfLinkRepository;
+
+    @Autowired
+    private GenderRepository genderRepository;
 
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -119,6 +124,8 @@ public class UserServiceImpl implements UserService {
         userLink.setLink("http://www.zoofirma.ru/images/stories/2012/05/07/capybara1.jpg");
         userLink.setTypeOfLink(typeOfLinkRepository.findByName("Img"));
         userLinkRepository.save(userLink);
+        user.setGender(genderRepository.getOne((long)1));
+        user.setCity(cityRepository.findOne((long)1));
         tempUserRepository.delete(tempUser);
         authServiceClient.createUser(tempUserDtoMapper.fromTempUserToAuthUserDto(tempUser));
     }

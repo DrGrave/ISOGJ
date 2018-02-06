@@ -51,4 +51,9 @@ public class LinkController {
     public UserLinkDto setUserImg(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") long id){
         return linkLightWeightService.addUserImg(userLinkDto, id);
     }
+
+    @PostMapping("links/delete")
+    public List<UserLinkDto> deleteLink(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") long id){
+        return linkLightWeightService.deleteLink(userLinkDto, id);
+    }
 }
