@@ -37,6 +37,8 @@ import {MatDialogModule} from '@angular/material';
 import { MoreUserInfoPageComponent } from './more-user-info-page/more-user-info-page.component';
 import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page-service";
 import {HomePageService} from "./home-page/home-page.service";
+import { WorkPageComponent } from './work-page/work-page.component';
+import {WorkPageService} from "./work-page/work-page.service";
 
   export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -56,7 +58,8 @@ import {HomePageService} from "./home-page/home-page.service";
     LangSelectComponent,
     HomePageComponent,
     HeaderComponent,
-    MoreUserInfoPageComponent
+    MoreUserInfoPageComponent,
+    WorkPageComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +96,7 @@ import {HomePageService} from "./home-page/home-page.service";
     AuthenticationService,
     UserService,
     EmailConfirmPageService,
+    WorkPageService,
     AuthGuard,
   ],
   bootstrap: [AppComponent]
