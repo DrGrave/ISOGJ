@@ -66,4 +66,5 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     public CityDto changeCity(CityDto cityDto, long id) {
         return userService.changeCity(cityDto, id);
     }
+
 }

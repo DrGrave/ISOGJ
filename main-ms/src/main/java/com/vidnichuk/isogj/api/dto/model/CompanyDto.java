@@ -1,6 +1,5 @@
 package com.vidnichuk.isogj.api.dto.model;
 
-import com.vidnichuk.isogj.api.model.City;
 
 /**
  * companyDTO object
@@ -9,6 +8,15 @@ public class CompanyDto {
     private long id;
     private String name;
     private CityDto cityOfCompany;
+    private String companyLogo;
+
+    public String getCompanyLogo() {
+        return companyLogo;
+    }
+
+    public void setCompanyLogo(String companyLogo) {
+        this.companyLogo = companyLogo;
+    }
 
     public long getId() {
         return id;

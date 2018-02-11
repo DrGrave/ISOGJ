@@ -11,6 +11,7 @@ import com.vidnichuk.isogj.api.dto.model.CompanyDto;
 import com.vidnichuk.isogj.api.dto.model.PositionDto;
 import com.vidnichuk.isogj.api.dto.model.UserCompanyDto;
 
+import com.vidnichuk.isogj.api.dto.model.UserFullCompanyDto;
 import com.vidnichuk.isogj.api.model.Company;
 import com.vidnichuk.isogj.api.model.Position;
 import com.vidnichuk.isogj.api.model.UserCompany;
@@ -108,5 +109,10 @@ public class CompanyServiceImpl implements CompanyService{
             userCompanyDtos.add(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(usCom));
         }
         return userCompanyDtos;
+    }
+
+    @Override
+    public UserFullCompanyDto getMainCompany(long id) {
+        return userCompanyDtoMapper.fromUserCompanyToUserFullCompanyDto(userCompanyRepository.findByUserIdAndCompanyApprove(id, true));
     }
 }

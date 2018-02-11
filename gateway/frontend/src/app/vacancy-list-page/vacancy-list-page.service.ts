@@ -2,7 +2,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Vacancy} from './vacancy';
-import {Skill} from "../user-list-page/skill";
 import {VacancySkill} from "./vacancySkill";
 
 

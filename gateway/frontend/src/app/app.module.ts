@@ -38,7 +38,7 @@ import { MoreUserInfoPageComponent } from './more-user-info-page/more-user-info-
 import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page-service";
 import {HomePageService} from "./home-page/home-page.service";
 import { WorkPageComponent } from './work-page/work-page.component';
-import {WorkPageService} from "./work-page/work-page.service";
+  import {CompanyPageService} from "./work-page/company-page.service";
 
   export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -96,7 +96,7 @@ import {WorkPageService} from "./work-page/work-page.service";
     AuthenticationService,
     UserService,
     EmailConfirmPageService,
-    WorkPageService,
+    CompanyPageService,
     AuthGuard,
   ],
   bootstrap: [AppComponent]

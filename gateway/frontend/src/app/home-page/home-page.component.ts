@@ -320,8 +320,8 @@ export class HomePageComponent implements OnInit {
     this.imgLink = new UserLink();
     this.homePageService.getUserByToken().subscribe(data => {
       this.username = data;
-      this.getMyAccount()
-
+      this.getMyAccount();
+      localStorage.setItem('username',this.username);
     });
 
   }
@@ -336,7 +336,7 @@ export class HomePageComponent implements OnInit {
       this.getMyCompany();
       this.getMySkills();
       this.getSkills("");
-
+      localStorage.setItem('myUser', JSON.stringify(this.myUser));
     });
   }
 

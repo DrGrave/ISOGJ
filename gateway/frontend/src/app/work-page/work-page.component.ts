@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UserCompany} from "../home-page/UserCompany";
-import {WorkPageService} from "./work-page.service";
+
 import {MyUser} from "../home-page/MyUser";
+import {CompanyPageService} from "./company-page.service";
+import {Position} from "../home-page/Position";
+import {Company} from "../home-page/Company";
 
 @Component({
   selector: 'app-work-page',
@@ -13,19 +16,20 @@ export class WorkPageComponent implements OnInit {
   myUser: MyUser;
   mainCompany: UserCompany;
 
-  constructor(private workPageService: WorkPageService) {
-    this.mainCompany = new UserCompany();
+  constructor(private companyPageService: CompanyPageService) {
+
   }
 
   ngOnInit() {
-    this.getMainCompany();
+       this.myUser = JSON.parse(localStorage.getItem('myUser'));
+       this.getMainCompany();
   }
 
-  getMainCompany(){
-    this.workPageService.getMainCompany(this.myUser.id).subscribe( date => this.mainCompany = date);
-  }
+    getMainCompany(){
+      this.companyPageService.getMainCompany(this.myUser.id).subscribe( date => this.mainCompany = date);
+    }
 
-  getNextCompany(){
-    this.workPageService.getNextMainNextCompany(this.myUser.id, this.mainCompany.idUserCompany).subscribe( date => this.mainCompany = date);
-  }
+    getNextCompany(){
+      this.companyPageService.getNextMainNextCompany(this.myUser.id, this.mainCompany.idUserCompany).subscribe( date => this.mainCompany = date);
+    }
 }

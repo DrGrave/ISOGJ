@@ -10,6 +10,7 @@ import {Component, OnInit} from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>; // {1}
+  username: string =  localStorage.getItem('username');
 
 
   constructor(private authService: AuthenticationService) {

@@ -2,10 +2,7 @@ package com.vidnichuk.isogj.impl.service.user;
 
 import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.*;
-import com.vidnichuk.isogj.api.dto.model.CityDto;
-import com.vidnichuk.isogj.api.dto.model.GenderDto;
-import com.vidnichuk.isogj.api.dto.model.MeUserDto;
-import com.vidnichuk.isogj.api.dto.model.UserDto;
+import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.model.UserLink;
@@ -180,4 +177,5 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return cityDtoMapper.fromCityToCityDto(user.getCity());
     }
+
 }

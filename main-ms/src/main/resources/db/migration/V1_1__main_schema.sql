@@ -14,6 +14,7 @@ create table company
   date_of_creation datetime null,
   info varchar(255) null,
   name varchar(255) null,
+  company_logo varchar(255) null,
   city_of_company bigint null,
   constraint FKbk2fldd8i3j16sxhiv7u1wlum
   foreign key (city_of_company) references city (id)
@@ -376,6 +377,7 @@ create table user_company
   company bigint null,
   position bigint null,
   user bigint null,
+  company_approve tinyint(1) default '0' null,
   constraint FKi6q4u3i9d85h47qjn7w7p9687
   foreign key (company) references company (id),
   constraint FKc1goa9mr96odm0l38subly2jf

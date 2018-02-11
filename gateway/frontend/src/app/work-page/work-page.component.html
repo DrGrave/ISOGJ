@@ -1,3 +1,53 @@
-<div>
-  <button mat-button (click)="getNextCompany()"></button>
+<div class="main-company-class">
+
+  <mat-card *ngIf="mainCompany" class="main-title-class">
+    <mat-card-title>
+      <div mat-card-avatar class="mat-header-image"><img src="{{mainCompany.company.companyLogo}}" width="200" height="100"></div>
+      <div class="main-text-class" >
+        {{mainCompany.company.name}}
+        <br>
+        {{mainCompany.company.cityOfCompany.name}}
+        <br>
+        {{mainCompany.company.info}}
+      </div>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-card>
+        <mat-card-title>
+          Workers
+        </mat-card-title>
+        <mat-card-content>
+          <mat-card class="user-class">
+
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          Not approved workers
+        </mat-card-title>
+        <mat-card-content>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      Company reit.
+    </mat-card-content>
+    <mat-card-content>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="vacancy-class">
+    <mat-card-title>
+      Vacancy
+    </mat-card-title>
+    <mat-card-content>
+
+    </mat-card-content>
+  </mat-card>
+
+  <button mat-button (click)="getMainCompany()">N</button>
 </div>

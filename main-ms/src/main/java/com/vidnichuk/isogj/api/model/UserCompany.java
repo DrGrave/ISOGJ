@@ -13,6 +13,8 @@ public class UserCompany {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUserCompany;
 
+    @Column(name = "CompanyApprove")
+    private Boolean companyApprove;
     /**
      * user object
      */
@@ -49,6 +51,13 @@ public class UserCompany {
     }
 
 
+    public Boolean getCompanyApprove() {
+        return companyApprove;
+    }
+
+    public void setCompanyApprove(Boolean companyApprove) {
+        this.companyApprove = companyApprove;
+    }
 
     /**
      * @return user object

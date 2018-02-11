@@ -3,6 +3,7 @@ package com.vidnichuk.isogj.impl.controller;
 import com.vidnichuk.isogj.api.dto.model.CompanyDto;
 import com.vidnichuk.isogj.api.dto.model.PositionDto;
 import com.vidnichuk.isogj.api.dto.model.UserCompanyDto;
+import com.vidnichuk.isogj.api.dto.model.UserFullCompanyDto;
 import com.vidnichuk.isogj.api.service.company.CompanyLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +46,11 @@ public class CompanyController {
     @PostMapping("/delete")
     public List<UserCompanyDto> deleteCompany(@Valid @RequestBody UserCompanyDto companyDto, @RequestParam("id") Long id){
         return companyLightWeightService.deleteCompany(companyDto, id);
+    }
+
+    @GetMapping("/authorize/maincompany")
+    public UserFullCompanyDto getMainCompany(@RequestParam("id") long id){
+        return companyLightWeightService.getMainCompany(id);
     }
 
 }

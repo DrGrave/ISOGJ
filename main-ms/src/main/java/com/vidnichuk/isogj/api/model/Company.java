@@ -38,6 +38,17 @@ public class Company {
      */
     private Date dateOfCreation;
 
+    @Column(name = "CompanyLogo")
+    private String companyLogo;
+
+    public String getCompanyLogo() {
+        return companyLogo;
+    }
+
+    public void setCompanyLogo(String companyLogo) {
+        this.companyLogo = companyLogo;
+    }
+
     /**
      * @return id of company
      */

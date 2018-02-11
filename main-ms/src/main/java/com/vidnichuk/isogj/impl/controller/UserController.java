@@ -2,6 +2,7 @@ package com.vidnichuk.isogj.impl.controller;
 
 import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.City;
+import com.vidnichuk.isogj.api.model.UserCompany;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -70,6 +71,8 @@ public class UserController {
     public CityDto applyCity(@Valid @RequestBody CityDto cityDto, @RequestParam("id") long id){
         return userLightWeightService.changeCity(cityDto, id);
     }
+
+
 
 
 }
