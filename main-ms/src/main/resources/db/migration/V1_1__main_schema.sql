@@ -462,12 +462,9 @@ create table vacancy
   primary key,
   info varchar(255) null,
   company bigint null,
-  task bigint null,
   type_of_vacancy bigint null,
   constraint FKd8i1boc2bf2p3pmtgi3ucxyqf
   foreign key (company) references company (id),
-  constraint FK88okuegm0qxj10q8nrp4odo97
-  foreign key (task) references task (id),
   constraint FKg1qrdnkrpjlkt2fr9twump8pt
   foreign key (type_of_vacancy) references type_of_vacancy (id)
 )
@@ -478,12 +475,52 @@ create index FKd8i1boc2bf2p3pmtgi3ucxyqf
   on vacancy (company)
 ;
 
-create index FK88okuegm0qxj10q8nrp4odo97
-  on vacancy (task)
-;
-
 create index FKg1qrdnkrpjlkt2fr9twump8pt
   on vacancy (type_of_vacancy)
+;
+
+create table task_skill
+(
+  id bigint auto_increment
+  primary key,
+  skill bigint null,
+  task bigint null,
+  constraint FKrqovwv8qhc3vt1r5etshfs0ge
+  foreign key (skill) references skill (id),
+  constraint FK531rx05uc86qlhwtkx049ce18
+  foreign key (task) references task (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FKrqovwv8qhc3vt1r5etshfs0ge
+  on task_skill (skill)
+;
+
+create index FK531rx05uc86qlhwtkx049ce18
+  on task_skill (task)
+;
+
+create table vacancy_task
+(
+  id bigint auto_increment
+  primary key,
+  task bigint null,
+  vacancy bigint null,
+  constraint FK6ba9j9jtk95526blq7994470h
+  foreign key (task) references task (id),
+  constraint FKsfm3668avg4bw12qfax2slrrd
+  foreign key (vacancy) references vacancy (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FK6ba9j9jtk95526blq7994470h
+	on vacancy_task (task)
+;
+
+create index FKsfm3668avg4bw12qfax2slrrd
+	on vacancy_task (vacancy)
 ;
 
 create table vacancy_skill

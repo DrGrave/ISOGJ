@@ -2,8 +2,10 @@ package com.vidnichuk.isogj.api.dto.mapper;
 
 
 import com.vidnichuk.isogj.api.dto.model.N_A_VacancyDto;
+import com.vidnichuk.isogj.api.dto.model.TypeOfVacancyDto;
 import com.vidnichuk.isogj.api.dto.model.VacancyDto;
 import com.vidnichuk.isogj.api.model.Vacancy;
+import com.vidnichuk.isogj.api.model.type.TypeOfVacancy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -16,21 +18,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface VacancyDtoMapper {
 
-    @Mappings({
-            @Mapping(source = "typeOfVacancy.name", target = "typeOfVacancy"),
-            @Mapping(source = "company.name", target = "companyName")
-    })
+    TypeOfVacancyDto fromTypeOfVacancyToVacancyDto(TypeOfVacancy typeOfVacancy);
     N_A_VacancyDto fromVacancyToVacancyDTO(Vacancy vacancy);
-
-    @Mappings({
-        @Mapping(source = "typeOfVacancy", target = "typeOfVacancy.name"),
-        @Mapping(source = "companyName", target = "company.name")
-    })
-    Vacancy fromVacancyNADtoToVacancy(N_A_VacancyDto NAVacancyDto);
-
     VacancyDto fromVacancyToVacancyDto(Vacancy vacancy);
 
-    List<Vacancy> fromListOfVacancyDTOToListOfVacancy(List<N_A_VacancyDto> NAVacancyDtoList);
-
-    List<N_A_VacancyDto> fromListOfVacancyToListOfVacancyDTO(List<Vacancy> vacancyList);
 }

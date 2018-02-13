@@ -101,9 +101,9 @@ INSERT INTO isogj_account.user_skill (id, end_skilling, skill_mark, skill_practi
 INSERT INTO isogj_account.user_skill (id, end_skilling, skill_mark, skill_practical_mark, start_skilling, id_marker, id_skill, id_user) VALUES (9, '2017-12-19 21:52:30', '7', '8', '2017-12-19 21:52:27', 2, 9, 3);
 INSERT INTO isogj_account.user_skill (id, end_skilling, skill_mark, skill_practical_mark, start_skilling, id_marker, id_skill, id_user) VALUES (10, '2017-12-19 21:52:30', '7', '8', '2017-12-19 21:52:27', 2, 10, 3);
 INSERT INTO isogj_account.user_skill (id, end_skilling, skill_mark, skill_practical_mark, start_skilling, id_marker, id_skill, id_user) VALUES (11, '2017-12-19 21:52:30', '7', '8', '2017-12-19 21:52:27', 2, 1, 3);
-INSERT INTO isogj_account.vacancy (id, info, company, task, type_of_vacancy) VALUES (1, 'Do work', 1, 1, 1);
-INSERT INTO isogj_account.vacancy (id, info, company, task, type_of_vacancy) VALUES (2, 'Do', 2, 2, 2);
-INSERT INTO isogj_account.vacancy (id, info, company, task, type_of_vacancy) VALUES (3, 'Do Work', 3, 3, 3);
+INSERT INTO isogj_account.vacancy (id, info, company, type_of_vacancy) VALUES (1, 'Do work', 1, 1);
+INSERT INTO isogj_account.vacancy (id, info, company, type_of_vacancy) VALUES (2, 'Do', 2, 2);
+INSERT INTO isogj_account.vacancy (id, info, company, type_of_vacancy) VALUES (3, 'Do Work', 3, 3);
 INSERT INTO isogj_account.vacancy_skill (id, expected_mark, skill, vacancy) VALUES (1, '6', 1, 1);
 INSERT INTO isogj_account.vacancy_skill (id, expected_mark, skill, vacancy) VALUES (2, '7', 2, 1);
 INSERT INTO isogj_account.vacancy_skill (id, expected_mark, skill, vacancy) VALUES (3, '7', 3, 1);

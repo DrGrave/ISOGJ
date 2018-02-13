@@ -51,9 +51,6 @@ public class CompanyServiceImpl implements CompanyService{
     @Autowired
     private VacancyRepository vacancyRepository;
 
-    @Autowired
-    private UserCompanyRepository userCompanyRepository;
-
     @Override
     public List<UserCompanyDto> findCompanyByUserId(long id) {
         List<UserCompanyDto> userCompanyDtos = new ArrayList<>();

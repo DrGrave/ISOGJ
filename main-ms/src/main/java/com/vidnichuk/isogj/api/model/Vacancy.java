@@ -31,13 +31,6 @@ public class Vacancy {
     private TypeOfVacancy typeOfVacancy;
 
     /**
-     * task object
-     */
-    @ManyToOne
-    @JoinColumn(name = "Task")
-    private Task task;
-
-    /**
      * company of vacancy
      */
     @ManyToOne
@@ -100,18 +93,5 @@ public class Vacancy {
         this.info = info;
     }
 
-    /**
-     * @return task object
-     */
-    public Task getTask() {
-        return task;
-    }
-
-    /**
-     * @param task set task object
-     */
-    public void setTask(Task task) {
-        this.task = task;
-    }
 
 }

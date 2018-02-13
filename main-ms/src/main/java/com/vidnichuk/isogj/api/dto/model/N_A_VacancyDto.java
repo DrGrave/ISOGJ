@@ -6,16 +6,9 @@ package com.vidnichuk.isogj.api.dto.model;
 public class N_A_VacancyDto {
     private Long id;
     private String info;
-    private String typeOfVacancy;
-    private String companyName;
+    private TypeOfVacancyDto typeOfVacancy;
+    private CompanyDto companyName;
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
 
     public Long getId() {
         return id;
@@ -33,11 +26,19 @@ public class N_A_VacancyDto {
         this.info = info;
     }
 
-    public String getTypeOfVacancy() {
+    public TypeOfVacancyDto getTypeOfVacancy() {
         return typeOfVacancy;
     }
 
-    public void setTypeOfVacancy(String typeOfVacancy) {
+    public void setTypeOfVacancy(TypeOfVacancyDto typeOfVacancy) {
         this.typeOfVacancy = typeOfVacancy;
+    }
+
+    public void setCompanyName(CompanyDto companyName) {
+        this.companyName = companyName;
+    }
+
+    public CompanyDto getCompanyName() {
+        return companyName;
     }
 }
