@@ -1,20 +1,16 @@
 package com.vidnichuk.isogj.impl.service.company;
 
-import com.vidnichuk.isogj.api.dao.CompanyRepository;
-import com.vidnichuk.isogj.api.dao.PositionRepository;
-import com.vidnichuk.isogj.api.dao.UserCompanyRepository;
-import com.vidnichuk.isogj.api.dao.UserRepository;
+import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.CompanyDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.PositionDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.UserCompanyDtoMapper;
-import com.vidnichuk.isogj.api.dto.model.CompanyDto;
-import com.vidnichuk.isogj.api.dto.model.PositionDto;
-import com.vidnichuk.isogj.api.dto.model.UserCompanyDto;
+import com.vidnichuk.isogj.api.dto.mapper.VacancyDtoMapper;
+import com.vidnichuk.isogj.api.dto.model.*;
 
-import com.vidnichuk.isogj.api.dto.model.UserFullCompanyDto;
 import com.vidnichuk.isogj.api.model.Company;
 import com.vidnichuk.isogj.api.model.Position;
 import com.vidnichuk.isogj.api.model.UserCompany;
+import com.vidnichuk.isogj.api.model.Vacancy;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +43,16 @@ public class CompanyServiceImpl implements CompanyService{
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private CompanyDtoMapper companyDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private VacancyDtoMapper vacancyDtoMapper;
+
+    @Autowired
+    private VacancyRepository vacancyRepository;
+
+    @Autowired
+    private UserCompanyRepository userCompanyRepository;
 
     @Override
     public List<UserCompanyDto> findCompanyByUserId(long id) {
@@ -114,5 +120,23 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     public UserFullCompanyDto getMainCompany(long id) {
         return userCompanyDtoMapper.fromUserCompanyToUserFullCompanyDto(userCompanyRepository.findByUserIdAndCompanyApprove(id, true));
+    }
+
+    @Override
+    public List<UserCompanyDto> getUsersToCompany(long id, boolean b) {
+        List<UserCompanyDto> userCompanyDtoList = new ArrayList<>();
+        for (UserCompany userCompany : userCompanyRepository.findAllByCompanyIdAndCompanyApprove(id, b)){
+            userCompanyDtoList.add(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompany));
+        }
+        return userCompanyDtoList;
+    }
+
+    @Override
+    public List<VacancyDto> getVacancysById(long id) {
+        List<VacancyDto> vacancyDtoList = new ArrayList<>();
+        for (Vacancy vacancy: vacancyRepository.findAllByCompanyId(id)){
+            vacancyDtoList.add(vacancyDtoMapper.fromVacancyToVacancyDto(vacancy));
+        }
+        return vacancyDtoList;
     }
 }

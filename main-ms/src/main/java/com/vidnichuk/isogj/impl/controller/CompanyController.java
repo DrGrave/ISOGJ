@@ -1,9 +1,6 @@
 package com.vidnichuk.isogj.impl.controller;
 
-import com.vidnichuk.isogj.api.dto.model.CompanyDto;
-import com.vidnichuk.isogj.api.dto.model.PositionDto;
-import com.vidnichuk.isogj.api.dto.model.UserCompanyDto;
-import com.vidnichuk.isogj.api.dto.model.UserFullCompanyDto;
+import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.service.company.CompanyLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +48,21 @@ public class CompanyController {
     @GetMapping("/authorize/maincompany")
     public UserFullCompanyDto getMainCompany(@RequestParam("id") long id){
         return companyLightWeightService.getMainCompany(id);
+    }
+
+    @GetMapping("/authorize/users")
+    public List<UserCompanyDto> getUserToCompany(@RequestParam("id") long id){
+        return companyLightWeightService.getUserToCompany(id, true);
+    }
+
+    @GetMapping("/authorize/notappusers")
+    public List<UserCompanyDto> getNotApprovedUsers(@RequestParam("id") long id){
+        return companyLightWeightService.getUserToCompany(id, false);
+    }
+
+    @GetMapping("/authorize/vacancys")
+    public List<VacancyDto> getCompanyVacancy(@RequestParam("id") long id){
+        return companyLightWeightService.getVacancys(id);
     }
 
 }

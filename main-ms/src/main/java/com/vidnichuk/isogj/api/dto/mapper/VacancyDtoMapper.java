@@ -2,6 +2,7 @@ package com.vidnichuk.isogj.api.dto.mapper;
 
 
 import com.vidnichuk.isogj.api.dto.model.N_A_VacancyDto;
+import com.vidnichuk.isogj.api.dto.model.VacancyDto;
 import com.vidnichuk.isogj.api.model.Vacancy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -25,7 +26,9 @@ public interface VacancyDtoMapper {
         @Mapping(source = "typeOfVacancy", target = "typeOfVacancy.name"),
         @Mapping(source = "companyName", target = "company.name")
     })
-    Vacancy fromVacancyDtoToVacancy(N_A_VacancyDto NAVacancyDto);
+    Vacancy fromVacancyNADtoToVacancy(N_A_VacancyDto NAVacancyDto);
+
+    VacancyDto fromVacancyToVacancyDto(Vacancy vacancy);
 
     List<Vacancy> fromListOfVacancyDTOToListOfVacancy(List<N_A_VacancyDto> NAVacancyDtoList);
 

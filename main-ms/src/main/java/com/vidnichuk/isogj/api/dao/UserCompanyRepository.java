@@ -8,4 +8,5 @@ import java.util.List;
 public interface UserCompanyRepository extends JpaRepository<UserCompany, Long>{
     List<UserCompany> findAllByUserId(long id);
     UserCompany findByUserIdAndCompanyApprove(long id, boolean approve);
+    List<UserCompany> findAllByCompanyIdAndCompanyApprove(long id, boolean approve);
 }

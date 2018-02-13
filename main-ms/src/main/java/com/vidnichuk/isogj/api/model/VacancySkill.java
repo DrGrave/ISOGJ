@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Table(name = "VacancySkill")
 public class VacancySkill {
 
+    /* todo скиллы у таска, мэни ту ван таск ваканси.*/
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
