@@ -54,7 +54,6 @@ public class User {
      * patronymic of user
      */
     @Column(name = "middle_name", nullable = false)
-    @NotEmpty(message = "*Please provide your Patronymic")
     private String middleName;
 
 

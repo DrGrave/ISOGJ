@@ -6,6 +6,7 @@ import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.education.EducationLightWeightService;
 import com.vidnichuk.isogj.api.service.skill.SkillLightWeightService;
+import com.vidnichuk.isogj.api.service.user.UserService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +49,9 @@ public class IsogjApplicationTests {
 	@Autowired
 	private EducationRepository educationRepository;
 
+	@Autowired
+	private UserService userService;
+
 
 	@Autowired
 	private EducationDtoMapper educationDtoMapper;
@@ -55,9 +59,8 @@ public class IsogjApplicationTests {
 
 	@Test
 	public void fromVacancyToVacancyDto(){
-		System.out.println("dd");
-		EducationDto educationDto = educationDtoMapper.formEducationToEducationDto(educationRepository.findAll().get(0));
-		System.out.println(educationDto);
+		boolean user = userService.checkLogin("DrGrav");
+		System.out.println(user);
 	}
 
 

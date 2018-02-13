@@ -323,7 +323,7 @@ create table user
   email varchar(255) not null,
   first_name varchar(255) not null,
   last_name varchar(255) not null,
-  middle_name varchar(255) not null,
+  middle_name varchar(255) null,
   username varchar(255) not null,
   city_of_living bigint null,
   gender bigint null,
