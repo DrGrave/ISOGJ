@@ -20,7 +20,9 @@ public interface CompanyService {
 
     UserFullCompanyDto getMainCompany(long id);
 
-    List<UserCompanyDto> getUsersToCompany(long id, boolean b);
+    List<UserDto> getUsersToCompany(long id, boolean b);
 
     List<VacancyDto> getVacancysById(long id);
+
+    UserCompanyDto getUserPosition(long userId, long companyId);
 }

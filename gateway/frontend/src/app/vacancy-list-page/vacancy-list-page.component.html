@@ -5,7 +5,12 @@
   <mat-card-header class="mat-title-cs">
     <div mat-card-avatar class="mat-header-image"></div>
     <mat-card-title>{{vacancy.info}}</mat-card-title>
-    <mat-card-subtitle>{{vacancy.typeOfVacancy.name}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      Company:
+      {{vacancy.company.name}}
+      <br>
+      {{vacancy.typeOfVacancy.name}}
+    </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content class="mat-card-content-cs">

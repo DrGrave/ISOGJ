@@ -49,12 +49,17 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     }
 
     @Override
-    public List<UserCompanyDto> getUserToCompany(long id, boolean b) {
+    public List<UserDto> getUserToCompany(long id, boolean b) {
         return companyService.getUsersToCompany(id, b);
     }
 
     @Override
     public List<VacancyDto> getVacancys(long id) {
         return companyService.getVacancysById(id);
+    }
+
+    @Override
+    public UserCompanyDto getUserPosition(long userId, long companyId) {
+        return companyService.getUserPosition(userId, companyId);
     }
 }

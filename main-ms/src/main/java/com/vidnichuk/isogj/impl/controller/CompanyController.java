@@ -51,18 +51,23 @@ public class CompanyController {
     }
 
     @GetMapping("/authorize/users")
-    public List<UserCompanyDto> getUserToCompany(@RequestParam("id") long id){
+    public List<UserDto> getUserToCompany(@RequestParam("id") long id){
         return companyLightWeightService.getUserToCompany(id, true);
     }
 
     @GetMapping("/authorize/notappusers")
-    public List<UserCompanyDto> getNotApprovedUsers(@RequestParam("id") long id){
+    public List<UserDto> getNotApprovedUsers(@RequestParam("id") long id){
         return companyLightWeightService.getUserToCompany(id, false);
     }
 
     @GetMapping("/authorize/vacancys")
     public List<VacancyDto> getCompanyVacancy(@RequestParam("id") long id){
         return companyLightWeightService.getVacancys(id);
+    }
+
+    @GetMapping("/user/position")
+    public UserCompanyDto getPositionByUserAndCompany(@RequestParam("idUser") long userId, @RequestParam("idCompany") long companyId){
+        return companyLightWeightService.getUserPosition(userId, companyId);
     }
 
 }

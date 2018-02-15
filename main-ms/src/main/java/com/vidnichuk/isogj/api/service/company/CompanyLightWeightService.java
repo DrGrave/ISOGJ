@@ -21,7 +21,9 @@ public interface CompanyLightWeightService {
 
     UserFullCompanyDto getMainCompany(long id);
 
-    List<UserCompanyDto> getUserToCompany(long id, boolean b);
+    List<UserDto> getUserToCompany(long id, boolean b);
 
     List<VacancyDto> getVacancys(long id);
+
+    UserCompanyDto getUserPosition(long userId, long companyId);
 }

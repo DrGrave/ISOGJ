@@ -17,8 +17,18 @@
           Workers
         </mat-card-title>
         <mat-card-content>
-          <mat-card class="user-class">
-
+          <mat-card class="user-class" *ngFor="let user of users">
+            <div mat-card-avatar class="mat-header-image"><img src="{{user.imgLink}}" width="45" height="45"></div>
+            <br>
+            {{user.firstName}}
+            <br>
+            {{user.middleName}}
+            <br>
+            {{user.lastName}}
+            <br>
+            <div *ngIf="user.position">
+            {{user.position.position.name}}
+            </div>
           </mat-card>
         </mat-card-content>
       </mat-card>
@@ -28,7 +38,19 @@
           Not approved workers
         </mat-card-title>
         <mat-card-content>
-
+          <mat-card class="user-class" *ngFor="let user of nusers">
+            <div mat-card-avatar class="mat-header-image"><img src="{{user.imgLink}}" width="45" height="45"></div>
+            <br>
+            {{user.firstName}}
+            <br>
+            {{user.middleName}}
+            <br>
+            {{user.lastName}}
+            <br>
+            <div *ngIf="user.position">
+              {{user.position.position.name}}
+            </div>
+          </mat-card>
         </mat-card-content>
 
       </mat-card>

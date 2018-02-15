@@ -7,7 +7,7 @@ public class N_A_VacancyDto {
     private Long id;
     private String info;
     private TypeOfVacancyDto typeOfVacancy;
-    private CompanyDto companyName;
+    private CompanyDto company;
 
 
     public Long getId() {
@@ -34,11 +34,11 @@ public class N_A_VacancyDto {
         this.typeOfVacancy = typeOfVacancy;
     }
 
-    public void setCompanyName(CompanyDto companyName) {
-        this.companyName = companyName;
+    public CompanyDto getCompany() {
+        return company;
     }
 
-    public CompanyDto getCompanyName() {
-        return companyName;
+    public void setCompany(CompanyDto company) {
+        this.company = company;
     }
 }

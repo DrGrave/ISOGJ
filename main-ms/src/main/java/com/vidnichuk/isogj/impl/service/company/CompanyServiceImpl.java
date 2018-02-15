@@ -1,10 +1,7 @@
 package com.vidnichuk.isogj.impl.service.company;
 
 import com.vidnichuk.isogj.api.dao.*;
-import com.vidnichuk.isogj.api.dto.mapper.CompanyDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.PositionDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.UserCompanyDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.VacancyDtoMapper;
+import com.vidnichuk.isogj.api.dto.mapper.*;
 import com.vidnichuk.isogj.api.dto.model.*;
 
 import com.vidnichuk.isogj.api.model.Company;
@@ -29,12 +26,17 @@ public class CompanyServiceImpl implements CompanyService{
     @Autowired
     private PositionRepository positionRepository;
 
+
     @Autowired
     private UserRepository userRepository;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private UserCompanyDtoMapper userCompanyDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private UserDtoMapper userDtoMapper;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -120,10 +122,10 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public List<UserCompanyDto> getUsersToCompany(long id, boolean b) {
-        List<UserCompanyDto> userCompanyDtoList = new ArrayList<>();
+    public List<UserDto> getUsersToCompany(long id, boolean b) {
+        List<UserDto> userCompanyDtoList = new ArrayList<>();
         for (UserCompany userCompany : userCompanyRepository.findAllByCompanyIdAndCompanyApprove(id, b)){
-            userCompanyDtoList.add(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompany));
+            userCompanyDtoList.add(userDtoMapper.fromUserToUserDto(userCompany.getUser()));
         }
         return userCompanyDtoList;
     }
@@ -135,5 +137,10 @@ public class CompanyServiceImpl implements CompanyService{
             vacancyDtoList.add(vacancyDtoMapper.fromVacancyToVacancyDto(vacancy));
         }
         return vacancyDtoList;
+    }
+
+    @Override
+    public UserCompanyDto getUserPosition(long userId, long companyId) {
+        return userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompanyRepository.findByUserIdAndCompanyId(userId, companyId));
     }
 }

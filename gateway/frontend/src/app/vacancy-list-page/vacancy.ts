@@ -6,6 +6,6 @@ export class Vacancy {
   id: number;
   info: string;
   typeOfVacancy: TypeOfVacancy;
-  companyName: Company;
+  company: Company;
   skills: VacancySkill[];
 }
