@@ -12,4 +12,6 @@ public interface VacancyService {
     List<VacancyDto> getVacancyByCompanyId(long id);
 
     List<VacancyTaskDto> getTasksByVacancyId(long id);
+
+    List<TaskSkillDto> getSkillsToTask(long id);
 }

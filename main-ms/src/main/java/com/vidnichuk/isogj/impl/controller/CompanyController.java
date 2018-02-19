@@ -15,6 +15,11 @@ public class CompanyController {
     @Autowired
     private CompanyLightWeightService companyLightWeightService;
 
+    @GetMapping("/vacancy/skills")
+    public List<VacancySkillDto> getSkillsToVacancy(@RequestParam("id") long id){
+        return companyLightWeightService.getVacancySkills(id);
+    }
+
     @GetMapping("/user")
     public List<UserCompanyDto> findEducationByUserId(@RequestParam("id") long id){
         return companyLightWeightService.getUserCompanyByUserId(id);

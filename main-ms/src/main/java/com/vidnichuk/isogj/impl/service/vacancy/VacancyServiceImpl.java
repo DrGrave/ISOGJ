@@ -1,16 +1,9 @@
 package com.vidnichuk.isogj.impl.service.vacancy;
 
-import com.vidnichuk.isogj.api.dao.UserVacancyRepository;
-import com.vidnichuk.isogj.api.dao.VacancyRepository;
-import com.vidnichuk.isogj.api.dao.VacancyTaskRepository;
-import com.vidnichuk.isogj.api.dto.mapper.UserDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.UserVacancyDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.VacancyDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.VacancyTaskDtoMapper;
+import com.vidnichuk.isogj.api.dao.*;
+import com.vidnichuk.isogj.api.dto.mapper.*;
 import com.vidnichuk.isogj.api.dto.model.*;
-import com.vidnichuk.isogj.api.model.Vacancy;
-import com.vidnichuk.isogj.api.model.VacancyTask;
-import com.vidnichuk.isogj.api.model.VacancyUser;
+import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.vacancy.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +19,13 @@ public class VacancyServiceImpl implements VacancyService{
 
     @Autowired
     private UserVacancyRepository userVacancyRepository;
+
+    @Autowired
+    private TaskSkillRepository taskSkillRepository;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private TaskSkillDtoMapper taskSkillDtoMapper;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -80,5 +80,14 @@ public class VacancyServiceImpl implements VacancyService{
             taskDtos.add(vacancyTaskDtoMapper.fromVacancyTaskToVacancyTaskDto(vacancyTask));
         }
         return taskDtos;
+    }
+
+    @Override
+    public List<TaskSkillDto> getSkillsToTask(long id) {
+        List<TaskSkillDto> skillDtoList = new ArrayList<>();
+        for (TaskSkill skill: taskSkillRepository.findAllByTask_Id(id)){
+            skillDtoList.add(taskSkillDtoMapper.fromTaskSkillToTaskSkillDto(skill));
+        }
+        return skillDtoList;
     }
 }

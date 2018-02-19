@@ -43,4 +43,9 @@ public class VacancyController {
     public List<UserDto> getNotUsersToVacancy(@RequestParam("id") long id){
         return vacancyLightWeightService.getUsersByCompanyId(id, true, false);
     }
+
+    @GetMapping("/task/skills")
+    public List<TaskSkillDto> getSkillsToTask(@RequestParam("id") long id){
+        return vacancyLightWeightService.getSkillsToTask(id);
+    }
 }

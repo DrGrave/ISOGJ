@@ -4,10 +4,7 @@ import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.*;
 import com.vidnichuk.isogj.api.dto.model.*;
 
-import com.vidnichuk.isogj.api.model.Company;
-import com.vidnichuk.isogj.api.model.Position;
-import com.vidnichuk.isogj.api.model.UserCompany;
-import com.vidnichuk.isogj.api.model.Vacancy;
+import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +21,9 @@ public class CompanyServiceImpl implements CompanyService{
     private CompanyRepository companyRepository;
 
     @Autowired
+    private VacancySkillRepository vacancySkillRepository;
+
+    @Autowired
     private PositionRepository positionRepository;
 
 
@@ -33,6 +33,10 @@ public class CompanyServiceImpl implements CompanyService{
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private UserCompanyDtoMapper userCompanyDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private VacancySkillDtoMapper vacancySkillDtoMapper;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -142,5 +146,14 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     public UserCompanyDto getUserPosition(long userId, long companyId) {
         return userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompanyRepository.findByUserIdAndCompanyId(userId, companyId));
+    }
+
+    @Override
+    public List<VacancySkillDto> getVacancySkills(long id) {
+        List<VacancySkillDto> vacancySkillDtos = new ArrayList<>();
+        for (VacancySkill vacancySkill: vacancySkillRepository.findAllByVacancy_Id(id)){
+            vacancySkillDtos.add(vacancySkillDtoMapper.fromVacancySkillToVacancySkillDto(vacancySkill));
+        }
+        return vacancySkillDtos;
     }
 }

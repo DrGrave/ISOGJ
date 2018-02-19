@@ -9,6 +9,8 @@ import {User} from "../user-list-page/user";
 import {HomePageService} from "../home-page/home-page.service";
 import {UserService} from "../user-list-page/user-list-page.service";
 import {UserWork} from "./UserWork";
+import {Vacancy} from "../vacancy-list-page/vacancy";
+import {WorkVacancy} from "./WorkVacancy";
 
 @Component({
   selector: 'app-work-page',
@@ -21,6 +23,7 @@ export class WorkPageComponent implements OnInit {
   mainCompany: UserCompany;
   users: UserWork[];
   nusers: UserWork[];
+  vacancys: WorkVacancy[];
 
   constructor(private companyPageService: CompanyPageService, private userService: UserService) {
     this.mainCompany = new UserCompany();
@@ -41,6 +44,7 @@ export class WorkPageComponent implements OnInit {
         this.mainCompany = date;
         this.getCompanyUsers();
         this.getCompanyNUsers();
+        this.getVacancys();
       });
     }
 
@@ -63,11 +67,33 @@ export class WorkPageComponent implements OnInit {
     }
 
     getVacancys(){
-
+      this.companyPageService.getVacancys(this.mainCompany.company.id).subscribe( date => {
+        this.vacancys = date;
+        this.getVacancySkills(this.vacancys);
+      });
     }
     getVacancyUser(){
 
     }
+
+    getVacancySkills(skillArr: WorkVacancy[]){
+      for (let i = 0; i < skillArr.length; i++){
+        this.companyPageService.getVacancySkills(skillArr[i].id).subscribe(date => {
+          skillArr[i].skills = date;
+        });
+        this.companyPageService.getVacancyTask(skillArr[i].id).subscribe( date =>{
+          skillArr[i].vacancyTasks = date;
+          for (let j = 0; j < skillArr[i].vacancyTasks.length; j++){
+            this.companyPageService.getTaskSkills(skillArr[i].vacancyTasks[j].task.id).subscribe( date =>{
+              skillArr[i].vacancyTasks[j].task.taskSkills = date;
+            });
+          }
+        });
+      }
+    }
+
+
+
     getVacancyNUser(){
 
     }

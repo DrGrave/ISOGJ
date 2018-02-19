@@ -33,4 +33,9 @@ public class VacancyLightWeightServiceImpl implements VacancyLightWeightService{
     public List<VacancyTaskDto> getTasksByVacancyId(long id) {
         return vacancyService.getTasksByVacancyId(id);
     }
+
+    @Override
+    public List<TaskSkillDto> getSkillsToTask(long id) {
+        return vacancyService.getSkillsToTask(id);
+    }
 }
