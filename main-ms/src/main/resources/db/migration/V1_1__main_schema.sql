@@ -378,6 +378,7 @@ create table user_company
   position bigint null,
   user bigint null,
   company_approve tinyint(1) default '0' null,
+  change_approve tinyint(1) default '0' null,
   constraint FKi6q4u3i9d85h47qjn7w7p9687
   foreign key (company) references company (id),
   constraint FKc1goa9mr96odm0l38subly2jf

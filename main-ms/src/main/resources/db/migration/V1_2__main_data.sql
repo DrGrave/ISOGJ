@@ -82,8 +82,8 @@ INSERT INTO isogj_account.summary (id, text, user) VALUES (3, 'Normal user summa
 INSERT INTO isogj_account.task (id, info, name, type_of_task) VALUES (1, 'Do frontend', 'Front', 2);
 INSERT INTO isogj_account.task (id, info, name, type_of_task) VALUES (2, 'Do beck', 'BE', 2);
 INSERT INTO isogj_account.task (id, info, name, type_of_task) VALUES (3, 'Create mysql db', 'MySql', 1);
-INSERT INTO isogj_account.user_company (id_user_company, company, position, user) VALUES (1, 1, 1, 1);
-INSERT INTO isogj_account.user_company (id_user_company, company, position, user) VALUES (2, 2, 1, 2);
+INSERT INTO isogj_account.user_company (id_user_company, company, position, user, change_approve, company_approve) VALUES (1, 1, 1, 1, 1, 1);
+INSERT INTO isogj_account.user_company (id_user_company, company, position, user, change_approve, company_approve) VALUES (2, 2, 1, 2, 1, 1);
 INSERT INTO isogj_account.user_link (id, link, type_of_link, user) VALUES (1, 'http://img12.nnm.me/9/3/d/6/2/8fecfc7bd57c0ecb7583e4125bf.jpg', 1, 1);
 INSERT INTO isogj_account.user_link (id, link, type_of_link, user) VALUES (2, 'https://i.ytimg.com/vi/-qj4O2aHQqc/maxresdefault.jpg', 1, 2);
 INSERT INTO isogj_account.user_link (id, link, type_of_link, user) VALUES (3, 'http://img11.nnm.me/0/e/f/6/5/8c8c6600b355289e18311c8f273.jpg', 1, 3);

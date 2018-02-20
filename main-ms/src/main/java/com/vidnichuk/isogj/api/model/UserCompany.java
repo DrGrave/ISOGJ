@@ -15,6 +15,9 @@ public class UserCompany {
 
     @Column(name = "CompanyApprove")
     private Boolean companyApprove;
+
+    @Column(name = "ChangeApprove")
+    private Boolean changeApprove;
     /**
      * user object
      */
@@ -43,9 +46,19 @@ public class UserCompany {
         return idUserCompany;
     }
 
+    public Boolean getChangeApprove() {
+        return changeApprove;
+    }
+
+    public void setChangeApprove(Boolean changeApprove) {
+        this.changeApprove = changeApprove;
+    }
+
     /**
      * @param idUserCompany set id of user company
      */
+
+
     public void setIdUserCompany(Long idUserCompany) {
         this.idUserCompany = idUserCompany;
     }
