@@ -55,6 +55,7 @@ export class HomePageService {
   private addLinkUrl = 'api/main/user/links/add/?id=';
   private changeImgUrl = 'api/main/user/links/img/change/?id=';
   private deleteLinkUrl = 'api/main/user/links/delete/?id=';
+  private createNewCompanyUrl = 'api/main/company/create/?id=';
 
 
   constructor(private http: HttpClient) {
@@ -291,6 +292,13 @@ export class HomePageService {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.get<TypeOfLink[]>(this.getAllTypesOfLinks, httpOptions);
+  }
+
+  createNewCompany(createNewCompany: Company, id: number) :Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    return this.http.post<any>(this.createNewCompanyUrl + id, createNewCompany, httpOptions);
   }
 }
 

@@ -74,6 +74,8 @@
         {{vacancy.typeOfVacancy.name}}
         <mat-card *ngFor="let task of vacancy.vacancyTasks">
           {{task.task.name}}
+          {{task.task.name}}
+          {{task.task.info}}
           <mat-chip-list>
             <mat-chip *ngFor="let taskSkill of task.task.taskSkills">
               {{taskSkill.skill.name}}

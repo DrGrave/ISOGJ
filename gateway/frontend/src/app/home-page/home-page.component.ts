@@ -23,6 +23,7 @@ import {Company} from "./Company";
 import {Position} from "./Position";
 import {TypeOfLink} from "./TypeOfLink";
 import {NewLink} from "./NewLink";
+import {NewCompany} from "./NewCompany";
 
 
 
@@ -89,10 +90,12 @@ export class HomePageComponent implements OnInit {
   newNewLink: NewLink;
   isChangeImg: boolean = false;
   changeImg: UserLink;
-
+  isCreateCompanyClick: boolean = false;
   newLink: UserLink;
-
+  changeCompanyGr: FormGroup;
   test: string;
+  newCompany: NewCompany;
+  createNewCompany: Company;
 
 
 
@@ -126,6 +129,8 @@ export class HomePageComponent implements OnInit {
     this.changedLink = new UserLink();
     this.newNewLink = new NewLink();
     this.changeImg = new UserLink();
+    this.newCompany = new NewCompany();
+    this.createNewCompany = new Company();
   }
 
   myControl = new FormControl();
@@ -250,6 +255,10 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.changeCompanyGr = this.fb.group({
+      nameOfNewCompany: ['', Validators.required]
+    });
 
     this.inputSkillForm = this.fb.group({
       nameOfNewSkill: ['', Validators.required]
@@ -637,10 +646,22 @@ export class HomePageComponent implements OnInit {
 
   changeImage() {
     this.isChangeImg = !this.isChangeImg;
+    this.test = this.changeCompanyGr.value;
   }
 
   acceptChangeImg(){
 
+  }
+
+  createCompany(){
+    this.isCreateCompanyClick = !this.isCreateCompanyClick;
+  }
+
+  acceptCreateCompany(){
+    this.newCompany = this.changeCompanyGr.value;
+    this.createNewCompany.name = this.newCompany.nameOfNewCompany;
+    this.createNewCompany.dateOfCreation = new Date().getTime();
+    this.homePageService.createNewCompany(this.createNewCompany, this.myUser.id).subscribe();
   }
 
   applyImgLink() {

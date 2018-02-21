@@ -348,6 +348,19 @@
         </form>
       </mat-card-content>
     </mat-card>
+    <button mat-button (click)="createCompany()">Create company</button>
+    <mat-card *ngIf="isCreateCompanyClick">
+      <form (submit)="acceptCreateCompany()" [formGroup]="changeCompanyGr">
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Company name"  matInput formControlName="nameOfNewCompany" required>
+        </mat-form-field>
+        <button mat-button (click)="acceptCreateCompany()">Accept</button>
+      </form>
+    </mat-card>
+
+
+
+
 
     <div class="button-grouph">
 
@@ -359,7 +372,7 @@
         <button mat-button (click)="declineCompany()">Decline</button>
       </mat-card-content>
     </div>
-
+    {{newCompany.nameOfNewCompany}}
 
 
 
