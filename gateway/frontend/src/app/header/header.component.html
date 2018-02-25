@@ -3,17 +3,17 @@
   <div class="heads">
     <div *ngIf="isLoggedIn$ | async; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
-      <button mat-button routerLink="/company-list-page" routerLinkActive="menu">Vacancy</button>
-      <button mat-button routerLink="/user-list-page" routerLinkActive="menu">User</button>
-      <button mat-button routerLink="/home-page" routerLinkActive="menu">Home</button>
-      <button mat-button routerLink="/work-page" routerLinkActive="menu">Work</button>
-      <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
+      <button mat-button routerLink="/company-list-page" routerLinkActive="menu">{{'HEADER.VACANCY.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/user-list-page" routerLinkActive="menu">{{'HEADER.USER.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/home-page" routerLinkActive="{{'HEADER.HOME.PLACEHOLDER' | translate}}">Home</button>
+      <button mat-button routerLink="/work-page" routerLinkActive="menu">{{'HEADER.WORK.PLACEHOLDER' | translate}}</button>
+      <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">{{'HEADER.LOGOUT.PLACEHOLDER' | translate}}</button>
     </ng-template>
     <ng-template #elseBlock>
-      <button mat-button routerLink="/login" routerLinkActive="menu" >Sign in</button>
-      <button mat-button routerLink="/registration" routerLinkActive="menu" >Sign up</button>
-      <button mat-button routerLink="/company-list-page" routerLinkActive="menu">Vacancy</button>
-      <button mat-button routerLink="/user-list-page" routerLinkActive="menu">User</button>
+      <button mat-button routerLink="/login" routerLinkActive="menu" >{{'HEADER.SIGN_IN.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/registration" routerLinkActive="menu" >{{'HEADER.SIGN_UP.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/company-list-page" routerLinkActive="menu">{{'HEADER.VACANCY.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/user-list-page" routerLinkActive="menu">{{'HEADER.USER.PLACEHOLDER' | translate}}</button>
     </ng-template>
     </div>
   <div class="lang-select">

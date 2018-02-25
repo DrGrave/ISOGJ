@@ -1,6 +1,5 @@
 package com.vidnichuk.isogj.api.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.vidnichuk.isogj.api.model.type.TypeOfEducation;
 
 import javax.persistence.*;

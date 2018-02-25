@@ -6,4 +6,5 @@ export class RegUser {
   firstName: string;
   lastName: string;
   middleName: string;
+  birthday: number;
 }

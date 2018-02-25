@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
+import java.util.Date;
 
 @ApiModel("User registration model")
 public class TempUserDto {
@@ -35,6 +36,16 @@ public class TempUserDto {
 
     @Length(max = 255, message = "Middle name is too large")
     private String middleName;
+
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     public String getPassword() {
         return password;

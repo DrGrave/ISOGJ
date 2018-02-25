@@ -1,5 +1,7 @@
 package com.vidnichuk.isogj.api.dto.model;
 
+import java.util.Date;
+
 /**
  * User dto object
  */
@@ -21,6 +23,16 @@ public class UserDto {
      * user patronymic
      */
     private String middleName;
+
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     public Long getId() {
         return id;

@@ -4,6 +4,8 @@ import com.vidnichuk.isogj.api.model.type.TypeOfUser;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.Date;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -26,6 +28,7 @@ public class User {
      * username for identification and synchronization with other services.
      */
     @Column(name = "username", nullable = false)
+    @NotEmpty(message = "*Please provide your username")
     private String username;
 
 
@@ -56,6 +59,13 @@ public class User {
     @Column(name = "middle_name", nullable = false)
     private String middleName;
 
+    @Column(name = "birthday")
+    @NotEmpty(message = "*Please provide a valid birthday")
+    private Date birthday;
+
+    @Column(name = "uid", nullable = false)
+    @NotEmpty(message = "*uid")
+    private long uid;
 
     /**
      * email of user
@@ -235,5 +245,21 @@ public class User {
 
     public void setPossibleCitiesToWork(Set<City> possibleCitiesToWork) {
         this.possibleCitiesToWork = possibleCitiesToWork;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public long getUid() {
+        return uid;
+    }
+
+    public void setUid(long uid) {
+        this.uid = uid;
     }
 }

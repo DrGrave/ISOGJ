@@ -19,6 +19,12 @@
         "PATTERN": "Password must contain at least one digit, one latin character and at least 8 characters"
       }
     },
+    "BIRTHDAY":{
+      "PLACEHOLDER": "Birthday",
+      "VALIDATION":{
+        "PATTERN": "Please provide your day of birth"
+      }
+    },
     "CONFIRM_PASSWORD": {
       "PLACEHOLDER": "Confirm password",
       "VALIDATION": {
@@ -43,6 +49,34 @@
     },
     "SUBMIT_BUTTON": {
       "TEXT": "Submit"
+    }
+  },
+  "HEADER":{
+    "COMMON": {
+      "VALIDATION": {
+        "REQUIRED": "Field is mandatory"
+      }
+    },
+    "SIGN_IN":{
+      "PLACEHOLDER": "Sign in"
+    },
+    "SIGN_UP":{
+      "PLACEHOLDER": "Sign up"
+    },
+    "HOME":{
+      "PLACEHOLDER": "Home"
+    },
+    "VACANCY":{
+      "PLACEHOLDER": "Vacancys"
+    },
+    "WORK":{
+      "PLACEHOLDER": "Work"
+    },
+    "LOGOUT":{
+      "PLACEHOLDER": "Logout"
+    },
+    "USER":{
+      "PLACEHOLDER": "Users"
     }
   }
 }

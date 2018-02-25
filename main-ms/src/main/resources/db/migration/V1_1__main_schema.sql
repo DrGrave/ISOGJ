@@ -220,7 +220,8 @@ create table temp_user
   last_name varchar(255) null,
   middle_name varchar(255) null,
   password varchar(255) null,
-  username varchar(255) null
+  username varchar(255) null,
+  birthday datetime null
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
@@ -328,6 +329,10 @@ create table user
   city_of_living bigint null,
   gender bigint null,
   type_of_user bigint null,
+  uid bigint not null,
+  birthday datetime null,
+  constraint user_uid_uindex
+  unique (uid),
   constraint FKkrcm363wm8xl5ydosqnynmhym
   foreign key (city_of_living) references city (id),
   constraint FK1isrcw5olh4k3cddck2x7um5p

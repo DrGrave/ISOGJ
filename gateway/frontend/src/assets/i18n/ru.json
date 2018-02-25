@@ -19,6 +19,12 @@
         "PATTERN": "Пароль должен содержать хотя бы одну цифру, один латинский символ и быть не короче восьми символов"
       }
     },
+    "BIRTHDAY":{
+      "PLACEHOLDER": "День рождения",
+      "VALIDATION":{
+        "PATTERN": "Пожалуйста, укажите дату вашего рождения"
+      }
+    },
     "CONFIRM_PASSWORD": {
       "PLACEHOLDER": "Подтвердите пароль",
       "VALIDATION": {
@@ -43,6 +49,34 @@
     },
     "SUBMIT_BUTTON": {
       "TEXT": "Отправить"
+    }
+  },
+  "HEADER":{
+    "COMMON": {
+      "VALIDATION": {
+        "REQUIRED": "Field is mandatory"
+      }
+    },
+    "SIGN_IN":{
+      "PLACEHOLDER": "Войти"
+    },
+    "SIGN_UP":{
+      "PLACEHOLDER": "Регистрация"
+    },
+    "HOME":{
+      "PLACEHOLDER": "Домой"
+    },
+    "VACANCY":{
+      "PLACEHOLDER": "Вакансии"
+    },
+    "WORK":{
+      "PLACEHOLDER": "Работа"
+    },
+    "LOGOUT":{
+      "PLACEHOLDER": "Выйти"
+    },
+    "USER":{
+      "PLACEHOLDER": "Пользователи"
     }
   }
 }

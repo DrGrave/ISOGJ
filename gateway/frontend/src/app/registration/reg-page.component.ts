@@ -43,7 +43,8 @@ export class RegPageComponent implements OnInit {
         [Validators.required]),
       middleName: new FormControl(''),
       lastName: new FormControl('',
-        [Validators.required])
+        [Validators.required]),
+      birthday: new FormControl('', [Validators.required])
     });
 
 
