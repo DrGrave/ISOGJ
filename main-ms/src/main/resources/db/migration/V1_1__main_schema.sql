@@ -329,7 +329,7 @@ create table user
   city_of_living bigint null,
   gender bigint null,
   type_of_user bigint null,
-  uid bigint not null,
+  uid varchar(255),
   birthday datetime null,
   constraint user_uid_uindex
   unique (uid),

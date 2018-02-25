@@ -60,12 +60,10 @@ public class User {
     private String middleName;
 
     @Column(name = "birthday")
-    @NotEmpty(message = "*Please provide a valid birthday")
     private Date birthday;
 
     @Column(name = "uid", nullable = false)
-    @NotEmpty(message = "*uid")
-    private long uid;
+    private String uid;
 
     /**
      * email of user
@@ -255,11 +253,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public long getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 }

@@ -115,6 +115,11 @@ public class UserServiceImpl implements UserService {
         TempUser tempUser = tempUserRepository.findByConfirmLink(link);
         User user = tempUserToUserMapper.tempUserToUser(tempUser);
         user.setTypeOfUser(typeOfUserRepository.findAll().get(0));
+        UUID uuid = UUID.randomUUID();
+        while (userRepository.findByUid(uuid.toString()) != null) {
+            uuid = UUID.randomUUID();
+        }
+        user.setUid(uuid.toString());
         userRepository.save(user);
         UserLink userLink = new UserLink();
         userLink.setUser(user);
