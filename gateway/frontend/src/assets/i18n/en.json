@@ -78,5 +78,28 @@
     "USER":{
       "PLACEHOLDER": "Users"
     }
+  },
+  "LOGIN":{
+    "LOGIN":{
+    "PLACEHOLDER": "Username"
+    },
+    "PASSWORD":{
+      "PLACEHOLDER": "Password"
+    },
+    "ENTER":{
+      "PLACEHOLDER": "Login"
+    },
+    "REQUIRED":{
+      "PASSWORD":{
+        "PLACEHOLDER": "Please inform your user name"
+      },
+      "LOGIN":{
+        "PLACEHOLDER": "Please inform your password"
+      },
+    "HEADER":{
+      "PLACEHOLDER": "Enter in system"
+    }
   }
+  }
+
 }

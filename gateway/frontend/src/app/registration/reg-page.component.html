@@ -91,6 +91,9 @@
         <input matInput [matDatepicker]="dp1" placeholder="{{'SIGN_UP.BIRTHDAY.PLACEHOLDER' | translate}}" formControlName="birthday" required>
         <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
         <mat-datepicker #dp1 ></mat-datepicker>
+        <mat-error *ngIf="regFormGroup.controls.birthday.hasError('required')">
+          {{ 'SIGN_UP.COMMON.VALIDATION.REQUIRED' | translate }}
+        </mat-error>
       </mat-input-container>
       <button type="submit" class="reg-button" mat-button color="primary" [disabled]="regFormGroup.invalid">
         {{ 'SIGN_UP.SUBMIT_BUTTON.TEXT' | translate }}

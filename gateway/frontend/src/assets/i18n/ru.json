@@ -78,5 +78,27 @@
     "USER":{
       "PLACEHOLDER": "Пользователи"
     }
+  },
+  "LOGIN":{
+    "LOGIN":{
+      "PLACEHOLDER": "Логин"
+    },
+    "PASSWORD":{
+      "PLACEHOLDER": "Пароль"
+    },
+    "ENTER":{
+      "PLACEHOLDER": "Войти"
+    },
+    "REQUIRED":{
+      "PASSWORD":{
+        "PLACEHOLDER": "Введите пароль"
+      },
+      "LOGIN":{
+        "PLACEHOLDER": "Введите логин"
+      }
+    },
+    "HEADER":{
+      "PLACEHOLDER": "Вход в систему"
+    }
   }
 }
