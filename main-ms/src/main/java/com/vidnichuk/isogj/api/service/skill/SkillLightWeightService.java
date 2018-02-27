@@ -9,20 +9,20 @@ import java.util.List;
 
 public interface SkillLightWeightService {
 
-    List<UserSkillDto> findAllSkillsById(long idUser);
+    List<UserSkillDto> findAllSkillsById(String idUser);
 
     List<VacancySkillDto> findAllVacancySkillsById(Long id);
 
-    List<UserSkillDto> findAuthorizedUserSkillsById(long id);
+    List<UserSkillDto> findAuthorizedUserSkillsById(String id);
 
     List<SkillDto> findAddSkill(String name);
 
-    List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, long id);
+    List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, String id);
 
     List<TypeOfSkillDto> getAllTypesOfSkill();
 
     void addNewSkill(SkillDto skill);
 
 
-    List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, long id);
+    List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, String id);
 }

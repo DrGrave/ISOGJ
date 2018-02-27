@@ -48,8 +48,8 @@ public class LinkServiceImpl implements LinkService{
     }
 
     @Override
-    public UserLinkDto getUserImgByUserId(long id) {
-        return userLinkDtoMapper.fromUserLinkToUserLinkDto(userLinkRepository.findByUserIdAndTypeOfLinkId(id, 1));
+    public UserLinkDto getUserImgByUsername(String username) {
+        return userLinkDtoMapper.fromUserLinkToUserLinkDto(userLinkRepository.findByUserIdAndTypeOfLinkId(userRepository.findByUsername(username).getId(), 1));
     }
 
     @Override
@@ -64,12 +64,12 @@ public class LinkServiceImpl implements LinkService{
     }
 
     @Override
-    public List<UserLinkDto> changeLink(UserLinkDto userLinkDto, long id) {
+    public List<UserLinkDto> changeLink(UserLinkDto userLinkDto, String id) {
         UserLink userLink = userLinkDtoMapper.fromUserLinkDtoToUserLink(userLinkDto);
-        userLink.setUser(userRepository.findById(id));
+        userLink.setUser(userRepository.findByUid(id));
         userLinkRepository.save(userLink);
         List<UserLinkDto> userLinkDtos = new ArrayList<>();
-        for (UserLink usLink : userLinkRepository.findAllByUserId(id)){
+        for (UserLink usLink : userLinkRepository.findAllByUserId(userRepository.findByUid(id).getId())){
             if (usLink.getTypeOfLink().getId() != 1) {
                 userLinkDtos.add(userLinkDtoMapper.fromUserLinkToUserLinkDto(usLink));
             }
@@ -78,12 +78,12 @@ public class LinkServiceImpl implements LinkService{
     }
 
     @Override
-    public List<UserLinkDto> addLink(UserLinkDto userLinkDto, long id) {
+    public List<UserLinkDto> addLink(UserLinkDto userLinkDto, String id) {
         List<UserLinkDto> userLinkDtos = new ArrayList<>();
         UserLink userLink = userLinkDtoMapper.fromUserLinkDtoToUserLink(userLinkDto);
-        userLink.setUser(userRepository.findById(id));
+        userLink.setUser(userRepository.findByUid(id));
         userLinkRepository.save(userLink);
-        for (UserLink usLink : userLinkRepository.findAllByUserId(id)){
+        for (UserLink usLink : userLinkRepository.findAllByUserId(userRepository.findByUid(id).getId())){
             if (usLink.getTypeOfLink().getId() != 1) {
                 userLinkDtos.add(userLinkDtoMapper.fromUserLinkToUserLinkDto(usLink));
             }
@@ -92,24 +92,29 @@ public class LinkServiceImpl implements LinkService{
     }
 
     @Override
-    public UserLinkDto addUserImg(UserLinkDto userLinkDto, long id) {
-        UserLink us = userLinkRepository.findByUserIdAndTypeOfLinkId(id, typeOfLinkRepository.findByName("Img").getId());
+    public UserLinkDto addUserImg(UserLinkDto userLinkDto, String id) {
+        UserLink us = userLinkRepository.findByUserIdAndTypeOfLinkId(userRepository.findByUid(id).getId(), typeOfLinkRepository.findByName("Img").getId());
         us.setLink(userLinkDtoMapper.fromUserLinkDtoToUserLink(userLinkDto).getLink());
         userLinkRepository.save(us);
         return userLinkDtoMapper.fromUserLinkToUserLinkDto(us);
     }
 
     @Override
-    public List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, long id) {
+    public List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, String id) {
         UserLink userLink = userLinkDtoMapper.fromUserLinkDtoToUserLink(userLinkDto);
-        userLink.setUser(userRepository.findById(id));
+        userLink.setUser(userRepository.findByUid(id));
         userLinkRepository.delete(userLink);
         List<UserLinkDto> userLinkDtos = new ArrayList<>();
-        for (UserLink usLink : userLinkRepository.findAllByUserId(id)){
+        for (UserLink usLink : userLinkRepository.findAllByUserId(userRepository.findByUid(id).getId())){
             if (usLink.getTypeOfLink().getId() != 1) {
                 userLinkDtos.add(userLinkDtoMapper.fromUserLinkToUserLinkDto(usLink));
             }
         }
         return userLinkDtos;
+    }
+
+    @Override
+    public UserLinkDto getUserImgByUid(String uid) {
+        return userLinkDtoMapper.fromUserLinkToUserLinkDto(userLinkRepository.findByUserIdAndTypeOfLinkId(userRepository.findByUid(uid).getId(), 1));
     }
 }

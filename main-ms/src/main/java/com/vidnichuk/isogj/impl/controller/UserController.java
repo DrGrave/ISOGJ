@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -52,27 +53,27 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/all")
-    public List<UserDto> getAllUser(@RequestParam("page") int page, @RequestParam("size") int size){
+    public List<UserListInfoDto> getAllUser(@RequestParam("page") int page, @RequestParam("size") int size){
         return userLightWeightService.getAllUsers(page, size);
     }
 
     @GetMapping("/moreuserinfo")
-    public UserDto getUserWithMoreInformation(@RequestParam("id") Long id){
+    public UserDto getUserWithMoreInformation(@RequestParam("id") String id){
         return userLightWeightService.getUserWithMoreInformation(id);
     }
 
     @GetMapping("/me")
-    public MeUserDto getUserByUsername(@RequestParam("username") String username){
-        return userLightWeightService.getUserByUsername(username);
+    public MeUserDto getUserByUsername(Principal principal){
+        return userLightWeightService.getUserByUsername(principal.getName());
     }
 
     @PostMapping("/changegender")
-    public GenderDto setNewGender(@Valid @RequestBody GenderDto gender, @RequestParam("id") long id){
+    public GenderDto setNewGender(@Valid @RequestBody GenderDto gender, @RequestParam("id") String id){
         return userLightWeightService.changeGender(gender, id);
     }
 
     @PostMapping("/city")
-    public CityDto applyCity(@Valid @RequestBody CityDto cityDto, @RequestParam("id") long id){
+    public CityDto applyCity(@Valid @RequestBody CityDto cityDto, @RequestParam("id") String id){
         return userLightWeightService.changeCity(cityDto, id);
     }
 

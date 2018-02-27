@@ -14,15 +14,15 @@ public interface UserLightWeightService {
 
     void approveRegistration(String link);
 
-    List<UserDto> getAllUsers(int page, int size);
+    List<UserListInfoDto> getAllUsers(int page, int size);
 
-    UserDto getUserWithMoreInformation(Long id);
+    UserDto getUserWithMoreInformation(String id);
 
     MeUserDto getUserByUsername(String username);
 
-    GenderDto changeGender(GenderDto gender, long id);
+    GenderDto changeGender(GenderDto gender, String id);
 
-    CityDto changeCity(CityDto cityDto, long id);
+    CityDto changeCity(CityDto cityDto, String id);
 
 
     long getCountOfPublicUser();

@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface EducationLightWeightService {
 
-    List<EducationDto> getEducationById(Long id);
+    List<EducationDto> getEducationById(String id);
 
-    List<N_A_EducationDto> getLastEducationByUserId(long id);
+    List<N_A_EducationDto> getLastEducationByUserId(String id);
 
     List<TypeOfEducationDto> getAllTypesOfEducation();
 
-    List<EducationDto> changeEducation(EducationDto educationDto, Long id);
+    List<EducationDto> changeEducation(EducationDto educationDto, String id);
 
-    List<EducationDto> addEducation(EducationDto educationDto, Long id);
+    List<EducationDto> addEducation(EducationDto educationDto, String id);
 
-    List<EducationDto> deleteEducation(EducationDto educationDto, Long id);
+    List<EducationDto> deleteEducation(EducationDto educationDto, String id);
 }

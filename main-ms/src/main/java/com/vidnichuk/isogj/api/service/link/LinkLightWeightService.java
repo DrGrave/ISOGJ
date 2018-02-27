@@ -8,15 +8,17 @@ import java.util.List;
 public interface LinkLightWeightService {
     List<UserLinkDto> getLinksToUser(Long id);
 
-    UserLinkDto getImgToUser(long id);
+    UserLinkDto getImgToUser(String username);
 
     List<TypeOfLinkDto> getAllTypesOfLink();
 
-    List<UserLinkDto> changeLink(UserLinkDto userLinkDto, long id);
+    List<UserLinkDto> changeLink(UserLinkDto userLinkDto, String id);
 
-    List<UserLinkDto> addLink(UserLinkDto userLinkDto, long id);
+    List<UserLinkDto> addLink(UserLinkDto userLinkDto, String id);
 
-    UserLinkDto addUserImg(UserLinkDto userLinkDto, long id);
+    UserLinkDto addUserImg(UserLinkDto userLinkDto, String id);
 
-    List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, long id);
+    List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, String id);
+
+    UserLinkDto getImgToUserList(String uid);
 }

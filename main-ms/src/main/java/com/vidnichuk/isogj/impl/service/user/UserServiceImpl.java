@@ -6,7 +6,10 @@ import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.model.UserLink;
+import com.vidnichuk.isogj.api.service.education.EducationService;
+import com.vidnichuk.isogj.api.service.link.LinkService;
 import com.vidnichuk.isogj.api.service.mail.EmailService;
+import com.vidnichuk.isogj.api.service.skill.SkillService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import com.vidnichuk.isogj.impl.client.AuthServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +79,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private LinkService linkService;
+
+    @Autowired
+    private SkillService skillService;
+
+    @Autowired
+    private EducationService educationService;
+
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -108,13 +120,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAllUsers(int page, int size) {
-        List<UserDto> userDtoList = new ArrayList<>();
-
+    public List<UserListInfoDto> getAllUsers(int page, int size) {
+        List<UserListInfoDto> userListInfoDtos = new ArrayList<>();
         for (User user: userRepository.findAll(createPageRequest(size,page))){
-            userDtoList.add(userDtoMapper.fromUserToUserDto(user));
+            userListInfoDtos.add(new UserListInfoDto(userDtoMapper.fromUserToUserDto(user), linkService.getUserImgByUid(user.getUid()), skillService.findAllSkillsByUserId(user.getUid()), educationService.getLastEducationByUserId(user.getUid())));
         }
-        return userDtoList;
+        return userListInfoDtos;
     }
 
     @Transactional
@@ -166,8 +177,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserWithMoreInfo(Long id) {
-        return userDtoMapper.fromUserToUserDto(userRepository.findById(id));
+    public UserDto getUserWithMoreInfo(String id) {
+        return userDtoMapper.fromUserToUserDto(userRepository.findByUid(id));
     }
 
     @Override
@@ -176,16 +187,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public GenderDto changeGender(GenderDto gender, long id) {
-        User user = userRepository.findById(id);
+    public GenderDto changeGender(GenderDto gender, String id) {
+        User user = userRepository.findByUid(id);
         user.setGender(genderDtoMapper.fromGenderDtoToGender(gender));
         userRepository.save(user);
         return genderDtoMapper.fromGenderToGenderDto(user.getGender());
     }
 
     @Override
-    public CityDto changeCity(CityDto cityDto, long id) {
-        User user = userRepository.findById(id);
+    public CityDto changeCity(CityDto cityDto, String id) {
+        User user = userRepository.findByUid(id);
         user.setCity(cityDtoMapper.fromCityDtoToCity(cityDto));
         userRepository.save(user);
         return cityDtoMapper.fromCityToCityDto(user.getCity());

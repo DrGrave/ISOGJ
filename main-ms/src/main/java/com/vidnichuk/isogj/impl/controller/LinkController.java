@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -24,13 +25,13 @@ public class LinkController {
     }
 
     @GetMapping("/img")
-    public UserLinkDto getUserImg(@RequestParam("id") long id){
-        return linkLightWeightService.getImgToUser(id);
+    public UserLinkDto getUserImg(Principal principal){
+        return linkLightWeightService.getImgToUser(principal.getName());
     }
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/userlistimg")
-    public UserLinkDto getUserImgToUserList(@RequestParam("id") long id) { return linkLightWeightService.getImgToUser(id); }
+    public UserLinkDto getUserImgToUserList(@RequestParam("id") String uid) { return linkLightWeightService.getImgToUserList(uid); }
 
     @GetMapping("/links/all")
     public List<TypeOfLinkDto> getAllTypesOfLinks(){
@@ -38,22 +39,22 @@ public class LinkController {
     }
 
     @PostMapping("/links/change")
-    public List<UserLinkDto> changeLink(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") long id){
+    public List<UserLinkDto> changeLink(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") String id){
         return linkLightWeightService.changeLink(userLinkDto, id);
     }
 
     @PostMapping("/links/add")
-    public List<UserLinkDto> addLink(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") long id){
+    public List<UserLinkDto> addLink(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") String id){
         return linkLightWeightService.addLink(userLinkDto, id);
     }
 
     @PostMapping("/links/img/change")
-    public UserLinkDto setUserImg(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") long id){
+    public UserLinkDto setUserImg(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") String id){
         return linkLightWeightService.addUserImg(userLinkDto, id);
     }
 
     @PostMapping("links/delete")
-    public List<UserLinkDto> deleteLink(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") long id){
+    public List<UserLinkDto> deleteLink(@Valid @RequestBody UserLinkDto userLinkDto, @RequestParam("id") String id){
         return linkLightWeightService.deleteLink(userLinkDto, id);
     }
 }

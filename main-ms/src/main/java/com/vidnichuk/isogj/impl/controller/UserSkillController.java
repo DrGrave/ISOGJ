@@ -21,22 +21,22 @@ public class UserSkillController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/userskills")
-    public List<UserSkillDto> findUserSkillsById(@RequestParam("id") long id){
+    public List<UserSkillDto> findUserSkillsById(@RequestParam("id") String id){
         return skillLightWeightService.findAllSkillsById(id);
     }
 
     @GetMapping("/authorize/userskills")
-    public List<UserSkillDto> authorizedFindUserSkillsById(@RequestParam("id") long id){
+    public List<UserSkillDto> authorizedFindUserSkillsById(@RequestParam("id") String id){
         return skillLightWeightService.findAuthorizedUserSkillsById(id);
     }
 
     @PostMapping("/authorize/add")
-    public List<UserSkillDto> authorizedAddedUserSkills(@Valid @RequestBody SkillDto skill, @RequestParam("id") long id){
+    public List<UserSkillDto> authorizedAddedUserSkills(@Valid @RequestBody SkillDto skill, @RequestParam("id") String id){
         return skillLightWeightService.addAndGetSkillsToUser(skill, id);
     }
 
     @PostMapping("/authorize/delete")
-    public List<UserSkillDto> authorizedDeleteUserSkill(@Valid @RequestBody UserSkillDto userSkillDto, @RequestParam("id") long id){
+    public List<UserSkillDto> authorizedDeleteUserSkill(@Valid @RequestBody UserSkillDto userSkillDto, @RequestParam("id") String id){
         return skillLightWeightService.deleteSkills(userSkillDto, id);
     }
 }

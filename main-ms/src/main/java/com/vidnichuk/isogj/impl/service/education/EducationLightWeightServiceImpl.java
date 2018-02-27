@@ -17,12 +17,12 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     private EducationService educationService;
 
     @Override
-    public List<EducationDto> getEducationById(Long id) {
+    public List<EducationDto> getEducationById(String id) {
         return educationService.findEducationById(id);
     }
 
     @Override
-    public List<N_A_EducationDto> getLastEducationByUserId(long id) {
+    public List<N_A_EducationDto> getLastEducationByUserId(String id) {
         return educationService.getLastEducationByUserId(id);
     }
 
@@ -32,18 +32,18 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     }
 
     @Override
-    public List<EducationDto> changeEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> changeEducation(EducationDto educationDto, String id) {
         return educationService.changeEducation(educationDto, id);
 
     }
 
     @Override
-    public List<EducationDto> addEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> addEducation(EducationDto educationDto, String id) {
         return educationService.addEducation(educationDto, id);
     }
 
     @Override
-    public List<EducationDto> deleteEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> deleteEducation(EducationDto educationDto, String id) {
         return educationService.deleteEducation(educationDto, id);
     }
 }

@@ -22,7 +22,7 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     private UserService userService;
 
     @Override
-    public GenderDto changeGender(GenderDto gender, long id) {
+    public GenderDto changeGender(GenderDto gender, String id) {
         return userService.changeGender(gender, id);
     }
 
@@ -47,12 +47,12 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     }
 
     @Override
-    public List<UserDto> getAllUsers(int page, int size) {
+    public List<UserListInfoDto> getAllUsers(int page, int size) {
         return userService.getAllUsers(page, size);
     }
 
     @Override
-    public UserDto getUserWithMoreInformation(Long id) {
+    public UserDto getUserWithMoreInformation(String id) {
         return userService.getUserWithMoreInfo(id);
     }
 
@@ -62,7 +62,7 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     }
 
     @Override
-    public CityDto changeCity(CityDto cityDto, long id) {
+    public CityDto changeCity(CityDto cityDto, String id) {
         return userService.changeCity(cityDto, id);
     }
 

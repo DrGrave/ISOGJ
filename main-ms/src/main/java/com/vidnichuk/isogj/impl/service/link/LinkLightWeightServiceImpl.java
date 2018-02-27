@@ -20,8 +20,8 @@ public class LinkLightWeightServiceImpl implements LinkLightWeightService{
     }
 
     @Override
-    public UserLinkDto getImgToUser(long id) {
-        return linkService.getUserImgByUserId(id);
+    public UserLinkDto getImgToUser(String uid) {
+        return linkService.getUserImgByUsername(uid);
     }
 
     @Override
@@ -30,22 +30,27 @@ public class LinkLightWeightServiceImpl implements LinkLightWeightService{
     }
 
     @Override
-    public List<UserLinkDto> changeLink(UserLinkDto userLinkDto, long id) {
+    public List<UserLinkDto> changeLink(UserLinkDto userLinkDto, String id) {
         return linkService.changeLink(userLinkDto, id);
     }
 
     @Override
-    public List<UserLinkDto> addLink(UserLinkDto userLinkDto, long id) {
+    public List<UserLinkDto> addLink(UserLinkDto userLinkDto, String id) {
         return linkService.addLink(userLinkDto, id);
     }
 
     @Override
-    public UserLinkDto addUserImg(UserLinkDto userLinkDto, long id) {
+    public UserLinkDto addUserImg(UserLinkDto userLinkDto, String id) {
         return linkService.addUserImg(userLinkDto, id);
     }
 
     @Override
-    public List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, long id) {
+    public List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, String id) {
         return linkService.deleteLink(userLinkDto, id);
+    }
+
+    @Override
+    public UserLinkDto getImgToUserList(String uid) {
+        return linkService.getUserImgByUid(uid);
     }
 }

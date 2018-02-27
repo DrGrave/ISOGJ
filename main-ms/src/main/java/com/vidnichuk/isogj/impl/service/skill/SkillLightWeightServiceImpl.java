@@ -17,7 +17,7 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     private SkillService skillService;
 
     @Override
-    public List<UserSkillDto> findAllSkillsById(long idUser) {
+    public List<UserSkillDto> findAllSkillsById(String idUser) {
         return skillService.findAllSkillsByUserId(idUser);
     }
 
@@ -27,7 +27,7 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     }
 
     @Override
-    public List<UserSkillDto> findAuthorizedUserSkillsById(long id) {
+    public List<UserSkillDto> findAuthorizedUserSkillsById(String id) {
         return skillService.findAllSkillsByUserId(id);
     }
 
@@ -37,7 +37,7 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     }
 
     @Override
-    public List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, long id) {
+    public List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, String id) {
         return skillService.addAndGetSkillsToUser(skill, id);
     }
 
@@ -52,7 +52,7 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     }
 
     @Override
-    public List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, long id) {
+    public List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, String id) {
         return skillService.deleteSkills(userSkillDto, id);
     }
 }

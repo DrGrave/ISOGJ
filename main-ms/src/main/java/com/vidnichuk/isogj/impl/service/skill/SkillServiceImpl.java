@@ -55,9 +55,9 @@ public class SkillServiceImpl implements SkillService{
 
 
     @Override
-    public List<UserSkillDto> findAllSkillsByUserId(long id) {
+    public List<UserSkillDto> findAllSkillsByUserId(String id) {
         List<UserSkillDto> userSkillDtoList = new ArrayList<>();
-        for (UserSkill userSkill : userSkillRepository.findAllByUser_Id(id)){
+        for (UserSkill userSkill : userSkillRepository.findAllByUser_Uid(id)){
             userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
         }
         return userSkillDtoList;
@@ -75,9 +75,9 @@ public class SkillServiceImpl implements SkillService{
 
 
     @Override
-    public List<UserSkillDto> findAuthorizedSkillsByUserId(long id) {
+    public List<UserSkillDto> findAuthorizedSkillsByUserId(String id) {
         List<UserSkillDto> userSkillDtoList = new ArrayList<>();
-        for (UserSkill userSkill : userSkillRepository.findAllByUser_Id(id)){
+        for (UserSkill userSkill : userSkillRepository.findAllByUser_Uid(id)){
             userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
         }
         return userSkillDtoList;
@@ -97,15 +97,15 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, long id) {
-        if (userSkillRepository.findByUserIdAndSkillId(id, skill.getId()) == null) {
+    public List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, String id) {
+        if (userSkillRepository.findByUserUidAndSkillId(id, skill.getId()) == null) {
             UserSkill userSkill = new UserSkill();
             userSkill.setSkill(skillRepository.findSkillById(skill.getId()));
-            userSkill.setUser(userRepository.findById(id));
+            userSkill.setUser(userRepository.findByUid(id));
             userSkillRepository.save(userSkill);
         }
         List<UserSkillDto> userSkillDtoList = new ArrayList<>();
-        for (UserSkill thisSkill: userSkillRepository.findAllByUser_Id(id)){
+        for (UserSkill thisSkill: userSkillRepository.findAllByUser_Uid(id)){
             userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(thisSkill));
         }
         return userSkillDtoList;
@@ -126,10 +126,10 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, long id) {
+    public List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, String id) {
         List<UserSkillDto> userSkillDtoList = new ArrayList<>();
         userSkillRepository.delete(userSkillDto.getId());
-        for (UserSkill userSkill : userSkillRepository.findAllByUser_Id(id)){
+        for (UserSkill userSkill : userSkillRepository.findAllByUser_Uid(id)){
             userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
         }
         return userSkillDtoList;

@@ -7,15 +7,17 @@ import java.util.List;
 
 public interface LinkService {
     List<UserLinkDto> findAllUserLinks(Long id);
-    UserLinkDto getUserImgByUserId(long id);
+    UserLinkDto getUserImgByUsername(String username);
 
     List<TypeOfLinkDto> getAllTypesOfLink();
 
-    List<UserLinkDto> changeLink(UserLinkDto userLinkDto, long id);
+    List<UserLinkDto> changeLink(UserLinkDto userLinkDto, String id);
 
-    List<UserLinkDto> addLink(UserLinkDto userLinkDto, long id);
+    List<UserLinkDto> addLink(UserLinkDto userLinkDto, String id);
 
-    UserLinkDto addUserImg(UserLinkDto userLinkDto, long id);
+    UserLinkDto addUserImg(UserLinkDto userLinkDto, String id);
 
-    List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, long id);
+    List<UserLinkDto> deleteLink(UserLinkDto userLinkDto, String id);
+
+    UserLinkDto getUserImgByUid(String uid);
 }

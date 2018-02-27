@@ -9,7 +9,7 @@ public class UserDto {
     /**
      * user id
      */
-    private Long id;
+    private String uid;
 
     /**
      * user name
@@ -34,12 +34,12 @@ public class UserDto {
         this.birthday = birthday;
     }
 
-    public Long getId() {
-        return id;
+    public String getUid() {
+        return uid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getFirstName() {

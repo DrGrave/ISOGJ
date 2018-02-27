@@ -9,19 +9,19 @@ import java.util.List;
 
 public interface SkillService {
 
-    List<UserSkillDto> findAllSkillsByUserId(long id);
+    List<UserSkillDto> findAllSkillsByUserId(String id);
 
     List<VacancySkillDto> findAllSkillsByVacancyId(long id);
 
-    List<UserSkillDto> findAuthorizedSkillsByUserId(long id);
+    List<UserSkillDto> findAuthorizedSkillsByUserId(String id);
 
     List<SkillDto> findAddSkill(String name);
 
-    List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, long id);
+    List<UserSkillDto> addAndGetSkillsToUser(SkillDto skill, String id);
 
     List<TypeOfSkillDto> getAllTypesOfSkill();
 
     void addNewSkill(SkillDto skill);
 
-    List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, long id);
+    List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, String id);
 }

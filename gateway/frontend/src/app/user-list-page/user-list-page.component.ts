@@ -4,6 +4,7 @@ import {User} from './user';
 import {Router} from '@angular/router';
 import {MatPaginator} from "@angular/material/paginator";
 import {PageEvent} from "@angular/material";
+import {UserListInfo} from "./UserListInfo";
 
 
 @Component({
@@ -16,6 +17,7 @@ export class UserListPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   token: string;
   users: User[];
+  userList: UserListInfo[];
   user: User;
   selectedUser: User;
   pageNum: number = 0;
@@ -35,24 +37,16 @@ export class UserListPageComponent implements OnInit {
       this.userCount = count;
     });
     this.userService.getUsers(size,page).subscribe(usersList => {
-      this.users = usersList;
-      this.getAllSkills();
+      this.userList = usersList;
     });
   }
 
-  getAllSkills() {
-    for (let i = 0; i < this.users.length; i++) {
-      this.userService.getSkills(this.users[i].id).subscribe(skills => this.users[i].skill = skills);
-      this.userService.getUserImg(this.users[i].id).subscribe( img => this.users[i].imgLink = img.link);
-      this.userService.getUserAducation(this.users[i].id).subscribe( education => this.users[i].education = education);
-    }
-  }
 
   onSelect(user: User): void {
     if (localStorage.getItem('access_token') != null) {
       this.selectedUser = user;
       this.token = localStorage.getItem('access_token');
-      this.router.navigateByUrl('/more-user-info-page?id=' + this.selectedUser.id);
+      this.router.navigateByUrl('/more-user-info-page?id=' + this.selectedUser.uid);
     }
   }
 

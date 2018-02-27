@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {UserCompany} from "../home-page/UserCompany";
 import {User} from "../user-list-page/user";
-import {Vacancy} from "../vacancy-list-page/vacancy";
 import {VacancyTask} from "./VacancyTask";
 import {UserWork} from "./UserWork";
 import {VacancySkill} from "../vacancy-list-page/vacancySkill";
@@ -45,14 +44,14 @@ export class CompanyPageService {
   }
 
 
-  getMainCompany(id: number): Observable<UserCompany> {
+  getMainCompany(id: String): Observable<UserCompany> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     };
     return this.http.get<UserCompany>(this.getMainCompanyUrl +id, httpOptions);
   }
 
-  getNextMainNextCompany(id: number, idUserCompany: number): Observable<UserCompany>{
+  getNextMainNextCompany(id: String, idUserCompany: number): Observable<UserCompany>{
     const urlSearchParams = new URLSearchParams();
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
@@ -105,7 +104,7 @@ export class CompanyPageService {
     return this.http.get<VacancyTask[]>(this.getTasksUrl + id, httpOptions);
   }
 
-  getUserPosition(idUser: number, idCompany: number): Observable<UserCompany>{
+  getUserPosition(idUser: String, idCompany: number): Observable<UserCompany>{
     const urlSearchParams = new URLSearchParams();
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))

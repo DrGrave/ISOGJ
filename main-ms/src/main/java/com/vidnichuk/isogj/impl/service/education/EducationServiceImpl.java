@@ -39,18 +39,18 @@ public class EducationServiceImpl implements EducationService{
     private TypeOfEducationDtoMapper typeOfEducationDtoMapper;
 
     @Override
-    public List<EducationDto> findEducationById(Long id) {
+    public List<EducationDto> findEducationById(String id) {
         List<EducationDto> educationDtos = new ArrayList<>();
-        for (Education education : educationRepository.findAllByUser_Id(id)){
+        for (Education education : educationRepository.findAllByUser_Id(userRepository.findByUid(id).getId())){
             educationDtos.add(educationDtoMapper.formEducationToEducationDto(education));
         }
         return educationDtos;
     }
 
     @Override
-    public List<N_A_EducationDto> getLastEducationByUserId(long id) {
+    public List<N_A_EducationDto> getLastEducationByUserId(String id) {
         List<N_A_EducationDto> n_a_educationDtoList = new ArrayList<>();
-        for (Education education: educationRepository.findAllByUserIdOrderByDateOfEnd(id)){
+        for (Education education: educationRepository.findAllByUserIdOrderByDateOfEnd(userRepository.findByUid(id).getId())){
             n_a_educationDtoList.add(educationDtoMapper.fromEducationToNAEducationDto(education));
         }
         return n_a_educationDtoList;
@@ -66,34 +66,34 @@ public class EducationServiceImpl implements EducationService{
     }
 
     @Override
-    public List<EducationDto> changeEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> changeEducation(EducationDto educationDto, String id) {
         Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
-        education.setUser(userRepository.findById(id));
+        education.setUser(userRepository.findByUid(id));
         educationRepository.save(education);
         List<EducationDto> educationDtoList = new ArrayList<>();
-        for (Education educ: educationRepository.findAllByUser_Id(id)){
+        for (Education educ: educationRepository.findAllByUser_Id(userRepository.findByUid(id).getId())){
             educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educ));
         }
         return educationDtoList;
     }
 
     @Override
-    public List<EducationDto> addEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> addEducation(EducationDto educationDto, String id) {
         List<EducationDto> educationDtoList = new ArrayList<>();
         Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
-        education.setUser(userRepository.findById(id));
+        education.setUser(userRepository.findByUid(id));
         educationRepository.save(education);
-        for (Education educate: educationRepository.findAllByUser_Id(id)){
+        for (Education educate: educationRepository.findAllByUser_Id(userRepository.findByUid(id).getId())){
             educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educate));
         }
         return educationDtoList;
     }
 
     @Override
-    public List<EducationDto> deleteEducation(EducationDto educationDto, Long id) {
+    public List<EducationDto> deleteEducation(EducationDto educationDto, String id) {
         educationRepository.delete(educationDtoMapper.fromEducationDtoToEducation(educationDto));
         List<EducationDto> educationDtoList = new ArrayList<>();
-        for (Education educ: educationRepository.findAllByUser_Id(id)){
+        for (Education educ: educationRepository.findAllByUser_Id(userRepository.findByUid(id).getId())){
             educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educ));
         }
         return educationDtoList;

@@ -40,7 +40,7 @@ export class WorkPageComponent implements OnInit {
   }
 
     getMainCompany(){
-      this.companyPageService.getMainCompany(this.myUser.id).subscribe( date => {
+      this.companyPageService.getMainCompany(this.myUser.uid).subscribe( date => {
         this.mainCompany = date;
         this.getCompanyUsers();
         this.getCompanyNUsers();
@@ -49,7 +49,7 @@ export class WorkPageComponent implements OnInit {
     }
 
     getNextCompany(){
-      this.companyPageService.getNextMainNextCompany(this.myUser.id, this.mainCompany.idUserCompany).subscribe( date => this.mainCompany = date);
+      this.companyPageService.getNextMainNextCompany(this.myUser.uid, this.mainCompany.idUserCompany).subscribe( date => this.mainCompany = date);
     }
 
     getCompanyUsers(){
@@ -103,10 +103,6 @@ export class WorkPageComponent implements OnInit {
 
     private getUsersImg(userArr: UserWork[]) {
       for (let i = 0; i < userArr.length; i++) {
-        this.userService.getSkills(userArr[i].id).subscribe(skills => userArr[i].skill = skills);
-        this.userService.getUserImg(userArr[i].id).subscribe( img => userArr[i].imgLink = img.link);
-        this.userService.getUserAducation(userArr[i].id).subscribe( education => userArr[i].education = education);
-        this.companyPageService.getUserPosition(userArr[i].id, this.mainCompany.company.id).subscribe( date=> userArr[i].position = date);
       }
     }
 }

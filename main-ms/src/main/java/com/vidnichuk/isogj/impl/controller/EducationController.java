@@ -21,13 +21,13 @@ public class EducationController {
     private EducationLightWeightService educationLightWeightService;
 
     @GetMapping("/")
-    public List<EducationDto> findEducationByUserId(@RequestParam("id") long id){
+    public List<EducationDto> findEducationByUserId(@RequestParam("id") String id){
         return educationLightWeightService.getEducationById(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/userlist")
-    public List<N_A_EducationDto> findLastEducationByUserId(@RequestParam("id") long id){
+    public List<N_A_EducationDto> findLastEducationByUserId(@RequestParam("id") String id){
         return educationLightWeightService.getLastEducationByUserId(id);
     }
 
@@ -37,17 +37,17 @@ public class EducationController {
     }
 
     @PostMapping("/change")
-    public List<EducationDto> changeEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+    public List<EducationDto> changeEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") String id){
         return educationLightWeightService.changeEducation(educationDto, id);
     }
 
     @PostMapping("/add")
-    public List<EducationDto> addEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+    public List<EducationDto> addEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") String id){
         return educationLightWeightService.addEducation(educationDto, id);
     }
 
     @PostMapping("/delete")
-    public List<EducationDto> deleteEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") Long id){
+    public List<EducationDto> deleteEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") String id){
         return educationLightWeightService.deleteEducation(educationDto, id);
     }
 
