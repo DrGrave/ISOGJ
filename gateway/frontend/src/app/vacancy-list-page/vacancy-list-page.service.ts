@@ -11,21 +11,28 @@ const httpOptions = {
 
 @Injectable()
 export class VacancyService {
-  private userUrl = '/api/main/vacancy/all';
+  private countUrl = '/api/main/vacancy/count';
+  private userUrl = '/api/main/vacancy/all?';
   private skillUrl = '/api/main/skill/vacancyskills?';
 
 
   constructor(private http: HttpClient) {
   }
 
+  getCountOfVacancy(): Observable<number>{
+    return this.http.get<number>(this.countUrl, httpOptions);
+  }
 
-  getVacancy(): Observable<Vacancy[]> {
-    return this.http.get<Vacancy[]>(this.userUrl);
+  getVacancy(size: number, page: number): Observable<Vacancy[]> {
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('size', size.toString());
+    urlSearchParams.append('page', page.toString());
+    return this.http.get<Vacancy[]>(this.userUrl + urlSearchParams.toString(), httpOptions);
   }
 
   getSkills(idVacancy: number):Observable<VacancySkill[]>{
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('id', idVacancy.toString());
-    return this.http.get<VacancySkill[]>(this.skillUrl + urlSearchParams.toString(), httpOptions)
+    return this.http.get<VacancySkill[]>(this.skillUrl + urlSearchParams.toString(), httpOptions);
   }
 }

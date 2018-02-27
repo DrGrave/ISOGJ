@@ -20,8 +20,14 @@ public class VacancyController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/all")
-    public List<N_A_VacancyDto> getListOfVacancy(){
-        return vacancyLightWeightService.getAllVacancy();
+    public List<N_A_VacancyDto> getListOfVacancy(@RequestParam("page") int page, @RequestParam("size") int size){
+        return vacancyLightWeightService.getAllVacancy(page, size);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
+    @GetMapping("/count")
+    public long getCountOfVacancy(){
+        return vacancyLightWeightService.getCountOfVacancy();
     }
 
     @GetMapping("/authorize/vacancys")

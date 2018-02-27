@@ -25,7 +25,7 @@ public class UserController {
         return userLightWeightService.registerUser(tempUserDto);
     }
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
-    @PostMapping("/count")
+    @GetMapping("/count")
     public long countOfPublicUser(){
         return userLightWeightService.getCountOfPublicUser();
     }

@@ -5,7 +5,7 @@ import com.vidnichuk.isogj.api.dto.model.*;
 import java.util.List;
 
 public interface VacancyLightWeightService {
-    List<N_A_VacancyDto> getAllVacancy();
+    List<N_A_VacancyDto> getAllVacancy(int page, int size);
 
     List<UserDto> getUsersByCompanyId(long id, boolean us, boolean comp);
 
@@ -15,4 +15,6 @@ public interface VacancyLightWeightService {
     List<VacancyTaskDto> getTasksByVacancyId(long id);
 
     List<TaskSkillDto> getSkillsToTask(long id);
+
+    long getCountOfVacancy();
 }

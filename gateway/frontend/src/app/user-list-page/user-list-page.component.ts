@@ -13,28 +13,28 @@ import {PageEvent} from "@angular/material";
 })
 
 export class UserListPageComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   token: string;
   users: User[];
   user: User;
   selectedUser: User;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   pageNum: number = 0;
   pageSiz: number = 0;
   userCount: number = 0;
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getUsers(10, 0);
   }
 
   constructor(private userService: UserService,
               private router: Router) {
   }
 
-  getUsers(): void {
+  getUsers(size: number, page: number): void {
     this.userService.getUsersCount().subscribe( count =>{
       this.userCount = count;
     });
-    this.userService.getUsers(10,0).subscribe(usersList => {
+    this.userService.getUsers(size,page).subscribe(usersList => {
       this.users = usersList;
       this.getAllSkills();
     });
@@ -59,6 +59,7 @@ export class UserListPageComponent implements OnInit {
   getNextPage(event){
     this.pageNum = this.paginator.pageIndex;
     this.pageSiz = this.paginator.pageSize;
+    this.getUsers(this.pageSiz, this.pageNum);
   }
 
 

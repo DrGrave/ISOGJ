@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../user-list-page/user';
 import {VacancyService} from './vacancy-list-page.service';
 import {Vacancy} from './vacancy';
+import {MatPaginator} from "@angular/material";
 
 @Component({
   selector: 'app-vacancy-list-page',
@@ -11,18 +12,26 @@ import {Vacancy} from './vacancy';
 
 export class VacancyListPageComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   vacancies: Vacancy[];
   sellectedVacancy: Vacancy;
+  pageNum: number = 0;
+  pageSiz: number = 0;
+  vacancyCount: number = 0;
+
 
   ngOnInit(): void {
-    this.getVacancys();
+    this.vacancyService.getCountOfVacancy().subscribe( count =>{
+      this.vacancyCount = count;
+    });
+    this.getVacancys(10,0);
   }
 
   constructor(private vacancyService: VacancyService) {
   }
 
-  getVacancys(): void {
-    this.vacancyService.getVacancy().subscribe(vacancy => {
+  getVacancys(size: number, page: number): void {
+    this.vacancyService.getVacancy(size, page).subscribe(vacancy => {
       this.vacancies = vacancy;
       this.getAllSkills()
     });
@@ -37,5 +46,11 @@ export class VacancyListPageComponent implements OnInit {
   onSelect(vacancy: Vacancy): void {
     this.vacancyService.getSkills(vacancy.id).subscribe( skills => vacancy.skills = skills);
     this.sellectedVacancy = vacancy;
+  }
+
+  getNextPage(event){
+    this.pageNum = this.paginator.pageIndex;
+    this.pageSiz = this.paginator.pageSize;
+    this.getVacancys(this.pageSiz, this.pageNum);
   }
 }

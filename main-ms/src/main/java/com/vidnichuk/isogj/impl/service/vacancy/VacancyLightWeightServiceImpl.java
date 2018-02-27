@@ -15,8 +15,8 @@ public class VacancyLightWeightServiceImpl implements VacancyLightWeightService{
 
 
     @Override
-    public List<N_A_VacancyDto> getAllVacancy() {
-        return vacancyService.findAllVacancyDto();
+    public List<N_A_VacancyDto> getAllVacancy(int page, int size) {
+        return vacancyService.findAllVacancyDto(page,size);
     }
 
     @Override
@@ -37,5 +37,10 @@ public class VacancyLightWeightServiceImpl implements VacancyLightWeightService{
     @Override
     public List<TaskSkillDto> getSkillsToTask(long id) {
         return vacancyService.getSkillsToTask(id);
+    }
+
+    @Override
+    public long getCountOfVacancy() {
+        return vacancyService.getCountOfVacancy();
     }
 }

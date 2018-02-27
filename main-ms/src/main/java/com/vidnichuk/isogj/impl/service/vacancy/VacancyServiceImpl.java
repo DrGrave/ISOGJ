@@ -6,6 +6,8 @@ import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.vacancy.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,9 +49,9 @@ public class VacancyServiceImpl implements VacancyService{
     private VacancyDtoMapper vacancyDtoMapper;
 
     @Override
-    public List<N_A_VacancyDto> findAllVacancyDto() {
+    public List<N_A_VacancyDto> findAllVacancyDto(int page, int size) {
         List<N_A_VacancyDto> NAVacancyDtos = new ArrayList<>();
-        for (Vacancy vacancy : vacancyRepository.findAll()){
+        for (Vacancy vacancy : vacancyRepository.findAll(createPageRequest(size,page))){
             NAVacancyDtos.add(vacancyDtoMapper.fromVacancyToVacancyDTO(vacancy));
         }
         return NAVacancyDtos;
@@ -89,5 +91,14 @@ public class VacancyServiceImpl implements VacancyService{
             skillDtoList.add(taskSkillDtoMapper.fromTaskSkillToTaskSkillDto(skill));
         }
         return skillDtoList;
+    }
+
+    @Override
+    public long getCountOfVacancy() {
+        return vacancyRepository.count();
+    }
+
+    private Pageable createPageRequest(int size, int page) {
+        return new PageRequest(page, size);
     }
 }
