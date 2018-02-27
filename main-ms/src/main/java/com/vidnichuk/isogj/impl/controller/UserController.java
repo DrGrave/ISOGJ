@@ -23,7 +23,11 @@ public class UserController {
     @PostMapping("/register")
     public boolean registerUser(@Valid @RequestBody TempUserDto tempUserDto) {
         return userLightWeightService.registerUser(tempUserDto);
-
+    }
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
+    @PostMapping("/count")
+    public long countOfPublicUser(){
+        return userLightWeightService.getCountOfPublicUser();
     }
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
@@ -48,8 +52,8 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @GetMapping("/all")
-    public List<UserDto> getAllUser(){
-        return userLightWeightService.getAllUsers();
+    public List<UserDto> getAllUser(@RequestParam("page") int page, @RequestParam("size") int size){
+        return userLightWeightService.getAllUsers(page, size);
     }
 
     @GetMapping("/moreuserinfo")

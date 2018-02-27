@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {UserService} from './user-list-page.service';
 import {User} from './user';
 import {Router} from '@angular/router';
-import {UserLink} from "../home-page/UserLink";
-import {EducationDto} from "./EducationDto";
-import {Department} from "../home-page/Department";
+import {MatPaginator} from "@angular/material/paginator";
+import {PageEvent} from "@angular/material";
 
 
 @Component({
@@ -18,9 +17,12 @@ export class UserListPageComponent implements OnInit {
   users: User[];
   user: User;
   selectedUser: User;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  pageNum: number = 0;
+  pageSiz: number = 0;
+  userCount: number = 0;
 
   ngOnInit(): void {
-
     this.getUsers();
   }
 
@@ -29,7 +31,10 @@ export class UserListPageComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers().subscribe(usersList => {
+    this.userService.getUsersCount().subscribe( count =>{
+      this.userCount = count;
+    });
+    this.userService.getUsers(10,0).subscribe(usersList => {
       this.users = usersList;
       this.getAllSkills();
     });
@@ -49,6 +54,11 @@ export class UserListPageComponent implements OnInit {
       this.token = localStorage.getItem('access_token');
       this.router.navigateByUrl('/more-user-info-page?id=' + this.selectedUser.id);
     }
+  }
+
+  getNextPage(event){
+    this.pageNum = this.paginator.pageIndex;
+    this.pageSiz = this.paginator.pageSize;
   }
 
 

@@ -95,11 +95,11 @@
       },
       "LOGIN":{
         "PLACEHOLDER": "Please inform your password"
-      },
-    "HEADER":{
-      "PLACEHOLDER": "Enter in system"
-    }
-  }
+      }
+    },
+      "HEADER":{
+        "PLACEHOLDER": "Enter in system"
+      }
   }
 
 }

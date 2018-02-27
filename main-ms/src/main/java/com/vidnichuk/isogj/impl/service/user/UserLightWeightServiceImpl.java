@@ -2,7 +2,6 @@ package com.vidnichuk.isogj.impl.service.user;
 
 import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.dto.mapper.TempUserDtoMapper;
-import com.vidnichuk.isogj.api.model.Gender;
 import com.vidnichuk.isogj.api.service.user.UserLightWeightService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +47,8 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserDto> getAllUsers(int page, int size) {
+        return userService.getAllUsers(page, size);
     }
 
     @Override
@@ -67,4 +66,8 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
         return userService.changeCity(cityDto, id);
     }
 
+    @Override
+    public long getCountOfPublicUser() {
+        return userService.getCountOfPublicUser();
+    }
 }

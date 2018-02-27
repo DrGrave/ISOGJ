@@ -14,7 +14,7 @@ public interface UserLightWeightService {
 
     void approveRegistration(String link);
 
-    List<UserDto> getAllUsers();
+    List<UserDto> getAllUsers(int page, int size);
 
     UserDto getUserWithMoreInformation(Long id);
 
@@ -25,4 +25,5 @@ public interface UserLightWeightService {
     CityDto changeCity(CityDto cityDto, long id);
 
 
+    long getCountOfPublicUser();
 }

@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatAutocompleteModule,
   MatButtonModule, MatChipsModule, MatDatepickerModule, MatIconModule, MatInputModule, MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
@@ -39,6 +40,7 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
 import {HomePageService} from "./home-page/home-page.service";
 import { WorkPageComponent } from './work-page/work-page.component';
   import {CompanyPageService} from "./work-page/company-page.service";
+
 
   export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -79,6 +81,7 @@ import { WorkPageComponent } from './work-page/work-page.component';
     MatAutocompleteModule,
     MatNativeDateModule,
     MatIconModule,
+    MatPaginatorModule,
     MatSelectModule,
     TranslateModule.forRoot({
       loader: {

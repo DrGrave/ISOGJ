@@ -1,7 +1,6 @@
 package com.vidnichuk.isogj.api.service.user;
 
 import com.vidnichuk.isogj.api.dto.model.*;
-import com.vidnichuk.isogj.api.model.Gender;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 
@@ -27,8 +26,10 @@ public interface UserService {
 
     /**
      * @return all users
+     * @param page
+     * @param size
      */
-    List<UserDto> getAllUsers();
+    List<UserDto> getAllUsers(int page, int size);
 
 
     User findByLogin(String login);
@@ -50,4 +51,5 @@ public interface UserService {
 
     CityDto changeCity(CityDto cityDto, long id);
 
+    long getCountOfPublicUser();
 }

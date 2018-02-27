@@ -10,6 +10,8 @@ import com.vidnichuk.isogj.api.service.mail.EmailService;
 import com.vidnichuk.isogj.api.service.user.UserService;
 import com.vidnichuk.isogj.impl.client.AuthServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,14 +98,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public long getCountOfPublicUser() {
+        return userRepository.count();
+    }
+
+    @Override
     public User findById(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers(int page, int size) {
         List<UserDto> userDtoList = new ArrayList<>();
-        for (User user: userRepository.findAll()){
+
+        for (User user: userRepository.findAll(createPageRequest(size,page))){
             userDtoList.add(userDtoMapper.fromUserToUserDto(user));
         }
         return userDtoList;
@@ -181,6 +189,10 @@ public class UserServiceImpl implements UserService {
         user.setCity(cityDtoMapper.fromCityDtoToCity(cityDto));
         userRepository.save(user);
         return cityDtoMapper.fromCityToCityDto(user.getCity());
+    }
+
+    private Pageable createPageRequest(int size, int page) {
+        return new PageRequest(page, size);
     }
 
 }

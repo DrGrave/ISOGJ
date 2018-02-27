@@ -15,6 +15,8 @@ import {ErrorStateMatcher} from '@angular/material';
 })
 
 export class RegPageComponent implements OnInit {
+  minDate = new Date(1900, 0, 1);
+  maxDate = new Date();
 
   constructor(private registerService: RegUserPageService, private router: Router) {
   }

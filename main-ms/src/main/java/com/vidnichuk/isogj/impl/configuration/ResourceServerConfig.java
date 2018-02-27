@@ -39,6 +39,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/skill/vacancyskills").permitAll()
                 .antMatchers("/user/userlistimg/").permitAll()
                 .antMatchers("/education/userlist/").permitAll()
+                .antMatchers("/user/count").permitAll()
                 .anyRequest().authenticated()
         ;
 

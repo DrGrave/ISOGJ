@@ -12,7 +12,8 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
-  private userUrl = '/api/main/user/all';
+  private countUrl = '/api/main/user/count';
+  private userUrl = '/api/main/user/all?';
   private skillUrl = '/api/main/skill/userskills?';
   private thisImg = '/api/main/user/userlistimg/?id=';
   private getUserAducUrl = '/api/main/education/userlist/?id=';
@@ -22,9 +23,15 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  getUsersCount(): Observable<number>{
+    return this.http.get<number>(this.countUrl, httpOptions);
+  }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.userUrl);
+  getUsers(size: number, page: number): Observable<User[]> {
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('page', page.toString());
+    urlSearchParams.append('size', size.toString());
+    return this.http.get<User[]>(this.userUrl + urlSearchParams.toString(), httpOptions);
   }
 
   getSkills(id :number): Observable<UserSkill[]>{
