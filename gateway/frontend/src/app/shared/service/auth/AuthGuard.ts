@@ -16,17 +16,15 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthenticationService,
               private router: Router) {
   }
+  
+  canActivate() {
+    if (localStorage.getItem('access_token')) {
+      // logged in so return true
+      return true;
+    }
 
-  canActivate(next: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.isLoggedIn       // {1}
-      .take(1)                               // {2}
-      .map((isLoggedIn: boolean) => {        // {3}
-        if (!isLoggedIn) {
-          this.router.navigate(['/login']);  // {4}
-          return false;
-        }
-        return true;
-      });
+    // not logged in so redirect to login page
+    this.router.navigate(['/login']);
+    return false;
   }
 }
