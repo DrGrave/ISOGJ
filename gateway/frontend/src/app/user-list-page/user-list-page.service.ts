@@ -15,9 +15,6 @@ const httpOptions = {
 export class UserService {
   private countUrl = '/api/main/user/count';
   private userUrl = '/api/main/user/all?';
-  private skillUrl = '/api/main/skill/userskills?';
-  private thisImg = '/api/main/user/userlistimg?';
-  private getUserAducUrl = '/api/main/education/userlist?';
 
 
 
@@ -36,15 +33,5 @@ export class UserService {
   }
 
 
-  getUserImg(id: String) {
-    const urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('id', id.toString());
-    return this.http.get<UserLink>(this.thisImg + urlSearchParams.toString(), httpOptions);
-  }
 
-  getUserAducation(id: String): Observable<EducationDto[]>{
-    const urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('id', id.toString());
-    return this.http.get<EducationDto[]>(this.getUserAducUrl + urlSearchParams.toString(), httpOptions);
-  }
 }

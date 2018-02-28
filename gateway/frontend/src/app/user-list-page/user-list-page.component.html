@@ -1,23 +1,24 @@
 
 <script src="TypeOfSkill.ts"></script>
-<mat-card class="mat-card" *ngFor="let user of users"
-          [class.selected]="user === selectedUser"
-          (click)="onSelect(user)">
+<mat-card class="mat-card" *ngFor="let user of userList">
   <mat-card-header class="mat-title-cs">
-    <div mat-card-avatar class="mat-header-image"><img src="{{user}}" width="45" height="45"></div>
-    <mat-card-title>{{user.lastName}} {{user.firstName}} {{user.middleName}}</mat-card-title>
-    <mat-card-subtitle *ngFor="let education of user">
-      Department:
+    <div mat-card-avatar class="mat-header-image" *ngIf="user.userLinkDto"><img src="{{user.userLinkDto.link}}" width="45" height="45"></div>
+    <mat-card-title>{{user.userDto.firstName}} {{user.userDto.middleName}} {{user.userDto.lastName}}</mat-card-title>
+    <mat-card-subtitle *ngFor="let education of user.educations">
+      {{ 'USERS.DEPARTMENT.PLACEHOLDER' | translate }}
       {{education.department.name}}
-      University:
+      {{ 'USERS.UNIVERSITY.PLACEHOLDER' | translate }}
       {{education.department.faculty.university.name}}
     </mat-card-subtitle>
 
   </mat-card-header>
   <div class="content-cs">
-    <mat-card-content class="mat-card-content-cs">
+    <mat-card-content class="mat-card-content-cs" *ngIf="user.userSkills.length">
+      <mat-card-title>
+        {{ 'USERS.SKILLS.PLACEHOLDER' | translate }}
+      </mat-card-title>
         <mat-chip-list>
-            <mat-chip class="chip" *ngFor="let skill of user">{{skill.skill.name}}</mat-chip>
+            <mat-chip class="chip" *ngFor="let skill of user.userSkills">{{skill.skill.name}}</mat-chip>
         </mat-chip-list>
     </mat-card-content >
   </div>
@@ -30,15 +31,3 @@
                [pageIndex]="pageNum"
                (page)="getNextPage($event)">
 </mat-paginator>
-
-<div *ngIf="selectedUser">
-      <h2>{{ selectedUser.firstName | uppercase }} Details</h2>
-      <div><span>id: </span>{{selectedUser}}</div>
-      <div>
-        <label>name:
-          <input [(ngModel)]="selectedUser.lastName" placeholder="name">
-          {{token}}
-        </label>
-      </div>
-
-</div>

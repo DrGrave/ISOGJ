@@ -100,5 +100,16 @@
     "HEADER":{
       "PLACEHOLDER": "Вход в систему"
     }
+  },
+  "USERS":{
+    "DEPARTMENT":{
+      "PLACEHOLDER": "Кафедра:"
+    },
+    "UNIVERSITY":{
+      "PLACEHOLDER": "Университет:"
+    },
+    "SKILLS":{
+      "PLACEHOLDER": "Навыки"
+    }
   }
 }

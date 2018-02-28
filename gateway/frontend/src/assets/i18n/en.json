@@ -100,6 +100,17 @@
       "HEADER":{
         "PLACEHOLDER": "Enter in system"
       }
+  },
+  "USERS":{
+    "DEPARTMENT":{
+      "PLACEHOLDER": "Department:"
+    },
+    "UNIVERSITY":{
+      "PLACEHOLDER": "University:"
+    },
+    "SKILLS":{
+      "PLACEHOLDER": "Skills"
+    }
   }
 
 }
