@@ -8,9 +8,7 @@ import {UserMoreInfo} from './UserMoreInfo';
 export class MoreUserInfoPageService {
   private infoUrl = '/api/main/user/moreuserinfo?';
 
-  private httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
-  };
+
 
   constructor(private http: HttpClient) {
   }
@@ -20,7 +18,7 @@ export class MoreUserInfoPageService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('id', id.toString());
 
-    return this.http.get<UserMoreInfo>(this.infoUrl + urlSearchParams.toString(), this.httpOptions);
+    return this.http.get<UserMoreInfo>(this.infoUrl + urlSearchParams.toString());
 
   }
 }

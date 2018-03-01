@@ -28,6 +28,7 @@ import {NewCompany} from "./NewCompany";
 export class HomePageComponent implements OnInit {
   myUser: MyUser;
   username: string;
+  link: string;
 
 
 
@@ -40,11 +41,7 @@ export class HomePageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.homePageService.getUserByToken().subscribe(data => {
-      this.username = data;
-      this.getMyAccount();
-      localStorage.setItem('username',this.username);
-    });
+    this.getMyAccount();
   }
 
   getMyAccount(){
@@ -57,6 +54,7 @@ export class HomePageComponent implements OnInit {
 
   getImg(){
     this.homePageService.getUserImage().subscribe( image =>{
+      this.link = image.link;
     });
   }
 }

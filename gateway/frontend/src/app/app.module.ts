@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {RegPageComponent} from './registration/reg-page.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatAutocompleteModule,
@@ -40,6 +40,7 @@ import {MoreUserInfoPageService} from "./more-user-info-page/more-user-info-page
 import {HomePageService} from "./home-page/home-page.service";
 import { WorkPageComponent } from './work-page/work-page.component';
   import {CompanyPageService} from "./work-page/company-page.service";
+  import {TokenInterceptor} from "./shared/service/auth/TokenInterceptor";
 
 
   export function HttpLoaderFactory(http: HttpClient) {
@@ -101,6 +102,11 @@ import { WorkPageComponent } from './work-page/work-page.component';
     EmailConfirmPageService,
     CompanyPageService,
     AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

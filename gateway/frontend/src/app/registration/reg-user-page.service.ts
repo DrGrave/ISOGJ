@@ -4,9 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {RegUser} from './reg-user';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
+
 
 
 @Injectable()
@@ -21,18 +19,18 @@ export class RegUserPageService {
 
 
   addRegUser(regUser: RegUser): Observable<any> {
-    return this.http.post<RegUser>(this.userUrl, regUser, httpOptions);
+    return this.http.post<RegUser>(this.userUrl, regUser);
   }
 
   checkLogin(username: string): Observable<boolean> {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('username', username);
-    return this.http.get<boolean>(this.checkLoginUrl + urlSearchParams.toString(), httpOptions);
+    return this.http.get<boolean>(this.checkLoginUrl + urlSearchParams.toString());
   }
 
   checkEmail(email: string): Observable<any> {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('email', email);
-    return this.http.get<boolean>(this.checkEmailUrl + urlSearchParams.toString(), httpOptions);
+    return this.http.get<boolean>(this.checkEmailUrl + urlSearchParams.toString());
   }
 }
