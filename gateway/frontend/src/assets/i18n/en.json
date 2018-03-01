@@ -111,6 +111,14 @@
     "SKILLS":{
       "PLACEHOLDER": "Skills"
     }
+  },
+  "VACANCYS":{
+    "COMPANY":{
+      "PLACEHOLDER": "Company:"
+    },
+    "VACANCY_TYPE":{
+      "PLACEHOLDER": "Vacancy type:"
+    }
   }
 
 }

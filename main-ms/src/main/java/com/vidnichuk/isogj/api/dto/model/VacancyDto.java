@@ -4,6 +4,15 @@ public class VacancyDto {
     private Long id;
     private String info;
     private TypeOfVacancyDto typeOfVacancy;
+    private CompanyDto company;
+
+    public CompanyDto getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyDto company) {
+        this.company = company;
+    }
 
     public Long getId() {
         return id;

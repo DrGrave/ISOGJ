@@ -111,5 +111,13 @@
     "SKILLS":{
       "PLACEHOLDER": "Навыки"
     }
+  },
+  "VACANCYS":{
+    "COMPANY":{
+      "PLACEHOLDER": "Компания:"
+    },
+    "VACANCY_TYPE":{
+      "PLACEHOLDER": "Тип вакансии:"
+    }
   }
 }

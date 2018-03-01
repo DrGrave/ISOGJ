@@ -77,19 +77,7 @@ export class WorkPageComponent implements OnInit {
     }
 
     getVacancySkills(skillArr: WorkVacancy[]){
-      for (let i = 0; i < skillArr.length; i++){
-        this.companyPageService.getVacancySkills(skillArr[i].id).subscribe(date => {
-          skillArr[i].skills = date;
-        });
-        this.companyPageService.getVacancyTask(skillArr[i].id).subscribe( date =>{
-          skillArr[i].vacancyTasks = date;
-          for (let j = 0; j < skillArr[i].vacancyTasks.length; j++){
-            this.companyPageService.getTaskSkills(skillArr[i].vacancyTasks[j].task.id).subscribe( date =>{
-              skillArr[i].vacancyTasks[j].task.taskSkills = date;
-            });
-          }
-        });
-      }
+
     }
 
 

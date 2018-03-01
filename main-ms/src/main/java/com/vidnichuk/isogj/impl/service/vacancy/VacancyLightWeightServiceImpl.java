@@ -15,7 +15,7 @@ public class VacancyLightWeightServiceImpl implements VacancyLightWeightService{
 
 
     @Override
-    public List<N_A_VacancyDto> getAllVacancy(int page, int size) {
+    public List<VacancyListDto> getAllVacancy(int page, int size) {
         return vacancyService.findAllVacancyDto(page,size);
     }
 

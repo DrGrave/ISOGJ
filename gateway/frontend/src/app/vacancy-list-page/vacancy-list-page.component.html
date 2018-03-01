@@ -1,21 +1,23 @@
 
 
 
-<mat-card class="mat-card" *ngFor="let vacancy of vacancies">
+<mat-card class="mat-card" *ngFor="let vacancy of vacancyList">
   <mat-card-header class="mat-title-cs">
-    <div mat-card-avatar class="mat-header-image"></div>
-    <mat-card-title>{{vacancy.info}}</mat-card-title>
+    <div mat-card-avatar class="mat-header-image" *ngIf="vacancy.vacancy.company"><img src="{{vacancy.vacancy.company.companyLogo}}" width="70" height="70"></div>
+    <mat-card-title>{{vacancy.vacancy.info}}</mat-card-title>
     <mat-card-subtitle>
+      {{ 'VACANCYS.COMPANY.PLACEHOLDER' | translate }}
       Company:
-      {{vacancy.company.name}}
+      {{vacancy.vacancy.company.name}}
       <br>
-      {{vacancy.typeOfVacancy.name}}
+      {{ 'VACANCYS.VACANCY_TYPE.PLACEHOLDER' | translate }}
+      {{vacancy.vacancy.typeOfVacancy.name}}
     </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content class="mat-card-content-cs">
       <mat-chip-list>
-          <mat-chip class="chip" *ngFor="let skill of vacancy.skills">{{skill.skill.name}}</mat-chip>
+          <mat-chip class="chip" *ngFor="let skill of vacancy.skillDtoList">{{skill.skill.name}}</mat-chip>
       </mat-chip-list>
   </mat-card-content >
 </mat-card>

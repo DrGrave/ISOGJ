@@ -5,7 +5,7 @@ import com.vidnichuk.isogj.api.dto.model.*;
 import java.util.List;
 
 public interface VacancyService {
-    List<N_A_VacancyDto> findAllVacancyDto(int page, int size);
+    List<VacancyListDto> findAllVacancyDto(int page, int size);
 
     List<UserDto> getUserByCompanyId(long id, boolean us, boolean comp);
 

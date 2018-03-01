@@ -1,4 +1,4 @@
-import {VacancySkill} from "./vacancySkill";
+
 import {Company} from "../home-page/Company";
 import {TypeOfVacancy} from "./TypeOfVacancy";
 
@@ -7,5 +7,4 @@ export class Vacancy {
   info: string;
   typeOfVacancy: TypeOfVacancy;
   company: Company;
-  skills: VacancySkill[];
 }

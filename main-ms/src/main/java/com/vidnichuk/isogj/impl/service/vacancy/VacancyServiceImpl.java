@@ -4,6 +4,7 @@ import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.*;
 import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.*;
+import com.vidnichuk.isogj.api.service.skill.SkillService;
 import com.vidnichuk.isogj.api.service.vacancy.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -37,9 +38,6 @@ public class VacancyServiceImpl implements VacancyService{
     @Autowired
     private UserDtoMapper userDtoMapper;
 
-    @Autowired
-    private VacancyTaskRepository vacancyTaskRepository;
-
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private VacancyTaskDtoMapper vacancyTaskDtoMapper;
@@ -48,13 +46,27 @@ public class VacancyServiceImpl implements VacancyService{
     @Autowired
     private VacancyDtoMapper vacancyDtoMapper;
 
+    @Autowired
+    private SkillService skillService;
+
+    @Autowired
+    private VacancyTaskRepository vacancyTaskRepository;
+
+
+
+
+
     @Override
-    public List<N_A_VacancyDto> findAllVacancyDto(int page, int size) {
-        List<N_A_VacancyDto> NAVacancyDtos = new ArrayList<>();
+    public List<VacancyListDto> findAllVacancyDto(int page, int size) {
+        List<VacancyListDto> vacancyList = new ArrayList<>();
         for (Vacancy vacancy : vacancyRepository.findAll(createPageRequest(size,page))){
-            NAVacancyDtos.add(vacancyDtoMapper.fromVacancyToVacancyDTO(vacancy));
+            List<TaskListDto> taskListDtos= new ArrayList<>();
+            for (VacancyTask vacancyTask: vacancyTaskRepository.findAllByVacancyId(vacancy.getId())){
+                taskListDtos.add(new TaskListDto(vacancyTaskDtoMapper.fromVacancyTaskToVacancyTaskDto(vacancyTask), getSkillsToTask(vacancyTask.getTask().getId())));
+            }
+            vacancyList.add(new VacancyListDto(vacancyDtoMapper.fromVacancyToVacancyDto(vacancy), skillService.findAllSkillsByVacancyId(vacancy.getId()), taskListDtos));
         }
-        return NAVacancyDtos;
+        return vacancyList;
     }
 
     @Override
