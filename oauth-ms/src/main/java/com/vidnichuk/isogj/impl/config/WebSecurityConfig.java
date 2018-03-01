@@ -32,6 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
+                .logout()
+                .logoutUrl("/oauth/token/remove")
+                .and()
                 .csrf().disable();
     }
 

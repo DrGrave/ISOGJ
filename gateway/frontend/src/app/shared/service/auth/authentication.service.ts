@@ -56,9 +56,16 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    this.loggedIn.next(false);
-    this.router.navigate(['/login']);
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    };
+    this.http.delete<any>('/api/auth/oauth/revoke-token', httpOptions).subscribe(date =>{
+
+        this.loggedIn.next(false);
+        localStorage.removeItem('access_token');
+        this.router.navigate(['/login']);
+      });
+
   }
 
 }

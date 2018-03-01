@@ -1,22 +1,14 @@
 package com.vidnichuk.isogj.api.dto.model;
 
 
-import com.vidnichuk.isogj.api.model.Gender;
 
 public class MeUserDto {
-    private Long id;
+    private String uid;
 
-    /**
-     * user name
-     */
     private String firstName;
-    /**
-     * user surname
-     */
+
     private String lastName;
-    /**
-     * user patronymic
-     */
+
     private String middleName;
 
     private String email;
@@ -25,13 +17,22 @@ public class MeUserDto {
 
     private GenderDto gender;
 
+    private TypeOfUserDto typeOfUserDto;
 
-    public Long getId() {
-        return id;
+    public TypeOfUserDto getTypeOfUserDto() {
+        return typeOfUserDto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTypeOfUserDto(TypeOfUserDto typeOfUserDto) {
+        this.typeOfUserDto = typeOfUserDto;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getFirstName() {
