@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
@@ -56,11 +56,16 @@ export class AuthenticationService {
   }
 
   logout() {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
-    };
     if (localStorage.getItem('access_token') != null) {
-      this.http.delete<any>('/api/auth/oauth/revoke-token', httpOptions).subscribe();
+      this.http.delete('/api/auth/oauth/revoke-token', {responseType: 'text'}).subscribe(response => {
+        console.log('success');
+      }, error => {
+        if (error.status === 200) {
+          console.log("Logout success")
+        }else {
+          console.log(error)
+        }
+      });
     }
     this.loggedIn.next(false);
     localStorage.removeItem('access_token');
