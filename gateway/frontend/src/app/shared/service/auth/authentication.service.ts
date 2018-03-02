@@ -57,15 +57,7 @@ export class AuthenticationService {
 
   logout() {
     if (localStorage.getItem('access_token') != null) {
-      this.http.delete('/api/auth/oauth/revoke-token', {responseType: 'text'}).subscribe(response => {
-        console.log('success');
-      }, error => {
-        if (error.status === 200) {
-          console.log("Logout success")
-        }else {
-          console.log(error)
-        }
-      });
+      this.http.delete('/api/auth/oauth/revoke-token', {responseType: 'text'}).subscribe();
     }
     this.loggedIn.next(false);
     localStorage.removeItem('access_token');

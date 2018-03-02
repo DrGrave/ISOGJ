@@ -41,6 +41,7 @@ import {HomePageService} from "./home-page/home-page.service";
 import { WorkPageComponent } from './work-page/work-page.component';
   import {CompanyPageService} from "./work-page/company-page.service";
   import {TokenInterceptor} from "./shared/service/auth/TokenInterceptor";
+  import {HttpErrorInterceptor} from "./shared/service/auth/HttpErrorInterceptor";
 
 
   export function HttpLoaderFactory(http: HttpClient) {
@@ -106,6 +107,11 @@ import { WorkPageComponent } from './work-page/work-page.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]
