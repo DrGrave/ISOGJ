@@ -65,8 +65,12 @@ export class AuthenticationService {
     this.loggedIn.next(false);
     localStorage.removeItem('access_token');
     this.router.navigate(['/login']);
+  }
 
-
+  notGoodToken(){
+    this.loggedIn.next(false);
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/login']);
   }
 
 }

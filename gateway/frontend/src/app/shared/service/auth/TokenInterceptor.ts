@@ -34,7 +34,7 @@ export class TokenInterceptor implements HttpInterceptor{
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            log.logout();
+            log.notGoodToken();
           }
         }
       });
@@ -52,7 +52,7 @@ export class TokenInterceptor implements HttpInterceptor{
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            log.logout();
+            log.notGoodToken();
           }
         }
       });
