@@ -19,6 +19,7 @@ export class TokenInterceptor implements HttpInterceptor{
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const auth = this.injector.get(AuthGuard);
+    const log = this.injector.get(AuthenticationService);
     const authToken = auth.getToken();
     if (authToken == null) {
       request = request.clone({
@@ -33,8 +34,7 @@ export class TokenInterceptor implements HttpInterceptor{
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            localStorage.removeItem('access_token');
-            this.router.navigate(['/login']);
+            log.logout();
           }
         }
       });
@@ -52,8 +52,7 @@ export class TokenInterceptor implements HttpInterceptor{
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            localStorage.removeItem('access_token');
-            this.router.navigate(['/login']);
+            log.logout();
           }
         }
       });

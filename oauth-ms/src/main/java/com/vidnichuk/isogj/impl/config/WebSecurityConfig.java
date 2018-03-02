@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .logout()
-                .logoutUrl("/oauth/token/remove")
+                .logoutUrl("/oauth/revoke-token")
                 .and()
                 .csrf().disable();
     }
