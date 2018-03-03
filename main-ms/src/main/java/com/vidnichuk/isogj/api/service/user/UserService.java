@@ -45,7 +45,7 @@ public interface UserService {
 
     UserDto getUserWithMoreInfo(String id);
 
-    MeUserDto getUserByUsername(String username);
+    FullUserInfoDto getUserByUsername(String username);
 
     GenderDto changeGender(GenderDto gender, String id);
 

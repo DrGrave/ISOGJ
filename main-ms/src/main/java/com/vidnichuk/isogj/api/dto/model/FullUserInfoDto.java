@@ -4,6 +4,7 @@ import java.util.List;
 
 public class FullUserInfoDto {
     private MeUserDto meUserDto;
+    private UserLinkDto userLinkDto;
     private List<EducationDto> educationDtoList;
     private List<UserSkillDto> userSkillDtoList;
     private List<UserCompanyDto> userCompanyDtoList;
@@ -18,6 +19,14 @@ public class FullUserInfoDto {
     }
 
     public FullUserInfoDto() {
+    }
+
+    public UserLinkDto getUserLinkDto() {
+        return userLinkDto;
+    }
+
+    public void setUserLinkDto(UserLinkDto userLinkDto) {
+        this.userLinkDto = userLinkDto;
     }
 
     public MeUserDto getMeUserDto() {

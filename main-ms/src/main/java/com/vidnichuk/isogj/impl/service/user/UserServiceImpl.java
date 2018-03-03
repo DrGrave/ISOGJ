@@ -6,6 +6,7 @@ import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.model.UserLink;
+import com.vidnichuk.isogj.api.service.company.CompanyService;
 import com.vidnichuk.isogj.api.service.education.EducationService;
 import com.vidnichuk.isogj.api.service.link.LinkService;
 import com.vidnichuk.isogj.api.service.mail.EmailService;
@@ -84,6 +85,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private SkillService skillService;
+
+    @Autowired
+    private CompanyService companyService;
 
     @Autowired
     private EducationService educationService;
@@ -182,8 +186,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public MeUserDto getUserByUsername(String username) {
-        return userDtoMapper.fromUserToMeUserDto(userRepository.findByUsername(username));
+    public FullUserInfoDto getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        FullUserInfoDto fullUserInfoDto = new FullUserInfoDto();
+        fullUserInfoDto.setMeUserDto(userDtoMapper.fromUserToMeUserDto(user));
+        fullUserInfoDto.setEducationDtoList(educationService.findEducationById(fullUserInfoDto.getMeUserDto().getUid()));
+        fullUserInfoDto.setUserCompanyDtoList(companyService.findCompanyByUserId(user.getId()));
+        fullUserInfoDto.setUserLinkDtoList(linkService.findAllUserLinks(user.getId()));
+        fullUserInfoDto.setUserSkillDtoList(skillService.findAllSkillsByUserId(user.getUid()));
+        fullUserInfoDto.setUserLinkDto(linkService.getUserImgByUid(user.getUid()));
+        return fullUserInfoDto;
     }
 
     @Override

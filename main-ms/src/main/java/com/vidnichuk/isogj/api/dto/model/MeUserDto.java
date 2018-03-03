@@ -17,14 +17,14 @@ public class MeUserDto {
 
     private GenderDto gender;
 
-    private TypeOfUserDto typeOfUserDto;
+    private TypeOfUserDto typeOfUser;
 
-    public TypeOfUserDto getTypeOfUserDto() {
-        return typeOfUserDto;
+    public TypeOfUserDto getTypeOfUser() {
+        return typeOfUser;
     }
 
-    public void setTypeOfUserDto(TypeOfUserDto typeOfUserDto) {
-        this.typeOfUserDto = typeOfUserDto;
+    public void setTypeOfUser(TypeOfUserDto typeOfUser) {
+        this.typeOfUser = typeOfUser;
     }
 
     public String getUid() {

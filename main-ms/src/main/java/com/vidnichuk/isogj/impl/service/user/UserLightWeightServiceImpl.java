@@ -57,7 +57,7 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     }
 
     @Override
-    public MeUserDto getUserByUsername(String username) {
+    public FullUserInfoDto getUserByUsername(String username) {
         return userService.getUserByUsername(username);
     }
 

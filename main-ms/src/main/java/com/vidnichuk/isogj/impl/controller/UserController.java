@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public MeUserDto getUserByUsername(Principal principal){
+    public FullUserInfoDto getUserByUsername(Principal principal){
         return userLightWeightService.getUserByUsername(principal.getName());
     }
 

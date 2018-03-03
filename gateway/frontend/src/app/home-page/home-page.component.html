@@ -1,24 +1,24 @@
 <div class="user-info" >
-  <div class="main-info">
+  <div class="main-info" *ngIf="myUser">
     <mat-card class="card-main">
       <mat-card-title class="title-main">
-        <div mat-card-avatar class="mat-header-image" *ngIf="link"><img src="{{link}}" width="100" height="100"></div>
+        <div mat-card-avatar class="mat-header-image" *ngIf="myUser.userLinkDto"><img src="{{myUser.userLinkDto.link}}" width="100" height="100"></div>
         <div class="user-main-info">
-          <div class="user-name">
-            {{myUser.firstName}}
-            {{myUser.lastName}}
-            {{myUser.middleName}}
+          <div class="user-name" *ngIf="myUser.meUserDto">
+            {{myUser.meUserDto.firstName}}
+            {{myUser.meUserDto.lastName}}
+            {{myUser.meUserDto.middleName}}
           </div>
-          <mat-card-content>
+          <mat-card-content *ngIf="myUser.meUserDto">
             Email:
-            {{myUser.email}}
-            <div *ngIf="myUser.gender">
+            {{myUser.meUserDto.email}}
+            <div *ngIf="myUser.meUserDto.gender">
               Gender:
-              {{myUser.gender.name}}
+              {{myUser.meUserDto.gender.name}}
             </div>
-            <div *ngIf="myUser.city">
+            <div *ngIf="myUser.meUserDto.city">
               City:
-              {{myUser.city.name}}
+              {{myUser.meUserDto.city.name}}
             </div>
           </mat-card-content>
         </div>

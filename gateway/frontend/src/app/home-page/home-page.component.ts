@@ -17,6 +17,7 @@ import {Company} from "./Company";
 import {TypeOfLink} from "./TypeOfLink";
 import {NewLink} from "./NewLink";
 import {NewCompany} from "./NewCompany";
+import {FullUserInfo} from "./FullUserInfo";
 
 
 
@@ -26,7 +27,7 @@ import {NewCompany} from "./NewCompany";
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  myUser: MyUser;
+  myUser: FullUserInfo;
   username: string;
   link: string;
 
@@ -36,7 +37,6 @@ export class HomePageComponent implements OnInit {
 
 
   constructor(private homePageService: HomePageService, private router: Router, private fb: FormBuilder) {
-    this.myUser = new MyUser();
   }
 
 
@@ -47,14 +47,7 @@ export class HomePageComponent implements OnInit {
   getMyAccount(){
     this.homePageService.getUser().subscribe( data => {
       this.myUser = data;
-      this.getImg();
       localStorage.setItem('myUser', JSON.stringify(this.myUser));
-    });
-  }
-
-  getImg(){
-    this.homePageService.getUserImage().subscribe( image =>{
-      this.link = image.link;
     });
   }
 }
