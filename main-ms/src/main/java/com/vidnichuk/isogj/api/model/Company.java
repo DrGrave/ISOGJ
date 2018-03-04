@@ -41,6 +41,28 @@ public class Company {
     @Column(name = "CompanyLogo")
     private String companyLogo;
 
+    @Column(name = "CompanyRegistration")
+    private String companyRegistration;
+
+    @Column(name = "LegalAddress")
+    private String legalAddress;
+
+    public String getLegalAddress() {
+        return legalAddress;
+    }
+
+    public void setLegalAddress(String legalAddress) {
+        this.legalAddress = legalAddress;
+    }
+
+    public String getCompanyRegistration() {
+        return companyRegistration;
+    }
+
+    public void setCompanyRegistration(String companyRegistration) {
+        this.companyRegistration = companyRegistration;
+    }
+
     public String getCompanyLogo() {
         return companyLogo;
     }

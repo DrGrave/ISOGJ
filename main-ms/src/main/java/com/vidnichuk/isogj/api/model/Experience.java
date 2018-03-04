@@ -40,6 +40,10 @@ public class Experience {
     @JoinColumn(name = "User")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "Position")
+    private Position position;
+
     /**
      * @return previous company
      */
@@ -59,6 +63,14 @@ public class Experience {
      */
     public User getUser() {
         return user;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     /**

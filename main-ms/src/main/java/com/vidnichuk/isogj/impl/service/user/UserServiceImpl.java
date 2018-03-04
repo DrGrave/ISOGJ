@@ -7,7 +7,10 @@ import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.model.UserLink;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
+import com.vidnichuk.isogj.api.service.courses.CoursesService;
 import com.vidnichuk.isogj.api.service.education.EducationService;
+import com.vidnichuk.isogj.api.service.experience.ExperienceService;
+import com.vidnichuk.isogj.api.service.history.HistoryService;
 import com.vidnichuk.isogj.api.service.link.LinkService;
 import com.vidnichuk.isogj.api.service.mail.EmailService;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
@@ -56,6 +59,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private GenderRepository genderRepository;
 
+    @Autowired
+    private HistoryService historyService;
+
+    @Autowired
+    private ExperienceService experienceService;
+
+    @Autowired
+    private CoursesService coursesService;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -189,9 +200,13 @@ public class UserServiceImpl implements UserService {
     public FullUserInfoDto getUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         FullUserInfoDto fullUserInfoDto = new FullUserInfoDto();
+
         fullUserInfoDto.setMeUserDto(userDtoMapper.fromUserToMeUserDto(user));
-        fullUserInfoDto.setEducationDtoList(educationService.findEducationById(fullUserInfoDto.getMeUserDto().getUid()));
-        fullUserInfoDto.setUserCompanyDtoList(companyService.findCompanyByUserId(user.getId()));
+        fullUserInfoDto.setEducationSkillsDtoList(educationService.getEducationSkills(user.getId()));
+        fullUserInfoDto.setUserCompanySkillsDtoList(companyService.getUserCompanyDtoList(user.getId()));
+        fullUserInfoDto.setHistorySkillsDtoList(historyService.getAllUserHistory(user.getId()));
+        fullUserInfoDto.setExperienceSkillsDtoList(experienceService.getExperienceSkillsById(user.getId()));
+        fullUserInfoDto.setCoursesSkillsListDtoList(coursesService.getCoursesByUserId(user.getId()));
         fullUserInfoDto.setUserLinkDtoList(linkService.findAllUserLinks(user.getId()));
         fullUserInfoDto.setUserSkillDtoList(skillService.findAllSkillsByUserId(user.getUid()));
         fullUserInfoDto.setUserLinkDto(linkService.getUserImgByUid(user.getUid()));
@@ -217,5 +232,7 @@ public class UserServiceImpl implements UserService {
     private Pageable createPageRequest(int size, int page) {
         return new PageRequest(page, size);
     }
+
+
 
 }

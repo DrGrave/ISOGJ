@@ -11,10 +11,12 @@ create table company
 (
   id bigint auto_increment
   primary key,
+  company_logo varchar(255) null,
+  company_registration varchar(255) null,
   date_of_creation datetime null,
   info varchar(255) null,
+  legal_address varchar(255) null,
   name varchar(255) null,
-  company_logo varchar(255) null,
   city_of_company bigint null,
   constraint FKbk2fldd8i3j16sxhiv7u1wlum
   foreign key (city_of_company) references city (id)
@@ -24,6 +26,43 @@ create table company
 
 create index FKbk2fldd8i3j16sxhiv7u1wlum
   on company (city_of_company)
+;
+
+create table courses
+(
+  id bigint auto_increment
+  primary key,
+  name varchar(255) null,
+  company bigint null,
+  constraint FKn3kho9fsq2dk9icugjb1jav04
+  foreign key (company) references company (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FKn3kho9fsq2dk9icugjb1jav04
+  on courses (company)
+;
+
+create table courses_skill
+(
+  id bigint auto_increment
+  primary key,
+  mark int null,
+  courses bigint null,
+  skill bigint null,
+  constraint FKidnaroskqv5a32karjau56mor
+  foreign key (courses) references courses (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FKidnaroskqv5a32karjau56mor
+  on courses_skill (courses)
+;
+
+create index FKq4vcy9s377iccqifiudb6gb4a
+  on courses_skill (skill)
 ;
 
 create table department
@@ -38,6 +77,27 @@ create table department
 
 create index FK6sk1ry6h6g5ejrihwm8haf88l
   on department (faculty)
+;
+
+create table department_skill
+(
+  id bigint auto_increment
+  primary key,
+  mark int null,
+  department bigint null,
+  skill bigint null,
+  constraint FKn66blblyc0ixoaebeo92noopm
+  foreign key (department) references department (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FKd4w53bv22gcd2y2sqxqc0l1c7
+  on department_skill (skill)
+;
+
+create index FKn66blblyc0ixoaebeo92noopm
+  on department_skill (department)
 ;
 
 create table education
@@ -56,20 +116,20 @@ create table education
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-create index FK63tr6a4xjq3e62tq52gmt5twn
-  on education (department)
-;
-
-create index FKaisuay6bqm69r0pd1omskh0l8
-  on education (school)
-;
-
 create index FK198l9sf1b0xanx6mp4au0cmgf
   on education (type_of_education)
 ;
 
 create index FK2mvosaxmdk20x35f654ykcplj
   on education (user)
+;
+
+create index FK63tr6a4xjq3e62tq52gmt5twn
+  on education (department)
+;
+
+create index FKaisuay6bqm69r0pd1omskh0l8
+  on education (school)
 ;
 
 create table experience
@@ -79,6 +139,7 @@ create table experience
   date_of_end datetime null,
   date_of_start datetime null,
   prev_company bigint null,
+  position bigint null,
   user bigint null,
   constraint FKc19dq0h5qymr9epwviyngjxic
   foreign key (prev_company) references company (id)
@@ -88,6 +149,10 @@ create table experience
 
 create index FKc19dq0h5qymr9epwviyngjxic
   on experience (prev_company)
+;
+
+create index FKpfh1r83yw1avr31sw3ub99ppa
+  on experience (position)
 ;
 
 create index FKsal35eberq8nmfvfis0bxp5j
@@ -122,6 +187,40 @@ create table gender
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
+create table history
+(
+  id bigint auto_increment
+  primary key,
+  date_of_history datetime null,
+  history_info varchar(255) null,
+  education bigint null,
+  experience bigint null,
+  user bigint null,
+  courses bigint null,
+  constraint FKpip11hwoqfjrrp6leo2prk5ny
+  foreign key (education) references education (id),
+  constraint FK3mqsud0tlrcn67vg2f1vnwy0v
+  foreign key (experience) references experience (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FK3mqsud0tlrcn67vg2f1vnwy0v
+  on history (experience)
+;
+
+create index FK9i377avigaa5nxmjyts3qhnwy
+  on history (courses)
+;
+
+create index FKcgxo71htg9isvktffsodq8g94
+  on history (user)
+;
+
+create index FKpip11hwoqfjrrp6leo2prk5ny
+  on history (education)
+;
+
 create table position
 (
   id bigint auto_increment
@@ -129,6 +228,31 @@ create table position
   name varchar(255) null
 )
   engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+alter table experience
+  add constraint FKpfh1r83yw1avr31sw3ub99ppa
+  foreign key (position) references position (id)
+;
+
+create table position_skill
+(
+  id bigint auto_increment
+  primary key,
+  psition bigint null,
+  skill bigint null,
+  constraint FKrbwccr2kt3yatpx8wgglsarcr
+  foreign key (psition) references position (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FKftw0v131ksvhtjsxuq9lo00bm
+  on position_skill (skill)
+;
+
+create index FKrbwccr2kt3yatpx8wgglsarcr
+  on position_skill (psition)
 ;
 
 create table possible_cities_to_work
@@ -181,6 +305,21 @@ create index FK2pq7nkn4vi1tw0f3sh9te20ak
   on skill (type_of_skill)
 ;
 
+alter table courses_skill
+  add constraint FKq4vcy9s377iccqifiudb6gb4a
+  foreign key (skill) references skill (id)
+;
+
+alter table department_skill
+  add constraint FKd4w53bv22gcd2y2sqxqc0l1c7
+  foreign key (skill) references skill (id)
+;
+
+alter table position_skill
+  add constraint FKftw0v131ksvhtjsxuq9lo00bm
+  foreign key (skill) references skill (id)
+;
+
 create table summary
 (
   id bigint auto_increment
@@ -203,25 +342,46 @@ create table task
   name varchar(255) null,
   type_of_task bigint null
 )
-  engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
 create index FKhnxotnqsbea4shipxmjxk4a1v
   on task (type_of_task)
 ;
 
+create table task_skill
+(
+  id bigint auto_increment
+  primary key,
+  skill bigint null,
+  task bigint null,
+  constraint FKrqovwv8qhc3vt1r5etshfs0ge
+  foreign key (skill) references skill (id),
+  constraint FK531rx05uc86qlhwtkx049ce18
+  foreign key (task) references task (id)
+)
+	engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FK531rx05uc86qlhwtkx049ce18
+  on task_skill (task)
+;
+
+create index FKrqovwv8qhc3vt1r5etshfs0ge
+  on task_skill (skill)
+;
+
 create table temp_user
 (
   id bigint auto_increment
   primary key,
+  birthday datetime null,
   confirm_link varchar(255) null,
   email varchar(255) null,
   first_name varchar(255) null,
   last_name varchar(255) null,
   middle_name varchar(255) null,
   password varchar(255) null,
-  username varchar(255) null,
-  birthday datetime null
+  username varchar(255) null
 )
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
@@ -321,18 +481,16 @@ create table user
   id bigint auto_increment
   primary key,
   active bit null,
+  birthday datetime null,
   email varchar(255) not null,
   first_name varchar(255) not null,
   last_name varchar(255) not null,
-  middle_name varchar(255) null,
+  middle_name varchar(255) not null,
+  uid varchar(255) not null,
   username varchar(255) not null,
   city_of_living bigint null,
   gender bigint null,
   type_of_user bigint null,
-  uid varchar(255),
-  birthday datetime null,
-  constraint user_uid_uindex
-  unique (uid),
   constraint FKkrcm363wm8xl5ydosqnynmhym
   foreign key (city_of_living) references city (id),
   constraint FK1isrcw5olh4k3cddck2x7um5p
@@ -343,16 +501,16 @@ create table user
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-create index FKkrcm363wm8xl5ydosqnynmhym
-  on user (city_of_living)
-;
-
 create index FK1isrcw5olh4k3cddck2x7um5p
   on user (gender)
 ;
 
 create index FKgcjmd56vdfe8y4uxwq5jb852d
   on user (type_of_user)
+;
+
+create index FKkrcm363wm8xl5ydosqnynmhym
+  on user (city_of_living)
 ;
 
 alter table education
@@ -362,6 +520,11 @@ alter table education
 
 alter table experience
   add constraint FKsal35eberq8nmfvfis0bxp5j
+  foreign key (user) references user (id)
+;
+
+alter table history
+  add constraint FKcgxo71htg9isvktffsodq8g94
   foreign key (user) references user (id)
 ;
 
@@ -379,11 +542,11 @@ create table user_company
 (
   id_user_company bigint auto_increment
   primary key,
+  change_approve bit null,
+  company_approve bit null,
   company bigint null,
   position bigint null,
   user bigint null,
-  company_approve tinyint(1) default '0' null,
-  change_approve tinyint(1) default '0' null,
   constraint FKi6q4u3i9d85h47qjn7w7p9687
   foreign key (company) references company (id),
   constraint FKc1goa9mr96odm0l38subly2jf
@@ -394,16 +557,46 @@ create table user_company
   engine=InnoDb DEFAULT CHARSET=utf8
 ;
 
-create index FKi6q4u3i9d85h47qjn7w7p9687
-  on user_company (company)
-;
-
 create index FKc1goa9mr96odm0l38subly2jf
   on user_company (position)
 ;
 
+create index FKi6q4u3i9d85h47qjn7w7p9687
+  on user_company (company)
+;
+
 create index FKopbeqqs42qr4nhq4ew10dt069
   on user_company (user)
+;
+
+create table user_courses
+(
+  id bigint auto_increment
+  primary key,
+  date_of_end datetime null,
+  date_of_start datetime null,
+  if_courses_pass bit null,
+  courses bigint null,
+  user bigint null,
+  constraint FKfl9etfqvikmtqq9exitrcg5ue
+  foreign key (courses) references courses (id),
+  constraint FKdlc2xqew3j47dpxpg97mllb7d
+  foreign key (user) references user (id)
+)
+	engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FKdlc2xqew3j47dpxpg97mllb7d
+  on user_courses (user)
+;
+
+create index FKfl9etfqvikmtqq9exitrcg5ue
+  on user_courses (courses)
+;
+
+alter table history
+  add constraint FK9i377avigaa5nxmjyts3qhnwy
+  foreign key (courses) references user_courses (id)
 ;
 
 create table user_link
@@ -454,12 +647,12 @@ create index FK6pru830ugj5nuapp3nhdl2p9p
   on user_skill (id_marker)
 ;
 
-create index FKrsvxrshr30q4756yoxncoaeyl
-  on user_skill (id_skill)
-;
-
 create index FKkwwol8ie05lcjsko1qewnm6r7
   on user_skill (id_user)
+;
+
+create index FKrsvxrshr30q4756yoxncoaeyl
+  on user_skill (id_skill)
 ;
 
 create table vacancy
@@ -485,50 +678,6 @@ create index FKg1qrdnkrpjlkt2fr9twump8pt
   on vacancy (type_of_vacancy)
 ;
 
-create table task_skill
-(
-  id bigint auto_increment
-  primary key,
-  skill bigint null,
-  task bigint null,
-  constraint FKrqovwv8qhc3vt1r5etshfs0ge
-  foreign key (skill) references skill (id),
-  constraint FK531rx05uc86qlhwtkx049ce18
-  foreign key (task) references task (id)
-)
-  engine=InnoDb DEFAULT CHARSET=utf8
-;
-
-create index FKrqovwv8qhc3vt1r5etshfs0ge
-  on task_skill (skill)
-;
-
-create index FK531rx05uc86qlhwtkx049ce18
-  on task_skill (task)
-;
-
-create table vacancy_task
-(
-  id bigint auto_increment
-  primary key,
-  task bigint null,
-  vacancy bigint null,
-  constraint FK6ba9j9jtk95526blq7994470h
-  foreign key (task) references task (id),
-  constraint FKsfm3668avg4bw12qfax2slrrd
-  foreign key (vacancy) references vacancy (id)
-)
-  engine=InnoDb DEFAULT CHARSET=utf8
-;
-
-create index FK6ba9j9jtk95526blq7994470h
-	on vacancy_task (task)
-;
-
-create index FKsfm3668avg4bw12qfax2slrrd
-	on vacancy_task (vacancy)
-;
-
 create table vacancy_skill
 (
   id bigint auto_increment
@@ -550,6 +699,28 @@ create index FKk10dm3uxe9tlepfwottw6q072
 
 create index FKogk31vh34wanbyjgvq8yer6hi
   on vacancy_skill (vacancy)
+;
+
+create table vacancy_task
+(
+  id bigint auto_increment
+  primary key,
+  task bigint null,
+  vacancy bigint null,
+  constraint FK6ba9j9jtk95526blq7994470h
+  foreign key (task) references task (id),
+  constraint FKsfm3668avg4bw12qfax2slrrd
+  foreign key (vacancy) references vacancy (id)
+)
+  engine=InnoDb DEFAULT CHARSET=utf8
+;
+
+create index FK6ba9j9jtk95526blq7994470h
+  on vacancy_task (task)
+;
+
+create index FKsfm3668avg4bw12qfax2slrrd
+  on vacancy_task (vacancy)
 ;
 
 create table vacancy_user

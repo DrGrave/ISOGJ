@@ -27,4 +27,6 @@ public interface CompanyService {
     UserCompanyDto getUserPosition(long userId, long companyId);
 
     List<VacancySkillDto> getVacancySkills(long id);
+
+    List<UserCompanySkillsDto> getUserCompanyDtoList(long id);
 }

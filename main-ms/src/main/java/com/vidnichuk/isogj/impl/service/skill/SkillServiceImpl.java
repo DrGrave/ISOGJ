@@ -1,17 +1,9 @@
 package com.vidnichuk.isogj.impl.service.skill;
 
 import com.vidnichuk.isogj.api.dao.*;
-import com.vidnichuk.isogj.api.dto.mapper.SkillDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.TypeOfSkillDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.UserSkillDtoMapper;
-import com.vidnichuk.isogj.api.dto.mapper.VacancySkillDtoMapper;
-import com.vidnichuk.isogj.api.dto.model.SkillDto;
-import com.vidnichuk.isogj.api.dto.model.TypeOfSkillDto;
-import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
-import com.vidnichuk.isogj.api.dto.model.VacancySkillDto;
-import com.vidnichuk.isogj.api.model.Skill;
-import com.vidnichuk.isogj.api.model.UserSkill;
-import com.vidnichuk.isogj.api.model.VacancySkill;
+import com.vidnichuk.isogj.api.dto.mapper.*;
+import com.vidnichuk.isogj.api.dto.model.*;
+import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.model.type.TypeOfSkill;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +20,16 @@ public class SkillServiceImpl implements SkillService{
     @Autowired
     private VacancySkillRepository vacancySkillRepository;
 
+    @Autowired
+    private DepartmentSkillRepository departmentSkillRepository;
+
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private UserSkillDtoMapper userSkillDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private DepartmentSkillDtoMapper departmentSkillDtoMapper;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -43,6 +42,16 @@ public class SkillServiceImpl implements SkillService{
     private UserRepository userRepository;
 
     @Autowired
+    private CoursesSkillRepository coursesSkillRepository;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private CoursesSkillDtoMapper coursesSkillDtoMapper;
+
+    @Autowired
+    private PositionSkillRepository positionSkillRepository;
+
+    @Autowired
     private TypeOfSkillRepository typeOfSkillRepository;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -53,6 +62,9 @@ public class SkillServiceImpl implements SkillService{
     @Autowired
     private TypeOfSkillDtoMapper typeOfSkillDtoMapper;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private PositionSkillDtoMapper positionSkillDtoMapper;
 
     @Override
     public List<UserSkillDto> findAllSkillsByUserId(String id) {
@@ -133,5 +145,32 @@ public class SkillServiceImpl implements SkillService{
             userSkillDtoList.add(userSkillDtoMapper.fromUserSkillToUserSkillDto(userSkill));
         }
         return userSkillDtoList;
+    }
+
+    @Override
+    public List<PositionSkillDto> getPositionSkills(long id) {
+        List<PositionSkillDto> positionSkillDtoList = new ArrayList<>();
+        for (PositionSkill positionSkill: positionSkillRepository.findAllByPositionId(id)){
+            positionSkillDtoList.add(positionSkillDtoMapper.fromPositionToPositionDto(positionSkill));
+        }
+        return positionSkillDtoList;
+    }
+
+    @Override
+    public List<DepartmentSkillDto> getDepartmentSkills(long id) {
+        List<DepartmentSkillDto> departmentSkillDtos = new ArrayList<>();
+        for (DepartmentSkill departmentSkill: departmentSkillRepository.findAllByDepartmentId(id)){
+            departmentSkillDtos.add(departmentSkillDtoMapper.fromDepartmentSkillToDepartmentSkillDto(departmentSkill));
+        }
+        return departmentSkillDtos;
+    }
+
+    @Override
+    public List<CoursesSkillDto> getAllCoursesSkill(Long id) {
+        List<CoursesSkillDto> coursesSkillDtoList = new ArrayList<>();
+        for (CoursesSkill coursesSkill: coursesSkillRepository.findAllByCoursesId(id)){
+            coursesSkillDtoList.add(coursesSkillDtoMapper.fromCoursesSkillToCoursesSkillDto(coursesSkill));
+        }
+        return coursesSkillDtoList;
     }
 }

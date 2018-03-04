@@ -1,9 +1,6 @@
 package com.vidnichuk.isogj.api.service.skill;
 
-import com.vidnichuk.isogj.api.dto.model.SkillDto;
-import com.vidnichuk.isogj.api.dto.model.TypeOfSkillDto;
-import com.vidnichuk.isogj.api.dto.model.UserSkillDto;
-import com.vidnichuk.isogj.api.dto.model.VacancySkillDto;
+import com.vidnichuk.isogj.api.dto.model.*;
 
 import java.util.List;
 
@@ -24,4 +21,10 @@ public interface SkillService {
     void addNewSkill(SkillDto skill);
 
     List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, String id);
+
+    List<PositionSkillDto> getPositionSkills(long id);
+
+    List<DepartmentSkillDto> getDepartmentSkills(long id);
+
+    List<CoursesSkillDto> getAllCoursesSkill(Long id);
 }

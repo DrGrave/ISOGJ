@@ -6,12 +6,14 @@ import com.vidnichuk.isogj.api.dao.UserRepository;
 import com.vidnichuk.isogj.api.dto.mapper.EducationDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.TypeOfEducationDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.EducationDto;
+import com.vidnichuk.isogj.api.dto.model.EducationSkillsDto;
 import com.vidnichuk.isogj.api.dto.model.N_A_EducationDto;
 import com.vidnichuk.isogj.api.dto.model.TypeOfEducationDto;
 import com.vidnichuk.isogj.api.model.Education;
 import com.vidnichuk.isogj.api.model.type.TypeOfEducation;
 import com.vidnichuk.isogj.api.service.education.EducationService;
 
+import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,9 @@ public class EducationServiceImpl implements EducationService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SkillService skillService;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -97,5 +102,22 @@ public class EducationServiceImpl implements EducationService{
             educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educ));
         }
         return educationDtoList;
+    }
+
+    @Override
+    public List<EducationSkillsDto> getEducationSkills(Long id) {
+        List<EducationSkillsDto> educationSkillsDtoList = new ArrayList<>();
+        for (Education education: educationRepository.findAllByUser_Id(id)){
+            educationSkillsDtoList.add(new EducationSkillsDto(educationDtoMapper.formEducationToEducationDto(education), skillService.getDepartmentSkills(education.getDepartment().getId())));
+        }
+        return educationSkillsDtoList;
+    }
+
+    @Override
+    public EducationSkillsDto getOneEducationById(Long id) {
+        EducationSkillsDto educationSkillsDto = new EducationSkillsDto();
+        educationSkillsDto.setEducationDto(educationDtoMapper.formEducationToEducationDto(educationRepository.findOne(id)));
+        educationSkillsDto.setDepartmentSkillDtoList(skillService.getDepartmentSkills(educationRepository.findOne(id).getDepartment().getId()));
+        return educationSkillsDto;
     }
 }

@@ -6,6 +6,7 @@ import com.vidnichuk.isogj.api.dto.model.*;
 
 import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
+import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,9 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Autowired
     private PositionRepository positionRepository;
+
+    @Autowired
+    private SkillService skillService;
 
 
     @Autowired
@@ -155,5 +159,14 @@ public class CompanyServiceImpl implements CompanyService{
             vacancySkillDtos.add(vacancySkillDtoMapper.fromVacancySkillToVacancySkillDto(vacancySkill));
         }
         return vacancySkillDtos;
+    }
+
+    @Override
+    public List<UserCompanySkillsDto> getUserCompanyDtoList(long id) {
+        List<UserCompanySkillsDto> userCompanySkillsDtoList = new ArrayList<>();
+        for (UserCompany userCompany: userCompanyRepository.findAllByUserId(id)){
+            userCompanySkillsDtoList.add(new UserCompanySkillsDto(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompany), skillService.getPositionSkills(userCompany.getPosition().getId())));
+        }
+        return userCompanySkillsDtoList;
     }
 }

@@ -12,7 +12,7 @@ import {
   MatAutocompleteModule,
   MatButtonModule, MatChipsModule, MatDatepickerModule, MatIconModule, MatInputModule, MatNativeDateModule,
   MatPaginatorModule,
-  MatSelectModule,
+  MatSelectModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -83,6 +83,7 @@ import { WorkPageComponent } from './work-page/work-page.component';
     MatAutocompleteModule,
     MatNativeDateModule,
     MatIconModule,
+    MatTabsModule,
     MatPaginatorModule,
     MatSelectModule,
     TranslateModule.forRoot({
