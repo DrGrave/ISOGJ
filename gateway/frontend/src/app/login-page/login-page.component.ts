@@ -14,7 +14,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class LoginPageComponent implements OnInit {
 
 
-  private error: string;
+  private isAfto: boolean = true;
   private formSubmitAttempt: boolean;
 
   private token: string;
@@ -41,7 +41,9 @@ export class LoginPageComponent implements OnInit {
         .subscribe(data => {
           this.token = data.access_token;
           this.router.navigateByUrl("/home-page");
+
         });
+      this.isAfto = false;
     }
     this.formSubmitAttempt = true;
   }

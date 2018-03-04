@@ -80,6 +80,7 @@ import { AuthorizedUserListPageComponent } from './authorized-user-list-page/aut
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatIconModule,
     SharedModule,
     MatDatepickerModule,
     MatToolbarModule,

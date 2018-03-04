@@ -99,6 +99,11 @@
     },
     "HEADER":{
       "PLACEHOLDER": "Вход в систему"
+    },
+    "ERROR":{
+      "INCORRECT_LOG_PASS":{
+        "PLACEHOLDER": "Неправильный логин или пароль."
+      }
     }
   },
   "USERS":{
@@ -118,6 +123,11 @@
     },
     "VACANCY_TYPE":{
       "PLACEHOLDER": "Тип вакансии:"
+    }
+  },
+  "HOME":{
+    "GENDER":{
+      "PLACEHOLDER": "Пол"
     }
   }
 }

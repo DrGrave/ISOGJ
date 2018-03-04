@@ -99,7 +99,12 @@
     },
       "HEADER":{
         "PLACEHOLDER": "Enter in system"
+      },
+    "ERROR":{
+      "INCORRECT_LOG_PASS":{
+        "PLACEHOLDER": "Incorrect login or password."
       }
+    }
   },
   "USERS":{
     "DEPARTMENT":{
@@ -118,6 +123,11 @@
     },
     "VACANCY_TYPE":{
       "PLACEHOLDER": "Vacancy type:"
+    }
+  },
+  "HOME":{
+    "GENDER":{
+      "PLACEHOLDER": "Gender"
     }
   }
 

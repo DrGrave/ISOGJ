@@ -16,6 +16,9 @@
             {{ 'LOGIN.REQUIRED.PASSWORD.PLACEHOLDER' | translate }}
           </mat-error>
         </mat-input-container>
+        <div *ngIf="!isAfto" style="color: red">
+          {{'LOGIN.ERROR.INCORRECT_LOG_PASS.PLACEHOLDER' | translate}}
+        </div>
         <button mat-raised-button color="primary" type="submit">Login</button>
       </form>
 </div>

@@ -13,17 +13,41 @@
             <mat-card-content *ngIf="myUser.meUserDto">
               Email:
               {{myUser.meUserDto.email}}
-              <div *ngIf="myUser.meUserDto.gender">
-                Gender:
-                {{myUser.meUserDto.gender.name}}
+
+              <br>
+              <div *ngIf="myUser.meUserDto.gender" class="gender-field">
+
+                <div *ngIf="!ifChangeGenderClick" class="gender-label">
+                  Gender:
+                  {{myUser.meUserDto.gender.name}}
+                </div>
+
+                <div *ngIf="ifChangeGenderClick" [formGroup]="genderForm" >
+
+                  <mat-input-container class="full-width-input">
+                    <input matInput type="text" placeholder="{{ 'HOME.GENDER.PLACEHOLDER' | translate }}"
+                           formControlName="gender" required>
+                  </mat-input-container>
+
+                </div>
+
+                <button mat-icon-button (click)="changeGenderAction()" class="gender-button">
+                  <mat-icon>create</mat-icon>
+                </button>
+
               </div>
+
               <div *ngIf="myUser.meUserDto.city">
                 City:
                 {{myUser.meUserDto.city.name}}
               </div>
+
             </mat-card-content>
+
           </div>
+
         </mat-card-title>
+
       </mat-card>
 
       <mat-tab-group class="tab-group-class">
