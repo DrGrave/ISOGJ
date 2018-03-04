@@ -36,21 +36,21 @@
           University: {{educate.educationDto.department.faculty.university.name}}
           <br>
           Skills witch learn during education:
-          <mat-chip-list>
+          <mat-chip-list class="education-skills">
             <mat-chip *ngFor="let skill of educate.departmentSkillDtoList">{{skill.skill.name}}</mat-chip>
           </mat-chip-list>
         </mat-tab>
       </mat-tab-group>
 
-      <mat-tab-group>
-        <mat-tab *ngFor="let company of myUser.userCompanySkillsDtoList" label="{{company.userCompanyDto.company.name}}">
+      <mat-tab-group class="company-class">
+        <mat-tab *ngFor="let company of myUser.userCompanySkillsDtoList" label="{{company.userCompanyDto.company.name}}" class="company-tab">
           <br>
           Company: {{company.userCompanyDto.company.name}}
           <br>
           Position: {{company.userCompanyDto.position.name}}
           <br>
-          Skills witch need in vacancy:
-          <mat-chip-list>
+          Skills witch need in work:
+          <mat-chip-list class="company-skills">
             <mat-chip *ngFor="let skill of company.positionSkillDtoList">{{skill.skill.name}}</mat-chip>
           </mat-chip-list>
         </mat-tab>
@@ -63,6 +63,32 @@
           <mat-chip-list>
             <mat-chip *ngFor="let skill of myUser.userSkillDtoList">{{skill.skill.name}}</mat-chip>
           </mat-chip-list>
+
+          Experience:
+          <br>
+          <div class="experience-class">
+            <mat-tab-group>
+              <mat-tab *ngFor="let experience of myUser.experienceSkillsDtoList" label="{{experience.experienceDto.company.name}}" class="experience-class">
+                <div class="experience-info">
+                  <div mat-card-avatar class="mat-header-image" *ngIf="experience.experienceDto.company">
+                    <img src="{{experience.experienceDto.company.companyLogo}}" width="60" height="60">
+                  </div>
+                  Company name: {{experience.experienceDto.company.name}}
+                  <br>
+                  Company info: {{experience.experienceDto.company.info}}
+                  <br>
+                  Position: {{experience.experienceDto.position.name}}
+                </div>
+                <br>
+                Skills witch use in work:
+                <mat-chip-list>
+                  <mat-chip *ngFor="let skill of experience.positionSkillDtoList">
+                    {{skill.skill.name}}
+                  </mat-chip>
+                </mat-chip-list>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
         </mat-card>
       </div>
       <div class="history-class">
