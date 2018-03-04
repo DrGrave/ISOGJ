@@ -1,22 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HomePageService} from './home-page.service';
-import {MyUser} from './MyUser';
-import {Education} from "./Education";
-import {UserCompany} from "./UserCompany";
-import {UserLink} from "./UserLink";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-
-import {Skill} from "../user-list-page/skill";
-import {Gender} from "./Gender";
 import {Router} from "@angular/router";
-import {TypeOfSkill} from "../user-list-page/TypeOfSkill";
-import {NewSkill} from "./NewSkill";
-import {City} from "./City";
-import {MatDatepickerInputEvent} from "@angular/material";
-import {Company} from "./Company";
-import {TypeOfLink} from "./TypeOfLink";
-import {NewLink} from "./NewLink";
-import {NewCompany} from "./NewCompany";
+import {MatDatepickerInputEvent, MatPaginator} from "@angular/material";
 import {FullUserInfo} from "./FullUserInfo";
 
 
@@ -27,9 +13,12 @@ import {FullUserInfo} from "./FullUserInfo";
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   myUser: FullUserInfo;
   username: string;
-  link: string;
+  pageNum: number = 0;
+  pageSiz: number = 0;
+  historyCount: number = 0;
 
 
 
@@ -45,9 +34,24 @@ export class HomePageComponent implements OnInit {
   }
 
   getMyAccount(){
+    this.homePageService.getSizeHistory().subscribe(date =>{
+      this.historyCount = date;
+    });
     this.homePageService.getUser().subscribe( data => {
       this.myUser = data;
       localStorage.setItem('myUser', JSON.stringify(this.myUser));
+    });
+  }
+
+  getNextPage(event){
+    this.pageNum = this.paginator.pageIndex;
+    this.pageSiz = this.paginator.pageSize;
+    this.getNextHistory(this.pageSiz, this.pageNum);
+  }
+
+  private getNextHistory(pageSiz: number, pageNum: number) {
+    this.homePageService.getHistory(this.pageNum,this.pageSiz).subscribe(date => {
+      this.myUser.historySkillsDtoList = date;
     });
   }
 }

@@ -42,6 +42,8 @@ import { WorkPageComponent } from './work-page/work-page.component';
   import {CompanyPageService} from "./work-page/company-page.service";
   import {TokenInterceptor} from "./shared/service/auth/TokenInterceptor";
   import {HttpErrorInterceptor} from "./shared/service/auth/HttpErrorInterceptor";
+import { AuthorizedVacancyListPageComponent } from './authorized-vacancy-list-page/authorized-vacancy-list-page.component';
+import { AuthorizedUserListPageComponent } from './authorized-user-list-page/authorized-user-list-page.component';
 
 
   export function HttpLoaderFactory(http: HttpClient) {
@@ -63,7 +65,9 @@ import { WorkPageComponent } from './work-page/work-page.component';
     HomePageComponent,
     HeaderComponent,
     MoreUserInfoPageComponent,
-    WorkPageComponent
+    WorkPageComponent,
+    AuthorizedVacancyListPageComponent,
+    AuthorizedUserListPageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,19 @@
 import {MyUser} from "./MyUser";
-import {Education} from "./Education";
 import {UserSkill} from "../user-list-page/userSkill";
-import {UserCompany} from "./UserCompany";
 import {UserLink} from "./UserLink";
+import {EducationSkillsDto} from "./EducationSkillsDto";
+import {UserCompanySkills} from "./UserCompanySkills";
+import {ExperienceSkills} from "./ExperienceSkills";
+import {HistorySkills} from "./HistorySkills";
+import {CoursesSkills} from "./CoursesSkills";
 
 export class FullUserInfo{
   meUserDto: MyUser;
-  educationDtoList: Education[];
-  userSkillDtoList: UserSkill[];
-  userCompanyDtoList: UserCompany[];
-  userLinkDtoList: UserLink[];
   userLinkDto: UserLink;
+  educationSkillsDtoList: EducationSkillsDto[];
+  userSkillDtoList: UserSkill[];
+  userCompanySkillsDtoList: UserCompanySkills[];
+  experienceSkillsDtoList: ExperienceSkills[];
+  historySkillsDtoList: HistorySkills[];
+  coursesSkillsListDtoList: CoursesSkills[];
 }

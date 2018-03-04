@@ -1,47 +1,89 @@
 <div class="user-info" >
-  <div class="main-info" *ngIf="myUser">
-    <mat-card class="card-main">
-      <mat-card-title class="title-main">
-        <div mat-card-avatar class="mat-header-image" *ngIf="myUser.userLinkDto"><img src="{{myUser.userLinkDto.link}}" width="100" height="100"></div>
-        <div class="user-main-info">
-          <div class="user-name" *ngIf="myUser.meUserDto">
-            {{myUser.meUserDto.firstName}}
-            {{myUser.meUserDto.lastName}}
-            {{myUser.meUserDto.middleName}}
+  <div class="home-page-class" *ngIf="myUser">
+    <div class="main-info">
+      <mat-card class="card-main">
+        <mat-card-title class="title-main">
+          <div mat-card-avatar class="mat-header-image" *ngIf="myUser.userLinkDto"><img src="{{myUser.userLinkDto.link}}" width="100" height="100"></div>
+          <div class="user-main-info">
+            <div class="user-name" *ngIf="myUser.meUserDto">
+              {{myUser.meUserDto.firstName}}
+              {{myUser.meUserDto.lastName}}
+              {{myUser.meUserDto.middleName}}
+            </div>
+            <mat-card-content *ngIf="myUser.meUserDto">
+              Email:
+              {{myUser.meUserDto.email}}
+              <div *ngIf="myUser.meUserDto.gender">
+                Gender:
+                {{myUser.meUserDto.gender.name}}
+              </div>
+              <div *ngIf="myUser.meUserDto.city">
+                City:
+                {{myUser.meUserDto.city.name}}
+              </div>
+            </mat-card-content>
           </div>
-          <mat-card-content *ngIf="myUser.meUserDto">
-            Email:
-            {{myUser.meUserDto.email}}
-            <div *ngIf="myUser.meUserDto.gender">
-              Gender:
-              {{myUser.meUserDto.gender.name}}
-            </div>
-            <div *ngIf="myUser.meUserDto.city">
-              City:
-              {{myUser.meUserDto.city.name}}
-            </div>
-          </mat-card-content>
-        </div>
-      </mat-card-title>
-    </mat-card>
-    <mat-tab-group class="tab-group-class">
-      <mat-tab *ngFor="let educate of myUser.educationDtoList" label="{{educate.department.faculty.university.name}}">
-        <br>
-        Department: {{educate.department.name}}
-        <br>
-        Faculty: {{educate.department.faculty.name}}
-        <br>
-        University: {{educate.department.faculty.university.name}}
+        </mat-card-title>
+      </mat-card>
 
-      </mat-tab>
-    </mat-tab-group>
-    <mat-tab-group>
-      <mat-tab *ngFor="let company of myUser.userCompanyDtoList" label="{{company.company.name}}">
-        <br>
-        Company: {{company.company.name}}
-        <br>
-        Position: {{company.position.name}}
-      </mat-tab>
-    </mat-tab-group>
+      <mat-tab-group class="tab-group-class">
+        <mat-tab *ngFor="let educate of myUser.educationSkillsDtoList" label="{{educate.educationDto.department.faculty.university.name}}">
+          <br>
+          Department: {{educate.educationDto.department.name}}
+          <br>
+          Faculty: {{educate.educationDto.department.faculty.name}}
+          <br>
+          University: {{educate.educationDto.department.faculty.university.name}}
+          <br>
+          Skills witch learn during education:
+          <mat-chip-list>
+            <mat-chip *ngFor="let skill of educate.departmentSkillDtoList">{{skill.skill.name}}</mat-chip>
+          </mat-chip-list>
+        </mat-tab>
+      </mat-tab-group>
+
+      <mat-tab-group>
+        <mat-tab *ngFor="let company of myUser.userCompanySkillsDtoList" label="{{company.userCompanyDto.company.name}}">
+          <br>
+          Company: {{company.userCompanyDto.company.name}}
+          <br>
+          Position: {{company.userCompanyDto.position.name}}
+          <br>
+          Skills witch need in vacancy:
+          <mat-chip-list>
+            <mat-chip *ngFor="let skill of company.positionSkillDtoList">{{skill.skill.name}}</mat-chip>
+          </mat-chip-list>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="skills-class">
+      <div>
+        <mat-card>
+          Skills:
+          <mat-chip-list>
+            <mat-chip *ngFor="let skill of myUser.userSkillDtoList">{{skill.skill.name}}</mat-chip>
+          </mat-chip-list>
+        </mat-card>
+      </div>
+      <div class="history-class">
+        <mat-card>
+          History:
+          <mat-card *ngFor="let history of myUser.historySkillsDtoList" class="history-elem-class">
+            {{history.historyDto.historyInfo}} at {{history.historyDto.date}} and get next skills:
+            <mat-chip-list>
+              <mat-chip *ngFor="let skill of history.coursesSkillDto.coursesSkillDtoList">
+                {{skill.skill.name}}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card>
+          <mat-paginator [length]="historyCount"
+                         [pageSize]="10"
+                         [pageSizeOptions]="[5, 10, 25, 50]"
+                         [pageIndex]="pageNum"
+                         (page)="getNextPage($event)">
+          </mat-paginator>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>

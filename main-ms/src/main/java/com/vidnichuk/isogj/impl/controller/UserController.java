@@ -77,6 +77,15 @@ public class UserController {
         return userLightWeightService.changeCity(cityDto, id);
     }
 
+    @GetMapping("/history/page")
+    public List<HistorySkillsDto> getPageOfHistory(@RequestParam("size") int size, @RequestParam("page") int page, Principal principal){
+        return userLightWeightService.getPageOfHistory(size, page, principal.getName());
+    }
+
+    @GetMapping("/history/count")
+    public long getCountOfHistory(Principal principal){
+        return userLightWeightService.getCountOfHistory(principal.getName());
+    }
 
 
 

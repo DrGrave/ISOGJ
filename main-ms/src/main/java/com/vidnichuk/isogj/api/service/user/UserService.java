@@ -52,4 +52,8 @@ public interface UserService {
     CityDto changeCity(CityDto cityDto, String id);
 
     long getCountOfPublicUser();
+
+    List<HistorySkillsDto> getPageOfHistory(int size, int page, String name);
+
+    long getCountOfHistory(String name);
 }

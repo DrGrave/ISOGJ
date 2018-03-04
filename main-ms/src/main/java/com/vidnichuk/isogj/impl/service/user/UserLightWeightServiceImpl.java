@@ -70,4 +70,14 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     public long getCountOfPublicUser() {
         return userService.getCountOfPublicUser();
     }
+
+    @Override
+    public List<HistorySkillsDto> getPageOfHistory(int size, int page, String name) {
+        return userService.getPageOfHistory(size, page, name);
+    }
+
+    @Override
+    public long getCountOfHistory(String name) {
+        return userService.getCountOfHistory(name);
+    }
 }

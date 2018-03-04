@@ -204,7 +204,7 @@ public class UserServiceImpl implements UserService {
         fullUserInfoDto.setMeUserDto(userDtoMapper.fromUserToMeUserDto(user));
         fullUserInfoDto.setEducationSkillsDtoList(educationService.getEducationSkills(user.getId()));
         fullUserInfoDto.setUserCompanySkillsDtoList(companyService.getUserCompanyDtoList(user.getId()));
-        fullUserInfoDto.setHistorySkillsDtoList(historyService.getAllUserHistory(user.getId()));
+        fullUserInfoDto.setHistorySkillsDtoList(historyService.getAllUserHistory(user.getId(), createPageRequest(10,0)));
         fullUserInfoDto.setExperienceSkillsDtoList(experienceService.getExperienceSkillsById(user.getId()));
         fullUserInfoDto.setCoursesSkillsListDtoList(coursesService.getCoursesByUserId(user.getId()));
         fullUserInfoDto.setUserLinkDtoList(linkService.findAllUserLinks(user.getId()));
@@ -229,10 +229,17 @@ public class UserServiceImpl implements UserService {
         return cityDtoMapper.fromCityToCityDto(user.getCity());
     }
 
+    @Override
+    public List<HistorySkillsDto> getPageOfHistory(int size, int page, String name) {
+        return historyService.getAllUserHistory(userRepository.findByUsername(name).getId(), createPageRequest(size,page));
+    }
+
     private Pageable createPageRequest(int size, int page) {
         return new PageRequest(page, size);
     }
 
-
-
+    @Override
+    public long getCountOfHistory(String name) {
+        return historyService.getCountOfHistory(userRepository.findByUsername(name).getId());
+    }
 }

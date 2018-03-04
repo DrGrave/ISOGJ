@@ -81,10 +81,20 @@
   min-width: 230px;
 }
 
+.home-page-class{
+  display: inline-flex;
+}
+
 .skill-info{
   margin-left: 5%;
   min-width: 70%;
   max-height: 60px;
+}
+
+.skills-class{
+  padding-left: 40px;
+  padding-top: 10px;
+  min-width: 600px;
 }
 
 .mat-header-image {
@@ -103,6 +113,15 @@
 
 .add-new-skill{
   margin-left: 40%;
+}
+
+.history-class{
+  padding-top: 10px;
+}
+
+.history-elem-class{
+  padding-top: 10px;
+  margin-bottom: 10px;
 }
 
 .remove-skill{

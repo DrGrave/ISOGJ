@@ -3,8 +3,8 @@
   <div class="heads">
     <div *ngIf="isLoggedIn$ | async; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
-      <button mat-button routerLink="/company-list-page" routerLinkActive="menu">{{'HEADER.VACANCY.PLACEHOLDER' | translate}}</button>
-      <button mat-button routerLink="/user-list-page" routerLinkActive="menu">{{'HEADER.USER.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/authorize-vacancy-list-page" routerLinkActive="menu">{{'HEADER.VACANCY.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/authorize-user-list-page" routerLinkActive="menu">{{'HEADER.USER.PLACEHOLDER' | translate}}</button>
       <button mat-button routerLink="/home-page" routerLinkActive="menu">{{'HEADER.HOME.PLACEHOLDER' | translate}}</button>
       <button mat-button routerLink="/work-page" routerLinkActive="menu">{{'HEADER.WORK.PLACEHOLDER' | translate}}</button>
       <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">{{'HEADER.LOGOUT.PLACEHOLDER' | translate}}</button>
@@ -12,7 +12,7 @@
     <ng-template #elseBlock>
       <button mat-button routerLink="/login" routerLinkActive="menu" >{{'HEADER.SIGN_IN.PLACEHOLDER' | translate}}</button>
       <button mat-button routerLink="/registration" routerLinkActive="menu" >{{'HEADER.SIGN_UP.PLACEHOLDER' | translate}}</button>
-      <button mat-button routerLink="/company-list-page" routerLinkActive="menu">{{'HEADER.VACANCY.PLACEHOLDER' | translate}}</button>
+      <button mat-button routerLink="/vacancy-list-page" routerLinkActive="menu">{{'HEADER.VACANCY.PLACEHOLDER' | translate}}</button>
       <button mat-button routerLink="/user-list-page" routerLinkActive="menu">{{'HEADER.USER.PLACEHOLDER' | translate}}</button>
     </ng-template>
     </div>
