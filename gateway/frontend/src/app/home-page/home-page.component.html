@@ -16,18 +16,19 @@
 
               <br>
               <div *ngIf="myUser.meUserDto.gender" class="gender-field">
+                <div class="gender-field-with-button">
+                  <div class="gender-label" >
+                    <mat-form-field >
+                      <mat-select [(ngModel)]="selectedGender" [disabled]="!ifChangeGenderClick" placeholder="{{'HOME.GENDER.PLACEHOLDER' | translate}}">
+                        <mat-option *ngFor="let option of genders" [value]="option.id">{{ option.name }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
 
-                <div class="gender-label" >
-                  <mat-form-field >
-                    <mat-select [(ngModel)]="selectedGender" [disabled]="!ifChangeGenderClick" placeholder="{{'HOME.GENDER.PLACEHOLDER' | translate}}">
-                      <mat-option *ngFor="let option of genders" [value]="option.id">{{ option.name }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                  <button mat-icon-button *ngIf="ifChangeGenderClick" (click)="changeGenderApply()" class="apply-gender-class">
+                    <mat-icon>done</mat-icon>
+                  </button>
                 </div>
-
-                <button mat-icon-button *ngIf="ifChangeGenderClick" (click)="changeGenderApply()">
-                  <mat-icon>done</mat-icon>
-                </button>
 
                 <button mat-icon-button (click)="changeGenderAction()" class="gender-button">
                   <mat-icon>create</mat-icon>
@@ -35,9 +36,28 @@
 
               </div>
 
-              <div *ngIf="myUser.meUserDto.city">
-                {{'HOME.CITY.PLACEHOLDER' | translate}}:
-                {{myUser.meUserDto.city.name}}
+              <div *ngIf="myUser.meUserDto.city" class="city-info-class">
+                <div *ngIf="ifChangeCityClick">
+                  <mat-form-field [formGroup]="cityDesForm">
+                    <input type="text" [(ngModel)]="selectedCity.name" placeholder="{{'HOME.CITY.PLACEHOLDER' | translate}}"  matInput formControlName="inputCityDisable">
+                  </mat-form-field>
+                </div>
+
+                <div *ngIf="!ifChangeCityClick">
+                  <mat-form-field class="example-full-width" [formGroup]="cityForm">
+                    <input type="text" placeholder="{{'HOME.CITY.PLACEHOLDER' | translate}}: {{myUser.meUserDto.city.name}}" aria-label="Assignee" matInput [formControl]="cityControl" [matAutocomplete]="auto" formControlName="inputCity">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCityFn">
+                      <mat-option *ngFor="let option of filteredCity | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <button mat-icon-button (click)="applyCityChange()" *ngIf="ifChangeGenderClick">
+                  <mat-icon>
+                    done
+                  </mat-icon>
+                </button>
               </div>
 
             </mat-card-content>

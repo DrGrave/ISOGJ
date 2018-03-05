@@ -4,6 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import {FullUserInfo} from "./FullUserInfo";
 import {HistorySkills} from "./HistorySkills";
 import {Gender} from "./Gender";
+import {FormControl} from "@angular/forms";
+import {City} from "./City";
 
 
 
@@ -14,6 +16,11 @@ export class HomePageService {
   private thisGetAllGenders = '/api/main/gender/authorize/all';
   private thisHistoryGetPage = '/api/main/user/history/page?';
   private thisChangeGenderUrl = '/api/main/user/changegender?';
+  private getCityUrl = 'api/main/city/?name=';
+  private changeCityUrl = 'api/main/user/city/change?';
+
+
+
 
 
   constructor(private http: HttpClient) {
@@ -37,11 +44,24 @@ export class HomePageService {
   }
 
   getAllGenders(): Observable<Gender[]>{
+
     return this.http.get<Gender[]>(this.thisGetAllGenders);
   }
 
   changeGender(idGender: number): Observable<Gender>{
-    return null;
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('idGender', idGender.toString());
+    return this.http.get<Gender>(this.thisChangeGenderUrl + urlSearchParams.toString());
+  }
+
+  getCity(name: string): Observable<City[]> {
+    return this.http.get<City[]>(this.getCityUrl + name);
+  }
+
+  changeCity(cityName: string): Observable<City>{
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('cityName', cityName);
+    return this.http.get<City>(this.changeCityUrl + urlSearchParams.toString());
   }
 }
 

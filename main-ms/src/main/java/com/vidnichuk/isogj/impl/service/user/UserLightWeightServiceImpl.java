@@ -22,8 +22,8 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     private UserService userService;
 
     @Override
-    public GenderDto changeGender(GenderDto gender, String id) {
-        return userService.changeGender(gender, id);
+    public GenderDto changeGender(Long gender, String username) {
+        return userService.changeGender(gender, username);
     }
 
     @Override
@@ -62,8 +62,8 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     }
 
     @Override
-    public CityDto changeCity(CityDto cityDto, String id) {
-        return userService.changeCity(cityDto, id);
+    public CityDto changeCity(String cityName, String username) {
+        return userService.changeCity(cityName, username);
     }
 
     @Override

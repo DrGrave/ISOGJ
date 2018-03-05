@@ -3,6 +3,7 @@ package com.vidnichuk.isogj.impl.service.user;
 import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.*;
 import com.vidnichuk.isogj.api.dto.model.*;
+import com.vidnichuk.isogj.api.model.City;
 import com.vidnichuk.isogj.api.model.TempUser;
 import com.vidnichuk.isogj.api.model.User;
 import com.vidnichuk.isogj.api.model.UserLink;
@@ -214,17 +215,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public GenderDto changeGender(GenderDto gender, String id) {
-        User user = userRepository.findByUid(id);
-        user.setGender(genderDtoMapper.fromGenderDtoToGender(gender));
+    public GenderDto changeGender(Long gender, String username) {
+        User user = userRepository.findByUsername(username);
+        user.setGender(genderRepository.getOne(gender));
         userRepository.save(user);
         return genderDtoMapper.fromGenderToGenderDto(user.getGender());
     }
 
     @Override
-    public CityDto changeCity(CityDto cityDto, String id) {
-        User user = userRepository.findByUid(id);
-        user.setCity(cityDtoMapper.fromCityDtoToCity(cityDto));
+    public CityDto changeCity(String cityName, String username) {
+        User user = userRepository.findByUsername(username);
+        City city = cityRepository.findByName(cityName);
+        if (city != null){
+            user.setCity(city);
+        }else {
+            city = new City();
+            city.setName(cityName);
+            cityRepository.save(city);
+            user.setCity(city);
+        }
         userRepository.save(user);
         return cityDtoMapper.fromCityToCityDto(user.getCity());
     }

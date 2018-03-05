@@ -67,14 +67,14 @@ public class UserController {
         return userLightWeightService.getUserByUsername(principal.getName());
     }
 
-    @PostMapping("/changegender")
-    public GenderDto setNewGender(@Valid @RequestBody GenderDto gender, @RequestParam("id") String id){
-        return userLightWeightService.changeGender(gender, id);
+    @GetMapping("/changegender")
+    public GenderDto setNewGender(@RequestParam("idGender") Long idGender, Principal principal){
+        return userLightWeightService.changeGender(idGender, principal.getName());
     }
 
-    @PostMapping("/city")
-    public CityDto applyCity(@Valid @RequestBody CityDto cityDto, @RequestParam("id") String id){
-        return userLightWeightService.changeCity(cityDto, id);
+    @GetMapping("/city/change")
+    public CityDto applyCity(@RequestParam("cityName") String cityName, Principal principal){
+        return userLightWeightService.changeCity(cityName, principal.getName());
     }
 
     @GetMapping("/history/page")

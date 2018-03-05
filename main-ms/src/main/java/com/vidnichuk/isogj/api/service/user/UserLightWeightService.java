@@ -20,9 +20,9 @@ public interface UserLightWeightService {
 
     FullUserInfoDto getUserByUsername(String username);
 
-    GenderDto changeGender(GenderDto gender, String id);
+    GenderDto changeGender(Long gender, String id);
 
-    CityDto changeCity(CityDto cityDto, String id);
+    CityDto changeCity(String cityName, String username);
 
 
     long getCountOfPublicUser();

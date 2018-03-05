@@ -142,8 +142,13 @@
   padding-bottom: 24px;
 }
 .gender-button{
+
   position: absolute;
   right: 10px;
+}
+
+.apply-gender-class{
+  padding-top: 16px;
 }
 
 .company-tab{
@@ -152,6 +157,13 @@
 
 .company-skills{
 
+}
+.city-info-class{
+  display: inline-flex;
+}
+
+.gender-field-with-button{
+  display: inline-flex;
 }
 
 .education-skills{
