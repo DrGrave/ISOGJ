@@ -17,19 +17,17 @@
               <br>
               <div *ngIf="myUser.meUserDto.gender" class="gender-field">
 
-                <div *ngIf="!ifChangeGenderClick" class="gender-label">
-                  Gender:
-                  {{myUser.meUserDto.gender.name}}
+                <div class="gender-label" >
+                  <mat-form-field >
+                    <mat-select [(ngModel)]="selectedGender" [disabled]="!ifChangeGenderClick" placeholder="{{'HOME.GENDER.PLACEHOLDER' | translate}}">
+                      <mat-option *ngFor="let option of genders" [value]="option.id">{{ option.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
 
-                <div *ngIf="ifChangeGenderClick" [formGroup]="genderForm" >
-
-                  <mat-input-container class="full-width-input">
-                    <input matInput type="text" placeholder="{{ 'HOME.GENDER.PLACEHOLDER' | translate }}"
-                           formControlName="gender" required>
-                  </mat-input-container>
-
-                </div>
+                <button mat-icon-button *ngIf="ifChangeGenderClick" (click)="changeGenderApply()">
+                  <mat-icon>done</mat-icon>
+                </button>
 
                 <button mat-icon-button (click)="changeGenderAction()" class="gender-button">
                   <mat-icon>create</mat-icon>
@@ -38,7 +36,7 @@
               </div>
 
               <div *ngIf="myUser.meUserDto.city">
-                City:
+                {{'HOME.CITY.PLACEHOLDER' | translate}}:
                 {{myUser.meUserDto.city.name}}
               </div>
 

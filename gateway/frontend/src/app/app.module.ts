@@ -67,7 +67,7 @@ import { AuthorizedUserListPageComponent } from './authorized-user-list-page/aut
     MoreUserInfoPageComponent,
     WorkPageComponent,
     AuthorizedVacancyListPageComponent,
-    AuthorizedUserListPageComponent
+    AuthorizedUserListPageComponent,
   ],
   imports: [
     BrowserModule,

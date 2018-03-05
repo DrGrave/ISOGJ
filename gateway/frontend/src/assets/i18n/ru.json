@@ -80,6 +80,11 @@
     }
   },
   "LOGIN":{
+    "BUTTON":{
+      "LOGIN":{
+        "PLACEHOLDER": "Войти"
+      }
+    },
     "LOGIN":{
       "PLACEHOLDER": "Логин"
     },
@@ -128,6 +133,9 @@
   "HOME":{
     "GENDER":{
       "PLACEHOLDER": "Пол"
+    },
+    "CITY":{
+      "PLACEHOLDER": "Город"
     }
   }
 }

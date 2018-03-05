@@ -2,9 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {HomePageService} from './home-page.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {MatDatepickerInputEvent, MatPaginator, MatIconRegistry} from "@angular/material";
+import {MatDatepickerInputEvent, MatPaginator} from "@angular/material";
 import {FullUserInfo} from "./FullUserInfo";
-import {DomSanitizer} from "@angular/platform-browser";
+import {Gender} from "./Gender";
 
 
 
@@ -17,30 +17,26 @@ export class HomePageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   myUser: FullUserInfo;
   username: string;
+  genders: Gender[];
   pageNum: number = 0;
   pageSiz: number = 0;
   historyCount: number = 0;
   ifChangeGenderClick: boolean = false;
-
-  genderChangeGroup: FormGroup;
-
-  genderForm: FormGroup;
+  selectedGender;
 
 
 
 
-  constructor(private homePageService: HomePageService, private router: Router, private fb: FormBuilder, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    this.genderChangeGroup = new FormGroup({
-      genderChangeControl: new FormControl()
-    });
+
+  constructor(private homePageService: HomePageService, private router: Router, private fb: FormBuilder) {
+
   }
 
 
   ngOnInit() {
-    this.genderForm = this.fb.group({
-      gender: ['', Validators.required]
-    });
+
     this.getMyAccount();
+
   }
 
   getMyAccount(){
@@ -49,7 +45,9 @@ export class HomePageComponent implements OnInit {
     });
     this.homePageService.getUser().subscribe( data => {
       this.myUser = data;
-      localStorage.setItem('myUser', JSON.stringify(this.myUser));
+      this.getGenders();
+      this.selectedGender = data.meUserDto.gender;
+      localStorage.setItem('myUser', JSON.stringify(this.myUser))
     });
   }
 
@@ -65,8 +63,24 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  private getGenders(){
+    this.homePageService.getAllGenders().subscribe( date => {
+      this.genders = date;
+      this.selectedGender = this.myUser.meUserDto.gender.id;
+    });
+  }
+
   changeGenderAction() {
+
     this.ifChangeGenderClick = !this.ifChangeGenderClick;
+  }
+
+
+  changeGenderApply() {
+    this.ifChangeGenderClick = !this.ifChangeGenderClick;
+    if (this.myUser.meUserDto.gender.id != this.selectedGender) {
+      this.homePageService.changeGender(this.selectedGender).subscribe();
+    }
   }
 }
 

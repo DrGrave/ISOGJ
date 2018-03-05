@@ -80,8 +80,13 @@
     }
   },
   "LOGIN":{
+    "BUTTON":{
+      "LOGIN":{
+        "PLACEHOLDER": "Login"
+      }
+    },
     "LOGIN":{
-    "PLACEHOLDER": "Username"
+      "PLACEHOLDER": "Username"
     },
     "PASSWORD":{
       "PLACEHOLDER": "Password"
@@ -128,6 +133,9 @@
   "HOME":{
     "GENDER":{
       "PLACEHOLDER": "Gender"
+    },
+    "CITY":{
+      "PLACEHOLDER": "City"
     }
   }
 
