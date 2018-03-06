@@ -136,7 +136,32 @@
     },
     "CITY":{
       "PLACEHOLDER": "City"
+    },
+    "TYPE_OF_EDUCATION":{
+      "PLACEHOLDER": "Type of education"
+    },
+    "DEPARTMENT":{
+      "PLACEHOLDER": "Department"
+    },
+    "FACULTY":{
+      "PLACEHOLDER": "Faculty"
+    },
+    "UNIVERSITY":{
+      "PLACEHOLDER": "University"
+    },
+    "SPECIALIZATION":{
+      "PLACEHOLDER": "Specialization"
+    },
+    "DATE_OF_START":{
+      "PLACEHOLDER": "Date of start education"
+    },
+    "DATE_OF_END":{
+      "PLACEHOLDER": "Date of end education"
+    },
+    "EDUCATION_SKILLS":{
+      "PLACEHOLDER": "Skills witch get during education"
     }
+
   }
 
 }

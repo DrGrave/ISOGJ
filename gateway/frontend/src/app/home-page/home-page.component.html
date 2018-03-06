@@ -71,16 +71,102 @@
       <mat-tab-group class="tab-group-class">
         <mat-tab *ngFor="let educate of myUser.educationSkillsDtoList" label="{{educate.educationDto.department.faculty.university.name}}">
           <br>
-          Department: {{educate.educationDto.department.name}}
+          {{'HOME.TYPE_OF_EDIU' | translate}}: {{educate.educationDto.typeOfEducation.name}}
           <br>
-          Faculty: {{educate.educationDto.department.faculty.name}}
+          {{'HOME.DEPARTMENT.PLACEHOLDER' | translate}}: {{educate.educationDto.department.name}}
           <br>
-          University: {{educate.educationDto.department.faculty.university.name}}
+          {{'HOME.SPECIALIZATION.PLACEHOLDER' | translate}}: {{educate.educationDto.department.specialization}}
           <br>
-          Skills witch learn during education:
+          {{'HOME.FACULTY.PLACEHOLDER' | translate}}: {{educate.educationDto.department.faculty.name}}
+          <br>
+          {{'HOME.UNIVERSITY.PLACEHOLDER' | translate}}: {{educate.educationDto.department.faculty.university.name}}
+          <br>
+
+          <mat-form-field class="date-info-datepicker">
+            <input matInput [matDatepicker]="dp2" placeholder="{{'HOME.DATE_OF_START.PLACEHOLDER' | translate}}" value="{{convertDate(educate.educationDto.dateOfStart)}}" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+            <mat-datepicker #dp2 ></mat-datepicker>
+          </mat-form-field>
+          <br>
+
+          <mat-form-field class="date-info-datepicker">
+            <input matInput [matDatepicker]="dp3" placeholder="{{'HOME.DATE_OF_END.PLACEHOLDER' | translate}}" value="{{convertDate(educate.educationDto.dateOfEnd)}}" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 ></mat-datepicker>
+          </mat-form-field>
+          <br>
+          {{'HOME.EDUCATION_SKILLS.PLACEHOLDER' | translate}}:
           <mat-chip-list class="education-skills">
             <mat-chip *ngFor="let skill of educate.departmentSkillDtoList">{{skill.skill.name}}</mat-chip>
           </mat-chip-list>
+        </mat-tab>
+        <mat-tab label="+" onclick="getNewEducation()">
+          <mat-form-field>
+            <mat-select [(ngModel)]="selectedTypeOfEducation" placeholder="{{'HOME.TYPE_OF_EDUCATION.PLACEHOLDER' | translate}}">
+              <mat-option *ngFor="let option of typeOfEducation" [value]="option.id">{{ option.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <br>
+          <form *ngIf="ifAddClick">
+            <mat-form-field class="example-full-width" [formGroup]="universityForm">
+              <input type="text" placeholder="{{'HOME.UNIVERSITY.PLACEHOLDER' | translate}}" aria-label="Assignee" matInput [formControl]="universityControl" [matAutocomplete]="auto" formControlName="inputUniversity">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayUniversity">
+                <mat-option *ngFor="let option of filteredUniversity | async" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+          <br>
+          <form *ngIf="ifAddClick">
+            <mat-form-field class="height-class">
+              <input type="text" placeholder="{{'HOME.FACULTY.PLACEHOLDER' | translate}}" aria-label="Assignee" matInput [formControl]="facultyControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFacultyFn">
+                <mat-option *ngFor="let option of filteredFaculty | async" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+          <br>
+          <form *ngIf="ifAddClick">
+            <mat-form-field class="height-class">
+              <input type="text" placeholder="{{'HOME.DEPARTMENT.PLACEHOLDER' | translate}}" aria-label="Assignee" matInput [formControl]="departmentControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartmentFn">
+                <mat-option *ngFor="let option of filteredDepartment | async" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+          <br>
+          <mat-form-field class="date-info-datepicker">
+            <input matInput [matDatepicker]="picker1" placeholder="{{'HOME.DATE_OF_START.PLACEHOLDER' | translate}}" (dateChange)="changeStartEvent($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+
+          <br>
+          <mat-form-field class="date-info-datepicker">
+            <input matInput [matDatepicker]="picker2" placeholder="{{'HOME.DATE_OF_END.PLACEHOLDER' | translate}}" (dateChange)="changeEndEvent($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          <br>
+
+          <button mat-icon-button (click)="applyAddEducation()">
+            <mat-icon>
+              done
+            </mat-icon>
+          </button>
+
+
         </mat-tab>
       </mat-tab-group>
 

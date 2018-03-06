@@ -13,6 +13,9 @@ public class Department {
     @JoinColumn(name = "Faculty")
     private Faculty faculty;
 
+    @Column(name = "Specialization")
+    private String specialization;
+
     @Column(name = "Name")
     private String name;
 
@@ -38,5 +41,13 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 }

@@ -136,6 +136,30 @@
     },
     "CITY":{
       "PLACEHOLDER": "Город"
+    },
+    "TYPE_OF_EDUCATION":{
+      "PLACEHOLDER": "Тип образования"
+    },
+    "DEPARTMENT":{
+      "PLACEHOLDER": "Кафедра"
+    },
+    "FACULTY":{
+      "PLACEHOLDER": "Факультет"
+    },
+    "UNIVERSITY":{
+      "PLACEHOLDER": "Университет"
+    },
+    "SPECIALIZATION":{
+      "PLACEHOLDER": "Специализация"
+    },
+    "DATE_OF_START":{
+      "PLACEHOLDER": "Дата начала обучения"
+    },
+    "DATE_OF_END":{
+      "PLACEHOLDER": "Дата окончания обучения"
+    },
+    "EDUCATION_SKILLS":{
+      "PLACEHOLDER": "Навыки полученные за время обучения"
     }
   }
 }

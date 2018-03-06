@@ -3,6 +3,7 @@ package com.vidnichuk.isogj.api.dto.model;
 public class DepartmentDto {
     private Long id;
     private String name;
+    private String specialization;
     private FacultyDto faculty;
 
     public Long getId() {
@@ -27,5 +28,13 @@ public class DepartmentDto {
 
     public void setFaculty(FacultyDto faculty) {
         this.faculty = faculty;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 }

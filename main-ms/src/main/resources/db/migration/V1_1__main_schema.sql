@@ -70,6 +70,7 @@ create table department
   id bigint auto_increment
   primary key,
   name varchar(255) null,
+  specialization varchar(255) null,
   faculty bigint null
 )
   engine=InnoDb DEFAULT CHARSET=utf8
