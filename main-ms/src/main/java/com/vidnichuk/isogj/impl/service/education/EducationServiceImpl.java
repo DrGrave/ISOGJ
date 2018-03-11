@@ -83,15 +83,12 @@ public class EducationServiceImpl implements EducationService{
     }
 
     @Override
-    public List<EducationDto> addEducation(EducationDto educationDto, String id) {
-        List<EducationDto> educationDtoList = new ArrayList<>();
+    public List<EducationSkillsDto> addEducation(EducationDto educationDto, String name) {
         Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
-        education.setUser(userRepository.findByUid(id));
+        education.setUser(userRepository.findByUsername(name));
         educationRepository.save(education);
-        for (Education educate: educationRepository.findAllByUser_Id(userRepository.findByUid(id).getId())){
-            educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educate));
-        }
-        return educationDtoList;
+
+        return getEducationSkills(userRepository.findByUsername(name).getId());
     }
 
     @Override

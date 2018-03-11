@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HomePageService} from './home-page.service';
-import {FormBuilder, FormControl, FormControlName, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormControlName, FormGroup, NgModel, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatDatepickerInputEvent, MatPaginator} from "@angular/material";
 import {FullUserInfo} from "./FullUserInfo";
@@ -8,11 +8,15 @@ import {Gender} from "./Gender";
 import {City} from "./City";
 import {Observable} from "rxjs/Observable";
 import {map, startWith} from "rxjs/operators";
-import {async} from "rxjs/scheduler/async";
 import {TypeOfEducation} from "./TypeOfEducation";
 import {University} from "./University";
 import {Faculty} from "./Faculty";
 import {Department} from "./Department";
+import {Education} from "./Education";
+
+
+
+
 
 
 @Component({
@@ -21,6 +25,32 @@ import {Department} from "./Department";
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+
+  newEducation: Education;
+
+
+  ifOk: true;
+
+  cityList: City[];
+  universityList: University[];
+  facultyList: Faculty[];
+  departmentList: Department[];
+
+  universityCtrl: FormControl;
+  cityCtrl: FormControl;
+  facultyCtrl: FormControl;
+  departmentCtrl: FormControl;
+
+  reactiveFaculty: any;
+  reactiveUniversity: any;
+  reactiveCity: any;
+  reactiveDepartment: any;
+
+  universitys: University[];
+  citys: City[];
+  facultys: Faculty[];
+  departments: Department[];
+
   changedDateOfStart: Date;
   changedDateOfEnd: Date;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,13 +65,10 @@ export class HomePageComponent implements OnInit {
   selectedGender;
   ifAddClick = true;
 
-  selectedCity: City;
+
   selectedUniversity: University;
   selectedFaculty: Faculty;
-  selectedDepartment: Department;
 
-  universityOption: University[];
-  cityOption: City[];
   facultyOption: Faculty[];
   departmentOption: Department[];
 
@@ -51,12 +78,6 @@ export class HomePageComponent implements OnInit {
   facultyName: string;
   departmentName: string;
 
-  cityControl = new FormControl();
-  universityControl = new FormControl();
-  facultyControl = new FormControl();
-  departmentControl = new FormControl();
-
-
   cityForm: FormGroup;
   universityForm: FormGroup;
   cityDesForm: FormGroup;
@@ -65,119 +86,113 @@ export class HomePageComponent implements OnInit {
   typeOfEducation: TypeOfEducation[];
   selectedTypeOfEducation: TypeOfEducation;
 
-  filteredCity: Observable<City[]>;
-  filteredUniversity: Observable<University[]>;
-  filteredFaculty: Observable<Faculty[]>;
-  filteredDepartment: Observable<Department[]>;
-
-
-
-
-
-
-
-
-
-  cityFilter(name: string): City[]{
-    this.selectedCity = this.cityOption.filter(item => item.name === this.cityName)[0];
-    this.getCity(name);
-    this.cityName = name;
-    return this.cityOption.filter(option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
-  }
-
-  universityFilter(name: string): University[]{
-    this.selectedUniversity = this.universityOption.filter( item => item.name === this.universityName)[0];
-    this.getUniversity(name);
-    this.universityName = name;
-    return this.universityOption.filter( option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
-  }
-
-  facultyFilter(name: string): Faculty[]{
-    this.selectedUniversity = this.universityOption.filter(item => item.name === this.universityName)[0];
-    this.getFaculty(name);
-    this.facultyName = name;
-    return this.facultyOption.filter(
-      option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
-  }
-
-  departmentFilter(name: string): Department[]{
-    this.selectedFaculty = this.facultyOption.filter( item => item.name === this.facultyName)[0];
-    this.getDepartment(name);
-    this.departmentName = name;
-    return this.departmentOption.filter(
-      option => option.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) === 0);
-  }
-
-  displayUniversity(university?: University): string | undefined{
-    return university ? university.name: undefined;
-  }
-
-  displayCityFn(city?: City): string | undefined{
-    return city ? city.name: undefined;
-  }
-
-  displayFacultyFn(faculty?: Faculty): string | undefined{
-    return faculty ? faculty.name : undefined;
-  }
-
-  displayDepartmentFn(department?: Department): string | undefined{
-    return department ? department.name : undefined;
-  }
-
-
-
 
 
 
   constructor(private homePageService: HomePageService, private router: Router, private fb: FormBuilder) {
-    this.cityOption = [];
-    this.universityOption = [];
+
+    this.citys = [];
+    this.universitys = [];
+    this.facultys = [];
+    this.departments = [];
+
+    this.cityList = [];
+    this.universityList = [];
+    this.facultyList = [];
+    this.departmentList = [];
+
+    this.departmentCtrl = new FormControl({id: '', name: '', specialization: ''});
+    this.reactiveDepartment = this.departmentCtrl.valueChanges
+      .pipe(
+        startWith(this.departmentCtrl.value),
+        map( value => this.displayFn(value)),
+        map(name => this.departmentFilter(name, this.departments))
+      );
+
+    this.facultyCtrl = new FormControl({id: '', name: ''});
+    this.reactiveFaculty = this.facultyCtrl.valueChanges
+      .pipe(
+        startWith(this.facultyCtrl.value),
+        map( value => this.displayFn(value)),
+        map( name => this.facultyFilter(name, this.facultys))
+      );
+
+
+    this.universityCtrl = new FormControl({id:  '', name: ''});
+    this.reactiveUniversity = this.universityCtrl.valueChanges
+      .pipe(
+        startWith(this.universityCtrl.value),
+        map(val => this.displayFn(val)),
+        map(name => this.universityFilter(name, this.universitys))
+      );
+
+
+
     this.facultyOption = [];
     this.departmentOption = [];
+
+  }
+
+
+
+  displayFn(value: any): string {
+    return value && typeof value === 'object' ? value.name : value;
+  }
+
+  departmentFilter(val: string, options: any[]){
+    this.departmentName = val;
+    this.selectedFaculty = this.facultyList.filter( item => item.name === this.facultyName)[0];
+    options = this.getDepartment(val, this.selectedFaculty);
+    return this.filter(val, options);
+  }
+
+  facultyFilter(val: string, options: any[]){
+    this.facultyName = val;
+    this.selectedUniversity = this.universityList.filter(item => item.name === this.universityName)[0];
+    options = this.getFaculty(val, this.selectedUniversity);
+    return this.filter(val, options);
+  }
+
+  cityFilter(val: string, options: any[]){
+    options = this.getCity(val);
+    this.cityName = val;
+    return this.filter(val, options);
+  }
+
+  universityFilter(val: string, options: any[]){
+    options = this.getUniversity(val);
+    this.universityName = val;
+    this.selectedUniversity = options.filter( item => item.name === this.universityName)[0];
+    return this.filter(val, options);
+  }
+
+  filter(val: string, options: any[]) {
+    return val ? this._filter(options, val) : this.citys;
+  }
+
+
+  private _filter(values: any[], val: string) {
+    const filterValue = val.toLowerCase();
+    return values.filter(date => date.name.toLowerCase().startsWith(filterValue));
   }
 
 
   ngOnInit() {
 
-    this.filteredCity = this.cityControl.valueChanges
-      .pipe(
-        startWith<string | City>(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map( name => name ? this.cityFilter(name) : this.cityOption.slice())
-      );
-
-    this.filteredUniversity = this.universityControl.valueChanges
-      .pipe(
-        startWith<string | University>(''),
-        map( value => typeof value === 'string' ? value : value.name),
-        map( name => name ? this.universityFilter(name) : this.universityOption.slice())
-      );
-
-    this.filteredFaculty = this.facultyControl.valueChanges
-      .pipe(
-        startWith<string | Faculty>(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map( name => name ? this.facultyFilter(name) : this.facultyOption.slice())
-      );
-
-    this.filteredDepartment = this.departmentControl.valueChanges
-      .pipe(
-        startWith<string | Department>(''),
-        map( value => typeof  value === 'string' ? value : value.name),
-        map(name => name ? this.departmentFilter(name) : this.departmentOption.slice())
-      );
-
     this.getMyAccount();
-    this.getNewEducation();
+
     this.cityForm = this.fb.group({
       inputCity: new FormControl(
         { value: ''},
         {validators: [Validators.required]})
     });
 
+    this.getNewEducation();
+
+
     this.cityDesForm = this.fb.group({
       inputCityDisable: new FormControl({value: '', disabled: true})
-    })
+    });
 
     this.universityForm = this.fb.group({
       inputUniversity: new FormControl(
@@ -194,8 +209,18 @@ export class HomePageComponent implements OnInit {
       this.myUser = data;
       this.getGenders();
       this.selectedGender = data.meUserDto.gender;
-      this.selectedCity = data.meUserDto.city;
-      localStorage.setItem('myUser', JSON.stringify(this.myUser))
+      localStorage.setItem('myUser', JSON.stringify(this.myUser));
+
+
+
+
+      this.cityCtrl = new FormControl({id:  data.meUserDto.city.id, name: data.meUserDto.city.name, enabled: false});
+      this.reactiveCity = this.cityCtrl.valueChanges
+        .pipe(
+          startWith(this.cityCtrl.value),
+          map(val => this.displayFn(val)),
+          map(name => this.cityFilter(name, this.citys))
+        );
     });
 
   }
@@ -236,34 +261,39 @@ export class HomePageComponent implements OnInit {
   }
 
 
-  private getCity(name: string) {
-    this.homePageService.getCity(name).subscribe( date => this.cityOption = date);
+  private getCity(name: string): City[] {
+    this.homePageService.getCity(name).subscribe(dat => this.cityList = dat);
+    return this.cityList;
   }
 
-  getUniversity(name){
-    this.homePageService.getUniversity(name).subscribe( date => this.universityOption = date);
+  getUniversity(name): University[]{
+    this.homePageService.getUniversity(name).subscribe( date => this.universityList = date);
+    return this.universityList;
   }
 
-  getFaculty(name: string){
-    this.homePageService.getFaculty(name, this.selectedUniversity).subscribe( facultyDate => {
-      this.facultyOption = facultyDate;
-    })
+  getFaculty(name: string, university: University): Faculty[]{
+    this.homePageService.getFaculty(name, university).subscribe( facultyDate => {
+      this.facultyList = facultyDate;
+    });
+    return this.facultyList;
   }
 
-  getDepartment(name: string){
-    this.homePageService.getDepartments(name, this.selectedFaculty).subscribe( departmentDate => {
-      this.departmentOption = departmentDate;
-    })
+  getDepartment(name: string, faculty: Faculty): Department[]{
+    this.homePageService.getDepartments(name, faculty).subscribe( departmentDate => {
+      this.departmentList = departmentDate;
+    });
+    return this.departmentList;
   }
 
   applyCityChange() {
-    if (this.cityName.toLocaleLowerCase().indexOf('undefined') === 0){
+    if (this.cityName){
+      if (this.cityName.toLocaleLowerCase().indexOf('undefined') === 0){
 
-    }else {
-      this.homePageService.changeCity(this.cityName).subscribe(date => {
-        this.myUser.meUserDto.city = date;
-        this.selectedCity = date;
-      })
+      }else {
+        this.homePageService.changeCity(this.cityName).subscribe(date => {
+          this.myUser.meUserDto.city = date;
+        })
+      }
     }
   }
 
@@ -274,7 +304,10 @@ export class HomePageComponent implements OnInit {
   }
 
   applyAddEducation(){
-
+    this.newEducation.department =  this.departmentList.filter( item => item.name === this.departmentName)[0];
+    this.newEducation.dateOfStart = this.changedDateOfStart.getTime();
+    this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
+    this.homePageService.addEducation(this.newEducation).subscribe(date => this.myUser.educationSkillsDtoList = date);
   }
 
   convertDate(dateOfEnd: number): String {

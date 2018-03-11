@@ -9,6 +9,8 @@ import {TypeOfEducation} from "./TypeOfEducation";
 import {University} from "./University";
 import {Faculty} from "./Faculty";
 import {Department} from "./Department";
+import {Education} from "./Education";
+import {EducationSkillsDto} from "./EducationSkillsDto";
 
 
 
@@ -25,6 +27,7 @@ export class HomePageService {
   private universityUrl = 'api/main/university/all?';
   private getFacultyUrl = '/api/main/faculty?';
   private getDepartmentUrl = 'api/main/department?';
+  private addEducationUrl = 'api/main/education/add';
 
 
 
@@ -90,6 +93,10 @@ export class HomePageService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('name', name);
     return this.http.post<Department[]>(this.getDepartmentUrl + urlSearchParams.toString(), faculty);
+  }
+
+  addEducation(education: Education): Observable<EducationSkillsDto[]>{
+    return this.http.post<EducationSkillsDto[]>(this.addEducationUrl, education);
   }
 
 }

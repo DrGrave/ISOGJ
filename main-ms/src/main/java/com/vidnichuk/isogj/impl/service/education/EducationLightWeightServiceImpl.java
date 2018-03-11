@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.impl.service.education;
 
 import com.vidnichuk.isogj.api.dto.model.EducationDto;
+import com.vidnichuk.isogj.api.dto.model.EducationSkillsDto;
 import com.vidnichuk.isogj.api.dto.model.N_A_EducationDto;
 import com.vidnichuk.isogj.api.dto.model.TypeOfEducationDto;
 import com.vidnichuk.isogj.api.service.education.EducationLightWeightService;
@@ -38,12 +39,12 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     }
 
     @Override
-    public List<EducationDto> addEducation(EducationDto educationDto, String id) {
-        return educationService.addEducation(educationDto, id);
+    public List<EducationSkillsDto> addEducation(EducationDto educationDto, String name) {
+        return educationService.addEducation(educationDto, name);
     }
 
     @Override
-    public List<EducationDto> deleteEducation(EducationDto educationDto, String id) {
-        return educationService.deleteEducation(educationDto, id);
+    public List<EducationDto> deleteEducation(EducationDto educationDto, String name) {
+        return educationService.deleteEducation(educationDto, name);
     }
 }

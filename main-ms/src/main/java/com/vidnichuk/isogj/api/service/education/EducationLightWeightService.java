@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.api.service.education;
 
 import com.vidnichuk.isogj.api.dto.model.EducationDto;
+import com.vidnichuk.isogj.api.dto.model.EducationSkillsDto;
 import com.vidnichuk.isogj.api.dto.model.N_A_EducationDto;
 import com.vidnichuk.isogj.api.dto.model.TypeOfEducationDto;
 
@@ -16,7 +17,7 @@ public interface EducationLightWeightService {
 
     List<EducationDto> changeEducation(EducationDto educationDto, String id);
 
-    List<EducationDto> addEducation(EducationDto educationDto, String id);
+    List<EducationSkillsDto> addEducation(EducationDto educationDto, String name);
 
     List<EducationDto> deleteEducation(EducationDto educationDto, String id);
 }

@@ -17,7 +17,7 @@ public interface EducationService {
 
     List<EducationDto> changeEducation(EducationDto educationDto, String id);
 
-    List<EducationDto> addEducation(EducationDto educationDto, String id);
+    List<EducationSkillsDto> addEducation(EducationDto educationDto, String name);
 
     List<EducationDto> deleteEducation(EducationDto educationDto, String id);
 
