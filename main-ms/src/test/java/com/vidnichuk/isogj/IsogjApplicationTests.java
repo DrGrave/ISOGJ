@@ -61,7 +61,10 @@ public class IsogjApplicationTests {
 	public void fromVacancyToVacancyDto(){
 		boolean user = userService.checkLogin("DrGrav");
 		System.out.println(user);
+
 	}
+
+
 
 
 }

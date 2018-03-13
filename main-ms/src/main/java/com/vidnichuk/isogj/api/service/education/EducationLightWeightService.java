@@ -19,5 +19,5 @@ public interface EducationLightWeightService {
 
     List<EducationSkillsDto> addEducation(EducationDto educationDto, String name);
 
-    List<EducationDto> deleteEducation(EducationDto educationDto, String id);
+    List<EducationSkillsDto> deleteEducation(String userName, Long idEducation);
 }

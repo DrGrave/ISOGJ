@@ -48,9 +48,9 @@ public class EducationController {
         return educationLightWeightService.addEducation(educationDto, principal.getName());
     }
 
-    @PostMapping("/delete")
-    public List<EducationDto> deleteEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") String id){
-        return educationLightWeightService.deleteEducation(educationDto, id);
+    @GetMapping("/delete")
+    public List<EducationSkillsDto> deleteEducation(Principal principal, @RequestParam("educateId") Long id){
+        return educationLightWeightService.deleteEducation(principal.getName(), id);
     }
 
 }

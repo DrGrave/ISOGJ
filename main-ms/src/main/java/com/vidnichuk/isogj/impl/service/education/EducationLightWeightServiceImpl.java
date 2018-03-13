@@ -44,7 +44,7 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     }
 
     @Override
-    public List<EducationDto> deleteEducation(EducationDto educationDto, String name) {
-        return educationService.deleteEducation(educationDto, name);
+    public List<EducationSkillsDto> deleteEducation(String username, Long idEducation) {
+        return educationService.deleteEducation(username, idEducation);
     }
 }

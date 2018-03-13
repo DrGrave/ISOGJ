@@ -92,13 +92,9 @@ public class EducationServiceImpl implements EducationService{
     }
 
     @Override
-    public List<EducationDto> deleteEducation(EducationDto educationDto, String id) {
-        educationRepository.delete(educationDtoMapper.fromEducationDtoToEducation(educationDto));
-        List<EducationDto> educationDtoList = new ArrayList<>();
-        for (Education educ: educationRepository.findAllByUser_Id(userRepository.findByUid(id).getId())){
-            educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educ));
-        }
-        return educationDtoList;
+    public List<EducationSkillsDto> deleteEducation(String userName, Long idEducation) {
+        educationRepository.delete(idEducation);
+        return getEducationSkills(userRepository.findByUsername(userName).getId());
     }
 
     @Override

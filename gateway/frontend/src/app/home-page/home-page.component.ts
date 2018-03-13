@@ -62,6 +62,7 @@ export class HomePageComponent implements OnInit {
   historyCount: number = 0;
   ifChangeGenderClick: boolean = false;
   ifChangeCityClick: boolean = true;
+  universityNameGood: boolean = false;
   selectedGender;
   ifAddClick = true;
 
@@ -81,6 +82,7 @@ export class HomePageComponent implements OnInit {
   cityForm: FormGroup;
   universityForm: FormGroup;
   cityDesForm: FormGroup;
+  addEducFormGroup: FormGroup;
 
 
   typeOfEducation: TypeOfEducation[];
@@ -101,7 +103,10 @@ export class HomePageComponent implements OnInit {
     this.facultyList = [];
     this.departmentList = [];
 
-    this.departmentCtrl = new FormControl({id: '', name: '', specialization: ''});
+
+    this.universityCtrl = new FormControl({id:  '', name: ''}, [Validators.required]);
+
+    this.departmentCtrl = new FormControl({id: '', name: '', specialization: ''}, [Validators.required]);
     this.reactiveDepartment = this.departmentCtrl.valueChanges
       .pipe(
         startWith(this.departmentCtrl.value),
@@ -109,7 +114,7 @@ export class HomePageComponent implements OnInit {
         map(name => this.departmentFilter(name, this.departments))
       );
 
-    this.facultyCtrl = new FormControl({id: '', name: ''});
+    this.facultyCtrl = new FormControl({id: '', name: ''}, [Validators.required]);
     this.reactiveFaculty = this.facultyCtrl.valueChanges
       .pipe(
         startWith(this.facultyCtrl.value),
@@ -118,7 +123,7 @@ export class HomePageComponent implements OnInit {
       );
 
 
-    this.universityCtrl = new FormControl({id:  '', name: ''});
+
     this.reactiveUniversity = this.universityCtrl.valueChanges
       .pipe(
         startWith(this.universityCtrl.value),
@@ -130,7 +135,7 @@ export class HomePageComponent implements OnInit {
 
     this.facultyOption = [];
     this.departmentOption = [];
-
+    this.newEducation = new Education;
   }
 
 
@@ -304,6 +309,7 @@ export class HomePageComponent implements OnInit {
   }
 
   applyAddEducation(){
+    this.newEducation.typeOfEducation = this.selectedTypeOfEducation;
     this.newEducation.department =  this.departmentList.filter( item => item.name === this.departmentName)[0];
     this.newEducation.dateOfStart = this.changedDateOfStart.getTime();
     this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
@@ -320,6 +326,11 @@ export class HomePageComponent implements OnInit {
 
   changeEndEvent(event: MatDatepickerInputEvent<Date>) {
     this.changedDateOfEnd = event.value;
+  }
+
+  deleteEducation(educate){
+    this.homePageService.deleteEducate(educate.educationDto).subscribe( date => this.myUser.educationSkillsDtoList = date
+    );
   }
 }
 

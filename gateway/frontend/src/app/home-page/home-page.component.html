@@ -48,11 +48,6 @@
                   </mat-autocomplete>
                 </mat-form-field>
               </form>
-              <!--<mat-card-actions>-->
-                <!--<button mat-button (click)="cityCtrl.reset()">RESET</button>-->
-                <!--<button mat-button (click)="cityCtrl.setValue(states[10])">SET VALUE</button>-->
-
-              <!--</mat-card-actions>-->
 
                 <button mat-icon-button (click)="applyCityChange()">
                   <mat-icon>
@@ -72,6 +67,13 @@
         <mat-tab *ngFor="let educate of myUser.educationSkillsDtoList" label="{{educate.educationDto.department.faculty.university.name}}">
           <br>
           {{'HOME.TYPE_OF_EDUCATION.PLACEHOLDER' | translate}}: {{educate.educationDto.typeOfEducation.name}}
+
+
+          <button mat-icon-button (click)="deleteEducation(educate)">
+            <mat-icon>
+              clear
+            </mat-icon>
+          </button>
           <br>
           {{'HOME.DEPARTMENT.PLACEHOLDER' | translate}}: {{educate.educationDto.department.name}}
           <br>
@@ -100,74 +102,83 @@
             <mat-chip *ngFor="let skill of educate.departmentSkillDtoList">{{skill.skill.name}}</mat-chip>
           </mat-chip-list>
         </mat-tab>
+
+
+
         <mat-tab label="+" onclick="getNewEducation()">
-          <mat-form-field>
-            <mat-select [(ngModel)]="selectedTypeOfEducation" placeholder="{{'HOME.TYPE_OF_EDUCATION.PLACEHOLDER' | translate}}">
-              <mat-option *ngFor="let option of typeOfEducation" [value]="option.id">{{ option.name }}</mat-option>
-            </mat-select>
-          </mat-form-field>
 
-
-          <br>
-          <form *ngIf="ifAddClick">
-            <mat-form-field floatLabel="never">
-              <input matInput [matAutocomplete]="reactiveAutoUni" [formControl]="universityCtrl" placeholder="{{'HOME.UNIVERSITY.PLACEHOLDER' | translate}}">
-              <mat-autocomplete #reactiveAutoUni="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let university of reactiveUniversity | async" [value]="university">
-                  <span>{{ university.name }}</span>
-                </mat-option>
-              </mat-autocomplete>
+            <mat-form-field>
+              <mat-select [(ngModel)]="selectedTypeOfEducation" placeholder="{{'HOME.TYPE_OF_EDUCATION.PLACEHOLDER' | translate}}" name="typeOfEducation" required>
+                <mat-option *ngFor="let option of typeOfEducation" [value]="option">{{ option.name }}</mat-option>
+              </mat-select>
+              <mat-error>This field is required.</mat-error>
             </mat-form-field>
-          </form>
 
-          <br>
-          <form *ngIf="ifAddClick">
-            <mat-form-field floatLabel="never">
-              <input matInput [matAutocomplete]="reactiveAutoFacul" [formControl]="facultyCtrl" placeholder="{{'HOME.FACULTY.PLACEHOLDER' | translate}}">
-              <mat-autocomplete #reactiveAutoFacul="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let faculty of reactiveFaculty | async" [value]="faculty">
-                  <span>{{ faculty.name }}</span>
-                </mat-option>
-              </mat-autocomplete>
+
+
+
+            <br>
+            <form *ngIf="ifAddClick">
+              <mat-form-field floatLabel="never">
+                <input matInput [matAutocomplete]="reactiveAutoUni" [formControl]="universityCtrl" placeholder="{{'HOME.UNIVERSITY.PLACEHOLDER' | translate}}" required>
+                <mat-autocomplete #reactiveAutoUni="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let university of reactiveUniversity | async" [value]="university">
+                    <span>{{ university.name }}</span>
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error>provide university</mat-error>
+              </mat-form-field>
+            </form>
+
+            <br>
+            <form *ngIf="ifAddClick">
+              <mat-form-field floatLabel="never">
+                <input matInput [matAutocomplete]="reactiveAutoFacul" [formControl]="facultyCtrl" placeholder="{{'HOME.FACULTY.PLACEHOLDER' | translate}}" required>
+                <mat-autocomplete #reactiveAutoFacul="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let faculty of reactiveFaculty | async" [value]="faculty">
+                    <span>{{ faculty.name }}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+
+
+            <br>
+            <form *ngIf="ifAddClick">
+              <mat-form-field floatLabel="never">
+                <input matInput [matAutocomplete]="reactiveAutoDep" [formControl]="departmentCtrl" placeholder="{{'HOME.DEPARTMENT.PLACEHOLDER' | translate}}" required>
+                <mat-autocomplete #reactiveAutoDep="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let department of reactiveDepartment | async" [value]="department">
+                    <span>{{ department.name }}</span>
+                    <span>({{department.specialization}})</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+
+            <br>
+            <mat-form-field class="date-info-datepicker">
+              <input matInput [matDatepicker]="picker1" placeholder="{{'HOME.DATE_OF_START.PLACEHOLDER' | translate}}" (dateChange)="changeStartEvent($event)" required>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-error>This field is required.</mat-error>
             </mat-form-field>
-          </form>
 
 
-          <br>
-          <form *ngIf="ifAddClick">
-            <mat-form-field floatLabel="never">
-              <input matInput [matAutocomplete]="reactiveAutoDep" [formControl]="departmentCtrl" placeholder="{{'HOME.DEPARTMENT.PLACEHOLDER' | translate}}">
-              <mat-autocomplete #reactiveAutoDep="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let department of reactiveDepartment | async" [value]="department">
-                  <span>{{ department.name }}</span>
-                  <span>({{department.specialization}})</span>
-                </mat-option>
-              </mat-autocomplete>
+            <br>
+            <mat-form-field class="date-info-datepicker">
+              <input matInput [matDatepicker]="picker2" placeholder="{{'HOME.DATE_OF_END.PLACEHOLDER' | translate}}" (dateChange)="changeEndEvent($event)" required>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <mat-error>This field is required.</mat-error>
             </mat-form-field>
-          </form>
+            <br>
 
-          <br>
-          <mat-form-field class="date-info-datepicker">
-            <input matInput [matDatepicker]="picker1" placeholder="{{'HOME.DATE_OF_START.PLACEHOLDER' | translate}}" (dateChange)="changeStartEvent($event)">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-
-
-          <br>
-          <mat-form-field class="date-info-datepicker">
-            <input matInput [matDatepicker]="picker2" placeholder="{{'HOME.DATE_OF_END.PLACEHOLDER' | translate}}" (dateChange)="changeEndEvent($event)">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-          <br>
-
-          <button mat-icon-button (click)="applyAddEducation()">
-            <mat-icon>
-              done
-            </mat-icon>
-          </button>
-
+            <button mat-icon-button (click)="applyAddEducation()">
+              <mat-icon>
+                done
+              </mat-icon>
+            </button>
 
         </mat-tab>
       </mat-tab-group>
