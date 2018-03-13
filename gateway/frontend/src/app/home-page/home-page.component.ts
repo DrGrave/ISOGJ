@@ -27,6 +27,7 @@ import {Education} from "./Education";
 export class HomePageComponent implements OnInit {
 
   newEducation: Education;
+  ifEditEducationClick: boolean = false;
 
 
   ifOk: true;
@@ -64,6 +65,8 @@ export class HomePageComponent implements OnInit {
   ifChangeCityClick: boolean = true;
   universityNameGood: boolean = false;
   selectedGender;
+  selectedEditTypeOfEducation;
+  selectedEdTypeOfEducation: TypeOfEducation;
   ifAddClick = true;
 
 
@@ -102,6 +105,7 @@ export class HomePageComponent implements OnInit {
     this.universityList = [];
     this.facultyList = [];
     this.departmentList = [];
+
 
 
     this.universityCtrl = new FormControl({id:  '', name: ''}, [Validators.required]);
@@ -213,7 +217,6 @@ export class HomePageComponent implements OnInit {
     this.homePageService.getUser().subscribe( data => {
       this.myUser = data;
       this.getGenders();
-      this.selectedGender = data.meUserDto.gender;
       localStorage.setItem('myUser', JSON.stringify(this.myUser));
 
 
@@ -250,7 +253,6 @@ export class HomePageComponent implements OnInit {
   }
 
   changeGenderAction() {
-
     this.ifChangeGenderClick = !this.ifChangeGenderClick;
     this.ifChangeCityClick = !this.ifChangeCityClick;
   }
@@ -305,6 +307,7 @@ export class HomePageComponent implements OnInit {
   getNewEducation(){
     this.homePageService.getAllTypesOfEducation().subscribe( date => {
       this.typeOfEducation = date;
+      this.selectedEditTypeOfEducation = date[0].id;
     });
   }
 
@@ -331,6 +334,16 @@ export class HomePageComponent implements OnInit {
   deleteEducation(educate){
     this.homePageService.deleteEducate(educate.educationDto).subscribe( date => this.myUser.educationSkillsDtoList = date
     );
+  }
+
+  editEducation(educate){
+    this.selectedEditTypeOfEducation = educate.educationDto.typeOfEducation.id;
+    this.ifEditEducationClick = !this.ifEditEducationClick;
+  }
+
+  applyEditEducation(educate){
+    this.selectedEdTypeOfEducation = this.typeOfEducation.find(c => c.id == this.selectedEditTypeOfEducation);
+    
   }
 }
 
