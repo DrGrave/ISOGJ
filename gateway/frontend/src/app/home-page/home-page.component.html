@@ -134,7 +134,7 @@
             <br>
             <form *ngIf="ifAddClick">
               <mat-form-field>
-                <input matInput [matAutocomplete]="reactiveAutoUni" [formControl]="universityCtrl" placeholder="{{'HOME.UNIVERSITY.PLACEHOLDER' | translate}}" required>
+                <input matInput [matAutocomplete]="reactiveAutoUni" [formControl]="changeUniversityCtrl" placeholder="{{'HOME.UNIVERSITY.PLACEHOLDER' | translate}}" required>
                 <mat-autocomplete #reactiveAutoUni="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let university of reactiveUniversity | async" [value]="university">
                     <span>{{ university.name }}</span>
@@ -147,7 +147,7 @@
             <br>
             <form *ngIf="ifAddClick">
               <mat-form-field floatLabel="never">
-                <input matInput [matAutocomplete]="reactiveAutoFacul" [formControl]="facultyCtrl" placeholder="{{'HOME.FACULTY.PLACEHOLDER' | translate}}" required>
+                <input matInput [matAutocomplete]="reactiveAutoFacul" [formControl]="changeFacultyCtrl" placeholder="{{'HOME.FACULTY.PLACEHOLDER' | translate}}" required>
                 <mat-autocomplete #reactiveAutoFacul="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let faculty of reactiveFaculty | async" [value]="faculty">
                     <span>{{ faculty.name }}</span>
@@ -160,7 +160,7 @@
             <br>
             <form *ngIf="ifAddClick">
               <mat-form-field floatLabel="never">
-                <input matInput [matAutocomplete]="reactiveAutoDep" [formControl]="departmentCtrl" placeholder="{{'HOME.DEPARTMENT.PLACEHOLDER' | translate}}" required>
+                <input matInput [matAutocomplete]="reactiveAutoDep" [formControl]="changeDepartmentCtrl" placeholder="{{'HOME.DEPARTMENT.PLACEHOLDER' | translate}}" required>
                 <mat-autocomplete #reactiveAutoDep="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let department of reactiveDepartment | async" [value]="department">
                     <span>{{ department.name }}</span>
@@ -172,7 +172,7 @@
 
             <br>
             <mat-form-field class="date-info-datepicker">
-              <input matInput [matDatepicker]="picker1" placeholder="{{'HOME.DATE_OF_START.PLACEHOLDER' | translate}}" (dateChange)="changeStartEvent($event)" required>
+              <input matInput [matDatepicker]="picker1" placeholder="{{'HOME.DATE_OF_START.PLACEHOLDER' | translate}}" (dateChange)="changeStartEvent($event)" value="{{convertDate(educate.educationDto.dateOfStart)}}" required>
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
               <mat-error>This field is required.</mat-error>
@@ -181,7 +181,7 @@
 
             <br>
             <mat-form-field class="date-info-datepicker">
-              <input matInput [matDatepicker]="picker2" placeholder="{{'HOME.DATE_OF_END.PLACEHOLDER' | translate}}" (dateChange)="changeEndEvent($event)" required>
+              <input matInput [matDatepicker]="picker2" placeholder="{{'HOME.DATE_OF_END.PLACEHOLDER' | translate}}" (dateChange)="changeEndEvent($event)" value="{{convertDate(educate.educationDto.dateOfEnd)}}" required>
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
               <mat-error>This field is required.</mat-error>
@@ -201,6 +201,8 @@
 
 
         <mat-tab label="+" onclick="getNewEducation()">
+
+          {{testField}}
 
             <mat-form-field>
               <mat-select [(ngModel)]="selectedTypeOfEducation" placeholder="{{'HOME.TYPE_OF_EDUCATION.PLACEHOLDER' | translate}}" name="typeOfEducation" required>

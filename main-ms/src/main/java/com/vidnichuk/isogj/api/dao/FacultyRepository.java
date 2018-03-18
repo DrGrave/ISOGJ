@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FacultyRepository extends JpaRepository<Faculty, Long>{
     List<Faculty> findAllByNameContainsAndUniversityId(String name, Long id);
+    Faculty findByName(String name);
 }

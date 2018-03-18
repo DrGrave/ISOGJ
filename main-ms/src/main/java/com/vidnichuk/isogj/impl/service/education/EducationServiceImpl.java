@@ -1,8 +1,6 @@
 package com.vidnichuk.isogj.impl.service.education;
 
-import com.vidnichuk.isogj.api.dao.EducationRepository;
-import com.vidnichuk.isogj.api.dao.TypeOfEducationRepository;
-import com.vidnichuk.isogj.api.dao.UserRepository;
+import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.EducationDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.TypeOfEducationDtoMapper;
 import com.vidnichuk.isogj.api.dto.model.EducationDto;
@@ -29,6 +27,15 @@ public class EducationServiceImpl implements EducationService{
 
     @Autowired
     private EducationRepository educationRepository;
+
+    @Autowired
+    private UniversityRepository universityRepository;
+
+    @Autowired
+    private FacultyRepository facultyRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @Autowired
     private TypeOfEducationRepository typeOfEducationRepository;
@@ -84,11 +91,21 @@ public class EducationServiceImpl implements EducationService{
 
     @Override
     public List<EducationSkillsDto> addEducation(EducationDto educationDto, String name) {
-        Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
-        education.setUser(userRepository.findByUsername(name));
-        educationRepository.save(education);
 
-        return getEducationSkills(userRepository.findByUsername(name).getId());
+        Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
+        if (universityRepository.findByName(education.getDepartment().getFaculty().getUniversity().getName()) == null){
+            universityRepository.save(education.getDepartment().getFaculty().getUniversity());
+            facultyRepository.save(education.getDepartment().getFaculty());
+            departmentRepository.save(education.getDepartment());
+        }else if (facultyRepository.findByName(education.getDepartment().getFaculty().getName()) == null){
+            facultyRepository.save(education.getDepartment().getFaculty());
+            departmentRepository.save(education.getDepartment());
+        } else if (departmentRepository.findByName(education.getDepartment().getName()) == null){
+            departmentRepository.save(education.getDepartment());
+        }
+            education.setUser(userRepository.findByUsername(name));
+            educationRepository.save(education);
+            return getEducationSkills(userRepository.findByUsername(name).getId());
     }
 
     @Override
