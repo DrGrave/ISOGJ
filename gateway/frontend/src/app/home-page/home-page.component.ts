@@ -385,7 +385,9 @@ export class HomePageComponent implements OnInit {
     this.selectedEditTypeOfEducation = educate.educationDto.typeOfEducation.id;
     this.changedDateOfStart = new Date(educate.educationDto.dateOfStart);
     this.changedDateOfEnd = new Date(educate.educationDto.dateOfEnd);
-
+    this.getUniversity(educate.educationDto.department.faculty.university.name);
+    this.getFaculty(educate.educationDto.department.faculty.name, educate.educationDto.department.faculty.university);
+    this.getDepartment(educate.educationDto.department.name, educate.educationDto.department.faculty);
 
     this.changeFacultyCtrl = new FormControl({id: educate.educationDto.department.faculty.id, name: educate.educationDto.department.faculty.name});
     this.reactiveFaculty = this.changeFacultyCtrl.valueChanges
