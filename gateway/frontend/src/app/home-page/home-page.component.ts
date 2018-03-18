@@ -337,7 +337,29 @@ export class HomePageComponent implements OnInit {
       this.newEducation.dateOfStart = this.changedDateOfStart.getTime();
       this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
       this.homePageService.addEducation(this.newEducation).subscribe(date => this.myUser.educationSkillsDtoList = date);
-    } else{
+    }else if(!this.facultyList.filter( item => item.name === this.facultyName)[0]){
+      this.newDepartment = new Department;
+      this.newDepartment.faculty = new Faculty;
+      this.newDepartment.faculty.university = new University;
+      this.newDepartment.faculty.university = this.selectedUniversity;
+      this.newDepartment.faculty.name = this.facultyName;
+      this.newDepartment.name = this.departmentName;
+      this.newEducation.department = this.newDepartment;
+      this.newEducation.dateOfStart = this.changedDateOfStart.getTime();
+      this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
+      this.homePageService.addEducation(this.newEducation).subscribe(date => this.myUser.educationSkillsDtoList = date);
+    }else if(!this.departmentList.filter(item => item.name === this.departmentName)[0]){
+      this.newDepartment = new Department;
+      this.newDepartment.faculty = new Faculty;
+      this.newDepartment.faculty.university = new University;
+      this.newDepartment.faculty.university = this.selectedUniversity;
+      this.newDepartment.faculty = this.selectedFaculty;
+      this.newDepartment.name = this.departmentName;
+      this.newEducation.department = this.newDepartment;
+      this.newEducation.dateOfStart = this.changedDateOfStart.getTime();
+      this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
+      this.homePageService.addEducation(this.newEducation).subscribe(date => this.myUser.educationSkillsDtoList = date);
+    }else{
       this.newEducation.department =  this.departmentList.filter( item => item.name === this.departmentName)[0];
       this.newEducation.dateOfStart = this.changedDateOfStart.getTime();
       this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
