@@ -29,7 +29,7 @@ export class HomePageService {
   private getDepartmentUrl = 'api/main/department?';
   private addEducationUrl = 'api/main/education/add';
   private deleteEucationUrl = 'api/main/education/delete?';
-
+  private changeEducationUrl = 'api/main/education/change';
 
 
 
@@ -88,6 +88,10 @@ export class HomePageService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('name', name);
     return this.http.post<Faculty[]>(this.getFacultyUrl + urlSearchParams.toString(), university);
+  }
+
+  changeEducation(education: Education): Observable<EducationSkillsDto[]>{
+    return this.http.post<EducationSkillsDto[]>(this.changeEducationUrl, education);
   }
 
   getDepartments(name: string, faculty: Faculty): Observable<Department[]> {

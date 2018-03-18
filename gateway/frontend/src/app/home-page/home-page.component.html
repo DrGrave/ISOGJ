@@ -31,30 +31,31 @@
                   </button>
                 </div>
 
-                <button mat-icon-button (click)="changeGenderAction(); cityCtrl.enabled ? cityCtrl.disable() : cityCtrl.enable();" class="gender-button">
+                <button mat-icon-button (click)="changeGenderAction(); cityCtrl.disabled ? cityCtrl.enable() : cityCtrl.disable()" class="gender-button">
                   <mat-icon>create</mat-icon>
                 </button>
 
               </div>
 
+              <div class="gender-class">
+                <form *ngIf="myUser.meUserDto.city">
+                  <mat-form-field floatLabel="never">
+                    <input matInput [matAutocomplete]="reactiveAuto" [formControl]="cityCtrl" placeholder="{{'HOME.CITY.PLACEHOLDER' | translate}}" >
+                    <mat-autocomplete #reactiveAuto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let city of reactiveCity | async" [value]="city">
+                        <span>{{ city.name }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
 
-              <form *ngIf="myUser.meUserDto.city">
-                <mat-form-field floatLabel="never">
-                  <input matInput [matAutocomplete]="reactiveAuto" [formControl]="cityCtrl" placeholder="{{'HOME.CITY.PLACEHOLDER' | translate}}">
-                  <mat-autocomplete #reactiveAuto="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let city of reactiveCity | async" [value]="city">
-                      <span>{{ city.name }}</span>
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-              </form>
+                <button mat-icon-button (click)="applyCityChange()" *ngIf="ifChangeGenderClick">
+                  <mat-icon>
+                    done
+                  </mat-icon>
+                </button>
 
-              <button mat-icon-button (click)="applyCityChange()">
-                <mat-icon>
-                  done
-                </mat-icon>
-              </button>
-
+              </div>
             </mat-card-content>
 
           </div>
@@ -200,7 +201,12 @@
 
 
 
-        <mat-tab label="+" onclick="getNewEducation()">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <button mat-icon-button (clicK)="getNewEducation()">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </ng-template>
 
           {{testField}}
 
@@ -271,7 +277,7 @@
             </mat-form-field>
             <br>
 
-            <button mat-icon-button (click)="applyAddEducation()">
+            <button mat-icon-button (click)="applyAddEducation(); universityCtrl.reset(); facultyCtrl.reset(); departmentCtrl.reset()">
               <mat-icon>
                 done
               </mat-icon>

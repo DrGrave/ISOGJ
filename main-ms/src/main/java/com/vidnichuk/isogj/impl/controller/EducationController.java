@@ -39,8 +39,8 @@ public class EducationController {
     }
 
     @PostMapping("/change")
-    public List<EducationDto> changeEducation(@Valid @RequestBody EducationDto educationDto, @RequestParam("id") String id){
-        return educationLightWeightService.changeEducation(educationDto, id);
+    public List<EducationSkillsDto> changeEducation(@Valid @RequestBody EducationDto educationDto, Principal principal){
+        return educationLightWeightService.changeEducation(educationDto, principal.getName());
     }
 
     @PostMapping("/add")

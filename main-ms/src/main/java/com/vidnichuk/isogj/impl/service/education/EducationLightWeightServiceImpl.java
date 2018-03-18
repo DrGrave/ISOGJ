@@ -33,7 +33,7 @@ public class EducationLightWeightServiceImpl implements EducationLightWeightServ
     }
 
     @Override
-    public List<EducationDto> changeEducation(EducationDto educationDto, String id) {
+    public List<EducationSkillsDto> changeEducation(EducationDto educationDto, String id) {
         return educationService.changeEducation(educationDto, id);
 
     }

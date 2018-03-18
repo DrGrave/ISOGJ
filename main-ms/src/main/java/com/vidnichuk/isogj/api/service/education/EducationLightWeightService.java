@@ -15,7 +15,7 @@ public interface EducationLightWeightService {
 
     List<TypeOfEducationDto> getAllTypesOfEducation();
 
-    List<EducationDto> changeEducation(EducationDto educationDto, String id);
+    List<EducationSkillsDto> changeEducation(EducationDto educationDto, String id);
 
     List<EducationSkillsDto> addEducation(EducationDto educationDto, String name);
 

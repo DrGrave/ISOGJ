@@ -78,20 +78,7 @@ public class EducationServiceImpl implements EducationService{
     }
 
     @Override
-    public List<EducationDto> changeEducation(EducationDto educationDto, String id) {
-        Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
-        education.setUser(userRepository.findByUid(id));
-        educationRepository.save(education);
-        List<EducationDto> educationDtoList = new ArrayList<>();
-        for (Education educ: educationRepository.findAllByUser_Id(userRepository.findByUid(id).getId())){
-            educationDtoList.add(educationDtoMapper.formEducationToEducationDto(educ));
-        }
-        return educationDtoList;
-    }
-
-    @Override
-    public List<EducationSkillsDto> addEducation(EducationDto educationDto, String name) {
-
+    public List<EducationSkillsDto> changeEducation(EducationDto educationDto, String name) {
         Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
         if (universityRepository.findByName(education.getDepartment().getFaculty().getUniversity().getName()) == null){
             universityRepository.save(education.getDepartment().getFaculty().getUniversity());
@@ -103,6 +90,25 @@ public class EducationServiceImpl implements EducationService{
         } else if (departmentRepository.findByName(education.getDepartment().getName()) == null){
             departmentRepository.save(education.getDepartment());
         }
+        education.setUser(userRepository.findByUsername(name));
+        educationRepository.save(education);
+        return getEducationSkills(userRepository.findByUsername(name).getId());
+    }
+
+    @Override
+    public List<EducationSkillsDto> addEducation(EducationDto educationDto, String name) {
+
+        Education education = educationDtoMapper.fromEducationDtoToEducation(educationDto);
+            if (universityRepository.findByName(education.getDepartment().getFaculty().getUniversity().getName()) == null){
+                universityRepository.save(education.getDepartment().getFaculty().getUniversity());
+                facultyRepository.save(education.getDepartment().getFaculty());
+                departmentRepository.save(education.getDepartment());
+            }else if (facultyRepository.findByName(education.getDepartment().getFaculty().getName()) == null){
+                facultyRepository.save(education.getDepartment().getFaculty());
+                departmentRepository.save(education.getDepartment());
+            } else if (departmentRepository.findByName(education.getDepartment().getName()) == null){
+                departmentRepository.save(education.getDepartment());
+            }
             education.setUser(userRepository.findByUsername(name));
             educationRepository.save(education);
             return getEducationSkills(userRepository.findByUsername(name).getId());

@@ -33,6 +33,7 @@ export class HomePageComponent implements OnInit {
   newDepartment: Department;
 
   ifOk: true;
+  tdDisabled: true;
 
   cityList: City[];
   universityList: University[];
@@ -244,6 +245,7 @@ export class HomePageComponent implements OnInit {
         );
     });
 
+
   }
 
   getNextPage(event){
@@ -326,10 +328,10 @@ export class HomePageComponent implements OnInit {
 
   applyAddEducation(){
     this.newEducation.typeOfEducation = this.selectedTypeOfEducation;
+    this.newDepartment = new Department;
+    this.newDepartment.faculty = new Faculty;
+    this.newDepartment.faculty.university = new University;
     if (!this.universityList.filter(item => item.name === this.universityName)[0]){
-      this.newDepartment = new Department;
-      this.newDepartment.faculty = new Faculty;
-      this.newDepartment.faculty.university = new University;
       this.newDepartment.faculty.university.name = this.universityName;
       this.newDepartment.faculty.name = this.facultyName;
       this.newDepartment.name = this.departmentName;
@@ -338,9 +340,6 @@ export class HomePageComponent implements OnInit {
       this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
       this.homePageService.addEducation(this.newEducation).subscribe(date => this.myUser.educationSkillsDtoList = date);
     }else if(!this.facultyList.filter( item => item.name === this.facultyName)[0]){
-      this.newDepartment = new Department;
-      this.newDepartment.faculty = new Faculty;
-      this.newDepartment.faculty.university = new University;
       this.newDepartment.faculty.university = this.selectedUniversity;
       this.newDepartment.faculty.name = this.facultyName;
       this.newDepartment.name = this.departmentName;
@@ -349,9 +348,6 @@ export class HomePageComponent implements OnInit {
       this.newEducation.dateOfEnd = this.changedDateOfEnd.getTime();
       this.homePageService.addEducation(this.newEducation).subscribe(date => this.myUser.educationSkillsDtoList = date);
     }else if(!this.departmentList.filter(item => item.name === this.departmentName)[0]){
-      this.newDepartment = new Department;
-      this.newDepartment.faculty = new Faculty;
-      this.newDepartment.faculty.university = new University;
       this.newDepartment.faculty.university = this.selectedUniversity;
       this.newDepartment.faculty = this.selectedFaculty;
       this.newDepartment.name = this.departmentName;
@@ -385,10 +381,10 @@ export class HomePageComponent implements OnInit {
   }
 
   editEducation(educate){
-    this.selectedEditTypeOfEducation = educate.educationDto.typeOfEducation.id;
     this.ifEditEducationClick = !this.ifEditEducationClick;
-    this.changedDateOfStart = educate.educationDto.dateOfStart;
-    this.changedDateOfEnd = educate.educationDto.dateOfEnd;
+    this.selectedEditTypeOfEducation = educate.educationDto.typeOfEducation.id;
+    this.changedDateOfStart = new Date(educate.educationDto.dateOfStart);
+    this.changedDateOfEnd = new Date(educate.educationDto.dateOfEnd);
 
 
     this.changeFacultyCtrl = new FormControl({id: educate.educationDto.department.faculty.id, name: educate.educationDto.department.faculty.name});
@@ -420,6 +416,40 @@ export class HomePageComponent implements OnInit {
   applyEditEducation(educate){
     this.selectedEdTypeOfEducation = this.typeOfEducation.find(c => c.id == this.selectedEditTypeOfEducation);
     educate.educationDto.typeOfEducation = this.selectedEdTypeOfEducation;
+    this.newDepartment = new Department;
+    this.newDepartment.faculty = new Faculty;
+    this.newDepartment.faculty.university = new University;
+    if (!this.universityList.filter(item => item.name === this.universityName)[0]){
+      this.newDepartment.faculty.university.name = this.universityName;
+      this.newDepartment.faculty.name = this.facultyName;
+      this.newDepartment.name = this.departmentName;
+      educate.educationDto.department = this.newDepartment;
+      educate.educationDto.dateOfStart = this.changedDateOfStart.getTime();
+      educate.educationDto.dateOfEnd = this.changedDateOfEnd.getTime();
+      this.homePageService.changeEducation(educate.educationDto).subscribe(date => this.myUser.educationSkillsDtoList = date);
+    }else if(!this.facultyList.filter( item => item.name === this.facultyName)[0]){
+      this.newDepartment.faculty.university = this.selectedUniversity;
+      this.newDepartment.faculty.name = this.facultyName;
+      this.newDepartment.name = this.departmentName;
+      educate.educationDto.department = this.newDepartment;
+      educate.educationDto.dateOfStart = this.changedDateOfStart.getTime();
+      educate.educationDto.dateOfEnd = this.changedDateOfEnd.getTime();
+      this.homePageService.changeEducation(educate.educationDto).subscribe(date => this.myUser.educationSkillsDtoList = date);
+    }else if(!this.departmentList.filter(item => item.name === this.departmentName)[0]){
+      this.newDepartment.faculty.university = this.selectedUniversity;
+      this.newDepartment.faculty = this.selectedFaculty;
+      this.newDepartment.name = this.departmentName;
+      educate.educationDto.department = this.newDepartment;
+      educate.educationDto.dateOfStart = this.changedDateOfStart.getTime();
+      educate.educationDto.dateOfEnd = this.changedDateOfEnd.getTime();
+      this.homePageService.changeEducation(educate.educationDto).subscribe(date => this.myUser.educationSkillsDtoList = date);
+    }else{
+      educate.educationDto.department =  this.departmentList.filter( item => item.name === this.departmentName)[0];
+      educate.educationDto.dateOfStart = this.changedDateOfStart.getTime();
+      educate.educationDto.dateOfEnd = this.changedDateOfEnd.getTime();
+      this.homePageService.changeEducation(educate.educationDto).subscribe(date => this.myUser.educationSkillsDtoList = date);
+    }
+    this.ifEditEducationClick = !this.ifEditEducationClick;
   }
 }
 
