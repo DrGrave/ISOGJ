@@ -159,16 +159,20 @@ export class HomePageComponent implements OnInit {
 
   departmentFilter(val: string, options: any[]){
     this.departmentName = val;
-    this.selectedFaculty = this.facultyList.filter( item => item.name === this.facultyName)[0];
-    options = this.getDepartment(val, this.selectedFaculty);
-    return this.filter(val, options);
+    if (this.facultyList.filter( item => item.name === this.facultyName)[0]) {
+      this.selectedFaculty = this.facultyList.filter(item => item.name === this.facultyName)[0];
+      options = this.getDepartment(val, this.selectedFaculty);
+      return this.filter(val, options);
+    }
   }
 
   facultyFilter(val: string, options: any[]){
     this.facultyName = val;
-    this.selectedUniversity = this.universityList.filter(item => item.name === this.universityName)[0];
-    options = this.getFaculty(val, this.selectedUniversity);
-    return this.filter(val, options);
+    if (this.universityList.filter(item => item.name === this.universityName)[0]){
+      this.selectedUniversity = this.universityList.filter(item => item.name === this.universityName)[0];
+      options = this.getFaculty(val, this.selectedUniversity);
+      return this.filter(val, options);
+    }
   }
 
   cityFilter(val: string, options: any[]){
