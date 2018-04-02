@@ -70,6 +70,7 @@ export class HomePageComponent implements OnInit {
   ifChangeGenderClick: boolean = false;
   ifChangeCityClick: boolean = true;
   universityNameGood: boolean = false;
+  changeWorkKlick: boolean = false;
   selectedGender;
   selectedEditTypeOfEducation;
   selectedEdTypeOfEducation: TypeOfEducation;
@@ -320,10 +321,19 @@ export class HomePageComponent implements OnInit {
   }
 
   getNewEducation(){
+    this.ifEditEducationClick = false;
     this.homePageService.getAllTypesOfEducation().subscribe( date => {
       this.typeOfEducation = date;
       this.selectedEditTypeOfEducation = date[0].id;
     });
+  }
+
+  addWorkClick(){
+
+  }
+
+  nextEducation(){
+    this.ifEditEducationClick = false;
   }
 
   applyAddEducation(){
@@ -452,6 +462,18 @@ export class HomePageComponent implements OnInit {
       this.homePageService.changeEducation(educate.educationDto).subscribe(date => this.myUser.educationSkillsDtoList = date);
     }
     this.ifEditEducationClick = !this.ifEditEducationClick;
+  }
+
+  editWork(company){
+    this.changeWorkKlick = !this.changeWorkKlick;
+  }
+
+  deleteWork(company){
+
+  }
+
+  applyChangeWork(company){
+    this.changeWorkKlick = !this.changeWorkKlick;
   }
 }
 
