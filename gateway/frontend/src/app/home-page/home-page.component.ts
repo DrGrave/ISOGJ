@@ -14,6 +14,7 @@ import {Faculty} from "./Faculty";
 import {Department} from "./Department";
 import {Education} from "./Education";
 import {Company} from "./Company";
+import {SkillsToPosition} from "./SkillsToPosition";
 
 
 
@@ -41,8 +42,10 @@ export class HomePageComponent implements OnInit {
   facultyList: Faculty[];
   departmentList: Department[];
   companyList: Company[];
+  positionList: SkillsToPosition[];
 
 
+  positionCtrl: FormControl;
   companyNameCtrl: FormControl;
   universityCtrl: FormControl;
   changeUniversityCtrl: FormControl;
@@ -53,6 +56,7 @@ export class HomePageComponent implements OnInit {
   changeDepartmentCtrl: FormControl;
 
 
+  reactivePosition: any;
   reactiveFaculty: any;
   reactiveUniversity: any;
   reactiveCity: any;
@@ -64,6 +68,7 @@ export class HomePageComponent implements OnInit {
   facultys: Faculty[];
   departments: Department[];
   companys: Company[];
+  positions: SkillsToPosition[];
 
 
   changedDateOfStart: Date;
@@ -98,6 +103,7 @@ export class HomePageComponent implements OnInit {
   facultyName: string;
   departmentName: string;
   companyName: string;
+  positionName: string;
 
   cityForm: FormGroup;
   universityForm: FormGroup;
@@ -119,12 +125,14 @@ export class HomePageComponent implements OnInit {
     this.universitys = [];
     this.facultys = [];
     this.departments = [];
+    this.positions = [];
 
     this.cityList = [];
     this.universityList = [];
     this.facultyList = [];
     this.departmentList = [];
     this.companyList = [];
+    this.positionList = [];
 
 
 
@@ -137,6 +145,14 @@ export class HomePageComponent implements OnInit {
         startWith(),
         map(value => this.displayFn(value)),
         map( name => this.companyFilter(name, this.companys))
+      );
+
+    this.positionCtrl = new FormControl({id:'', name:''}, [Validators.required]);
+    this.reactivePosition = this.positionCtrl.valueChanges
+      .pipe(
+        startWith(),
+        map(value => this.displayFn(value)),
+        map( name => this.positionFilter(name, this.positions))
       );
 
     this.departmentCtrl = new FormControl({id: '', name: '', specialization: ''}, [Validators.required]);
@@ -179,6 +195,8 @@ export class HomePageComponent implements OnInit {
     return value && typeof value === 'object' ? value.name : value;
   }
 
+
+
   departmentFilter(val: string, options: any[]){
     this.departmentName = val;
     if (this.facultyList.filter( item => item.name === this.facultyName)[0]) {
@@ -188,7 +206,21 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  positionFilter(val: string, options: any[]){
+    this.positionName = val;
+    options = this.getPositions(val);
+    return this.filter(val, options);
+  }
 
+  getPositions(val: string): SkillsToPosition[]{
+    this.homePageService.getPositions( 1, val).subscribe(date => this.positionList = date);
+    return this.positionList;
+  }
+
+
+  applyAddCompany(){
+
+  }
 
   facultyFilter(val: string, options: any[]){
     this.facultyName = val;
@@ -208,6 +240,7 @@ export class HomePageComponent implements OnInit {
   companyFilter(val: string, options: any[]){
     options = this.getCompanys(val);
     this.companyName = val;
+    this.selectedCompany = options.filter(item => item.name === val)[0];
     return this.filter(val, options);
   }
 
@@ -227,6 +260,8 @@ export class HomePageComponent implements OnInit {
     const filterValue = val.toLowerCase();
     return values.filter(date => date.name.toLowerCase().startsWith(filterValue));
   }
+
+
 
 
   ngOnInit() {

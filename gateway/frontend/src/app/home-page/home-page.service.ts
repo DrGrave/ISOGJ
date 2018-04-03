@@ -12,6 +12,7 @@ import {Department} from "./Department";
 import {Education} from "./Education";
 import {EducationSkillsDto} from "./EducationSkillsDto";
 import {Company} from "./Company";
+import {SkillsToPosition} from "./SkillsToPosition";
 
 
 
@@ -32,13 +33,19 @@ export class HomePageService {
   private deleteEucationUrl = 'api/main/education/delete?';
   private changeEducationUrl = 'api/main/education/change';
   private getCompanysUrl = 'api/main/company/get?';
-
+  private getPositionUrl = 'api/main/company/position/get?';
 
 
 
   constructor(private http: HttpClient) {
   }
 
+  getPositions(company: number, name: string): Observable<SkillsToPosition[]>{
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('name', name);
+    urlSearchParams.append('companyId', company.toString());
+    return this.http.get<SkillsToPosition[]>(this.getPositionUrl + urlSearchParams.toString())
+  }
 
   getUser(): Observable<FullUserInfo>{
 

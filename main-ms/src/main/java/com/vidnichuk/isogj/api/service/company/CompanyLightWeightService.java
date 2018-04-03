@@ -11,7 +11,7 @@ public interface CompanyLightWeightService {
 
     List<CompanyDto> getCompanysByPartName(String name);
 
-    List<PositionDto> getPositionsByPartName(String name);
+    List<SkillsToPositionDto> getPositionsByPartName(String name, long companyId);
 
     List<UserCompanyDto> changeCompany(UserCompanyDto companyDto, Long id);
 

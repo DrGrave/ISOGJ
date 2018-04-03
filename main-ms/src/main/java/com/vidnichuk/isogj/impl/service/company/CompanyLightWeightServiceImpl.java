@@ -24,8 +24,8 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     }
 
     @Override
-    public List<PositionDto> getPositionsByPartName(String name) {
-        return companyService.getPositionsByPartName(name);
+    public List<SkillsToPositionDto> getPositionsByPartName(String name, long companyId) {
+        return companyService.getPositionsByPartName(name, companyId);
     }
 
     @Override

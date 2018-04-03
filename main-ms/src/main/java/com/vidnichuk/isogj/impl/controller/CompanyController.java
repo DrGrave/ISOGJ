@@ -30,9 +30,9 @@ public class CompanyController {
         return companyLightWeightService.getCompanysByPartName(name);
     }
 
-    @GetMapping("/position/getname")
-    public List<PositionDto> findPositionsByPartOfName(@RequestParam("name") String name){
-        return companyLightWeightService.getPositionsByPartName(name);
+    @GetMapping("/position/get")
+    public List<SkillsToPositionDto> findPositionsByPartOfName(@RequestParam("name") String name, @RequestParam("companyId") long companyId){
+        return companyLightWeightService.getPositionsByPartName(name, companyId);
     }
 
     @PostMapping("/change")

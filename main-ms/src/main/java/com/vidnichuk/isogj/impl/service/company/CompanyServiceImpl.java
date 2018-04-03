@@ -30,6 +30,9 @@ public class CompanyServiceImpl implements CompanyService{
     @Autowired
     private SkillService skillService;
 
+    @Autowired
+    private PositionSkillRepository positionSkillRepository;
+
 
     @Autowired
     private UserRepository userRepository;
@@ -53,6 +56,10 @@ public class CompanyServiceImpl implements CompanyService{
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private CompanyDtoMapper companyDtoMapper;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private SkillDtoMapper skillDtoMapper;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -80,12 +87,24 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public List<PositionDto> getPositionsByPartName(String name) {
+    public List<SkillsToPositionDto> getPositionsByPartName(String name, long companyId) {
         List<PositionDto> positionDtos = new ArrayList<>();
         for (Position position : positionRepository.findAllByNameContains(name)){
             positionDtos.add(positionDtoMapper.fromPositionToPositionDto(position));
         }
-        return positionDtos;
+        List<SkillsToPositionDto> skillsToPositionDtoList = new ArrayList<>();
+        for (PositionDto position: positionDtos){
+            SkillsToPositionDto skillsToPositionDto = new SkillsToPositionDto();
+            skillsToPositionDto.setPosition(position);
+            skillsToPositionDto.setName(position.getName());
+            List<SkillDto> skills = new ArrayList<>();
+            for (PositionSkill positionSkill: positionSkillRepository.findAllByPositionId(position.getId())){
+                skills.add(skillDtoMapper.fromSkillToSkillDtoMapper(positionSkill.getSkill()));
+            }
+            skillsToPositionDto.setSkills(skills);
+            skillsToPositionDtoList.add(skillsToPositionDto);
+        }
+        return skillsToPositionDtoList;
     }
 
     @Override

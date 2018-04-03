@@ -347,12 +347,32 @@
               <mat-autocomplete #reactiveAutoCom="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let company of reactiveCompany | async" [value]="company">
                   <span>{{ company.name }}</span>
+                  <span>({{company.cityOfCompany.name}})</span>
                 </mat-option>
               </mat-autocomplete>
               <mat-error>provide university</mat-error>
             </mat-form-field>
           </form>
 
+          <form *ngIf="ifAddClick">
+            <mat-form-field>
+              <input matInput [matAutocomplete]="reactiveAutoPosition" [formControl]="positionCtrl" placeholder="{{'HOME.COMPANY.POSITION.PLACEHOLDER' | translate}}" required>
+              <mat-autocomplete #reactiveAutoPosition="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let position of reactivePosition | async" [value]="position">
+                  <span>{{ position.name }}</span>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error>provide university</mat-error>
+            </mat-form-field>
+          </form>
+
+
+
+          <button mat-icon-button (click)="applyAddCompany()">
+            <mat-icon>
+              done
+            </mat-icon>
+          </button>
 
         </mat-tab>
       </mat-tab-group>
