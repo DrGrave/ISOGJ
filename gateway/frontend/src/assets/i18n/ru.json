@@ -164,6 +164,12 @@
     "COMPANY":{
       "NAME":{
         "PLACEHOLDER": "Компания"
+      },
+      "POSITION":{
+        "PLACEHOLDER": "Позиция в компании"
+      },
+      "SKILLS":{
+        "PLACEHOLDER": "Навыки требуемые на данной позиции"
       }
     }
   }

@@ -317,9 +317,9 @@
 
           <div *ngIf="!changeWorkKlick">
           <br>
-            Position: {{company.userCompanyDto.position.name}}
+            {{'HOME.COMPANY.POSITION.PLACEHOLDER' | translate}}: {{company.userCompanyDto.position.name}}
             <br>
-            Skills witch need in work:
+            {{'HOME.COMPANY.SKILLS.PLACEHOLDER' | translate}}:
             <mat-chip-list class="company-skills">
               <mat-chip *ngFor="let skill of company.positionSkillDtoList">{{skill.skill.name}}</mat-chip>
             </mat-chip-list>

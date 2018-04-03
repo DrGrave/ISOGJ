@@ -164,6 +164,12 @@
     "COMPANY":{
       "NAME":{
         "PLACEHOLDER": "Company"
+      },
+      "POSITION":{
+        "PLACEHOLDER": "Position"
+      },
+      "SKILLS":{
+        "PLACEHOLDER": "Skills in this work"
       }
     }
 
