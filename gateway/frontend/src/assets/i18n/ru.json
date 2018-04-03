@@ -160,6 +160,11 @@
     },
     "EDUCATION_SKILLS":{
       "PLACEHOLDER": "Навыки полученные за время обучения"
+    },
+    "COMPANY":{
+      "NAME":{
+        "PLACEHOLDER": "Компания"
+      }
     }
   }
 }

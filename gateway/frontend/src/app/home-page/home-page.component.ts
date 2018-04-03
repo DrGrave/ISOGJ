@@ -13,6 +13,7 @@ import {University} from "./University";
 import {Faculty} from "./Faculty";
 import {Department} from "./Department";
 import {Education} from "./Education";
+import {Company} from "./Company";
 
 
 
@@ -39,7 +40,10 @@ export class HomePageComponent implements OnInit {
   universityList: University[];
   facultyList: Faculty[];
   departmentList: Department[];
+  companyList: Company[];
 
+
+  companyNameCtrl: FormControl;
   universityCtrl: FormControl;
   changeUniversityCtrl: FormControl;
   cityCtrl: FormControl;
@@ -48,15 +52,19 @@ export class HomePageComponent implements OnInit {
   departmentCtrl: FormControl;
   changeDepartmentCtrl: FormControl;
 
+
   reactiveFaculty: any;
   reactiveUniversity: any;
   reactiveCity: any;
   reactiveDepartment: any;
+  reactiveCompany: any;
 
   universitys: University[];
   citys: City[];
   facultys: Faculty[];
   departments: Department[];
+  companys: Company[];
+
 
   changedDateOfStart: Date;
   changedDateOfEnd: Date;
@@ -79,6 +87,7 @@ export class HomePageComponent implements OnInit {
 
   selectedUniversity: University;
   selectedFaculty: Faculty;
+  selectedCompany: Company;
 
   facultyOption: Faculty[];
   departmentOption: Department[];
@@ -88,6 +97,7 @@ export class HomePageComponent implements OnInit {
   cityName: string;
   facultyName: string;
   departmentName: string;
+  companyName: string;
 
   cityForm: FormGroup;
   universityForm: FormGroup;
@@ -114,10 +124,20 @@ export class HomePageComponent implements OnInit {
     this.universityList = [];
     this.facultyList = [];
     this.departmentList = [];
+    this.companyList = [];
 
 
 
     this.universityCtrl = new FormControl({id:  '', name: ''}, [Validators.required]);
+
+    this.companyNameCtrl = new FormControl({id:'', name:''}, [Validators.required]);
+
+    this.reactiveCompany = this.companyNameCtrl.valueChanges
+      .pipe(
+        startWith(),
+        map(value => this.displayFn(value)),
+        map( name => this.companyFilter(name, this.companys))
+      );
 
     this.departmentCtrl = new FormControl({id: '', name: '', specialization: ''}, [Validators.required]);
     this.reactiveDepartment = this.departmentCtrl.valueChanges
@@ -168,6 +188,8 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+
+
   facultyFilter(val: string, options: any[]){
     this.facultyName = val;
     if (this.universityList.filter(item => item.name === this.universityName)[0]){
@@ -180,6 +202,12 @@ export class HomePageComponent implements OnInit {
   cityFilter(val: string, options: any[]){
     options = this.getCity(val);
     this.cityName = val;
+    return this.filter(val, options);
+  }
+
+  companyFilter(val: string, options: any[]){
+    options = this.getCompanys(val);
+    this.companyName = val;
     return this.filter(val, options);
   }
 
@@ -224,6 +252,8 @@ export class HomePageComponent implements OnInit {
         {validators: [Validators.required]})
     })
   }
+
+
 
   getMyAccount(){
     this.homePageService.getSizeHistory().subscribe(date =>{
@@ -287,6 +317,11 @@ export class HomePageComponent implements OnInit {
   private getCity(name: string): City[] {
     this.homePageService.getCity(name).subscribe(dat => this.cityList = dat);
     return this.cityList;
+  }
+
+  getCompanys(name: string): Company[]{
+    this.homePageService.getCompanys(name).subscribe( date => this.companyList = date);
+    return this.companyList;
   }
 
   getUniversity(name): University[]{

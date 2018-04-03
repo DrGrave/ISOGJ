@@ -25,7 +25,7 @@ public class CompanyController {
         return companyLightWeightService.getUserCompanyByUserId(id);
     }
 
-    @GetMapping("/getname")
+    @GetMapping("/get")
     public List<CompanyDto> findCompanysByPartOfName(@RequestParam("name") String name){
         return companyLightWeightService.getCompanysByPartName(name);
     }

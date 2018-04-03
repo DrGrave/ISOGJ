@@ -160,6 +160,11 @@
     },
     "EDUCATION_SKILLS":{
       "PLACEHOLDER": "Skills witch get during education"
+    },
+    "COMPANY":{
+      "NAME":{
+        "PLACEHOLDER": "Company"
+      }
     }
 
   }

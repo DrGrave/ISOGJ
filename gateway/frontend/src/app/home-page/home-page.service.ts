@@ -11,6 +11,7 @@ import {Faculty} from "./Faculty";
 import {Department} from "./Department";
 import {Education} from "./Education";
 import {EducationSkillsDto} from "./EducationSkillsDto";
+import {Company} from "./Company";
 
 
 
@@ -30,6 +31,7 @@ export class HomePageService {
   private addEducationUrl = 'api/main/education/add';
   private deleteEucationUrl = 'api/main/education/delete?';
   private changeEducationUrl = 'api/main/education/change';
+  private getCompanysUrl = 'api/main/company/get?';
 
 
 
@@ -88,6 +90,12 @@ export class HomePageService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('name', name);
     return this.http.post<Faculty[]>(this.getFacultyUrl + urlSearchParams.toString(), university);
+  }
+
+  getCompanys(name: string): Observable<Company[]>{
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('name', name);
+    return this.http.get<Company[]>(this.getCompanysUrl + urlSearchParams.toString());
   }
 
   changeEducation(education: Education): Observable<EducationSkillsDto[]>{
