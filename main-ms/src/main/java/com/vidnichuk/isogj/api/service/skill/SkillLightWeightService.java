@@ -25,4 +25,6 @@ public interface SkillLightWeightService {
 
 
     List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, String id);
+
+    List<SkillDto> getSkillsByPartName(String name);
 }

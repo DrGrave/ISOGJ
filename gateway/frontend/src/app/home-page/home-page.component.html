@@ -350,7 +350,7 @@
                   <span>({{company.cityOfCompany.name}})</span>
                 </mat-option>
               </mat-autocomplete>
-              <mat-error>provide university</mat-error>
+              <mat-error>provide company</mat-error>
             </mat-form-field>
           </form>
 
@@ -362,7 +362,7 @@
                   <span>{{ position.name }}</span>
                 </mat-option>
               </mat-autocomplete>
-              <mat-error>provide university</mat-error>
+              <mat-error>provide position</mat-error>
             </mat-form-field>
           </form>
 
@@ -378,6 +378,17 @@
               </mat-chip>
             </mat-chip-list>
           </div>
+          <form *ngIf="selectedPosition">
+            <mat-form-field>
+              <input matInput [matAutocomplete]="reactiveAutoPositionSkill" [formControl]="positionSkillCtrl" placeholder="{{'HOME.COMPANY.SKILL.PLACEHOLDER' | translate}}" required>
+              <mat-autocomplete #reactiveAutoPositionSkill="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let skill of reactivePositionSkill | async" [value]="skill">
+                  <span>{{ skill.name }}</span>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error>provide university</mat-error>
+            </mat-form-field>
+          </form>
 
 
 

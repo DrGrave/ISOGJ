@@ -173,4 +173,13 @@ public class SkillServiceImpl implements SkillService{
         }
         return coursesSkillDtoList;
     }
+
+    @Override
+    public List<SkillDto> findSkillsByPartName(String name) {
+        List<SkillDto> skillDtoList = new ArrayList<>();
+        for (Skill skill: skillRepository.findAllByNameContains(name)){
+            skillDtoList.add(skillDtoMapper.fromSkillToSkillDtoMapper(skill));
+        }
+        return skillDtoList;
+    }
 }

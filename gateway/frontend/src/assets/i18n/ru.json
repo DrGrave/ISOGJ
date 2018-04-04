@@ -170,6 +170,9 @@
       },
       "SKILLS":{
         "PLACEHOLDER": "Навыки требуемые на данной позиции"
+      },
+      "SKILL":{
+        "PLACEHOLDER": "SKill"
       }
     }
   }

@@ -28,6 +28,9 @@ public class SkillController {
         return skillLightWeightService.getAllTypesOfSkill();
     }
 
+    @GetMapping("/getbypartname")
+    public List<SkillDto> getSkillsByPartName(@RequestParam("name") String name) {return skillLightWeightService.getSkillsByPartName(name); }
+
     @PostMapping("/authorize/addnew")
     public void addNewSkill(@Valid @RequestBody SkillDto skill){
         skillLightWeightService.addNewSkill(skill);

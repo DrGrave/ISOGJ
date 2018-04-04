@@ -15,10 +15,7 @@ import {Department} from "./Department";
 import {Education} from "./Education";
 import {Company} from "./Company";
 import {SkillsToPosition} from "./SkillsToPosition";
-
-
-
-
+import {Skill} from "../user-list-page/skill";
 
 
 @Component({
@@ -43,8 +40,9 @@ export class HomePageComponent implements OnInit {
   departmentList: Department[];
   companyList: Company[];
   positionList: SkillsToPosition[];
+  skillList: Skill[];
 
-
+  positionSkillCtrl: FormControl;
   positionCtrl: FormControl;
   companyNameCtrl: FormControl;
   universityCtrl: FormControl;
@@ -56,6 +54,7 @@ export class HomePageComponent implements OnInit {
   changeDepartmentCtrl: FormControl;
 
 
+  reactivePositionSkill: any;
   reactivePosition: any;
   reactiveFaculty: any;
   reactiveUniversity: any;
@@ -63,6 +62,7 @@ export class HomePageComponent implements OnInit {
   reactiveDepartment: any;
   reactiveCompany: any;
 
+  skills: Skill[];
   universitys: University[];
   citys: City[];
   facultys: Faculty[];
@@ -105,6 +105,7 @@ export class HomePageComponent implements OnInit {
   departmentName: string;
   companyName: string;
   positionName: string;
+  skillName: string;
 
   cityForm: FormGroup;
   universityForm: FormGroup;
@@ -127,6 +128,7 @@ export class HomePageComponent implements OnInit {
     this.facultys = [];
     this.departments = [];
     this.positions = [];
+    this.skills = [];
 
     this.cityList = [];
     this.universityList = [];
@@ -134,10 +136,19 @@ export class HomePageComponent implements OnInit {
     this.departmentList = [];
     this.companyList = [];
     this.positionList = [];
+    this.skillList = [];
 
     this.universityCtrl = new FormControl({id:  '', name: ''}, [Validators.required]);
 
     this.companyNameCtrl = new FormControl({id:'', name:''}, [Validators.required]);
+
+    this.positionSkillCtrl = new FormControl({id: '', name:''}, [Validators.required]);
+    this.reactivePositionSkill = this.positionSkillCtrl.valueChanges
+      .pipe(
+        startWith(),
+        map(value => this.displayFn(value)),
+        map(name => this.positionSkillFilter(name, this.skills))
+      );
 
     this.reactiveCompany = this.companyNameCtrl.valueChanges
       .pipe(
@@ -195,6 +206,16 @@ export class HomePageComponent implements OnInit {
   }
 
 
+  positionSkillFilter(val: string, options: any[]){
+    this.skillName = val;
+    options = this.getSkills(val);
+    return this.filter(val, options);
+  }
+
+  getSkills(name: string): Skill[]{
+    this.homePageService.getSkillsByPartName(name).subscribe(date => this.skillList = date);
+    return this.skillList;
+  }
 
   departmentFilter(val: string, options: any[]){
     this.departmentName = val;
@@ -291,7 +312,7 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteSkillFromPositionAdd(skill){
-    
+
   }
 
 

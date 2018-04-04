@@ -13,7 +13,7 @@ import {Education} from "./Education";
 import {EducationSkillsDto} from "./EducationSkillsDto";
 import {Company} from "./Company";
 import {SkillsToPosition} from "./SkillsToPosition";
-
+import {Skill} from "../user-list-page/skill";
 
 
 @Injectable()
@@ -34,6 +34,7 @@ export class HomePageService {
   private changeEducationUrl = 'api/main/education/change';
   private getCompanysUrl = 'api/main/company/get?';
   private getPositionUrl = 'api/main/company/position/get?';
+  private getSkillPartNameUrl = 'api/main/skill/getbypartname?';
 
 
 
@@ -117,6 +118,13 @@ export class HomePageService {
 
   addEducation(education: Education): Observable<EducationSkillsDto[]>{
     return this.http.post<EducationSkillsDto[]>(this.addEducationUrl, education);
+  }
+
+  getSkillsByPartName(name: string): Observable<Skill[]>{
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('name', name);
+    return this.http.get<Skill[]>(this.getSkillPartNameUrl + urlSearchParams.toString());
+
   }
 
   deleteEducate(educate: Education): Observable<EducationSkillsDto[]>{

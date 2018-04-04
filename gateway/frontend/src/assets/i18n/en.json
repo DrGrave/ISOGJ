@@ -170,6 +170,9 @@
       },
       "SKILLS":{
         "PLACEHOLDER": "Skills in this work"
+      },
+      "SKILL":{
+        "PLACEHOLDER": "SKill"
       }
     }
 

@@ -27,4 +27,6 @@ public interface SkillService {
     List<DepartmentSkillDto> getDepartmentSkills(long id);
 
     List<CoursesSkillDto> getAllCoursesSkill(Long id);
+
+    List<SkillDto> findSkillsByPartName(String name);
 }

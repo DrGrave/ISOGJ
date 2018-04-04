@@ -55,4 +55,9 @@ public class SkillLightWeightServiceImpl implements SkillLightWeightService{
     public List<UserSkillDto> deleteSkills(UserSkillDto userSkillDto, String id) {
         return skillService.deleteSkills(userSkillDto, id);
     }
+
+    @Override
+    public List<SkillDto> getSkillsByPartName(String name) {
+        return skillService.findSkillsByPartName(name);
+    }
 }
