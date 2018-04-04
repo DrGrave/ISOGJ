@@ -312,7 +312,8 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteSkillFromPositionAdd(skill){
-
+    var ind = this.selectedPosition.skills.indexOf(skill, 0);
+    this.selectedPosition.skills.splice(ind, 1)
   }
 
 
