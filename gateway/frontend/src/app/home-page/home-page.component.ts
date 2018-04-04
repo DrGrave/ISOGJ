@@ -316,6 +316,12 @@ export class HomePageComponent implements OnInit {
     this.selectedPosition.skills.splice(ind, 1)
   }
 
+  applyAddPositionSKill(){
+    var selectedPositionSkill = this.skillList.filter(item => item.name === this.skillName)[0];
+    if (!this.selectedPosition.skills.filter(item => item.name === selectedPositionSkill.name)[0]) {
+      this.selectedPosition.skills.push(selectedPositionSkill);
+    }
+  }
 
   getMyAccount(){
     this.homePageService.getSizeHistory().subscribe(date =>{

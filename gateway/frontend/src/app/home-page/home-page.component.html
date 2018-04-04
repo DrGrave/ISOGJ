@@ -378,7 +378,7 @@
               </mat-chip>
             </mat-chip-list>
           </div>
-          <form *ngIf="selectedPosition">
+          <form *ngIf="selectedPosition" (submit)="applyAddPositionSKill()">
             <mat-form-field>
               <input matInput [matAutocomplete]="reactiveAutoPositionSkill" [formControl]="positionSkillCtrl" placeholder="{{'HOME.COMPANY.SKILL.PLACEHOLDER' | translate}}" required>
               <mat-autocomplete #reactiveAutoPositionSkill="matAutocomplete" [displayWith]="displayFn">
@@ -386,7 +386,7 @@
                   <span>{{ skill.name }}</span>
                 </mat-option>
               </mat-autocomplete>
-              <mat-error>provide university</mat-error>
+              <mat-error>provide skill</mat-error>
             </mat-form-field>
           </form>
 
