@@ -93,6 +93,7 @@ export class HomePageComponent implements OnInit {
   selectedUniversity: University;
   selectedFaculty: Faculty;
   selectedCompany: Company;
+  selectedPosition: SkillsToPosition;
 
   facultyOption: Faculty[];
   departmentOption: Department[];
@@ -133,8 +134,6 @@ export class HomePageComponent implements OnInit {
     this.departmentList = [];
     this.companyList = [];
     this.positionList = [];
-
-
 
     this.universityCtrl = new FormControl({id:  '', name: ''}, [Validators.required]);
 
@@ -209,6 +208,9 @@ export class HomePageComponent implements OnInit {
   positionFilter(val: string, options: any[]){
     this.positionName = val;
     options = this.getPositions(val);
+    if (this.positionList.filter(item => item.name === this.positionName)[0]){
+      this.selectedPosition = this.positionList.filter(item => item.name === this.positionName)[0];
+    }
     return this.filter(val, options);
   }
 
@@ -288,6 +290,9 @@ export class HomePageComponent implements OnInit {
     })
   }
 
+  deleteSkillFromPositionAdd(skill){
+    
+  }
 
 
   getMyAccount(){

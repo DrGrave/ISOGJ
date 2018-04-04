@@ -366,6 +366,19 @@
             </mat-form-field>
           </form>
 
+          <div *ngIf="selectedPosition">
+            <mat-chip-list>
+              <mat-chip *ngFor="let skill of selectedPosition.skills">
+                {{skill.name}}
+                <button mat-icon-button (click)="deleteSkillFromPositionAdd(skill)">
+                  <mat-icon>
+                    clear
+                  </mat-icon>
+                </button>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+
 
 
           <button mat-icon-button (click)="applyAddCompany()">
