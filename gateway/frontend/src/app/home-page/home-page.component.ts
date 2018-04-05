@@ -1,12 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HomePageService} from './home-page.service';
-import {FormBuilder, FormControl, FormControlName, FormGroup, NgModel, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatDatepickerInputEvent, MatPaginator} from "@angular/material";
 import {FullUserInfo} from "./FullUserInfo";
 import {Gender} from "./Gender";
 import {City} from "./City";
-import {Observable} from "rxjs/Observable";
 import {map, startWith} from "rxjs/operators";
 import {TypeOfEducation} from "./TypeOfEducation";
 import {University} from "./University";
@@ -32,7 +31,6 @@ export class HomePageComponent implements OnInit {
   newDepartment: Department;
 
   ifOk: true;
-  tdDisabled: true;
 
   cityList: City[];
   universityList: University[];
@@ -82,7 +80,6 @@ export class HomePageComponent implements OnInit {
   historyCount: number = 0;
   ifChangeGenderClick: boolean = false;
   ifChangeCityClick: boolean = true;
-  universityNameGood: boolean = false;
   changeWorkKlick: boolean = false;
   selectedGender;
   selectedEditTypeOfEducation;
@@ -110,13 +107,12 @@ export class HomePageComponent implements OnInit {
   cityForm: FormGroup;
   universityForm: FormGroup;
   cityDesForm: FormGroup;
-  addEducFormGroup: FormGroup;
+
 
 
   typeOfEducation: TypeOfEducation[];
   selectedTypeOfEducation: TypeOfEducation;
 
-  testField: string;
 
 
 
@@ -312,12 +308,12 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteSkillFromPositionAdd(skill){
-    var ind = this.selectedPosition.skills.indexOf(skill, 0);
+    let ind = this.selectedPosition.skills.indexOf(skill, 0);
     this.selectedPosition.skills.splice(ind, 1)
   }
 
   applyAddPositionSKill(){
-    var selectedPositionSkill = this.skillList.filter(item => item.name === this.skillName)[0];
+    let selectedPositionSkill = this.skillList.filter(item => item.name === this.skillName)[0];
     if (!this.selectedPosition.skills.filter(item => item.name === selectedPositionSkill.name)[0]) {
       this.selectedPosition.skills.push(selectedPositionSkill);
     }
