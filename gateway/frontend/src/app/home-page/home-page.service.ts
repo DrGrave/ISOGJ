@@ -35,6 +35,7 @@ export class HomePageService {
   private getCompanysUrl = 'api/main/company/get?';
   private getPositionUrl = 'api/main/company/position/get?';
   private getSkillPartNameUrl = 'api/main/skill/getbypartname?';
+  private saveSkillUrl = 'api/main/skill/save?';
 
 
 
@@ -131,6 +132,10 @@ export class HomePageService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('educateId', educate.id.toString());
     return this.http.get<EducationSkillsDto[]>(this.deleteEucationUrl + urlSearchParams.toString());
+  }
+
+  addNewSkill(skill: Skill): Observable<Skill>{
+    return this.http.post<Skill>(this.saveSkillUrl, skill);
   }
 
 }
