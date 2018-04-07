@@ -36,6 +36,7 @@ export class HomePageService {
   private getPositionUrl = 'api/main/company/position/get?';
   private getSkillPartNameUrl = 'api/main/skill/getbypartname?';
   private saveSkillUrl = 'api/main/company/position/skill/save?';
+  private savePositionUrl = 'api/main/company/position/savenew?';
 
 
 
@@ -138,6 +139,12 @@ export class HomePageService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('skillName', skill.toString());
     return this.http.get<Skill>(this.saveSkillUrl + urlSearchParams.toString());
+  }
+
+  saveNewPosition(name: string){
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('positionName', name.toString());
+    return this.http.get<SkillsToPosition>(this.savePositionUrl + urlSearchParams.toString());
   }
 
 }

@@ -31,4 +31,6 @@ public interface CompanyService {
     List<UserCompanySkillsDto> getUserCompanyDtoList(long id);
 
     SkillDto saveSkill(String name);
+
+    SkillsToPositionDto saveNewPosition(String name);
 }

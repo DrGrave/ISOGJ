@@ -204,4 +204,16 @@ public class CompanyServiceImpl implements CompanyService{
         skillRepository.save(skill);
         return skillDtoMapper.fromSkillToSkillDtoMapper(skill);
     }
+
+    @Override
+    public SkillsToPositionDto saveNewPosition(String name) {
+        Position position = new Position();
+        position.setName(name);
+        this.positionRepository.save(position);
+        SkillsToPositionDto skillsToPositionDto = new SkillsToPositionDto();
+        skillsToPositionDto.setName(name);
+        skillsToPositionDto.setSkills(new ArrayList<>());
+        skillsToPositionDto.setPosition(positionDtoMapper.fromPositionToPositionDto(position));
+        return skillsToPositionDto;
+    }
 }

@@ -30,4 +30,6 @@ public interface CompanyLightWeightService {
     List<VacancySkillDto> getVacancySkills(long id);
 
     SkillDto saveSkill(String name);
+
+    SkillsToPositionDto saveNewPosition(String name);
 }

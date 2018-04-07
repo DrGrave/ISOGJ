@@ -319,7 +319,22 @@ export class HomePageComponent implements OnInit {
         this.selectedPosition.skills.push(selectedPositionSkill);
       }
     } else {
-        this.homePageService.addNewSkill(this.skillName).subscribe(date => this.selectedPosition.skills.push(date));
+        this.homePageService.addNewSkill(this.skillName).subscribe(date => {
+          this.selectedPosition.skills.push(date);
+          this.skillList.push(date);
+        });
+
+    }
+  }
+
+  applyAddPosition(){
+    if (this.positionList.filter(item => item.name === this.positionName)[0]){
+    } else{
+      this.homePageService.saveNewPosition(this.positionName).subscribe(date => {
+        this.selectedPosition = date;
+        this.positionList.push(date);
+      });
+
     }
   }
 

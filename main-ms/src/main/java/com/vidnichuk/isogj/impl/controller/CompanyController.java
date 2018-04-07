@@ -80,4 +80,9 @@ public class CompanyController {
         return companyLightWeightService.getUserPosition(userId, companyId);
     }
 
+    @GetMapping("/position/savenew")
+    public SkillsToPositionDto saveNewPosition(@RequestParam("positionName") String name){
+        return companyLightWeightService.saveNewPosition(name);
+    }
+
 }

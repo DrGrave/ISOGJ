@@ -354,7 +354,7 @@
             </mat-form-field>
           </form>
 
-          <form *ngIf="ifAddClick">
+          <form *ngIf="ifAddClick" (submit)="applyAddPosition()" >
             <mat-form-field>
               <input matInput [matAutocomplete]="reactiveAutoPosition" [formControl]="positionCtrl" placeholder="{{'HOME.COMPANY.POSITION.PLACEHOLDER' | translate}}" required>
               <mat-autocomplete #reactiveAutoPosition="matAutocomplete" [displayWith]="displayFn">
