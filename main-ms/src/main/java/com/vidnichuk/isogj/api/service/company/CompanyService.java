@@ -29,4 +29,6 @@ public interface CompanyService {
     List<VacancySkillDto> getVacancySkills(long id);
 
     List<UserCompanySkillsDto> getUserCompanyDtoList(long id);
+
+    SkillDto saveSkill(String name);
 }

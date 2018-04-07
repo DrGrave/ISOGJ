@@ -67,4 +67,9 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     public List<VacancySkillDto> getVacancySkills(long id) {
         return companyService.getVacancySkills(id);
     }
+
+    @Override
+    public SkillDto saveSkill(String name) {
+        return companyService.saveSkill(name);
+    }
 }

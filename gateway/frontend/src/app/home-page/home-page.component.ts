@@ -313,9 +313,13 @@ export class HomePageComponent implements OnInit {
   }
 
   applyAddPositionSKill(){
-    let selectedPositionSkill = this.skillList.filter(item => item.name === this.skillName)[0];
-    if (!this.selectedPosition.skills.filter(item => item.name === selectedPositionSkill.name)[0]) {
-      this.selectedPosition.skills.push(selectedPositionSkill);
+    if (this.skillList.filter(item => item.name === this.skillName)[0]) {
+      let selectedPositionSkill = this.skillList.filter(item => item.name === this.skillName)[0];
+      if (!this.selectedPosition.skills.filter(item => item.name === selectedPositionSkill.name)[0]) {
+        this.selectedPosition.skills.push(selectedPositionSkill);
+      }
+    } else {
+        this.homePageService.addNewSkill(this.skillName).subscribe(date => this.selectedPosition.skills.push(date));
     }
   }
 

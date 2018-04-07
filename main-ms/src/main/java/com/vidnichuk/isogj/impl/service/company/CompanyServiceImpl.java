@@ -5,6 +5,7 @@ import com.vidnichuk.isogj.api.dto.mapper.*;
 import com.vidnichuk.isogj.api.dto.model.*;
 
 import com.vidnichuk.isogj.api.model.*;
+import com.vidnichuk.isogj.api.model.type.TypeOfSkill;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Autowired
     private PositionSkillRepository positionSkillRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
+
+    @Autowired
+    private TypeOfSkillRepository typeOfSkillRepository;
 
 
     @Autowired
@@ -187,5 +194,14 @@ public class CompanyServiceImpl implements CompanyService{
             userCompanySkillsDtoList.add(new UserCompanySkillsDto(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompany), skillService.getPositionSkills(userCompany.getPosition().getId())));
         }
         return userCompanySkillsDtoList;
+    }
+
+    @Override
+    public SkillDto saveSkill(String name) {
+        Skill skill = new Skill();
+        skill.setName(name);
+        skill.setTypeOfSkill(typeOfSkillRepository.findOne((long)1));
+        skillRepository.save(skill);
+        return skillDtoMapper.fromSkillToSkillDtoMapper(skill);
     }
 }

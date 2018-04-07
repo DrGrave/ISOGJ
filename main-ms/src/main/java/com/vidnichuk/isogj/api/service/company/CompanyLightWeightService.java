@@ -28,4 +28,6 @@ public interface CompanyLightWeightService {
     UserCompanyDto getUserPosition(long userId, long companyId);
 
     List<VacancySkillDto> getVacancySkills(long id);
+
+    SkillDto saveSkill(String name);
 }

@@ -20,6 +20,11 @@ public class CompanyController {
         return companyLightWeightService.getVacancySkills(id);
     }
 
+    @GetMapping("/position/skill/save")
+    SkillDto saveSkill(@RequestParam("skillName") String name){
+        return companyLightWeightService.saveSkill(name);
+    }
+
     @GetMapping("/user")
     public List<UserCompanyDto> findEducationByUserId(@RequestParam("id") long id){
         return companyLightWeightService.getUserCompanyByUserId(id);
