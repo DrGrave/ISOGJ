@@ -151,7 +151,7 @@ export class HomePageService {
   saveNewCompany(name: string){
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('companyName', name.toString());
-    return this.http.get<Company>(this.saveNewCompanyUrl + urlSearchParams.toString);
+    return this.http.get<Company>(this.saveNewCompanyUrl + urlSearchParams.toString());
   }
 
 }
