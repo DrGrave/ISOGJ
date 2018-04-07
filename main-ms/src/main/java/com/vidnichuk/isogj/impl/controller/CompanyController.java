@@ -85,4 +85,9 @@ public class CompanyController {
         return companyLightWeightService.saveNewPosition(name);
     }
 
+    @GetMapping("/savenew")
+    public CompanyDto saveNewCompany(@RequestParam("companyName") String name){
+        return  companyLightWeightService.saveNewCompany(name);
+    }
+
 }

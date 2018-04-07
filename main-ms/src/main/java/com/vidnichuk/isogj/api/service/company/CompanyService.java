@@ -33,4 +33,6 @@ public interface CompanyService {
     SkillDto saveSkill(String name);
 
     SkillsToPositionDto saveNewPosition(String name);
+
+    CompanyDto saveNewCompany(String name);
 }

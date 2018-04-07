@@ -341,7 +341,7 @@
           </ng-template>
 
 
-          <form *ngIf="ifAddClick">
+          <form *ngIf="ifAddClick" (submit)="addNewCompany()">
             <mat-form-field>
               <input matInput [matAutocomplete]="reactiveAutoCom" [formControl]="companyNameCtrl" placeholder="{{'HOME.COMPANY.NAME.PLACEHOLDER' | translate}}" required>
               <mat-autocomplete #reactiveAutoCom="matAutocomplete" [displayWith]="displayFn">

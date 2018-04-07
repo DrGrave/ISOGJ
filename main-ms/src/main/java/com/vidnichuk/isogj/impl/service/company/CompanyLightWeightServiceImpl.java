@@ -77,4 +77,9 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     public SkillsToPositionDto saveNewPosition(String name) {
         return companyService.saveNewPosition(name);
     }
+
+    @Override
+    public CompanyDto saveNewCompany(String name) {
+        return companyService.saveNewCompany(name);
+    }
 }

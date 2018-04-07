@@ -216,4 +216,12 @@ public class CompanyServiceImpl implements CompanyService{
         skillsToPositionDto.setPosition(positionDtoMapper.fromPositionToPositionDto(position));
         return skillsToPositionDto;
     }
+
+    @Override
+    public CompanyDto saveNewCompany(String name) {
+        Company company = new Company();
+        company.setName(name);
+        companyRepository.save(company);
+        return companyDtoMapper.fromCompanyToCompanyDto(company);
+    }
 }

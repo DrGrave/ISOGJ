@@ -338,6 +338,17 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  addNewCompany(){
+    if (this.companyList.filter(item => item.name === this.companyName)[0]){
+
+    } else{
+      this.homePageService.saveNewCompany(this.companyName).subscribe( date =>{
+        this.selectedCompany = date;
+        this.companyList.push(date);
+      });
+    }
+  }
+
   getMyAccount(){
     this.homePageService.getSizeHistory().subscribe(date =>{
       this.historyCount = date;
