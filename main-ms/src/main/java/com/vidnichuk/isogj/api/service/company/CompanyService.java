@@ -35,4 +35,8 @@ public interface CompanyService {
     SkillsToPositionDto saveNewPosition(String name);
 
     CompanyDto saveNewCompany(String name);
+
+    SkillsToPositionDto checkPosition(SkillsToPositionDto skillsToPositionDto);
+
+    UserCompanySkillsDto saveNewWorkCompany(long idCompany, long idPosition, String name);
 }

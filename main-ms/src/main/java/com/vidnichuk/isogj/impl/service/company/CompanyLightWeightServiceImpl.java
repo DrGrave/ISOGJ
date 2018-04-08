@@ -82,4 +82,14 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     public CompanyDto saveNewCompany(String name) {
         return companyService.saveNewCompany(name);
     }
+
+    @Override
+    public SkillsToPositionDto checkPosition(SkillsToPositionDto skillsToPositionDto) {
+        return companyService.checkPosition(skillsToPositionDto);
+    }
+
+    @Override
+    public UserCompanySkillsDto saveNewWorkCompany(long idCompany, long idPosition, String name) {
+        return companyService.saveNewWorkCompany(idCompany, idPosition, name);
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -93,6 +94,11 @@ public class CompanyController {
     @PostMapping("/position/check")
     public  SkillsToPositionDto checkPosition(@Valid @RequestBody SkillsToPositionDto skillsToPositionDto){
         return companyLightWeightService.checkPosition(skillsToPositionDto);
+    }
+
+    @GetMapping("/work/new")
+    public UserCompanySkillsDto saveNewWorkCompany(@RequestParam("companyId") long idCompany, @RequestParam("positionId") long idPosition, Principal principal){
+        return companyLightWeightService.saveNewWorkCompany(idCompany, idPosition, principal.getName());
     }
 
 }

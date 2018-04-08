@@ -5,7 +5,6 @@ import com.vidnichuk.isogj.api.dto.mapper.*;
 import com.vidnichuk.isogj.api.dto.model.*;
 
 import com.vidnichuk.isogj.api.model.*;
-import com.vidnichuk.isogj.api.model.type.TypeOfSkill;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -227,5 +226,45 @@ public class CompanyServiceImpl implements CompanyService{
         company.setCityOfCompany(cityRepository.findOne((long)1));
         companyRepository.save(company);
         return companyDtoMapper.fromCompanyToCompanyDto(company);
+    }
+
+    @Override
+    public SkillsToPositionDto checkPosition(SkillsToPositionDto skillsToPositionDto) {
+        List<SkillsToPositionDto> skillsToPosCheck =  getPositionsByPartName(skillsToPositionDto.getName(), 1);
+        for (SkillsToPositionDto pos: skillsToPosCheck){
+            if (skillsToPositionDto.getSkills().containsAll(pos.getSkills()) && skillsToPositionDto.getSkills().size() == pos.getSkills().size()){
+                return pos;
+            } else{
+                Position position = new Position();
+                position.setName(skillsToPositionDto.getPosition().getName());
+                positionRepository.save(position);
+                for (SkillDto skillDto: skillsToPositionDto.getSkills()){
+                    PositionSkill positionSkill = new PositionSkill();
+                    positionSkill.setPosition(position);
+                    positionSkill.setSkill(skillDtoMapper.fromSkillDtoToSkillMapper(skillDto));
+                    positionSkillRepository.save(positionSkill);
+                }
+                skillsToPositionDto.setPosition(positionDtoMapper.fromPositionToPositionDto(position));
+                List<SkillDto> skillDtos = new ArrayList<>();
+                for (PositionSkill skill: positionSkillRepository.findAllByPositionId(position.getId())){
+                    skillDtos.add(skillDtoMapper.fromSkillToSkillDtoMapper(skill.getSkill()));
+                }
+                skillsToPositionDto.setSkills(skillDtos);
+                return skillsToPositionDto;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public UserCompanySkillsDto saveNewWorkCompany(long idCompany, long idPosition, String name) {
+        UserCompany userCompany = new UserCompany();
+        userCompany.setUser(userRepository.findByUsername(name));
+        userCompany.setCompany(companyRepository.findOne(idCompany));
+        userCompany.setPosition(positionRepository.findOne(idPosition));
+        userCompany.setChangeApprove(false);
+        userCompany.setCompanyApprove(false);
+        userCompanyRepository.save(userCompany);
+        return new UserCompanySkillsDto(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompany), skillService.getPositionSkills(userCompany.getPosition().getId()));
     }
 }
