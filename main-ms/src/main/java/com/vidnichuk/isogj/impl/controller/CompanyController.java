@@ -90,4 +90,9 @@ public class CompanyController {
         return  companyLightWeightService.saveNewCompany(name);
     }
 
+    @PostMapping("/position/check")
+    public  SkillsToPositionDto checkPosition(@Valid @RequestBody SkillsToPositionDto skillsToPositionDto){
+        return companyLightWeightService.checkPosition(skillsToPositionDto);
+    }
+
 }

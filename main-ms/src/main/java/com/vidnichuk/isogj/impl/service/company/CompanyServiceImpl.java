@@ -40,6 +40,9 @@ public class CompanyServiceImpl implements CompanyService{
     @Autowired
     private TypeOfSkillRepository typeOfSkillRepository;
 
+    @Autowired
+    private CityRepository cityRepository;
+
 
     @Autowired
     private UserRepository userRepository;
@@ -221,6 +224,7 @@ public class CompanyServiceImpl implements CompanyService{
     public CompanyDto saveNewCompany(String name) {
         Company company = new Company();
         company.setName(name);
+        company.setCityOfCompany(cityRepository.findOne((long)1));
         companyRepository.save(company);
         return companyDtoMapper.fromCompanyToCompanyDto(company);
     }

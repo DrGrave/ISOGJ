@@ -14,6 +14,7 @@ import {EducationSkillsDto} from "./EducationSkillsDto";
 import {Company} from "./Company";
 import {SkillsToPosition} from "./SkillsToPosition";
 import {Skill} from "../user-list-page/skill";
+import {UserCompanySkills} from "./UserCompanySkills";
 
 
 @Injectable()
@@ -38,6 +39,8 @@ export class HomePageService {
   private saveSkillUrl = 'api/main/company/position/skill/save?';
   private savePositionUrl = 'api/main/company/position/savenew?';
   private saveNewCompanyUrl = 'api/main/company/savenew?';
+  private saveNewWork = 'api/main/company/work/new?';
+  private checkPositionUrl = 'api/main/company/position/check?';
 
 
 
@@ -134,6 +137,17 @@ export class HomePageService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('educateId', educate.id.toString());
     return this.http.get<EducationSkillsDto[]>(this.deleteEucationUrl + urlSearchParams.toString());
+  }
+
+  saveWorkCompany(newCompany: Company, newPosition: SkillsToPosition){
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('companyId', newCompany.id.toString());
+    urlSearchParams.append('positionId', newPosition.position.id.toString());
+    return this.http.get<UserCompanySkills>(this.saveNewWork + urlSearchParams.toString());
+  }
+
+  checkPosition(position: SkillsToPosition){
+    return this.http.post<SkillsToPosition>(this.checkPositionUrl, position);
   }
 
   addNewSkill(skill: string): Observable<Skill>{

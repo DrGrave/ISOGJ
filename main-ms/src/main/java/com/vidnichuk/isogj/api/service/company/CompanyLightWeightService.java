@@ -34,4 +34,6 @@ public interface CompanyLightWeightService {
     SkillsToPositionDto saveNewPosition(String name);
 
     CompanyDto saveNewCompany(String name);
+
+    SkillsToPositionDto checkPosition(SkillsToPositionDto skillsToPositionDto);
 }

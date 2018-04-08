@@ -15,6 +15,7 @@ import {Education} from "./Education";
 import {Company} from "./Company";
 import {SkillsToPosition} from "./SkillsToPosition";
 import {Skill} from "../user-list-page/skill";
+import {UserCompanySkills} from "./UserCompanySkills";
 
 
 @Component({
@@ -238,7 +239,8 @@ export class HomePageComponent implements OnInit {
 
 
   applyAddCompany(){
-
+     this.homePageService.checkPosition(this.selectedPosition).subscribe(date => this.selectedPosition = date);
+     this.homePageService.saveWorkCompany(this.selectedCompany, this.selectedPosition).subscribe(date => this.myUser.userCompanySkillsDtoList.push(date))
   }
 
   facultyFilter(val: string, options: any[]){
