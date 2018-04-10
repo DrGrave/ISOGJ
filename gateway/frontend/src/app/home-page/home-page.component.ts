@@ -603,7 +603,7 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteWork(company){
-    this.homePageService.deleteWork(company.userCompanyDto.company.id).subscribe(date => this.myUser.userCompanySkillsDtoList = date)
+    this.homePageService.deleteWork(company.userCompanyDto.idUserCompany).subscribe(date => this.myUser.userCompanySkillsDtoList = date)
   }
 
   applyChangeWork(company){

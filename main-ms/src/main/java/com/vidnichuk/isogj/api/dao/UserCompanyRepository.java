@@ -10,4 +10,5 @@ public interface UserCompanyRepository extends JpaRepository<UserCompany, Long>{
     UserCompany findByUserIdAndCompanyApprove(long id, boolean approve);
     List<UserCompany> findAllByCompanyIdAndCompanyApprove(long id, boolean approve);
     UserCompany findByUserIdAndCompanyId(long userId, long companyId);
+    UserCompany findByIdUserCompanyAndUserId(long usCompanyId, long userId);
 }

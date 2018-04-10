@@ -144,9 +144,9 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     public List<UserCompanySkillsDto> deleteCompany(Long id, String name) {
         User user = userRepository.findByUsername(name);
-        UserCompany userCompany = userCompanyRepository.findByUserIdAndCompanyId(user.getId(), id);
+        UserCompany userCompany = userCompanyRepository.findByIdUserCompanyAndUserId(id, user.getId());
         if (userCompany != null){
-            userCompanyRepository.delete(id);
+            userCompanyRepository.delete(userCompany);
             return getUserCompanyDtoList(user.getId());
         } else {
             return getUserCompanyDtoList(user.getId());
