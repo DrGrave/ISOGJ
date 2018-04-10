@@ -7,6 +7,7 @@ import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -141,15 +142,15 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public List<UserCompanyDto> deleteCompany(UserCompanyDto companyDto, Long id) {
-        UserCompany userCompany = userCompanyDtoMapper.fromUserCompanyDtoToUserCompany(companyDto);
-        userCompany.setUser(userRepository.findById(id));
-        userCompanyRepository.delete(userCompany.getIdUserCompany());
-        List<UserCompanyDto> userCompanyDtos = new ArrayList<>();
-        for (UserCompany usCom : userCompanyRepository.findAllByUserId(id)){
-            userCompanyDtos.add(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(usCom));
+    public List<UserCompanySkillsDto> deleteCompany(Long id, String name) {
+        User user = userRepository.findByUsername(name);
+        UserCompany userCompany = userCompanyRepository.findByUserIdAndCompanyId(user.getId(), id);
+        if (userCompany != null){
+            userCompanyRepository.delete(id);
+            return getUserCompanyDtoList(user.getId());
+        } else {
+            return getUserCompanyDtoList(user.getId());
         }
-        return userCompanyDtos;
     }
 
     @Override
@@ -230,8 +231,7 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Override
     public SkillsToPositionDto checkPosition(SkillsToPositionDto skillsToPositionDto) {
-        List<SkillsToPositionDto> skillsToPosCheck =  getPositionsByPartName(skillsToPositionDto.getName(), 1);
-        for (SkillsToPositionDto pos: skillsToPosCheck){
+        for (SkillsToPositionDto pos: getPositionsByPartName(skillsToPositionDto.getName(), 1)){
             if (skillsToPositionDto.getSkills().containsAll(pos.getSkills()) && skillsToPositionDto.getSkills().size() == pos.getSkills().size()){
                 return pos;
             } else{

@@ -39,8 +39,8 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     }
 
     @Override
-    public List<UserCompanyDto> deleteCompany(UserCompanyDto companyDto, Long id) {
-        return companyService.deleteCompany(companyDto,id);
+    public List<UserCompanySkillsDto> deleteCompany(Long id, String name) {
+        return companyService.deleteCompany(id, name);
     }
 
     @Override

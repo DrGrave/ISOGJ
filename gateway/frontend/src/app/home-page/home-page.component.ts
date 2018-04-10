@@ -239,8 +239,11 @@ export class HomePageComponent implements OnInit {
 
 
   applyAddCompany(){
-     this.homePageService.checkPosition(this.selectedPosition).subscribe(date => this.selectedPosition = date);
-     this.homePageService.saveWorkCompany(this.selectedCompany, this.selectedPosition).subscribe(date => this.myUser.userCompanySkillsDtoList.push(date))
+     this.homePageService.checkPosition(this.selectedPosition).subscribe(date => {
+       this.selectedPosition = date;
+       this.homePageService.saveWorkCompany(this.selectedCompany, date).subscribe(date => this.myUser.userCompanySkillsDtoList.push(date))
+
+     });
   }
 
   facultyFilter(val: string, options: any[]){
@@ -600,7 +603,7 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteWork(company){
-
+    this.homePageService.deleteWork(company.userCompanyDto.company.id).subscribe(date => this.myUser.userCompanySkillsDtoList = date)
   }
 
   applyChangeWork(company){

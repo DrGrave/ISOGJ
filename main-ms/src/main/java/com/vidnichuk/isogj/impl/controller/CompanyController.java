@@ -51,9 +51,9 @@ public class CompanyController {
         return companyLightWeightService.addCompany(companyDto, id);
     }
 
-    @PostMapping("/delete")
-    public List<UserCompanyDto> deleteCompany(@Valid @RequestBody UserCompanyDto companyDto, @RequestParam("id") Long id){
-        return companyLightWeightService.deleteCompany(companyDto, id);
+    @GetMapping("/delete")
+    public List<UserCompanySkillsDto> deleteCompany(@RequestParam("idCompany") Long id, Principal principal){
+        return companyLightWeightService.deleteCompany(id, principal.getName());
     }
 
     @GetMapping("/authorize/maincompany")

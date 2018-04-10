@@ -41,7 +41,7 @@ export class HomePageService {
   private saveNewCompanyUrl = 'api/main/company/savenew?';
   private saveNewWork = 'api/main/company/work/new?';
   private checkPositionUrl = 'api/main/company/position/check?';
-
+  private deleteCompanyUrl = 'api/main/company/delete?';
 
 
   constructor(private http: HttpClient) {
@@ -52,6 +52,12 @@ export class HomePageService {
     urlSearchParams.append('name', name);
     urlSearchParams.append('companyId', company.toString());
     return this.http.get<SkillsToPosition[]>(this.getPositionUrl + urlSearchParams.toString())
+  }
+
+  deleteWork(id  : number): Observable<UserCompanySkills[]>{
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('idCompany', id.toString());
+    return this.http.get<UserCompanySkills[]>(this.deleteCompanyUrl + urlSearchParams.toString());
   }
 
   getUser(): Observable<FullUserInfo>{

@@ -17,7 +17,7 @@ public interface CompanyLightWeightService {
 
     List<UserCompanyDto> addCompany(UserCompanyDto companyDto, Long id);
 
-    List<UserCompanyDto> deleteCompany(UserCompanyDto companyDto, Long id);
+    List<UserCompanySkillsDto> deleteCompany(Long id, String name);
 
     UserFullCompanyDto getMainCompany(long id);
 
