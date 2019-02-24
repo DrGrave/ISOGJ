@@ -124,7 +124,11 @@ public class EducationServiceImpl implements EducationService{
     public List<EducationSkillsDto> getEducationSkills(Long id) {
         List<EducationSkillsDto> educationSkillsDtoList = new ArrayList<>();
         for (Education education: educationRepository.findAllByUser_Id(id)){
-            educationSkillsDtoList.add(new EducationSkillsDto(educationDtoMapper.formEducationToEducationDto(education), skillService.getDepartmentSkills(education.getDepartment().getId())));
+            /**
+             *  educationSkillsDtoList.add(new EducationSkillsDto(educationDtoMapper.formEducationToEducationDto(education), skillService.getDepartmentSkills(education.getDepartment().getId())));
+             *
+             * fill this field to view in home page educations
+             */
         }
         return educationSkillsDtoList;
     }
@@ -133,7 +137,11 @@ public class EducationServiceImpl implements EducationService{
     public EducationSkillsDto getOneEducationById(Long id) {
         EducationSkillsDto educationSkillsDto = new EducationSkillsDto();
         educationSkillsDto.setEducationDto(educationDtoMapper.formEducationToEducationDto(educationRepository.findOne(id)));
-        educationSkillsDto.setDepartmentSkillDtoList(skillService.getDepartmentSkills(educationRepository.findOne(id).getDepartment().getId()));
+        /**
+         *  educationSkillsDto.setDepartmentSkillDtoList(skillService.getDepartmentSkills(educationRepository.findOne(id).getDepartment().getId()));
+         *
+         * and this
+         */
         return educationSkillsDto;
     }
 }

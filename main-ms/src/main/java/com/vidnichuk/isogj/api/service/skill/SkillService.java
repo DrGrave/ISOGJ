@@ -24,7 +24,7 @@ public interface SkillService {
 
     List<PositionSkillDto> getPositionSkills(long id);
 
-    List<DepartmentSkillDto> getDepartmentSkills(long id);
+
 
     List<CoursesSkillDto> getAllCoursesSkill(Long id);
 

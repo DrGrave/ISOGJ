@@ -20,16 +20,13 @@ public class SkillServiceImpl implements SkillService{
     @Autowired
     private VacancySkillRepository vacancySkillRepository;
 
-    @Autowired
-    private DepartmentSkillRepository departmentSkillRepository;
+
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private UserSkillDtoMapper userSkillDtoMapper;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
-    private DepartmentSkillDtoMapper departmentSkillDtoMapper;
+
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -156,14 +153,6 @@ public class SkillServiceImpl implements SkillService{
         return positionSkillDtoList;
     }
 
-    @Override
-    public List<DepartmentSkillDto> getDepartmentSkills(long id) {
-        List<DepartmentSkillDto> departmentSkillDtos = new ArrayList<>();
-        for (DepartmentSkill departmentSkill: departmentSkillRepository.findAllByDepartmentId(id)){
-            departmentSkillDtos.add(departmentSkillDtoMapper.fromDepartmentSkillToDepartmentSkillDto(departmentSkill));
-        }
-        return departmentSkillDtos;
-    }
 
     @Override
     public List<CoursesSkillDto> getAllCoursesSkill(Long id) {
