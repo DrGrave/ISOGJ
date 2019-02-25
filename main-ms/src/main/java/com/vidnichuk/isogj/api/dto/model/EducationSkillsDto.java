@@ -4,11 +4,9 @@ import java.util.List;
 
 public class EducationSkillsDto {
     private EducationDto educationDto;
-    private List<DepartmentSkillDto> departmentSkillDtoList;
 
-    public EducationSkillsDto(EducationDto educationDto, List<DepartmentSkillDto> departmentSkillDtoList) {
+    public EducationSkillsDto(EducationDto educationDto) {
         this.educationDto = educationDto;
-        this.departmentSkillDtoList = departmentSkillDtoList;
     }
 
     public EducationSkillsDto() {
@@ -22,11 +20,5 @@ public class EducationSkillsDto {
         this.educationDto = educationDto;
     }
 
-    public List<DepartmentSkillDto> getDepartmentSkillDtoList() {
-        return departmentSkillDtoList;
-    }
 
-    public void setDepartmentSkillDtoList(List<DepartmentSkillDto> departmentSkillDtoList) {
-        this.departmentSkillDtoList = departmentSkillDtoList;
-    }
 }
