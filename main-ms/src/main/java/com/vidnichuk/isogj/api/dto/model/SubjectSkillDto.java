@@ -5,6 +5,15 @@ public class SubjectSkillDto {
     private SubjectDto subjectDto;
     private SkillDto skillDto;
 
+    public SubjectSkillDto(Long id, SubjectDto subjectDto, SkillDto skillDto) {
+        this.id = id;
+        this.subjectDto = subjectDto;
+        this.skillDto = skillDto;
+    }
+
+    public SubjectSkillDto() {
+    }
+
     public Long getId() {
         return id;
     }

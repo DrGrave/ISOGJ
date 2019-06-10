@@ -2,12 +2,11 @@ package com.vidnichuk.isogj.impl.service.education;
 
 import com.vidnichuk.isogj.api.dao.*;
 import com.vidnichuk.isogj.api.dto.mapper.EducationDtoMapper;
+import com.vidnichuk.isogj.api.dto.mapper.SubjectSkillUserDtoMapper;
 import com.vidnichuk.isogj.api.dto.mapper.TypeOfEducationDtoMapper;
-import com.vidnichuk.isogj.api.dto.model.EducationDto;
-import com.vidnichuk.isogj.api.dto.model.EducationSkillsDto;
-import com.vidnichuk.isogj.api.dto.model.N_A_EducationDto;
-import com.vidnichuk.isogj.api.dto.model.TypeOfEducationDto;
+import com.vidnichuk.isogj.api.dto.model.*;
 import com.vidnichuk.isogj.api.model.Education;
+import com.vidnichuk.isogj.api.model.SubjectSkillUser;
 import com.vidnichuk.isogj.api.model.type.TypeOfEducation;
 import com.vidnichuk.isogj.api.service.education.EducationService;
 
@@ -49,6 +48,16 @@ public class EducationServiceImpl implements EducationService{
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private TypeOfEducationDtoMapper typeOfEducationDtoMapper;
+
+    @Autowired
+    private SubjectRepository subjectRepository;
+
+    @Autowired
+    private SubjectSkillUserRepository subjectSkillUserRepository;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private SubjectSkillUserDtoMapper subjectSkillUserDtoMapper;
 
     @Override
     public List<EducationDto> findEducationById(String id) {
@@ -124,11 +133,12 @@ public class EducationServiceImpl implements EducationService{
     public List<EducationSkillsDto> getEducationSkills(Long id) {
         List<EducationSkillsDto> educationSkillsDtoList = new ArrayList<>();
         for (Education education: educationRepository.findAllByUser_Id(id)){
-            /**
-             *  educationSkillsDtoList.add(new EducationSkillsDto(educationDtoMapper.formEducationToEducationDto(education), skillService.getDepartmentSkills(education.getDepartment().getId())));
-             *
-             * fill this field to view in home page educations
-             */
+
+            List<SubjectSkillUserDto> subjectSkillUserDto = new ArrayList<>();
+            for (SubjectSkillUser subjectSkillUser :  subjectSkillUserRepository.findAllBySubjectSkill_Subject_Department_Id(education.getDepartment().getId())){
+                subjectSkillUserDto.add(subjectSkillUserDtoMapper.fromSubjectSkillUserToSubjectSkillUserDto(subjectSkillUser));
+            }
+            educationSkillsDtoList.add(new EducationSkillsDto(educationDtoMapper.formEducationToEducationDto(education), subjectSkillUserDto));
         }
         return educationSkillsDtoList;
     }
