@@ -1,6 +1,5 @@
 package com.vidnichuk.isogj.api.dto.model;
 
-import com.vidnichuk.isogj.api.model.SubjectSkill;
 
 public class SubjectSkillUserDto {
     private Long id;
@@ -16,6 +15,14 @@ public class SubjectSkillUserDto {
     }
 
     public SubjectSkillUserDto() {
+    }
+
+    public UserDto getExpert() {
+        return expert;
+    }
+
+    public void setExpert(UserDto expert) {
+        this.expert = expert;
     }
 
     public Long getId() {

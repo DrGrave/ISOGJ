@@ -3,15 +3,36 @@ package com.vidnichuk.isogj.api.dto.model;
 public class SubjectSkillDto {
     private Long id;
     private SubjectDto subjectDto;
+    private int percentOfSkill;
+    private int percentOfSubject;
     private SkillDto skillDto;
 
-    public SubjectSkillDto(Long id, SubjectDto subjectDto, SkillDto skillDto) {
+    public SubjectSkillDto(Long id, SubjectDto subjectDto, int percentOfSkill, int persentOfSubject, SkillDto skillDto) {
         this.id = id;
         this.subjectDto = subjectDto;
+        this.percentOfSkill = percentOfSkill;
+        this.percentOfSubject = persentOfSubject;
         this.skillDto = skillDto;
     }
 
     public SubjectSkillDto() {
+    }
+
+
+    public int getPersentOfSkill() {
+        return percentOfSkill;
+    }
+
+    public void setPersentOfSkill(int persentOfSkill) {
+        this.percentOfSkill = persentOfSkill;
+    }
+
+    public int getPersentOfSubject() {
+        return percentOfSubject;
+    }
+
+    public void setPersentOfSubject(int persentOfSubject) {
+        this.percentOfSubject = persentOfSubject;
     }
 
     public Long getId() {

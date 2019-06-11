@@ -135,7 +135,7 @@ public class EducationServiceImpl implements EducationService{
         for (Education education: educationRepository.findAllByUser_Id(id)){
 
             List<SubjectSkillUserDto> subjectSkillUserDto = new ArrayList<>();
-            for (SubjectSkillUser subjectSkillUser :  subjectSkillUserRepository.findAllBySubjectSkill_Subject_Department_Id(education.getDepartment().getId())){
+            for (SubjectSkillUser subjectSkillUser :  subjectSkillUserRepository.findAllBySubjectSkillSubjectDepartment_Id(education.getDepartment().getId())){
                 subjectSkillUserDto.add(subjectSkillUserDtoMapper.fromSubjectSkillUserToSubjectSkillUserDto(subjectSkillUser));
             }
             educationSkillsDtoList.add(new EducationSkillsDto(educationDtoMapper.formEducationToEducationDto(education), subjectSkillUserDto));
