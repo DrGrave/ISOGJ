@@ -30,4 +30,6 @@ public interface UserLightWeightService {
     List<HistorySkillsDto> getPageOfHistory(int size, int page, String name);
 
     long getCountOfHistory(String name);
+
+    FullUserInfoDto getUserByUid(String id);
 }

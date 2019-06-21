@@ -80,4 +80,9 @@ public class UserLightWeightServiceImpl implements UserLightWeightService {
     public long getCountOfHistory(String name) {
         return userService.getCountOfHistory(name);
     }
+
+    @Override
+    public FullUserInfoDto getUserByUid(String id) {
+        return userService.getUserByUid(id);
+    }
 }

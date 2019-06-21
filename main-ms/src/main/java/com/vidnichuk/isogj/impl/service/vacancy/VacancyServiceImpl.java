@@ -113,4 +113,16 @@ public class VacancyServiceImpl implements VacancyService{
     private Pageable createPageRequest(int size, int page) {
         return new PageRequest(page, size);
     }
+
+    public List<VacancyListDto> getVacancysByCompanyId(long id) {
+        List<VacancyListDto> vacancyList = new ArrayList<>();
+        for (Vacancy vacancy : vacancyRepository.findAllByCompanyId(id)){
+            List<TaskListDto> taskListDtos= new ArrayList<>();
+            for (VacancyTask vacancyTask: vacancyTaskRepository.findAllByVacancyId(vacancy.getId())){
+                taskListDtos.add(new TaskListDto(vacancyTaskDtoMapper.fromVacancyTaskToVacancyTaskDto(vacancyTask), getSkillsToTask(vacancyTask.getTask().getId())));
+            }
+            vacancyList.add(new VacancyListDto(vacancyDtoMapper.fromVacancyToVacancyDto(vacancy), skillService.findAllSkillsByVacancyId(vacancy.getId()), taskListDtos));
+        }
+        return vacancyList;
+    }
 }

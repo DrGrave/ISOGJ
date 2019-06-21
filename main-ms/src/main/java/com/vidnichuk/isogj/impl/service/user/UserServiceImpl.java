@@ -251,4 +251,21 @@ public class UserServiceImpl implements UserService {
     public long getCountOfHistory(String name) {
         return historyService.getCountOfHistory(userRepository.findByUsername(name).getId());
     }
+
+    @Override
+    public FullUserInfoDto getUserByUid(String id) {
+        User user = userRepository.findByUid(id);
+        FullUserInfoDto fullUserInfoDto = new FullUserInfoDto();
+
+        fullUserInfoDto.setMeUserDto(userDtoMapper.fromUserToMeUserDto(user));
+        fullUserInfoDto.setEducationSkillsDtoList(educationService.getEducationSkills(user.getId()));
+        fullUserInfoDto.setUserCompanySkillsDtoList(companyService.getUserCompanyDtoList(user.getId()));
+        fullUserInfoDto.setHistorySkillsDtoList(historyService.getAllUserHistory(user.getId(), createPageRequest(10,0)));
+        fullUserInfoDto.setExperienceSkillsDtoList(experienceService.getExperienceSkillsById(user.getId()));
+        fullUserInfoDto.setCoursesSkillsListDtoList(coursesService.getCoursesByUserId(user.getId()));
+        fullUserInfoDto.setUserLinkDtoList(linkService.findAllUserLinks(user.getId()));
+        fullUserInfoDto.setUserSkillDtoList(skillService.findAllSkillsByUserId(user.getUid()));
+        fullUserInfoDto.setUserLinkDto(linkService.getUserImgByUid(user.getUid()));
+        return fullUserInfoDto;
+    }
 }

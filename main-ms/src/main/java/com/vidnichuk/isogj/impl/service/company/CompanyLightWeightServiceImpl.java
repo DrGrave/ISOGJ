@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.impl.service.company;
 
 import com.vidnichuk.isogj.api.dto.model.*;
+import com.vidnichuk.isogj.api.model.UserCompany;
 import com.vidnichuk.isogj.api.service.company.CompanyLightWeightService;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,10 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     @Override
     public UserCompanySkillsDto saveNewWorkCompany(long idCompany, long idPosition, String name) {
         return companyService.saveNewWorkCompany(idCompany, idPosition, name);
+    }
+
+    @Override
+    public List<UserCompany> getUserCompanyByCompanyId(long id) {
+        return companyService.getUserCompanyByCompanyId(id);
     }
 }

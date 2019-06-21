@@ -16,8 +16,7 @@ import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService{
-    @Autowired
-    private UserCompanyRepository userCompanyRepository;
+
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -77,6 +76,9 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Autowired
     private VacancyRepository vacancyRepository;
+
+    @Autowired
+    private UserCompanyRepository userCompanyRepository;
 
     @Override
     public List<UserCompanyDto> findCompanyByUserId(long id) {
@@ -266,5 +268,10 @@ public class CompanyServiceImpl implements CompanyService{
         userCompany.setCompanyApprove(false);
         userCompanyRepository.save(userCompany);
         return new UserCompanySkillsDto(userCompanyDtoMapper.fromUserCompanyToUserCompanyDto(userCompany), skillService.getPositionSkills(userCompany.getPosition().getId()));
+    }
+
+    @Override
+    public List<UserCompany> getUserCompanyByCompanyId(long id) {
+        return userCompanyRepository.findAllByCompanyId(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.vidnichuk.isogj.impl.controller;
 
 import com.vidnichuk.isogj.api.dto.model.*;
+import com.vidnichuk.isogj.api.model.UserCompany;
 import com.vidnichuk.isogj.api.service.company.CompanyLightWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -101,4 +102,8 @@ public class CompanyController {
         return companyLightWeightService.saveNewWorkCompany(idCompany, idPosition, principal.getName());
     }
 
+    @GetMapping("/users/companyid")
+    public List<UserCompany> getUsersOfCompany(@RequestParam("id") long id){
+        return companyLightWeightService.getUserCompanyByCompanyId(id);
+    }
 }

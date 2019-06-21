@@ -2,6 +2,7 @@ package com.vidnichuk.isogj.api.service.company;
 
 
 import com.vidnichuk.isogj.api.dto.model.*;
+import com.vidnichuk.isogj.api.model.UserCompany;
 
 import java.util.List;
 
@@ -38,4 +39,6 @@ public interface CompanyLightWeightService {
     SkillsToPositionDto checkPosition(SkillsToPositionDto skillsToPositionDto);
 
     UserCompanySkillsDto saveNewWorkCompany(long idCompany, long idPosition, String name);
+
+    List<UserCompany> getUserCompanyByCompanyId(long id);
 }

@@ -17,4 +17,6 @@ public interface VacancyLightWeightService {
     List<TaskSkillDto> getSkillsToTask(long id);
 
     long getCountOfVacancy();
+
+    List<VacancyListDto> getVacancysByCompanyId(long id);
 }

@@ -43,4 +43,9 @@ public class VacancyLightWeightServiceImpl implements VacancyLightWeightService{
     public long getCountOfVacancy() {
         return vacancyService.getCountOfVacancy();
     }
+
+    @Override
+    public List<VacancyListDto> getVacancysByCompanyId(long id) {
+        return vacancyService.getVacancysByCompanyId(id);
+    }
 }

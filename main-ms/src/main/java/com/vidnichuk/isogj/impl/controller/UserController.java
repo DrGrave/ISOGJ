@@ -87,6 +87,10 @@ public class UserController {
         return userLightWeightService.getCountOfHistory(principal.getName());
     }
 
+    @GetMapping("/byUid")
+    public FullUserInfoDto getUserByUid(@RequestParam("uid") String id){
+        return userLightWeightService.getUserByUid(id);
+    }
 
 
 }
