@@ -98,4 +98,9 @@ public class CompanyLightWeightServiceImpl implements CompanyLightWeightService{
     public List<UserCompany> getUserCompanyByCompanyId(long id) {
         return companyService.getUserCompanyByCompanyId(id);
     }
+
+    @Override
+    public List<UserListInfoDto> getUsersToCompanyVacancys() {
+        return companyService.getUsersToCompanyVacancy();
+    }
 }

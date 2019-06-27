@@ -106,4 +106,9 @@ public class CompanyController {
     public List<UserCompany> getUsersOfCompany(@RequestParam("id") long id){
         return companyLightWeightService.getUserCompanyByCompanyId(id);
     }
+
+    @GetMapping("/getUsers")
+    public List<UserListInfoDto> getUsersToCompanyVacancys(){
+        return companyLightWeightService.getUsersToCompanyVacancys();
+    }
 }

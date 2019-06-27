@@ -6,6 +6,8 @@ import com.vidnichuk.isogj.api.dto.model.*;
 
 import com.vidnichuk.isogj.api.model.*;
 import com.vidnichuk.isogj.api.service.company.CompanyService;
+import com.vidnichuk.isogj.api.service.education.EducationService;
+import com.vidnichuk.isogj.api.service.link.LinkService;
 import com.vidnichuk.isogj.api.service.skill.SkillService;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,12 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private LinkService linkService;
+
+    @Autowired
+    private EducationService educationService;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -273,5 +281,21 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     public List<UserCompany> getUserCompanyByCompanyId(long id) {
         return userCompanyRepository.findAllByCompanyId(id);
+    }
+
+    @Override
+    public List<UserListInfoDto> getUsersToCompanyVacancy() {
+        List<User> userList = userRepository.findAll();
+        List<User> goodUsers = new ArrayList<>();
+        for (User user: userList){
+            if (userCompanyRepository.findAllByUserId(user.getId()).size() == 0){
+                goodUsers.add(user);
+            }
+        }
+        List<UserListInfoDto> userListInfoDtos = new ArrayList<>();
+        for (User user: goodUsers){
+            userListInfoDtos.add(new UserListInfoDto(userDtoMapper.fromUserToUserDto(user), linkService.getUserImgByUid(user.getUid()), skillService.findAllSkillsByUserId(user.getUid()), educationService.getLastEducationByUserId(user.getUid())));
+        }
+        return userListInfoDtos;
     }
 }

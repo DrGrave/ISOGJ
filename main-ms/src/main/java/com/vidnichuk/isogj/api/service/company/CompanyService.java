@@ -42,4 +42,6 @@ public interface CompanyService {
     UserCompanySkillsDto saveNewWorkCompany(long idCompany, long idPosition, String name);
 
     List<UserCompany> getUserCompanyByCompanyId(long id);
+
+    List<UserListInfoDto> getUsersToCompanyVacancy();
 }
